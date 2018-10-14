@@ -1,0 +1,39 @@
+ext {
+    versions = [
+            compile_sdk              : 28,
+            min_sdk                  : 21,
+            target_sdk               : 28,
+
+            version_code             : 1,
+            version_name             : '0.0.1',
+
+            android_gradle           : '3.2.1',
+
+            androidx                 : '1.0.0',
+            androidx_constraintlayout: '2.0.0-alpha2',
+
+            material                 : '1.0.0',
+
+            kotlin                   : '1.2.71',
+            kotlin_anko              : '0.10.6',
+
+            leak_cannary             : '1.6.1',
+    ]
+    libs = [
+            kotlin_stdlib_jdk7       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
+
+            androidx_appcompat       : "androidx.appcompat:appcompat:${versions.androidx}",
+            androidx_annotation      : "androidx.annotation:annotation:${versions.androidx}",
+            androidx_recyclerview    : "androidx.recyclerview:recyclerview:${versions.androidx}",
+            androidx_cardview        : "androidx.cardview:cardview:${versions.androidx}",
+            androidx_constraintlayout: "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}",
+
+            material                 : "com.google.android.material:material:${versions.material}",
+
+            kotlin_anko_common       : "org.jetbrains.anko:anko-commons:${versions.kotlin_anko}",
+            kotlin_anko_design       : "org.jetbrains.anko:anko-design:${versions.kotlin_anko}",
+
+            leak_cannary             : "com.squareup.leakcanary:leakcanary-android:${versions.leak_cannary}",
+            leak_cannary_no_op       : "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leak_cannary}",
+    ]
+}

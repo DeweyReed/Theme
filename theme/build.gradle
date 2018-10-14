@@ -1,18 +1,17 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion versions.compile_sdk
+
     defaultConfig {
-        applicationId "xyz.aprildown.theme.app"
         minSdkVersion versions.min_sdk
         targetSdkVersion versions.target_sdk
         versionCode versions.version_code
         versionName versions.version_name
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,10 +21,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':theme')
-
-    implementation libs.kotlin_stdlib_jdk7
     implementation libs.androidx_appcompat
-    implementation libs.androidx_constraintlayout
 }
