@@ -21,5 +21,6 @@ android {
 }
 
 dependencies {
+    implementation libs.kotlin_stdlib_jdk7
     implementation libs.androidx_appcompat
 }

@@ -1,0 +1,149 @@
+package xyz.aprildown.theme
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.os.Build
+import androidx.annotation.AttrRes
+import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
+import xyz.aprildown.theme.internal.*
+import xyz.aprildown.theme.utils.*
+
+class Theme private constructor(private var context: Context?) {
+
+    private var prefs: SharedPreferences? = null
+    private var isResumed = false
+
+    internal val delegates = mutableListOf<InflationDelegate>()
+
+    internal val safeContext
+        @CheckResult
+        get() = context ?: throw IllegalStateException("Not attached")
+
+    private val safePrefs
+        @CheckResult
+        get() = prefs ?: throw IllegalStateException("Not attached")
+
+    // region colors
+
+    val isDark: Boolean
+        get() = safePrefs.getBoolean(KEY_IS_DARK, false)
+
+    @ColorInt
+    fun attribute(@AttrRes attrId: Int): Int {
+        return safePrefs.getInt(safeContext.attrKey(attrId), safeContext.colorAttr(attr = attrId))
+    }
+
+    @ColorInt
+    fun attribute(name: String): Int {
+        return safePrefs.getInt(attrKey(name), 0)
+    }
+
+    val colorPrimary: Int
+        @ColorInt
+        get() = safePrefs.getInt(
+            KEY_PRIMARY_COLOR,
+            safeContext.colorAttr(attr = R.attr.colorPrimary)
+        )
+
+    val colorPrimaryDark: Int
+        @ColorInt
+        get() = safePrefs.getInt(
+            KEY_PRIMARY_DARK_COLOR,
+            safeContext.colorAttr(attr = R.attr.colorPrimaryDark)
+        )
+
+    val colorAccent: Int
+        @ColorInt
+        get() = safePrefs.getInt(
+            KEY_ACCENT_COLOR,
+            safeContext.colorAttr(attr = R.attr.colorAccent)
+        )
+
+    val colorStatusBar: Int
+        @ColorInt
+        get() = safePrefs.getInt(
+            KEY_STATUS_BAR_COLOR,
+            colorPrimaryDark
+        )
+
+    val colorNavigationBar: Int
+        @ColorInt
+        get() = safePrefs.getInt(
+            KEY_NAV_BAR_COLOR,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                safeContext.colorAttr(android.R.attr.navigationBarColor)
+            else Color.BLACK
+        )
+
+    // endregion colors
+
+    fun addDelegate(vararg ds: InflationDelegate) {
+        delegates.addAll(ds)
+    }
+
+    private fun initPrefs() {
+        prefs = safeContext.getThemePrefs()
+    }
+
+    private fun deInitPrefs() {
+        prefs = null
+    }
+
+    companion object {
+
+        @SuppressLint("StaticFieldLeak")
+        private lateinit var instance: Theme
+
+        fun get() = instance
+
+        fun peek(context: Context, f: Theme.() -> Unit) {
+            val localInstance = Theme(context)
+            localInstance.f()
+        }
+
+        fun edit(context: Context, f: ThemeEditor.() -> Unit) {
+            val editor = ThemeEditor(context)
+            editor.f()
+            editor.save()
+        }
+
+        fun attach(c: Context) {
+            if (!::instance.isInitialized) {
+                instance = Theme(c)
+            }
+            instance.run {
+                isResumed = false
+                context = c
+                initPrefs()
+            }
+            (c as? AppCompatActivity)?.let { it.setInflaterFactory(it.layoutInflater) }
+        }
+
+        fun pause(c: Context) {
+            instance.run {
+                isResumed = false
+                if (c is Activity && c.isFinishing && context == c) {
+                    context = null
+                    deInitPrefs()
+                }
+            }
+        }
+
+        fun resume(c: Context) {
+            instance.run {
+                context = c
+                initPrefs()
+                isResumed = true
+                (c as? Activity)?.let {
+                    it.setTaskDescriptionColor(colorPrimary)
+                    invalidateStatusBar()
+                }
+            }
+        }
+    }
+}

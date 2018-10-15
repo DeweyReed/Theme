@@ -1,7 +1,7 @@
 ext {
     versions = [
             compile_sdk              : 28,
-            min_sdk                  : 21,
+            min_sdk                  : 16,
             target_sdk               : 28,
 
             version_code             : 1,
@@ -35,5 +35,6 @@ ext {
 
             leak_cannary             : "com.squareup.leakcanary:leakcanary-android:${versions.leak_cannary}",
             leak_cannary_no_op       : "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leak_cannary}",
+            leak_cannary_fragment    : "com.squareup.leakcanary:leakcanary-support-fragment:${versions.leak_cannary}",
     ]
 }
