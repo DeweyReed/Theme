@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"
+        tools:ignore="AppCompatResource" />
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/hello_world_check"
+            android:checked="true"
+            android:title="Hello" />
+
+    </group>
+
+    <group android:checkableBehavior="all">
+
+        <item
+            android:id="@+id/hello_world_radio"
+            android:checked="true"
+            android:title="Hello 2" />
+
+    </group>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings" />
+
+</menu>

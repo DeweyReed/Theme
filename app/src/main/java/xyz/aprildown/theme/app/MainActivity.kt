@@ -1,12 +1,31 @@
 package xyz.aprildown.theme.app
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.*
+import xyz.aprildown.theme.ThemeActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar.inflateMenu(R.menu.main)
+
+        viewPager.adapter = MainViewPagerAdapter(supportFragmentManager)
+    }
+
+    private class MainViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        override fun getCount(): Int = 2
+
+        override fun getItem(position: Int): Fragment = when (position) {
+            0 -> MainFragment1()
+            1 -> MainFragment2()
+            else -> throw  IllegalStateException("$position")
+        }
     }
 }
