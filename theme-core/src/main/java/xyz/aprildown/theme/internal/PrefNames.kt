@@ -9,11 +9,8 @@ internal const val KEY_ATTRIBUTE = "attribute.%s"
 // Window/System
 const val KEY_STATUS_BAR_COLOR = "status_bar_color"
 const val KEY_NAV_BAR_COLOR = "nav_bar_color"
-const val KEY_LIGHT_STATUS_MODE = "light_status_mode"
-const val KEY_LIGHT_NAV_MODE = "light_navigation_bar_mode"
 
 // Colors
-
 internal const val KEY_PRIMARY_COLOR = "primary_color"
 internal const val KEY_PRIMARY_DARK_COLOR = "primary_dark_color"
 internal const val KEY_ACCENT_COLOR = "accent_color"

@@ -101,6 +101,10 @@ class Theme private constructor(private var context: Context?) {
 
         fun get(): Theme = instance ?: throw IllegalStateException("init not called")
 
+        /**
+         * Peek some color values when the app is not in the foreground.
+         * [Theme.addDelegate] won't work in this way.
+         */
         fun peek(context: Context, f: Theme.() -> Unit) {
             val localInstance = Theme(context)
             localInstance.f()
@@ -139,6 +143,11 @@ class Theme private constructor(private var context: Context?) {
                 (c as? Activity)?.let {
                     it.setTaskDescriptionColor(colorPrimary)
                     invalidateStatusBar()
+                    if (safePrefs.contains(KEY_NAV_BAR_COLOR)) {
+                        val navColor = colorNavigationBar
+                        it.setNavBarColorCompat(navColor)
+                        it.setLightNavBarCompat(navColor.isColorLight())
+                    }
                 }
             }
         }

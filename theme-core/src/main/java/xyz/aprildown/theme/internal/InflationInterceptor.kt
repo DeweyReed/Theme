@@ -53,12 +53,13 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
         "Toolbar", "$APPCOMPAT_WIDGET.Toolbar" ->
             ThemeToolbar(context, attrs)
 
-//        "$APPCOMPAT_WIDGET.AppCompatTextView", "TextView" ->
+        "$APPCOMPAT_WIDGET.AppCompatTextView", "TextView" ->
 //            if (viewId == id.snackbar_text) {
 //                AestheticSnackBarTextView(context, attrs)
 //            } else {
 //                null
 //            }
+            ThemeTextView(context, attrs)
 
         "Button", "$APPCOMPAT_WIDGET.AppCompatButton" ->
             if (viewId == android.R.id.button1 ||
