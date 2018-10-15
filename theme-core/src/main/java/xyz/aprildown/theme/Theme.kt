@@ -97,9 +97,9 @@ class Theme private constructor(private var context: Context?) {
     companion object {
 
         @SuppressLint("StaticFieldLeak")
-        private lateinit var instance: Theme
+        private var instance: Theme? = null
 
-        fun get() = instance
+        fun get(): Theme = instance ?: throw IllegalStateException("init not called")
 
         fun peek(context: Context, f: Theme.() -> Unit) {
             val localInstance = Theme(context)
@@ -113,10 +113,7 @@ class Theme private constructor(private var context: Context?) {
         }
 
         fun attach(c: Context) {
-            if (!::instance.isInitialized) {
-                instance = Theme(c)
-            }
-            instance.run {
+            get().run {
                 isResumed = false
                 context = c
                 initPrefs()
@@ -125,7 +122,7 @@ class Theme private constructor(private var context: Context?) {
         }
 
         fun pause(c: Context) {
-            instance.run {
+            get().run {
                 isResumed = false
                 if (c is Activity && c.isFinishing && context == c) {
                     context = null
@@ -135,7 +132,7 @@ class Theme private constructor(private var context: Context?) {
         }
 
         fun resume(c: Context) {
-            instance.run {
+            get().run {
                 context = c
                 initPrefs()
                 isResumed = true
@@ -143,6 +140,19 @@ class Theme private constructor(private var context: Context?) {
                     it.setTaskDescriptionColor(colorPrimary)
                     invalidateStatusBar()
                 }
+            }
+        }
+
+        fun init(c: Context, f: ThemeEditor.() -> Unit) {
+            if (instance == null) {
+                instance = Theme(c)
+            }
+            val prefs = c.getThemePrefs()
+            if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
+                prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
+                val editor = ThemeEditor(c)
+                editor.f()
+                editor.save()
             }
         }
     }

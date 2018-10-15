@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.EdgeGlowUtil.setEdgeGlowColor
 
-class ThemeViewPager(
+internal class ThemeViewPager(
     context: Context,
     attrs: AttributeSet? = null
 ) : ViewPager(context, attrs) {

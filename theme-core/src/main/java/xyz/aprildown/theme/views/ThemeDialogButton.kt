@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.changeTextColor
 
 internal class ThemeDialogButton(
     context: Context,
@@ -12,6 +11,6 @@ internal class ThemeDialogButton(
 ) : AppCompatButton(context, attrs) {
 
     init {
-        changeTextColor(get().colorAccent)
+        setTextColor(get().colorAccent)
     }
 }

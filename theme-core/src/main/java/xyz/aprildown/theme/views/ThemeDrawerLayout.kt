@@ -8,7 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.toolbarIconColor
 
-class ThemeDrawerLayout(
+internal class ThemeDrawerLayout(
     context: Context,
     attrs: AttributeSet? = null
 ) : DrawerLayout(context, attrs) {

@@ -46,7 +46,7 @@ class ThemeEditor(private val context: Context) {
     fun setColorPrimaryDark(@ColorInt color: Int, setColorStatusBar: Boolean = false) = apply {
         editor.putInt(KEY_PRIMARY_DARK_COLOR, color)
         if (setColorStatusBar) {
-            setColorAccent(color)
+            setColorStatusBar(color)
         }
     }
 

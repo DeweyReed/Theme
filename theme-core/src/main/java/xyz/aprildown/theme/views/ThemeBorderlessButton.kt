@@ -7,7 +7,7 @@ import androidx.appcompat.widget.AppCompatButton
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.adjustAlpha
 
-class ThemeBorderlessButton(
+internal class ThemeBorderlessButton(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatButton(context, attrs) {

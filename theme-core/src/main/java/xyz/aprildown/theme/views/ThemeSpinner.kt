@@ -9,7 +9,7 @@ import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTintAuto
 
-class ThemeSpinner(
+internal class ThemeSpinner(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatSpinner(context, attrs) {

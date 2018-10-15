@@ -9,7 +9,7 @@ import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTint
 
-class ThemeSeekBar(
+internal class ThemeSeekBar(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatSeekBar(context, attrs) {

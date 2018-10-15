@@ -9,7 +9,7 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.*
 
-class ThemeEditText(
+internal class ThemeEditText(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {

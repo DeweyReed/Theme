@@ -13,7 +13,7 @@ import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.isColorLight
 import xyz.aprildown.theme.utils.setTintAuto
 
-class ThemeButton(
+internal class ThemeButton(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatButton(context, attrs) {

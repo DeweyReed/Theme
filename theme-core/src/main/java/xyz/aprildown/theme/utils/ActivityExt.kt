@@ -16,8 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.LayoutInflaterCompat.setFactory2
 import xyz.aprildown.theme.internal.InflationInterceptor
 
+@Suppress("unused")
 internal fun AppCompatActivity.setInflaterFactory(li: LayoutInflater) =
-    setFactory2(li, InflationInterceptor(this, delegate))
+    setFactory2(li, InflationInterceptor())
 
 internal fun Activity.setStatusBarColorCompat(@ColorInt color: Int) {
     if (SDK_INT >= LOLLIPOP) {

@@ -9,7 +9,7 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.*
 
-class ThemeToolbar(
+internal class ThemeToolbar(
     context: Context,
     attrs: AttributeSet? = null
 ) : Toolbar(context, attrs) {

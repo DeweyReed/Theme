@@ -9,7 +9,7 @@ import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTint
 
-class ThemeCheckBox(
+internal class ThemeCheckBox(
     context: Context,
     attrs: AttributeSet? = null
 ) : AppCompatCheckBox(context, attrs) {

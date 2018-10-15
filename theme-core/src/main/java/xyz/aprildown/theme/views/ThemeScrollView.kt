@@ -6,7 +6,7 @@ import android.widget.ScrollView
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.EdgeGlowUtil.setEdgeGlowColor
 
-class ThemeScrollView(
+internal class ThemeScrollView(
     context: Context?,
     attrs: AttributeSet? = null
 ) : ScrollView(context, attrs) {
