@@ -7,16 +7,20 @@ import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.drawerlayout.widget.DrawerLayout
+import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 
 val Theme.toolbarIconColor
     @ColorInt
-    get() = if (colorPrimary.isColorLight()) Color.BLACK else Color.WHITE
+    get() = safeContext.color(
+        if (colorPrimary.isColorLight()) R.color.ate_icon_light
+        else R.color.ate_icon_dark
+    )
 
 val Theme.toolbarTitleColor
     @ColorInt
-    get() = if (colorPrimary.isColorLight()) Color.BLACK else Color.WHITE
+    get() = toolbarIconColor
 
 val Theme.toolbarSubtitleColor
     @ColorInt
