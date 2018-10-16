@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.views
+package xyz.aprildown.theme.material.views
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -10,7 +10,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.utils.*
+import xyz.aprildown.theme.material.utils.color
+import xyz.aprildown.theme.material.utils.defaultRippleColor
+import xyz.aprildown.theme.material.utils.isColorLight
+import xyz.aprildown.theme.material.utils.shiftColor
+import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.tint
 
 internal class ThemeFloatingActionButton(
     context: Context,

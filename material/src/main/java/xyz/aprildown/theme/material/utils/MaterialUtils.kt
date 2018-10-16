@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.utils
+package xyz.aprildown.theme.material.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
-import xyz.aprildown.theme.R
+import xyz.aprildown.theme.material.R
 
 /**
  *  Copied some methods from theme module.

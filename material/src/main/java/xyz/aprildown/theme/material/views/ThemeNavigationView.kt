@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.views
+package xyz.aprildown.theme.material.views
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -7,10 +7,10 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import com.google.android.material.navigation.NavigationView
-import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.adjustAlpha
-import xyz.aprildown.theme.utils.color
+import xyz.aprildown.theme.material.R
+import xyz.aprildown.theme.material.utils.adjustAlpha
+import xyz.aprildown.theme.material.utils.color
 
 internal class ThemeNavigationView(
     context: Context,

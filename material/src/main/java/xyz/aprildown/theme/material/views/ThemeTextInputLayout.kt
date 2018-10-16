@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.views
+package xyz.aprildown.theme.material.views
 
 import android.content.Context
 import android.content.res.ColorStateList

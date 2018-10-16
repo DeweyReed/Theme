@@ -1,12 +1,12 @@
 @file:Suppress("SpellCheckingInspection")
 
-package xyz.aprildown.theme
+package xyz.aprildown.theme.material
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import xyz.aprildown.theme.internal.InflationDelegate
-import xyz.aprildown.theme.views.*
+import xyz.aprildown.theme.material.views.*
 
 class MaterialInflationDelegate : InflationDelegate {
     override fun createView(
