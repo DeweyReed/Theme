@@ -24,18 +24,19 @@ internal class ThemeToolbar(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        setBackgroundColor(get().colorForAttrName(backgroundColorValue, get().colorPrimary)!!)
+        get().colorForAttrName(backgroundColorValue, get().colorPrimary)?.let {
+            setBackgroundColor(it)
+        }
 
         invalidateColors(get().toolbarIconColor)
 
-        setTitleTextColor(get().colorForAttrName(titleTextColorValue, get().toolbarTitleColor)!!)
+        get().colorForAttrName(titleTextColorValue, get().toolbarTitleColor)?.let {
+            setTitleTextColor(it)
+        }
 
-        setSubtitleTextColor(
-            get().colorForAttrName(
-                subtitleTextColorValue,
-                get().toolbarSubtitleColor
-            )!!
-        )
+        get().colorForAttrName(subtitleTextColorValue, get().toolbarSubtitleColor)?.let {
+            setSubtitleTextColor(it)
+        }
     }
 
     override fun setNavigationIcon(icon: Drawable?) {

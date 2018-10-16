@@ -20,21 +20,17 @@ internal class ThemeEditText(
     private val textColorHintValue = wizard.getRawValue(android.R.attr.textColorHint)
 
     init {
-        invalidateColors(
-            ColorIsDarkState(
-                get().colorForAttrName(tintColorValue, get().colorAccent)!!,
-                get().isDark
-            )
-        )
+        get().colorForAttrName(tintColorValue, get().colorAccent)?.let {
+            invalidateColors(ColorIsDarkState(it, get().isDark))
+        }
 
-        changeTextColor(get().colorForAttrName(textColorValue, context.textColorPrimary)!!)
+        get().colorForAttrName(textColorValue, context.textColorPrimary)?.let {
+            changeTextColor(it)
+        }
 
-        changeHintTextColor(
-            get().colorForAttrName(
-                textColorHintValue,
-                context.textColorSecondary
-            )!!
-        )
+        get().colorForAttrName(textColorHintValue, context.textColorSecondary)?.let {
+            changeHintTextColor(it)
+        }
     }
 
     private fun invalidateColors(state: ColorIsDarkState) =

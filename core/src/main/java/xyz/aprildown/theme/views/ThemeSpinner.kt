@@ -18,12 +18,9 @@ internal class ThemeSpinner(
     private val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
 
     init {
-        invalidateColors(
-            ColorIsDarkState(
-                get().colorForAttrName(backgroundColorValue, get().colorAccent)!!,
-                get().isDark
-            )
-        )
+        get().colorForAttrName(backgroundColorValue, get().colorAccent)?.let {
+            invalidateColors(ColorIsDarkState(it, get().isDark))
+        }
     }
 
     private fun invalidateColors(state: ColorIsDarkState) =

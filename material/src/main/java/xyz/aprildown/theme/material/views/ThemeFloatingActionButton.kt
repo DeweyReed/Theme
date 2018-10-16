@@ -27,9 +27,9 @@ internal class ThemeFloatingActionButton(
     private var iconColor: Int = 0
 
     init {
-        invalidateColors(
-            get().colorForAttrName(backgroundColorValue, get().colorAccent)!!
-        )
+        get().colorForAttrName(backgroundColorValue, get().colorAccent)?.let {
+            invalidateColors(it)
+        }
     }
 
     override fun setImageDrawable(drawable: Drawable?) =

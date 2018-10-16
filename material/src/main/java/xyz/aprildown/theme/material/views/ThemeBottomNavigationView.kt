@@ -76,8 +76,8 @@ internal class ThemeBottomNavigationView(
     }
 
     private fun invalidateWithBackgroundColor() {
-        if (backgroundColor != null) {
-            setBackgroundColor(backgroundColor!!)
+        backgroundColor?.let {
+            setBackgroundColor(it)
         }
     }
 }

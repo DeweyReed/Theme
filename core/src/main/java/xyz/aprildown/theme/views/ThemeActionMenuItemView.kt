@@ -38,8 +38,8 @@ internal class ThemeActionMenuItemView(
                 color
             )
         )
-        if (icon != null) {
-            setIcon(icon!!, sl)
+        icon?.let {
+            setIcon(it, sl)
         }
         setTextColor(color)
     }
