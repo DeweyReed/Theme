@@ -112,7 +112,9 @@ class Theme private constructor(private var context: Context?) {
          */
         fun peek(context: Context, f: Theme.() -> Unit) {
             val localInstance = Theme(context)
+            localInstance.initPrefs()
             localInstance.f()
+            localInstance.deInitPrefs()
         }
 
         fun edit(context: Context? = null, f: ThemeEditor.() -> Unit) {
