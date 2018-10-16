@@ -34,6 +34,16 @@
                 android:value="xyz.aprildown.theme.app.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".CoordinatorActivity"
+            android:label="@string/title_activity_coordinator"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.aprildown.theme.app.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

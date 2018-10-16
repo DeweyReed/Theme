@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_main1.*
 import kotlinx.android.synthetic.main.fragment_main1.view.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.toast
 import xyz.aprildown.theme.Theme
 
@@ -100,8 +101,10 @@ class MainFragment1 : Fragment() {
                 .show()
         }
 
-        view.btnBorderless.setOnClickListener {
-            requireContext().toast("Toast")
+        view.btnBorderless.setOnClickListener { _ ->
+            view.layoutRoot.snackbar("Snackbar", "Action") {
+                requireContext().toast("Toast")
+            }
         }
     }
 

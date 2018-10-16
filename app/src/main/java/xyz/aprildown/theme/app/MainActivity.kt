@@ -25,7 +25,13 @@ class MainActivity : ThemeActivity() {
         override fun getItem(position: Int): Fragment = when (position) {
             0 -> MainFragment1()
             1 -> MainFragment2()
-            else -> throw  IllegalStateException("$position")
+            else -> throw IllegalStateException("$position")
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? = when (position) {
+            0 -> "Tab1"
+            1 -> "Tab2"
+            else -> throw IllegalStateException("$position")
         }
     }
 }

@@ -24,10 +24,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':theme-core')
+    implementation project(':theme-material')
 
     implementation libs.kotlin_stdlib_jdk7
 
     implementation libs.androidx_appcompat
+    implementation libs.material
 
     debugImplementation libs.leak_cannary
     debugImplementation libs.leak_cannary_fragment
@@ -37,4 +39,5 @@ dependencies {
     implementation "com.mikepenz:materialize:1.2.0"
 
     implementation libs.kotlin_anko_common
+    implementation libs.kotlin_anko_design
 }
