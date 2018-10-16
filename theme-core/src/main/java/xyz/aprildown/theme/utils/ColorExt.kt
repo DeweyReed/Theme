@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package xyz.aprildown.theme.utils
 
 import android.graphics.Color

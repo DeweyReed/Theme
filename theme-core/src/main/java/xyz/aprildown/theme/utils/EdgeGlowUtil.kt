@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import java.lang.reflect.Field
 
+@Suppress("unused")
 internal object EdgeGlowUtil {
 
     private var EDGE_GLOW_FIELD_EDGE: Field? = null

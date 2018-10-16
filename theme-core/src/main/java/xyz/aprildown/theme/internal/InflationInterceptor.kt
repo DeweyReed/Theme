@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package xyz.aprildown.theme.internal
 
 import android.annotation.SuppressLint

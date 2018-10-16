@@ -78,7 +78,7 @@ internal fun Activity?.setTaskDescriptionColor(@ColorInt requestedColor: Int) {
             .bitmap
     }
     if (icon != null) {
-        // Sets color of entry in the system recents page
+        // Sets color of entry in the system recent page
         @Suppress("DEPRECATION")
         val td = ActivityManager.TaskDescription(title as String, icon, color)
         setTaskDescription(td)
