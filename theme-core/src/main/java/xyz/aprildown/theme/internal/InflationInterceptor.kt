@@ -54,11 +54,6 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
             ThemeToolbar(context, attrs)
 
         "$APPCOMPAT_WIDGET.AppCompatTextView", "TextView" ->
-//            if (viewId == id.snackbar_text) {
-//                AestheticSnackBarTextView(context, attrs)
-//            } else {
-//                null
-//            }
             ThemeTextView(context, attrs)
 
         "Button", "$APPCOMPAT_WIDGET.AppCompatButton" ->
@@ -67,8 +62,6 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
                 viewId == android.R.id.button3
             ) {
                 ThemeDialogButton(context, attrs)
-//            } else if (viewId == id.snackbar_action) {
-//                AestheticSnackBarButton(context, attrs)
             } else if (isBorderlessButton(context, attrs)) {
                 ThemeBorderlessButton(context, attrs)
             } else {
@@ -92,8 +85,6 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
         "$APPCOMPAT_VIEW.ActionMenuItemView" ->
             ThemeActionMenuItemView(context, attrs)
 
-//        "$APPCOMPAT_WIDGET.RecyclerView" ->
-//            AestheticRecyclerView(context, attrs)
         "$ANDROIDX_WIDGET.NestedScrollView" ->
             ThemeNestedScrollView(context, attrs)
         "ListView" ->
@@ -105,27 +96,6 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
 
         "Spinner", "$APPCOMPAT_WIDGET.AppCompatSpinner" ->
             ThemeSpinner(context, attrs)
-
-//        "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
-//            AestheticTextInputLayout(context, attrs)
-//        "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
-//            AestheticTextInputEditText(context, attrs)
-
-//        "$APPCOMPAT_WIDGET.CardView" ->
-//            AestheticCardView(context, attrs)
-//        "$GOOGLE_MATERIAL.tabs.TabLayout" ->
-//            AestheticTabLayout(context, attrs)
-//        "$GOOGLE_MATERIAL.navigation.NavigationView" ->
-//            AestheticNavigationView(context, attrs)
-//        "$GOOGLE_MATERIAL.bottomnavigation.BottomNavigationView" ->
-//            AestheticBottomNavigationView(context, attrs)
-//        "$GOOGLE_MATERIAL.floatingactionbutton.FloatingActionButton" ->
-//            AestheticFab(context, attrs)
-
-//        "androidx.coordinatorlayout.widget.CoordinatorLayout" ->
-//            AestheticCoordinatorLayout(context, attrs)
-//        "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
-//            ThemeSwipeRefreshLayout(context, attrs)
         else -> null
     }
 

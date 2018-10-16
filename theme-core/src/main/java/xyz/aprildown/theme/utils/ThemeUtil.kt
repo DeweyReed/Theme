@@ -10,11 +10,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 
-internal val Theme.toolbarIconColor
+val Theme.toolbarIconColor
     @ColorInt
     get() = if (colorPrimary.isColorLight()) Color.BLACK else Color.WHITE
 
-internal val Theme.toolbarTitleColor
+val Theme.toolbarTitleColor
     @ColorInt
     get() = if (colorPrimary.isColorLight()) Color.BLACK else Color.WHITE
 
@@ -51,9 +51,8 @@ internal fun Theme.invalidateStatusBar() {
     }
 }
 
-
 @CheckResult
-internal fun Theme.colorForAttrName(
+fun Theme.colorForAttrName(
     name: String,
     fallback: Int? = null
 ): Int? {

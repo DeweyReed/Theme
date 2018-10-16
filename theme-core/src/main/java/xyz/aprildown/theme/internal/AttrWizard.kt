@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 
-internal class AttrWizard(
+class AttrWizard(
     private val context: Context,
     private val attrs: AttributeSet?
 ) {

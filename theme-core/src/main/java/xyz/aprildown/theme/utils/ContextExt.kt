@@ -3,6 +3,7 @@ package xyz.aprildown.theme.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
@@ -31,8 +32,8 @@ internal fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
 }
 
 @ColorInt
-internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    val a = theme.obtainStyledAttributes(intArrayOf(attr))
+internal fun Resources.Theme.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
+    val a = obtainStyledAttributes(intArrayOf(attr))
     return try {
         a.getColor(0, fallback)
     } catch (ignored: Throwable) {
@@ -42,19 +43,19 @@ internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0):
     }
 }
 
-internal val Context.textColorPrimary: Int
+val Resources.Theme.textColorPrimary: Int
     @ColorInt
     get() = colorAttr(android.R.attr.textColorPrimary)
 
-internal val Context.textColorPrimaryInverse: Int
+val Resources.Theme.textColorPrimaryInverse: Int
     @ColorInt
     get() = colorAttr(android.R.attr.textColorPrimaryInverse)
 
-internal val Context.textColorSecondary: Int
+val Resources.Theme.textColorSecondary: Int
     @ColorInt
     get() = colorAttr(android.R.attr.textColorSecondary)
 
-internal val Context.textColorSecondaryInverse: Int
+val Resources.Theme.textColorSecondaryInverse: Int
     @ColorInt
     get() = colorAttr(android.R.attr.textColorSecondaryInverse)
 

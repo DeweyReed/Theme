@@ -13,7 +13,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import java.lang.reflect.Field
 
-internal object EdgeGlowUtil {
+object EdgeGlowUtil {
 
     private var EDGE_GLOW_FIELD_EDGE: Field? = null
     private var EDGE_GLOW_FIELD_GLOW: Field? = null
@@ -206,7 +206,7 @@ internal object EdgeGlowUtil {
     // Utilities
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun setEffectColor(requestedEdgeEffect: Any?, @ColorInt color: Int) {
+    fun setEffectColor(requestedEdgeEffect: Any?, @ColorInt color: Int) {
         var edgeEffect = requestedEdgeEffect
         invalidateEdgeEffectFields()
         if (edgeEffect is EdgeEffectCompat) {

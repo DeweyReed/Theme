@@ -27,12 +27,12 @@ internal class ThemeEditText(
             )
         )
 
-        changeTextColor(get().colorForAttrName(textColorValue, context.textColorPrimary)!!)
+        changeTextColor(get().colorForAttrName(textColorValue, context.theme.textColorPrimary)!!)
 
         changeHintTextColor(
             get().colorForAttrName(
                 textColorHintValue,
-                context.textColorSecondary
+                context.theme.textColorSecondary
             )!!
         )
     }

@@ -77,7 +77,7 @@ internal fun View.setTintAuto(
     }
 }
 
-internal fun View.setTintSelector(
+fun View.setTintSelector(
     @ColorInt color: Int,
     darker: Boolean,
     useDarkTheme: Boolean

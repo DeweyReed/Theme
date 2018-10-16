@@ -35,7 +35,10 @@ class Theme private constructor(private var context: Context?) {
 
     @ColorInt
     fun attribute(@AttrRes attrId: Int): Int {
-        return safePrefs.getInt(safeContext.attrKey(attrId), safeContext.colorAttr(attr = attrId))
+        return safePrefs.getInt(
+            safeContext.attrKey(attrId),
+            safeContext.theme.colorAttr(attr = attrId)
+        )
     }
 
     @ColorInt
@@ -47,21 +50,21 @@ class Theme private constructor(private var context: Context?) {
         @ColorInt
         get() = safePrefs.getInt(
             KEY_PRIMARY_COLOR,
-            safeContext.colorAttr(attr = R.attr.colorPrimary)
+            safeContext.theme.colorAttr(attr = R.attr.colorPrimary)
         )
 
     val colorPrimaryDark: Int
         @ColorInt
         get() = safePrefs.getInt(
             KEY_PRIMARY_DARK_COLOR,
-            safeContext.colorAttr(attr = R.attr.colorPrimaryDark)
+            safeContext.theme.colorAttr(attr = R.attr.colorPrimaryDark)
         )
 
     val colorAccent: Int
         @ColorInt
         get() = safePrefs.getInt(
             KEY_ACCENT_COLOR,
-            safeContext.colorAttr(attr = R.attr.colorAccent)
+            safeContext.theme.colorAttr(attr = R.attr.colorAccent)
         )
 
     val colorStatusBar: Int
@@ -76,7 +79,7 @@ class Theme private constructor(private var context: Context?) {
         get() = safePrefs.getInt(
             KEY_NAV_BAR_COLOR,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                safeContext.colorAttr(android.R.attr.navigationBarColor)
+                safeContext.theme.colorAttr(android.R.attr.navigationBarColor)
             else Color.BLACK
         )
 
