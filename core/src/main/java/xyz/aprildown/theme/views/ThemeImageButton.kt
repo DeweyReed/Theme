@@ -2,7 +2,7 @@ package xyz.aprildown.theme.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatImageButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
@@ -13,7 +13,7 @@ import xyz.aprildown.theme.utils.colorForAttrName
 internal class ThemeImageButton(
     context: Context,
     attrs: AttributeSet? = null
-) : AppCompatImageView(context, attrs) {
+) : AppCompatImageButton(context, attrs) {
 
     private val wizard = AttrWizard(context, attrs)
     private val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
