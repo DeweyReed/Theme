@@ -44,8 +44,9 @@ class Theme private constructor(private var context: Context?) {
     }
 
     @ColorInt
-    fun attribute(name: String): Int {
-        return safePrefs.getInt(attrKey(name), 0)
+    fun attribute(name: String): Int? {
+        val key = attrKey(name)
+        return if (safePrefs.contains(key)) safePrefs.getInt(key, 0) else null
     }
 
     val colorPrimary: Int
