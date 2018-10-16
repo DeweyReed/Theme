@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    implementation project(':theme-core')
+    implementation project(':core')
     implementation libs.kotlin_stdlib_jdk7
     implementation libs.androidx_appcompat
     implementation libs.material

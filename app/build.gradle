@@ -23,8 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':theme-core')
-    implementation project(':theme-material')
+    implementation project(':core')
+    implementation project(':material')
 
     implementation libs.kotlin_stdlib_jdk7
 
