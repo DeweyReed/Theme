@@ -6,11 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import com.google.android.material.navigation.NavigationView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.color
 
 internal class ThemeNavigationView(
     context: Context,
@@ -26,8 +26,7 @@ internal class ThemeNavigationView(
         val unselectedIconColor = baseColor.adjustAlpha(.54f)
         val unselectedTextColor = baseColor.adjustAlpha(.87f)
 
-        val selectedItemBgColor = ContextCompat.getColor(
-            context,
+        val selectedItemBgColor = context.color(
             if (isDark) R.color.ate_navigation_drawer_selected_dark
             else R.color.ate_navigation_drawer_selected_light
         )

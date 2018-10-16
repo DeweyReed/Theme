@@ -18,7 +18,7 @@ internal class ThemeTabLayout(
 ) : TabLayout(context, attrs) {
 
     companion object {
-        const val UNFOCUSED_ALPHA = 0.5f
+        private const val UNFOCUSED_ALPHA = 0.5f
     }
 
     init {

@@ -19,8 +19,6 @@ class MaterialInflationDelegate : InflationDelegate {
             if (viewId == R.id.snackbar_action) {
                 ThemeSnackBarButton(context, attrs)
             } else null
-        "$APPCOMPAT_WIDGET.RecyclerView" ->
-            ThemeRecyclerView(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
             ThemeTextInputLayout(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->

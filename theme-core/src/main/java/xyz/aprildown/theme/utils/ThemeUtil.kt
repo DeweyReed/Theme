@@ -18,7 +18,7 @@ val Theme.toolbarTitleColor
     @ColorInt
     get() = if (colorPrimary.isColorLight()) Color.BLACK else Color.WHITE
 
-internal val Theme.toolbarSubtitleColor
+val Theme.toolbarSubtitleColor
     @ColorInt
     get() = toolbarTitleColor.adjustAlpha(.87f)
 

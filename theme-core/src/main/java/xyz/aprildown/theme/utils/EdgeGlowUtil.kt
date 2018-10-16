@@ -10,10 +10,11 @@ import android.widget.ScrollView
 import androidx.annotation.ColorInt
 import androidx.core.widget.EdgeEffectCompat
 import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import java.lang.reflect.Field
 
-object EdgeGlowUtil {
+internal object EdgeGlowUtil {
 
     private var EDGE_GLOW_FIELD_EDGE: Field? = null
     private var EDGE_GLOW_FIELD_GLOW: Field? = null
@@ -24,6 +25,10 @@ object EdgeGlowUtil {
     private var NESTED_SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM: Field? = null
     private var LIST_VIEW_FIELD_EDGE_GLOW_TOP: Field? = null
     private var LIST_VIEW_FIELD_EDGE_GLOW_BOTTOM: Field? = null
+    private var RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP: Field? = null
+    private var RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT: Field? = null
+    private var RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT: Field? = null
+    private var RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM: Field? = null
     private var VIEW_PAGER_FIELD_EDGE_GLOW_LEFT: Field? = null
     private var VIEW_PAGER_FIELD_EDGE_GLOW_RIGHT: Field? = null
 
@@ -132,6 +137,41 @@ object EdgeGlowUtil {
         }
     }
 
+    private fun invalidateRecyclerViewFields() {
+        if (RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP != null &&
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT != null &&
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT != null &&
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM != null
+        ) {
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP!!.isAccessible = true
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT!!.isAccessible = true
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT!!.isAccessible = true
+            RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM!!.isAccessible = true
+            return
+        }
+        val cls = RecyclerView::class.java
+        for (f in cls.declaredFields) {
+            when (f.name) {
+                "mTopGlow" -> {
+                    f.isAccessible = true
+                    RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP = f
+                }
+                "mBottomGlow" -> {
+                    f.isAccessible = true
+                    RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM = f
+                }
+                "mLeftGlow" -> {
+                    f.isAccessible = true
+                    RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT = f
+                }
+                "mRightGlow" -> {
+                    f.isAccessible = true
+                    RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT = f
+                }
+            }
+        }
+    }
+
     private fun invalidateViewPagerFields() {
         if (VIEW_PAGER_FIELD_EDGE_GLOW_LEFT != null && VIEW_PAGER_FIELD_EDGE_GLOW_RIGHT != null) {
             VIEW_PAGER_FIELD_EDGE_GLOW_LEFT!!.isAccessible = true
@@ -191,6 +231,40 @@ object EdgeGlowUtil {
         }
     }
 
+    fun setEdgeGlowColor(
+        scrollView: RecyclerView,
+        @ColorInt color: Int,
+        requestedScrollListener: RecyclerView.OnScrollListener?
+    ) {
+        var scrollListener = requestedScrollListener
+        invalidateRecyclerViewFields()
+        invalidateRecyclerViewFields()
+        if (scrollListener == null) {
+            scrollListener = object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(
+                    recyclerView: RecyclerView,
+                    newState: Int
+                ) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    setEdgeGlowColor(recyclerView, color, this)
+                }
+            }
+            scrollView.addOnScrollListener(scrollListener)
+        }
+        try {
+            var ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP!!.get(scrollView)
+            setEffectColor(ee, color)
+            ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM!!.get(scrollView)
+            setEffectColor(ee, color)
+            ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT!!.get(scrollView)
+            setEffectColor(ee, color)
+            ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT!!.get(scrollView)
+            setEffectColor(ee, color)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
     fun setEdgeGlowColor(pager: ViewPager, @ColorInt color: Int) {
         invalidateViewPagerFields()
         try {
@@ -206,7 +280,7 @@ object EdgeGlowUtil {
     // Utilities
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    fun setEffectColor(requestedEdgeEffect: Any?, @ColorInt color: Int) {
+    private fun setEffectColor(requestedEdgeEffect: Any?, @ColorInt color: Int) {
         var edgeEffect = requestedEdgeEffect
         invalidateEdgeEffectFields()
         if (edgeEffect is EdgeEffectCompat) {

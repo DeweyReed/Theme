@@ -85,6 +85,8 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
         "$APPCOMPAT_VIEW.ActionMenuItemView" ->
             ThemeActionMenuItemView(context, attrs)
 
+        "$APPCOMPAT_WIDGET.RecyclerView" ->
+            ThemeRecyclerView(context, attrs)
         "$ANDROIDX_WIDGET.NestedScrollView" ->
             ThemeNestedScrollView(context, attrs)
         "ListView" ->

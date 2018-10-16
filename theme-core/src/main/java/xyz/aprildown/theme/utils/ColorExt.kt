@@ -27,7 +27,7 @@ internal fun Int.stripAlpha(): Int {
 }
 
 @ColorInt
-fun Int.adjustAlpha(factor: Float): Int {
+internal fun Int.adjustAlpha(factor: Float): Int {
     val alpha = Math.round(Color.alpha(this) * factor)
     val red = Color.red(this)
     val green = Color.green(this)
@@ -51,7 +51,7 @@ internal fun Int.darkenColor(): Int {
     return shiftColor(0.9f)
 }
 
-fun Int.isColorLight(): Boolean {
+internal fun Int.isColorLight(): Boolean {
     if (this == Color.BLACK) {
         return false
     } else if (this == Color.WHITE || this == Color.TRANSPARENT) {

@@ -7,11 +7,11 @@ import android.graphics.Color.BLACK
 import android.graphics.Color.WHITE
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.color
 import xyz.aprildown.theme.utils.isColorLight
 
 internal class ThemeBottomNavigationView(
@@ -30,8 +30,7 @@ internal class ThemeBottomNavigationView(
         backgroundColor: Int,
         selectedColor: Int
     ) {
-        val baseColor = ContextCompat.getColor(
-            context,
+        val baseColor = context.color(
             if (backgroundColor.isColorLight()) R.color.ate_icon_light
             else R.color.ate_icon_dark
         )
@@ -69,8 +68,7 @@ internal class ThemeBottomNavigationView(
         invalidateWithBackgroundColor()
 
         setBackgroundColor(
-            ContextCompat.getColor(
-                context,
+            context.color(
                 if (get().isDark) R.color.ate_bottom_nav_default_dark_bg
                 else R.color.ate_bottom_nav_default_light_bg
             )
