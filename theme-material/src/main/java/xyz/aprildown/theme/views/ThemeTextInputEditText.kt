@@ -8,7 +8,7 @@ import com.google.android.material.textfield.TextInputEditText
 import xyz.aprildown.theme.Theme.Companion.get
 
 @SuppressLint("RestrictedApi")
-class ThemeTextInputEditText(
+internal class ThemeTextInputEditText(
     context: Context,
     attrs: AttributeSet? = null
 ) : TextInputEditText(context, attrs) {

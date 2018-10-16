@@ -12,7 +12,7 @@ import xyz.aprildown.theme.utils.tint
 import xyz.aprildown.theme.utils.toolbarIconColor
 import xyz.aprildown.theme.utils.toolbarTitleColor
 
-class ThemeTabLayout(
+internal class ThemeTabLayout(
     context: Context,
     attrs: AttributeSet? = null
 ) : TabLayout(context, attrs) {

@@ -14,7 +14,7 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.isColorLight
 
-class ThemeBottomNavigationView(
+internal class ThemeBottomNavigationView(
     context: Context?,
     attrs: AttributeSet? = null
 ) : BottomNavigationView(context, attrs) {

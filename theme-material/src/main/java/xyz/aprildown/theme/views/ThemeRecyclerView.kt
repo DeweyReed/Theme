@@ -8,7 +8,7 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.EdgeGlowUtil
 import java.lang.reflect.Field
 
-class ThemeRecyclerView(
+internal class ThemeRecyclerView(
     context: Context,
     attrs: AttributeSet? = null
 ) : RecyclerView(context, attrs) {

@@ -13,7 +13,7 @@ import xyz.aprildown.theme.utils.isColorLight
 import xyz.aprildown.theme.utils.setTintSelector
 import xyz.aprildown.theme.utils.tint
 
-class ThemeFloatingActionButton(
+internal class ThemeFloatingActionButton(
     context: Context,
     attrs: AttributeSet? = null
 ) : FloatingActionButton(context, attrs) {

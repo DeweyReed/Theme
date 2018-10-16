@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import xyz.aprildown.theme.Theme.Companion.get
 
-class ThemeSwipeRefreshLayout(
+internal class ThemeSwipeRefreshLayout(
     context: Context,
     attrs: AttributeSet? = null
 ) : SwipeRefreshLayout(context, attrs) {

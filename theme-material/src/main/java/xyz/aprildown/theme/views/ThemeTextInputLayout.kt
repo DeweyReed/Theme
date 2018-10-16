@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.Theme.Companion.get
 
-class ThemeTextInputLayout(
+internal class ThemeTextInputLayout(
     context: Context,
     attrs: AttributeSet? = null
 ) : TextInputLayout(context, attrs) {

@@ -8,7 +8,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.toolbarTitleColor
 
-class ThemeCoordinatorLayout(
+internal class ThemeCoordinatorLayout(
     context: Context,
     attrs: AttributeSet? = null
 ) : CoordinatorLayout(context, attrs) {

@@ -12,7 +12,7 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.adjustAlpha
 
-class ThemeNavigationView(
+internal class ThemeNavigationView(
     context: Context,
     attrs: AttributeSet? = null
 ) : NavigationView(context, attrs) {
