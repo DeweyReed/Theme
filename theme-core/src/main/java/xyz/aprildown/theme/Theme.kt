@@ -115,8 +115,9 @@ class Theme private constructor(private var context: Context?) {
             localInstance.f()
         }
 
-        fun edit(context: Context, f: ThemeEditor.() -> Unit) {
-            val editor = ThemeEditor(context)
+        fun edit(context: Context? = null, f: ThemeEditor.() -> Unit) {
+            val c: Context = context ?: get().safeContext
+            val editor = ThemeEditor(c)
             editor.f()
             editor.save()
         }
