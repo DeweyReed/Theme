@@ -28,7 +28,7 @@ val Theme.toolbarSubtitleColor
 
 @CheckResult
 internal fun Context.attrKey(@AttrRes attrId: Int): String {
-    var name = resources.getResourceName(attrId)
+    var name = resources.safeResourceName(attrId)
     if (!name.startsWith("android")) {
         name = name.substring(name.indexOf(':') + 1)
     }

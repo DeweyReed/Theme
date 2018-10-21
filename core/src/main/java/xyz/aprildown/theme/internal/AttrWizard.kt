@@ -3,6 +3,7 @@ package xyz.aprildown.theme.internal
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
+import xyz.aprildown.theme.utils.safeResourceName
 
 class AttrWizard(
     private val context: Context,
@@ -15,7 +16,7 @@ class AttrWizard(
         }
 
         val res = context.resources
-        val attrName = res.getResourceName(attrId)
+        val attrName = res.safeResourceName(attrId)
         val attrIndex = attrs.indexOfAttr(context) { it == attrName }
         if (attrIndex == -1) {
             return ""
@@ -24,12 +25,16 @@ class AttrWizard(
         val attrValue = attrs.getAttributeValue(attrIndex)
         return when {
             attrValue.startsWith('@') || attrValue.startsWith('?') -> {
-                val id = attrValue.substring(1)
-                    .toInt()
-                if (id == 0) {
-                    return ""
+                val rawId = attrValue.substring(1)
+                var resName = if (rawId.all { it.isDigit() }) {
+                    val id = rawId.toInt()
+                    if (id == 0) {
+                        return ""
+                    }
+                    res.safeResourceName(id)
+                } else {
+                    rawId
                 }
-                var resName = res.getResourceName(id)
                 if (!resName.startsWith("android")) {
                     resName = resName.substring(resName.indexOf(':') + 1)
                 }
@@ -46,37 +51,10 @@ private fun AttributeSet.indexOfAttr(
 ): Int {
     for (i in 0 until attributeCount) {
         val nameResource = getAttributeNameResource(i)
-        val literalName =
-            if (nameResource != 0) context.resources.getResourceName(nameResource) else ""
+        val literalName = context.resources.safeResourceName(nameResource)
         if (matcher(literalName)) {
             return i
         }
     }
     return -1
 }
-
-//private fun scanForRClass(
-//  safeContext: Context,
-//  subclass: String
-//): Class<*> {
-//  val pkg = safeContext.packageName
-//  val cls = Class.forName("$pkg.R")
-//  return cls.declaredClasses.singleOrNull { it.simpleName == subclass }
-//      ?: throw IllegalArgumentException("Didn't find class $pkg.R.$subclass")
-//}
-//
-//private fun scanForFieldValue(
-//  classToSearch: Class<*>,
-//  target: Int
-//): String? {
-//  for (field in classToSearch.declaredFields) {
-//    try {
-//      val fieldValue = field.get(null) as Int
-//      if (fieldValue == target) {
-//        return field.name
-//      }
-//    } catch (_: Throwable) {
-//    }
-//  }
-//  return null
-//}

@@ -1,17 +1,19 @@
+@file:Suppress("unused")
+
 package xyz.aprildown.theme.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import android.view.LayoutInflater
+import android.util.Log
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import xyz.aprildown.theme.BuildConfig
 import xyz.aprildown.theme.internal.PREFS_NAME
-import java.lang.reflect.Array
-import java.lang.reflect.Field
 
 private fun Context.safeContext(): Context =
     takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !isDeviceProtectedStorage }?.let {
@@ -77,24 +79,15 @@ internal fun Context.resId(
     }
 }
 
-
-private var mConstructorArgsField: Field? = null
-
-/**
- * Gets around an issue existing before API 16. See
- * https://github.com/afollestad/aesthetic/issues/101.
- */
-internal fun Context.fixedLayoutInflater(): LayoutInflater {
-    val inflater = LayoutInflater.from(this)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) return inflater
-
-    if (mConstructorArgsField == null) {
-        //mConstructorArgs
-        mConstructorArgsField = LayoutInflater::class.findField("mConstructorArgs")
+@CheckResult
+internal fun Resources.safeResourceName(resId: Int): String {
+    if (resId == 0) {
+        return ""
     }
-    val constructorArgs = mConstructorArgsField!!.get(inflater)
-    Array.set(constructorArgs, 0, this)
-    mConstructorArgsField!!.set(inflater, constructorArgs)
-
-    return inflater
+    return try {
+        getResourceName(resId)
+    } catch (_: Resources.NotFoundException) {
+        if (BuildConfig.DEBUG) Log.w("AttrWizard", "Unable to get resource name for $resId")
+        ""
+    }
 }
