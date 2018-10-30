@@ -178,7 +178,7 @@ internal fun RadioButton.setTint(
     }
 }
 
-internal fun SeekBar.setTint(
+internal fun AbsSeekBar.setTint(
     @ColorInt color: Int,
     useDarker: Boolean
 ) {
@@ -192,6 +192,7 @@ internal fun SeekBar.setTint(
     if (SDK_INT >= LOLLIPOP) {
         this.thumbTintList = s1
         this.progressTintList = s1
+        this.secondaryProgressTintList = s1
     } else {
         this.progressDrawable = this.progressDrawable.tint(s1)
         if (SDK_INT >= JELLY_BEAN) {

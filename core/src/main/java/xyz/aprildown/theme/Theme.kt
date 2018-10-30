@@ -105,12 +105,14 @@ class Theme private constructor(private var context: Context?) {
         @SuppressLint("StaticFieldLeak")
         private var instance: Theme? = null
 
+        @JvmStatic
         fun get(): Theme = instance ?: throw IllegalStateException("init not called")
 
         /**
          * Peek some color values when the app is not in the foreground.
          * [Theme.addDelegate] won't work in this way.
          */
+        @JvmStatic
         fun peek(context: Context, f: Theme.() -> Unit) {
             val localInstance = Theme(context)
             localInstance.initPrefs()
@@ -118,6 +120,7 @@ class Theme private constructor(private var context: Context?) {
             localInstance.deInitPrefs()
         }
 
+        @JvmStatic
         fun edit(context: Context? = null, f: ThemeEditor.() -> Unit) {
             val c: Context = context ?: get().safeContext
             val editor = ThemeEditor(c)
@@ -125,6 +128,7 @@ class Theme private constructor(private var context: Context?) {
             editor.save()
         }
 
+        @JvmStatic
         fun attach(c: Context) {
             get().run {
                 isResumed = false
@@ -134,6 +138,7 @@ class Theme private constructor(private var context: Context?) {
             (c as? AppCompatActivity)?.let { it.setInflaterFactory(it.layoutInflater) }
         }
 
+        @JvmStatic
         fun pause(c: Context) {
             get().run {
                 isResumed = false
@@ -144,6 +149,7 @@ class Theme private constructor(private var context: Context?) {
             }
         }
 
+        @JvmStatic
         fun resume(c: Context) {
             get().run {
                 context = c
@@ -161,6 +167,7 @@ class Theme private constructor(private var context: Context?) {
             }
         }
 
+        @JvmStatic
         fun init(c: Context, f: ThemeEditor.() -> Unit) {
             if (instance == null) {
                 instance = Theme(c)
