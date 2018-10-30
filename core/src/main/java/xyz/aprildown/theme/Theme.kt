@@ -137,7 +137,7 @@ class Theme private constructor(private var context: Context?) {
         fun pause(c: Context) {
             get().run {
                 isResumed = false
-                if (c is Activity && c.isFinishing && context == c) {
+                if (c is Activity && c.isFinishing && safeContext == c) {
                     context = null
                     deInitPrefs()
                 }

@@ -14,8 +14,8 @@ ext {
 
             material                 : '1.0.0',
 
-            kotlin                   : '1.2.71',
-            kotlin_anko              : '0.10.6',
+            kotlin                   : '1.3.0',
+            kotlin_anko              : '0.10.7',
 
             leak_cannary             : '1.6.1',
     ]
