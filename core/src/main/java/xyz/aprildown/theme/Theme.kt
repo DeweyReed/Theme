@@ -24,11 +24,11 @@ class Theme private constructor(private var context: Context?) {
 
     internal val safeContext
         @CheckResult
-        get() = context ?: throw IllegalStateException("Not attached")
+        get() = context ?: throw IllegalStateException("Not attached. Theme.context is null.")
 
     private val safePrefs
         @CheckResult
-        get() = prefs ?: throw IllegalStateException("Not attached")
+        get() = prefs ?: throw IllegalStateException("Not attached. Theme.prefs is null.")
 
     // region colors
 
@@ -106,7 +106,7 @@ class Theme private constructor(private var context: Context?) {
         private var instance: Theme? = null
 
         @JvmStatic
-        fun get(): Theme = instance ?: throw IllegalStateException("init not called")
+        fun get(): Theme = instance ?: throw IllegalStateException("Theme.init not called")
 
         /**
          * Peek some color values when the app is not in the foreground.
