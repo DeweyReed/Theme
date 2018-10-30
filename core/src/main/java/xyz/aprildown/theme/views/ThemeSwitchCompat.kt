@@ -14,10 +14,10 @@ internal class ThemeSwitchCompat(
     attrs: AttributeSet? = null
 ) : SwitchCompat(context, attrs) {
 
-    private val wizard = AttrWizard(context, attrs)
-    private val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-
     init {
+        val wizard = AttrWizard(context, attrs)
+        val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
+
         get().colorForAttrName(backgroundColorValue, get().colorAccent)?.let {
             invalidateColors(ColorIsDarkState(it, get().isDark))
         }

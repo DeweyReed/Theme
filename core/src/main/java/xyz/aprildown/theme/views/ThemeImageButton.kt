@@ -15,11 +15,11 @@ internal class ThemeImageButton(
     attrs: AttributeSet? = null
 ) : AppCompatImageButton(context, attrs) {
 
-    private val wizard = AttrWizard(context, attrs)
-    private val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-    private val tintColorValue = wizard.getRawValue(R.attr.tint)
-
     init {
+        val wizard = AttrWizard(context, attrs)
+        val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
+        val tintColorValue = wizard.getRawValue(R.attr.tint)
+
         get().colorForAttrName(backgroundColorValue)?.let {
             changeBackgroundColor(it)
         }

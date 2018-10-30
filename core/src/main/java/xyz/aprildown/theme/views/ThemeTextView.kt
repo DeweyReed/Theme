@@ -13,10 +13,10 @@ internal class ThemeTextView(
     attrs: AttributeSet? = null
 ) : AppCompatTextView(context, attrs) {
 
-    private val wizard = AttrWizard(context, attrs)
-    private val textColorValue = wizard.getRawValue(android.R.attr.textColor)
-
     init {
+        val wizard = AttrWizard(context, attrs)
+        val textColorValue = wizard.getRawValue(android.R.attr.textColor)
+
         get().colorForAttrName(textColorValue)?.let {
             changeTextColor(it)
         }

@@ -14,12 +14,12 @@ internal class ThemeEditText(
     attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {
 
-    private val wizard = AttrWizard(context, attrs)
-    private val tintColorValue = wizard.getRawValue(R.attr.tint)
-    private val textColorValue = wizard.getRawValue(android.R.attr.textColor)
-    private val textColorHintValue = wizard.getRawValue(android.R.attr.textColorHint)
-
     init {
+        val wizard = AttrWizard(context, attrs)
+        val tintColorValue = wizard.getRawValue(R.attr.tint)
+        val textColorValue = wizard.getRawValue(android.R.attr.textColor)
+        val textColorHintValue = wizard.getRawValue(android.R.attr.textColorHint)
+
         get().colorForAttrName(tintColorValue, get().colorAccent)?.let {
             invalidateColors(ColorIsDarkState(it, get().isDark))
         }
