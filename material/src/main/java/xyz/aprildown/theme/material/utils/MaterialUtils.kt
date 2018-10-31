@@ -3,10 +3,14 @@ package xyz.aprildown.theme.material.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
+import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import xyz.aprildown.theme.material.R
 
 /**
@@ -63,4 +67,13 @@ internal fun defaultRippleColor(
         if (useDarkRipple) R.color.ripple_material_light
         else R.color.ripple_material_dark
     )
+}
+
+@CheckResult
+internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
+    var result: Drawable = this ?: return null
+    result = DrawableCompat.wrap(result.mutate())
+    DrawableCompat.setTintMode(result, PorterDuff.Mode.SRC_IN)
+    DrawableCompat.setTint(result, color)
+    return result
 }

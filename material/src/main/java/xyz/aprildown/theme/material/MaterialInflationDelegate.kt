@@ -15,10 +15,10 @@ class MaterialInflationDelegate : InflationDelegate {
         name: String,
         viewId: Int
     ): View? = when (name) {
-        "Button", "$APPCOMPAT_WIDGET.AppCompatButton" ->
-            if (viewId == R.id.snackbar_action) {
-                ThemeSnackBarButton(context, attrs)
-            } else null
+        // Actually, even if we don't tint here, ThemeButton will do it for us.
+        // Besides, ThemeSnackBarContentLayout only tints the button text color for now.
+//        "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
+//            ThemeSnackBarContentLayout(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
             ThemeTextInputLayout(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
@@ -39,7 +39,6 @@ class MaterialInflationDelegate : InflationDelegate {
     }
 
     companion object {
-        private const val APPCOMPAT_WIDGET = "androidx.appcompat.widget"
         private const val GOOGLE_MATERIAL = "com.google.android.material"
     }
 }
