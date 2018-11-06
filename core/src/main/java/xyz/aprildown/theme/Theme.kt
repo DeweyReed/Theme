@@ -138,20 +138,11 @@ class Theme private constructor(private var context: Context?) {
             (c as? AppCompatActivity)?.let { it.setInflaterFactory(it.layoutInflater) }
         }
 
-        @JvmStatic
-        fun pause(c: Context) {
-            get().run {
-                isResumed = false
-                if (c is Activity && c.isFinishing && safeContext == c) {
-                    context = null
-                    deInitPrefs()
-                }
-            }
-        }
 
         @JvmStatic
         fun resume(c: Context) {
             get().run {
+                if (isResumed) throw IllegalStateException("Already resumed")
                 context = c
                 initPrefs()
                 isResumed = true
@@ -163,6 +154,17 @@ class Theme private constructor(private var context: Context?) {
                         it.setNavBarColorCompat(navColor)
                         it.setLightNavBarCompat(navColor.isColorLight())
                     }
+                }
+            }
+        }
+
+        @JvmStatic
+        fun pause(c: Context) {
+            get().run {
+                isResumed = false
+                if (c is Activity && c.isFinishing && safeContext == c) {
+                    context = null
+                    deInitPrefs()
                 }
             }
         }

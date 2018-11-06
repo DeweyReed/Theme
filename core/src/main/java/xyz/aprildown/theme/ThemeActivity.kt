@@ -16,7 +16,7 @@ open class ThemeActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        super.onPause()
         Theme.pause(this)
+        super.onPause()
     }
 }
