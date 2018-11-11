@@ -138,14 +138,13 @@ class Theme private constructor(private var context: Context?) {
             (c as? AppCompatActivity)?.let { it.setInflaterFactory(it.layoutInflater) }
         }
 
-
         @JvmStatic
         fun resume(c: Context) {
             get().run {
-                if (isResumed) throw IllegalStateException("Already resumed")
+                if (isResumed) throw IllegalStateException("Theme already resumed")
+                isResumed = true
                 context = c
                 initPrefs()
-                isResumed = true
                 (c as? Activity)?.let {
                     it.setTaskDescriptionColor(colorPrimary)
                     invalidateStatusBar()
@@ -162,9 +161,9 @@ class Theme private constructor(private var context: Context?) {
         fun pause(c: Context) {
             get().run {
                 isResumed = false
-                if (c is Activity && c.isFinishing && safeContext == c) {
-                    context = null
+                if (c is Activity && c.isFinishing && context == c) {
                     deInitPrefs()
+                    context = null
                 }
             }
         }
