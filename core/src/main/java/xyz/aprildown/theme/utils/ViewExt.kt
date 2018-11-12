@@ -22,14 +22,14 @@ internal fun View.setBackgroundCompat(drawable: Drawable?) {
     }
 }
 
-internal fun Toolbar.setOverflowButtonColor(@ColorInt color: Int) {
+fun Toolbar.setOverflowButtonColor(@ColorInt color: Int) {
     val overflowDrawable = overflowIcon
     if (overflowDrawable != null) {
         overflowIcon = overflowDrawable.tint(color)
     }
 }
 
-internal fun Toolbar.tintMenu(
+fun Toolbar.tintMenu(
     menu: Menu,
     activeColor: Int,
     inactiveColor: Int

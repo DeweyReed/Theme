@@ -31,6 +31,8 @@ class MaterialInflationDelegate : InflationDelegate {
             ThemeBottomNavigationView(context, attrs)
         "$GOOGLE_MATERIAL.floatingactionbutton.FloatingActionButton" ->
             ThemeFloatingActionButton(context, attrs)
+        "$GOOGLE_MATERIAL.bottomappbar.BottomAppBar" ->
+            ThemeBottomAppBar(context, attrs)
         "androidx.coordinatorlayout.widget.CoordinatorLayout" ->
             ThemeCoordinatorLayout(context, attrs)
         "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->

@@ -51,4 +51,20 @@
         app:layout_anchor="@id/collapsingToolbar"
         app:layout_anchorGravity="bottom|end" />
 
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bar"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:hideOnScroll="true"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        app:layout_anchor="@id/bar" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

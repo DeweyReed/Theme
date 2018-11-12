@@ -23,6 +23,11 @@ internal fun Context.color(@ColorRes color: Int): Int {
     return ContextCompat.getColor(this, color)
 }
 
+@ColorInt
+internal fun Int.darkenColor(): Int {
+    return shiftColor(0.9f)
+}
+
 internal fun Int.isColorLight(): Boolean {
     if (this == Color.BLACK) {
         return false
