@@ -14,11 +14,14 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.LayoutInflaterCompat.setFactory2
+import xyz.aprildown.theme.internal.InflationDelegate
 import xyz.aprildown.theme.internal.InflationInterceptor
 
 @Suppress("unused")
-internal fun AppCompatActivity.setInflaterFactory(li: LayoutInflater) =
-    setFactory2(li, InflationInterceptor())
+internal fun AppCompatActivity.setInflaterFactory(
+    li: LayoutInflater,
+    delegates: Array<out InflationDelegate>
+) = setFactory2(li, InflationInterceptor(delegates))
 
 internal fun Activity.setStatusBarColorCompat(@ColorInt color: Int) {
     if (SDK_INT >= LOLLIPOP) {

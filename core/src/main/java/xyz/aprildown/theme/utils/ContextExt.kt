@@ -24,6 +24,11 @@ internal fun Context.getThemePrefs(): SharedPreferences =
     safeContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
 @ColorInt
+internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
+    return if (contains(key)) getInt(key, 0) else or.invoke()
+}
+
+@ColorInt
 internal fun Context.color(@ColorRes color: Int): Int {
     return ContextCompat.getColor(this, color)
 }

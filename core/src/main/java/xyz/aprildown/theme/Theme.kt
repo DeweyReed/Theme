@@ -4,6 +4,7 @@ package xyz.aprildown.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -12,23 +13,26 @@ import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import xyz.aprildown.theme.internal.*
 import xyz.aprildown.theme.utils.*
 
 class Theme private constructor(private var context: Context?) {
 
-    private var prefs: SharedPreferences? = null
-    private var isResumed = false
-
-    internal val delegates = mutableListOf<InflationDelegate>()
+    private var _prefs: SharedPreferences? = null
 
     internal val safeContext
         @CheckResult
-        get() = context ?: throw IllegalStateException("Not attached. Theme.context is null.")
+        get() = context
+            ?: throw IllegalStateException("Accessing context when the app is in the background")
 
     private val safePrefs
         @CheckResult
-        get() = prefs ?: throw IllegalStateException("Not attached. Theme.prefs is null.")
+        get() = _prefs
+            ?: throw IllegalStateException("Accessing prefs when the app is in the background")
 
     // region colors
 
@@ -37,10 +41,9 @@ class Theme private constructor(private var context: Context?) {
 
     @ColorInt
     fun attribute(@AttrRes attrId: Int): Int {
-        return safePrefs.getInt(
-            safeContext.attrKey(attrId),
+        return safePrefs.getColorOrDefault(safeContext.attrKey(attrId)) {
             safeContext.colorAttr(attr = attrId)
-        )
+        }
     }
 
     @ColorInt
@@ -51,53 +54,44 @@ class Theme private constructor(private var context: Context?) {
 
     val colorPrimary: Int
         @ColorInt
-        get() = safePrefs.getInt(
-            KEY_PRIMARY_COLOR,
+        get() = safePrefs.getColorOrDefault(KEY_PRIMARY_COLOR) {
             safeContext.colorAttr(attr = R.attr.colorPrimary)
-        )
+        }
 
     val colorPrimaryDark: Int
         @ColorInt
-        get() = safePrefs.getInt(
-            KEY_PRIMARY_DARK_COLOR,
+        get() = safePrefs.getColorOrDefault(KEY_PRIMARY_DARK_COLOR) {
             safeContext.colorAttr(attr = R.attr.colorPrimaryDark)
-        )
+        }
 
     val colorAccent: Int
         @ColorInt
-        get() = safePrefs.getInt(
-            KEY_ACCENT_COLOR,
+        get() = safePrefs.getColorOrDefault(KEY_ACCENT_COLOR) {
             safeContext.colorAttr(attr = R.attr.colorAccent)
-        )
+        }
 
     val colorStatusBar: Int
         @ColorInt
-        get() = safePrefs.getInt(
-            KEY_STATUS_BAR_COLOR,
+        get() = safePrefs.getColorOrDefault(KEY_STATUS_BAR_COLOR) {
             colorPrimaryDark
-        )
+        }
 
     val colorNavigationBar: Int
         @ColorInt
-        get() = safePrefs.getInt(
-            KEY_NAV_BAR_COLOR,
+        get() = safePrefs.getColorOrDefault(KEY_NAV_BAR_COLOR) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 safeContext.colorAttr(android.R.attr.navigationBarColor)
             else Color.BLACK
-        )
+        }
 
     // endregion colors
 
-    fun addDelegate(vararg ds: InflationDelegate) {
-        delegates.addAll(ds)
-    }
-
     private fun initPrefs() {
-        prefs = safeContext.getThemePrefs()
+        _prefs = safeContext.getThemePrefs()
     }
 
     private fun deInitPrefs() {
-        prefs = null
+        _prefs = null
     }
 
     companion object {
@@ -106,43 +100,30 @@ class Theme private constructor(private var context: Context?) {
         private var instance: Theme? = null
 
         @JvmStatic
-        fun get(): Theme = instance ?: throw IllegalStateException("Theme.init not called")
-
-        /**
-         * Peek some color values when the app is not in the foreground.
-         * [Theme.addDelegate] won't work in this way.
-         */
-        @JvmStatic
-        fun peek(context: Context, f: Theme.() -> Unit) {
-            val localInstance = Theme(context)
-            localInstance.initPrefs()
-            localInstance.f()
-            localInstance.deInitPrefs()
-        }
+        fun get(): Theme = instance ?: throw  IllegalStateException("App.init isn't called.")
 
         @JvmStatic
         fun edit(context: Context? = null, f: ThemeEditor.() -> Unit) {
-            val c: Context = context ?: get().safeContext
-            val editor = ThemeEditor(c)
-            editor.f()
-            editor.save()
+            ThemeEditor(context ?: get().safeContext).run {
+                f()
+                save()
+            }
         }
 
         @JvmStatic
-        fun attach(c: Context) {
+        fun attach(c: Context, vararg delegates: InflationDelegate) {
             get().run {
-                isResumed = false
                 context = c
                 initPrefs()
             }
-            (c as? AppCompatActivity)?.let { it.setInflaterFactory(it.layoutInflater) }
+            (c as? AppCompatActivity)?.let {
+                it.setInflaterFactory(it.layoutInflater, delegates)
+            }
         }
 
         @JvmStatic
         fun resume(c: Context) {
             get().run {
-                if (isResumed) throw IllegalStateException("Theme already resumed")
-                isResumed = true
                 context = c
                 initPrefs()
                 (c as? Activity)?.let {
@@ -158,28 +139,29 @@ class Theme private constructor(private var context: Context?) {
         }
 
         @JvmStatic
-        fun pause(c: Context) {
-            get().run {
-                isResumed = false
-                if (c is Activity && c.isFinishing && context == c) {
-                    deInitPrefs()
-                    context = null
-                }
-            }
-        }
-
-        @JvmStatic
-        fun init(c: Context, f: ThemeEditor.() -> Unit) {
+        fun init(app: Application, f: ThemeEditor.() -> Unit) {
             if (instance == null) {
-                instance = Theme(c)
+                instance = Theme(app)
             }
-            val prefs = c.getThemePrefs()
+            val theme = get()
+            theme.initPrefs()
+            val prefs = theme.safePrefs
             if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
                 prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
-                val editor = ThemeEditor(c)
+                val editor = ThemeEditor(app)
                 editor.f()
                 editor.save()
             }
+
+            ProcessLifecycleOwner.get().lifecycle.addObserver(object : LifecycleObserver {
+                @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+                fun stop() {
+                    get().run {
+                        deInitPrefs()
+                        context = null
+                    }
+                }
+            })
         }
     }
 }

@@ -5,7 +5,6 @@ package xyz.aprildown.theme.app
 import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.material.MaterialInflationDelegate
 
 class App : Application() {
     override fun onCreate() {
@@ -20,6 +19,5 @@ class App : Application() {
             setColorPrimaryDarkRes(R.color.colorPrimaryDarkDefault, true)
             setColorAccentRes(R.color.colorAccentDefault)
         }
-        Theme.get().addDelegate(MaterialInflationDelegate())
     }
 }

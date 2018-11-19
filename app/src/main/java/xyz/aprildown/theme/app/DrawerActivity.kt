@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import kotlinx.android.synthetic.main.activity_drawer.*
-import xyz.aprildown.theme.ThemeActivity
 
-class DrawerActivity : ThemeActivity() {
+class DrawerActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

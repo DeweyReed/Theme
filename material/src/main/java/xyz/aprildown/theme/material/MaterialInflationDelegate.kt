@@ -8,7 +8,7 @@ import android.view.View
 import xyz.aprildown.theme.internal.InflationDelegate
 import xyz.aprildown.theme.material.views.*
 
-class MaterialInflationDelegate : InflationDelegate {
+object MaterialInflationDelegate : InflationDelegate {
     override fun createView(
         context: Context,
         attrs: AttributeSet?,
@@ -40,7 +40,5 @@ class MaterialInflationDelegate : InflationDelegate {
         else -> null
     }
 
-    companion object {
-        private const val GOOGLE_MATERIAL = "com.google.android.material"
-    }
+    private const val GOOGLE_MATERIAL = "com.google.android.material"
 }

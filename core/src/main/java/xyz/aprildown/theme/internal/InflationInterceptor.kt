@@ -8,11 +8,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.IdRes
-import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.resId
 import xyz.aprildown.theme.views.*
 
-internal class InflationInterceptor : LayoutInflater.Factory2 {
+internal class InflationInterceptor(
+    private val delegates: Array<out InflationDelegate>
+) : LayoutInflater.Factory2 {
 
     override fun onCreateView(
         name: String?,
@@ -32,7 +33,7 @@ internal class InflationInterceptor : LayoutInflater.Factory2 {
         val viewId = context.resId(attrs, android.R.attr.id)
         var view: View?
         // Custom Views First
-        for (delegate in get().delegates) {
+        for (delegate in delegates) {
             view = delegate.createView(context, attrs, name, viewId)
             if (view != null) return view
         }

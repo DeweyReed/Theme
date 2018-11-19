@@ -24,4 +24,6 @@ dependencies {
     implementation libs.kotlin_stdlib_jdk7
     implementation libs.androidx_appcompat
     implementation libs.androidx_recyclerview
+
+    implementation 'androidx.lifecycle:lifecycle-process:2.0.0'
 }

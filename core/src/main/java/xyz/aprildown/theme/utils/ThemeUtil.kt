@@ -11,6 +11,8 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 
+// region derived colors
+
 val Theme.toolbarIconColor
     @ColorInt
     get() = safeContext.color(
@@ -25,6 +27,8 @@ val Theme.toolbarTitleColor
 val Theme.toolbarSubtitleColor
     @ColorInt
     get() = toolbarTitleColor.adjustAlpha(.87f)
+
+// endregion derived colors
 
 @CheckResult
 internal fun Context.attrKey(@AttrRes attrId: Int): String {

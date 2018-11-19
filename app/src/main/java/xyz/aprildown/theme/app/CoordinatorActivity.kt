@@ -11,9 +11,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_coordinator.*
 import kotlinx.android.synthetic.main.content_coordinator.*
 import kotlinx.android.synthetic.main.list_item.view.*
-import xyz.aprildown.theme.ThemeActivity
 
-class CoordinatorActivity : ThemeActivity() {
+class CoordinatorActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
