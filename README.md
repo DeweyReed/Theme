@@ -13,8 +13,8 @@ What Theme can do:
 - Supports any color tint
 - No need to create many styles in `style.xml` any more
 - Simple and easy to integrate
-- Doesn't require too many third-party dependencies(kotlin, appcompat, recyclerview for core module, material for material module)
-- AndroidX support
+- Doesn't require too many third-party dependencies
+- Support AndroidX
 
 What Theme CANNOT do:
 
@@ -27,101 +27,7 @@ Just image your app turns into any color theme.
 
 ## Usage
 
-1. Install dependency
-
-    Not available yet. Create an AAR on your own and use it for now.
-
-1. Extends `ThemeActivity` as your base activity:
-
-    ```Kotlin
-    class MainActivity : ThemeActivity() {
-        ...
-    }
-    ```
-
-    Or manually:
-
-    **The order here is important.**
-
-    ```Kotlin
-    class MyActivity : AppCompatActivity() {
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            Theme.attach(this)
-            super.onCreate(savedInstanceState)
-        }
-
-        override fun onResume() {
-            super.onResume()
-            Theme.resume(this)
-        }
-
-        override fun onPause() {
-            Theme.pause(this)
-            super.onPause()
-        }
-    }
-    ```
-
-1. In your `App`:
-
-    ```Kotlin
-    class App : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            // 1
-            Theme.init(this) {
-                setColorPrimaryRes(R.color.colorPrimaryDefault)
-                setColorPrimaryDarkRes(R.color.colorPrimaryDarkDefault, true)
-                setColorAccentRes(R.color.colorAccentDefault)
-            }
-            // 2 Optional
-            Theme.get().addDelegate(MaterialInflationDelegate())
-        }
-    }
-    ```
-
-    1: Initialize `Theme` and set a default theme if this is the first run.
-
-    2: [Optional] Let `Theme` also tint views from Material Components.
-
-## Change Theme
-
-```Kotlin
-Theme.edit(context) {
-    setColorPrimaryRes(R.color.md_amber_500, true)
-    setColorAccentRes(R.color.md_deep_purple_400)
-    setColorNavigationBarRes(R.color.md_amber_500)
-}
-// 1
-activity.recreate()
-```
-
-**1: After `Theme.edit`, you must recreate current activity to make it visible.** This is when you wish your app is using single activity and multiple fragments framework.
-
-## Retrieve Theme Colors
-
-```Kotlin
-Theme.get().run {
-    isDark
-    colorPrimary
-    colorPrimaryDark
-    colorAccent
-    colorStatusBar
-    colorNavigationBar
-    attribute("custom attribute")
-}
-```
-
-`ColorInt` is returned.
-
-## Tint Custom View or Ignore Some Views
-
-Use `Theme.get().addDelegate()` and put your delegate to first position.
-
-## Contribute
-
-Just remember this library is supposed to be simple and easy.
+Check the `app` module.
 
 ## License
 
