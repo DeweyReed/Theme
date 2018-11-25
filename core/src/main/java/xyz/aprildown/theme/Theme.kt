@@ -4,7 +4,6 @@ package xyz.aprildown.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -139,16 +138,17 @@ class Theme private constructor(private var context: Context?) {
         }
 
         @JvmStatic
-        fun init(app: Application, f: ThemeEditor.() -> Unit) {
+        fun init(c: Context, f: ThemeEditor.() -> Unit) {
+            val applicationContext = c.applicationContext
             if (instance == null) {
-                instance = Theme(app)
+                instance = Theme(applicationContext)
             }
             val theme = get()
             theme.initPrefs()
             val prefs = theme.safePrefs
             if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
                 prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
-                val editor = ThemeEditor(app)
+                val editor = ThemeEditor(applicationContext)
                 editor.f()
                 editor.save()
             }
