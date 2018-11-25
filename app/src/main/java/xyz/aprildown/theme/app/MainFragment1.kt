@@ -1,5 +1,6 @@
 package xyz.aprildown.theme.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -101,7 +102,7 @@ class MainFragment1 : Fragment() {
                 .show()
         }
 
-        view.btnBorderless.setOnClickListener { _ ->
+        view.btnBorderless.setOnClickListener {
             view.layoutRoot.snackbar("Snackbar", "Action") {
                 requireContext().toast("Toast")
             }
@@ -109,6 +110,10 @@ class MainFragment1 : Fragment() {
     }
 
     private fun reloadTheme() {
-        requireActivity().recreate()
+        requireActivity().run {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
     }
 }
