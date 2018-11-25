@@ -17,7 +17,7 @@ internal class ThemeTextView(
         val wizard = AttrWizard(context, attrs)
         val textColorValue = wizard.getRawValue(android.R.attr.textColor)
 
-        get().colorForAttrName(textColorValue)?.let {
+        get(context).colorForAttrName(textColorValue)?.let {
             changeTextColor(it)
         }
     }

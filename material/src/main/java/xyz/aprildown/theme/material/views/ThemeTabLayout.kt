@@ -22,23 +22,27 @@ internal class ThemeTabLayout(
     }
 
     init {
-        setIconsColor(get().toolbarIconColor)
+        val theme = get(context)
 
-        val toolbarTitleColor = get().toolbarTitleColor
+        setIconsColor(theme.toolbarIconColor)
+
+        val toolbarTitleColor = theme.toolbarTitleColor
         setTabTextColors(toolbarTitleColor.adjustAlpha(UNFOCUSED_ALPHA), toolbarTitleColor)
 
-        setBackgroundColor(get().colorPrimary)
+        setBackgroundColor(theme.colorPrimary)
 
-        setSelectedTabIndicatorColor(get().colorAccent)
+        setSelectedTabIndicatorColor(theme.colorAccent)
     }
 
     @SuppressLint("CheckResult")
     override fun setBackgroundColor(@ColorInt color: Int) {
         super.setBackgroundColor(color)
 
-        setIconsColor(get().toolbarIconColor)
+        val theme = get(context)
 
-        val toolbarTitleColor = get().toolbarTitleColor
+        setIconsColor(theme.toolbarIconColor)
+
+        val toolbarTitleColor = theme.toolbarTitleColor
         setTabTextColors(toolbarTitleColor.adjustAlpha(UNFOCUSED_ALPHA), toolbarTitleColor)
     }
 

@@ -12,6 +12,6 @@ internal class ThemeTextInputLayout(
 ) : TextInputLayout(context, attrs) {
 
     init {
-        defaultHintTextColor = ColorStateList.valueOf(get().colorAccent)
+        defaultHintTextColor = ColorStateList.valueOf(get(context).colorAccent)
     }
 }

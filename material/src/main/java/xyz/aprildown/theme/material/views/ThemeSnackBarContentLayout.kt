@@ -17,7 +17,7 @@ internal class ThemeSnackBarContentLayout(
     override fun onFinishInflate() {
         super.onFinishInflate()
 //        messageView.setTextColor(0)
-        actionView.setTextColor(get().colorAccent)
+        actionView.setTextColor(get(context).colorAccent)
     }
 
 //    private fun invalidateBgColors(color: Int) {

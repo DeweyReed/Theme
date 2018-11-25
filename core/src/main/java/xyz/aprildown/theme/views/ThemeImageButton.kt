@@ -20,11 +20,13 @@ internal class ThemeImageButton(
         val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
         val tintColorValue = wizard.getRawValue(R.attr.tint)
 
-        get().colorForAttrName(backgroundColorValue)?.let {
+        val theme = get(context)
+
+        theme.colorForAttrName(backgroundColorValue)?.let {
             changeBackgroundColor(it)
         }
 
-        get().colorForAttrName(tintColorValue)?.let {
+        theme.colorForAttrName(tintColorValue)?.let {
             changeImageTint(it)
         }
     }

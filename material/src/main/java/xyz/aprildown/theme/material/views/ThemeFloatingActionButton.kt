@@ -27,7 +27,8 @@ internal class ThemeFloatingActionButton(
     private var iconColor: Int = 0
 
     init {
-        get().colorForAttrName(backgroundColorValue, get().colorAccent)?.let {
+        val theme = get(context)
+        theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
             invalidateColors(it)
         }
     }

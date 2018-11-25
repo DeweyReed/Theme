@@ -24,17 +24,18 @@ internal class ThemeToolbar(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        get().colorForAttrName(backgroundColorValue, get().colorPrimary)?.let {
+        val theme = get(context)
+        theme.colorForAttrName(backgroundColorValue, theme.colorPrimary)?.let {
             setBackgroundColor(it)
         }
 
-        invalidateColors(get().toolbarIconColor)
+        invalidateColors(theme.toolbarIconColor)
 
-        get().colorForAttrName(titleTextColorValue, get().toolbarTitleColor)?.let {
+        theme.colorForAttrName(titleTextColorValue, theme.toolbarTitleColor)?.let {
             setTitleTextColor(it)
         }
 
-        get().colorForAttrName(subtitleTextColorValue, get().toolbarSubtitleColor)?.let {
+        theme.colorForAttrName(subtitleTextColorValue, theme.toolbarSubtitleColor)?.let {
             setSubtitleTextColor(it)
         }
     }

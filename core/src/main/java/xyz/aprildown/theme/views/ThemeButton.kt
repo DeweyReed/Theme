@@ -22,8 +22,9 @@ internal class ThemeButton(
         val wizard = AttrWizard(context, attrs)
         val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
 
-        get().colorForAttrName(backgroundColorValue, get().colorAccent)?.let {
-            invalidateColors(ColorIsDarkState(it, get().isDark))
+        val theme = get(context)
+        theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
+            invalidateColors(ColorIsDarkState(it, theme.isDark))
         }
     }
 

@@ -7,12 +7,12 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.EdgeGlowUtil.setEdgeGlowColor
 
 internal class ThemeScrollView(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet? = null
 ) : ScrollView(context, attrs) {
 
     init {
-        invalidateColors(get().colorAccent)
+        invalidateColors(get(context).colorAccent)
     }
 
     private fun invalidateColors(color: Int) = setEdgeGlowColor(this, color)

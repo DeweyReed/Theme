@@ -11,6 +11,6 @@ internal class ThemeDialogButton(
 ) : AppCompatButton(context, attrs) {
 
     init {
-        setTextColor(get().colorAccent)
+        setTextColor(get(context).colorAccent)
     }
 }

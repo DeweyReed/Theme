@@ -18,7 +18,8 @@ internal class ThemeNavigationView(
 ) : NavigationView(context, attrs) {
 
     init {
-        invalidateColors(get().colorPrimary, get().isDark)
+        val theme = get(context)
+        invalidateColors(theme.colorPrimary, theme.isDark)
     }
 
     private fun invalidateColors(selectedColor: Int, isDark: Boolean) {

@@ -13,7 +13,7 @@ internal class ThemeBorderlessButton(
 ) : AppCompatButton(context, attrs) {
 
     init {
-        invalidateColors(get().colorAccent)
+        invalidateColors(get(context).colorAccent)
     }
 
     private fun invalidateColors(accentColor: Int) {

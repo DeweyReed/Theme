@@ -14,4 +14,9 @@ abstract class ThemeActivity : AppCompatActivity() {
         super.onResume()
         Theme.resume(this)
     }
+
+    override fun onPause() {
+        Theme.pause(this)
+        super.onPause()
+    }
 }

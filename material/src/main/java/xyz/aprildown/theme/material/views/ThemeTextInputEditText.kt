@@ -14,6 +14,6 @@ internal class ThemeTextInputEditText(
 ) : TextInputEditText(context, attrs) {
 
     init {
-        supportBackgroundTintList = ColorStateList.valueOf(get().colorAccent)
+        supportBackgroundTintList = ColorStateList.valueOf(get(context).colorAccent)
     }
 }

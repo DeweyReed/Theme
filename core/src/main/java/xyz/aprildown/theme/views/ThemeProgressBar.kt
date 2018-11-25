@@ -7,12 +7,12 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.utils.setTint
 
 internal class ThemeProgressBar(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet? = null
 ) : ProgressBar(context, attrs) {
 
     init {
-        invalidateColors(get().colorAccent)
+        invalidateColors(get(context).colorAccent)
     }
 
     private fun invalidateColors(color: Int) = setTint(color)

@@ -26,11 +26,12 @@ internal class ThemeCoordinatorLayout(
             }
         }
 
+        val theme = get(context)
         collapsingToolbarLayout?.run {
-            val color = get().colorPrimary
+            val color = theme.colorPrimary
             setContentScrimColor(color)
             setStatusBarScrimColor(color)
-            val textColor = get().toolbarTitleColor
+            val textColor = theme.toolbarTitleColor
             setCollapsedTitleTextColor(textColor)
             setExpandedTitleColor(textColor)
         }

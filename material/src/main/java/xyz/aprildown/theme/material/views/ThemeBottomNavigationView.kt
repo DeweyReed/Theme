@@ -64,12 +64,13 @@ internal class ThemeBottomNavigationView(
     }
 
     private fun onState() {
-        lastTextIconColor = get().colorAccent
+        val theme = get(context)
+        lastTextIconColor = theme.colorAccent
         invalidateWithBackgroundColor()
 
         setBackgroundColor(
             context.color(
-                if (get().isDark) R.color.ate_bottom_nav_default_dark_bg
+                if (theme.isDark) R.color.ate_bottom_nav_default_dark_bg
                 else R.color.ate_bottom_nav_default_light_bg
             )
         )

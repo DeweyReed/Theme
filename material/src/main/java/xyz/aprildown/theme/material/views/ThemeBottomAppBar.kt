@@ -23,15 +23,17 @@ class ThemeBottomAppBar(
         val wizard = AttrWizard(context, attrs)
         val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
 
-        get().colorForAttrName(backgroundColorValue, get().colorPrimary)?.let {
+        val theme = get(context)
+
+        theme.colorForAttrName(backgroundColorValue, theme.colorPrimary)?.let {
             backgroundTint = ColorStateList.valueOf(it)
         }
 
-        invalidateColors(get().toolbarIconColor)
+        invalidateColors(theme.toolbarIconColor)
 
-        setTitleTextColor(get().toolbarTitleColor)
+        setTitleTextColor(theme.toolbarTitleColor)
 
-        setSubtitleTextColor(get().toolbarSubtitleColor)
+        setSubtitleTextColor(theme.toolbarSubtitleColor)
     }
 
     override fun setNavigationIcon(icon: Drawable?) {

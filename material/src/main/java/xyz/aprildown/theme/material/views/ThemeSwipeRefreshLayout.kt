@@ -11,6 +11,6 @@ internal class ThemeSwipeRefreshLayout(
 ) : SwipeRefreshLayout(context, attrs) {
 
     init {
-        setColorSchemeColors(get().colorAccent)
+        setColorSchemeColors(get(context).colorAccent)
     }
 }

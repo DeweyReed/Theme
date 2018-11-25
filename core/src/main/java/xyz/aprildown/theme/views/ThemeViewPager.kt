@@ -12,7 +12,7 @@ internal class ThemeViewPager(
 ) : ViewPager(context, attrs) {
 
     init {
-        invalidateColors(get().colorAccent)
+        invalidateColors(get(context).colorAccent)
     }
 
     private fun invalidateColors(color: Int) = setEdgeGlowColor(this, color)

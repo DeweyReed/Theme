@@ -17,7 +17,7 @@ internal class ThemeDrawerLayout(
     private var arrowDrawable: DrawerArrowDrawable? = null
 
     init {
-        invalidateColor(get().toolbarIconColor)
+        invalidateColor(get(context).toolbarIconColor)
     }
 
     private fun invalidateColor(color: Int?) {

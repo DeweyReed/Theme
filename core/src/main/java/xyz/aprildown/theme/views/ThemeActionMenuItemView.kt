@@ -24,7 +24,7 @@ internal class ThemeActionMenuItemView(
     private var icon: Drawable? = null
 
     init {
-        invalidateColors(get().toolbarIconColor)
+        invalidateColors(get(context).toolbarIconColor)
     }
 
     private fun invalidateColors(color: Int) {
@@ -49,7 +49,7 @@ internal class ThemeActionMenuItemView(
         // We need to retrieve the color again here.
         // For some reason, without this, a transparent color is used and the icon disappears
         // when the overflow menu opens.
-        invalidateColors(get().toolbarIconColor)
+        invalidateColors(get(context).toolbarIconColor)
     }
 
     @Suppress("MemberVisibilityCanBePrivate")

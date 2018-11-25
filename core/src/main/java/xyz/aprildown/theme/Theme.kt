@@ -12,10 +12,6 @@ import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ProcessLifecycleOwner
 import xyz.aprildown.theme.internal.*
 import xyz.aprildown.theme.utils.*
 
@@ -98,12 +94,24 @@ class Theme private constructor(private var context: Context?) {
         @SuppressLint("StaticFieldLeak")
         private var instance: Theme? = null
 
+        private fun getInstance(): Theme =
+            instance ?: throw IllegalStateException("App.init isn't called.")
+
+        /**
+         * Safe call version of [Theme.get())].
+         */
         @JvmStatic
-        fun get(): Theme = instance ?: throw  IllegalStateException("App.init isn't called.")
+        fun get(context: Context): Theme = (instance
+            ?: throw IllegalStateException("App.init isn't called.")).also {
+            if (it.context == null) {
+                it.context = context
+                it.initPrefs()
+            }
+        }
 
         @JvmStatic
-        fun edit(context: Context? = null, f: ThemeEditor.() -> Unit) {
-            ThemeEditor(context ?: get().safeContext).run {
+        fun edit(context: Context, f: ThemeEditor.() -> Unit) {
+            ThemeEditor(context).run {
                 f()
                 save()
             }
@@ -111,7 +119,7 @@ class Theme private constructor(private var context: Context?) {
 
         @JvmStatic
         fun attach(c: Context, vararg delegates: InflationDelegate) {
-            get().run {
+            getInstance().run {
                 context = c
                 initPrefs()
             }
@@ -122,7 +130,7 @@ class Theme private constructor(private var context: Context?) {
 
         @JvmStatic
         fun resume(c: Context) {
-            get().run {
+            getInstance().run {
                 context = c
                 initPrefs()
                 (c as? Activity)?.let {
@@ -138,12 +146,22 @@ class Theme private constructor(private var context: Context?) {
         }
 
         @JvmStatic
+        fun pause(c: Context) {
+            getInstance().run {
+                if (c is Activity && c.isFinishing && context == c) {
+                    deInitPrefs()
+                    context = null
+                }
+            }
+        }
+
+        @JvmStatic
         fun init(c: Context, f: ThemeEditor.() -> Unit) {
             val applicationContext = c.applicationContext
             if (instance == null) {
                 instance = Theme(applicationContext)
             }
-            val theme = get()
+            val theme = getInstance()
             theme.initPrefs()
             val prefs = theme.safePrefs
             if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
@@ -152,16 +170,6 @@ class Theme private constructor(private var context: Context?) {
                 editor.f()
                 editor.save()
             }
-
-            ProcessLifecycleOwner.get().lifecycle.addObserver(object : LifecycleObserver {
-                @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-                fun stop() {
-                    get().run {
-                        deInitPrefs()
-                        context = null
-                    }
-                }
-            })
         }
     }
 }
