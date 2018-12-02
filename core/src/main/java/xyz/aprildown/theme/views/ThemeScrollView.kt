@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.ScrollView
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.EdgeGlowUtil.setEdgeGlowColor
+import xyz.aprildown.theme.tint.EdgeEffectTint
 
 internal class ThemeScrollView(
     context: Context,
@@ -12,8 +12,7 @@ internal class ThemeScrollView(
 ) : ScrollView(context, attrs) {
 
     init {
-        invalidateColors(get(context).colorAccent)
+        EdgeEffectTint.setEdgeGlowColor(this, get(context).colorAccent)
     }
 
-    private fun invalidateColors(color: Int) = setEdgeGlowColor(this, color)
 }
