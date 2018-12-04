@@ -42,14 +42,11 @@ fun Toolbar.tintMenu(
     )
 
     // The collapse icon displays when action views are expanded (e.g. SearchView)
-    try {
-        val field = Toolbar::class.findField("mCollapseIcon")
+    Reflection.getField(this, "mCollapseIcon")?.let { field ->
         val collapseIcon = field.get(this) as? Drawable
         if (collapseIcon != null) {
             field.set(this, collapseIcon.tint(colors))
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 
     // Theme menu action views
@@ -77,35 +74,39 @@ internal fun SearchView.setColors(
     )
 
     try {
-        val mSearchSrcTextViewField = this::class.findField("mSearchSrcTextView")
-        mSearchSrcTextViewField.isAccessible = true
-        val mSearchSrcTextView = mSearchSrcTextViewField.get(this) as EditText
-        mSearchSrcTextView.setTextColor(activeColor)
-        mSearchSrcTextView.setHintTextColor(inactiveColor)
-        mSearchSrcTextView.setCursorTint(activeColor)
-
-        var field = this::class.findField("mSearchButton")
-        tintImageView(this, field, tintColors)
-        field = this::class.findField("mGoButton")
-        tintImageView(this, field, tintColors)
-        field = this::class.findField("mCloseButton")
-        tintImageView(this, field, tintColors)
-        field = this::class.findField("mVoiceButton")
-        tintImageView(this, field, tintColors)
-
-        field = this::class.findField("mSearchPlate")
-        (field.get(this) as View).apply {
-            setTintAuto(
-                color = activeColor,
-                requestBackground = true,
-                isDark = ColorUtils.isDarkColor(activeColor)
-            )
+        Reflection.getField(this, "mSearchSrcTextView")?.let { mSearchSrcTextViewField ->
+            val mSearchSrcTextView = mSearchSrcTextViewField.get(this) as EditText
+            mSearchSrcTextView.setTextColor(activeColor)
+            mSearchSrcTextView.setHintTextColor(inactiveColor)
+            mSearchSrcTextView.setCursorTint(activeColor)
+        }
+        Reflection.getField(this, "mSearchButton")?.let { field ->
+            tintImageView(this, field, tintColors)
+        }
+        Reflection.getField(this, "mGoButton")?.let { field ->
+            tintImageView(this, field, tintColors)
+        }
+        Reflection.getField(this, "mCloseButton")?.let { field ->
+            tintImageView(this, field, tintColors)
+        }
+        Reflection.getField(this, "mVoiceButton")?.let { field ->
+            tintImageView(this, field, tintColors)
         }
 
-        field = this::class.findField("mSearchHintIcon")
+        Reflection.getField(this, "mSearchPlate")?.let { field ->
+            (field.get(this) as View).apply {
+                setTintAuto(
+                    color = activeColor,
+                    requestBackground = true,
+                    isDark = ColorUtils.isDarkColor(activeColor)
+                )
+            }
+        }
 
-        (field.get(this) as Drawable).apply {
-            field.set(this@setColors, this@apply.tint(tintColors))
+        Reflection.getField(this, "mSearchHintIcon")?.let { field ->
+            (field.get(this) as Drawable).apply {
+                field.set(this@setColors, this@apply.tint(tintColors))
+            }
         }
     } catch (e: Exception) {
         e.printStackTrace()

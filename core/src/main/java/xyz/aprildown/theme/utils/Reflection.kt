@@ -19,7 +19,6 @@ package xyz.aprildown.theme.utils
 import java.lang.reflect.AccessibleObject
 import java.lang.reflect.Field
 import java.lang.reflect.Method
-import java.lang.reflect.Modifier
 
 /**
  * Contains helper methods to get/set fields/methods via reflection
@@ -94,35 +93,35 @@ class Reflection private constructor() {
             return null
         }
 
-        /**
-         * Set the field value to the specified value.
-         *
-         * @param field
-         *     the field
-         * @param obj
-         *     the object whose field should be modified
-         * @param value
-         *     the new value for the field of `obj` being modified
-         * @return `true` if the field was set successfully.
-         */
-        @JvmStatic
-        fun setFieldValue(field: Field, obj: Any?, value: Any?): Boolean {
-            if (!field.isAccessible) {
-                field.isAccessible = true
-            }
-            try {
-                if (Modifier.isFinal(field.modifiers)) {
-                    val modifiersField = Field::class.java.getDeclaredField("modifiers")
-                    modifiersField.isAccessible = true
-                    modifiersField.setInt(field, field.modifiers and Modifier.FINAL.inv())
-                }
-                field.set(obj, value)
-                return true
-            } catch (e: IllegalAccessException) {
-                e.printStackTrace()
-            }
-            return false
-        }
+//        /**
+//         * Set the field value to the specified value.
+//         *
+//         * @param field
+//         *     the field
+//         * @param obj
+//         *     the object whose field should be modified
+//         * @param value
+//         *     the new value for the field of `obj` being modified
+//         * @return `true` if the field was set successfully.
+//         */
+//        @JvmStatic
+//        fun setFieldValue(field: Field, obj: Any?, value: Any?): Boolean {
+//            if (!field.isAccessible) {
+//                field.isAccessible = true
+//            }
+//            try {
+//                if (Modifier.isFinal(field.modifiers)) {
+//                    val modifiersField = Field::class.java.getDeclaredField("modifiers")
+//                    modifiersField.isAccessible = true
+//                    modifiersField.setInt(field, field.modifiers and Modifier.FINAL.inv())
+//                }
+//                field.set(obj, value)
+//                return true
+//            } catch (e: IllegalAccessException) {
+//                e.printStackTrace()
+//            }
+//            return false
+//        }
 
         /**
          * Get a method from a class

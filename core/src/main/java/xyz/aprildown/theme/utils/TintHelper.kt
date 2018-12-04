@@ -16,6 +16,7 @@ import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.TintableBackgroundView
 import androidx.core.view.ViewCompat
@@ -341,23 +342,19 @@ internal fun EditText.setTint(
 }
 
 internal fun EditText.setCursorTint(@ColorInt color: Int) {
-    try {
-        val fCursorDrawableRes = TextView::class.findField("mCursorDrawableRes")
-        val mCursorDrawableRes = fCursorDrawableRes.getInt(this)
-
-        val fEditor = TextView::class.findField("mEditor")
-        val editor = fEditor.get(this)!!
-        val fCursorDrawable = editor::class.findField(
-            "mDrawableForCursor", "mCursorDrawable"
-        )
-
-        val drawables = arrayOf(
-            context.drawable(mCursorDrawableRes).tint(color),
-            context.drawable(mCursorDrawableRes).tint(color)
-        )
-        fCursorDrawable.set(editor, drawables)
-    } catch (e: Exception) {
-        e.printStackTrace()
+    Reflection.getField(this, "mCursorDrawableRes")?.let { fCursorDrawableRes ->
+        Reflection.getField(this, "mEditor")?.let { fEditor ->
+            fEditor.get(this)?.let { editor ->
+                Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
+                    val cursorDrawableRes = fCursorDrawableRes.getInt(this)
+                    ContextCompat.getDrawable(this.context, cursorDrawableRes)?.tint(color)
+                        ?.let { drawable ->
+                            val drawables = arrayOf(drawable, drawable)
+                            fCursorDrawable.set(editor, drawables)
+                        }
+                }
+            }
+        }
     }
 }
 
