@@ -16,7 +16,7 @@ import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 val Theme.toolbarIconColor
     @ColorInt
     get() = safeContext.color(
-        if (colorPrimary.isColorLight()) R.color.ate_icon_light
+        if (ColorUtils.isLightColor(colorPrimary)) R.color.ate_icon_light
         else R.color.ate_icon_dark
     )
 
@@ -26,7 +26,7 @@ val Theme.toolbarTitleColor
 
 val Theme.toolbarSubtitleColor
     @ColorInt
-    get() = toolbarTitleColor.adjustAlpha(.87f)
+    get() = ColorUtils.adjustAlpha(toolbarTitleColor, .87f)
 
 // endregion derived colors
 
@@ -55,7 +55,7 @@ internal fun Theme.invalidateStatusBar() {
         } else {
             setStatusBarColorCompat(color)
         }
-        setLightStatusBarCompat(color.isColorLight())
+        setLightStatusBarCompat(ColorUtils.isLightColor(color))
     }
 }
 

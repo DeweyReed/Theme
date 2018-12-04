@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.view.menu.ActionMenuItemView
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.tint
 import xyz.aprildown.theme.utils.toolbarIconColor
 
@@ -34,7 +34,7 @@ internal class ThemeActionMenuItemView(
                 intArrayOf(android.R.attr.state_selected)
             ),
             intArrayOf(
-                color.adjustAlpha(UNFOCUSED_ALPHA),
+                ColorUtils.adjustAlpha(color, UNFOCUSED_ALPHA),
                 color
             )
         )

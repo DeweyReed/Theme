@@ -98,7 +98,7 @@ internal fun SearchView.setColors(
             setTintAuto(
                 color = activeColor,
                 requestBackground = true,
-                isDark = !activeColor.isColorLight()
+                isDark = ColorUtils.isDarkColor(activeColor)
             )
         }
 

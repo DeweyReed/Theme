@@ -72,7 +72,7 @@ internal fun Activity?.setTaskDescriptionColor(@ColorInt requestedColor: Int) {
     var color = requestedColor
 
     // Task description requires fully opaque color
-    color = color.stripAlpha()
+    color = ColorUtils.stripAlpha(color)
     // Default is app's launcher icon
     val icon: Bitmap? = if (Build.VERSION.SDK_INT >= 26) {
         packageManager.getAppIcon(packageName)

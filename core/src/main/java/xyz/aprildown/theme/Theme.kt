@@ -139,7 +139,7 @@ class Theme private constructor(private var context: Context?) {
                     if (safePrefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
                         it.setNavBarColorCompat(navColor)
-                        it.setLightNavBarCompat(navColor.isColorLight())
+                        it.setLightNavBarCompat(ColorUtils.isLightColor(navColor))
                     }
                 }
             }

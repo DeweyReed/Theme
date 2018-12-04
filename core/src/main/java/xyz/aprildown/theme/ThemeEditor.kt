@@ -7,9 +7,9 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import xyz.aprildown.theme.internal.*
+import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.attrKey
 import xyz.aprildown.theme.utils.color
-import xyz.aprildown.theme.utils.darkenColor
 import xyz.aprildown.theme.utils.getThemePrefs
 
 class ThemeEditor(private val context: Context) {
@@ -33,7 +33,7 @@ class ThemeEditor(private val context: Context) {
     fun setColorPrimary(@ColorInt color: Int, autoDarkAndStatusBar: Boolean = false) = apply {
         editor.putInt(KEY_PRIMARY_COLOR, color)
         if (autoDarkAndStatusBar) {
-            val darkenColor = color.darkenColor()
+            val darkenColor = ColorUtils.darker(color)
             setColorPrimaryDark(darkenColor)
             setColorStatusBar(darkenColor)
         }

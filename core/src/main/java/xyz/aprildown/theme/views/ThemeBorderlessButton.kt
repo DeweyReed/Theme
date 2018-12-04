@@ -5,7 +5,7 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.ColorUtils
 
 internal class ThemeBorderlessButton(
     context: Context,
@@ -24,7 +24,7 @@ internal class ThemeBorderlessButton(
             ),
             intArrayOf(
                 accentColor,
-                accentColor.adjustAlpha(0.56f)
+                ColorUtils.adjustAlpha(accentColor, 0.56f)
             )
         )
         setTextColor(textColorSl)

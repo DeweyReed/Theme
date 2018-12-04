@@ -49,7 +49,7 @@ internal fun View.setTintAuto(
                 if (isDark) R.color.ripple_material_dark
                 else R.color.ripple_material_light
             )
-            val checked = color.adjustAlpha(0.4f)
+            val checked = ColorUtils.adjustAlpha(color, 0.4f)
             val sl = ColorStateList(
                 arrayOf(
                     intArrayOf(
@@ -82,13 +82,13 @@ internal fun View.setTintSelector(
     darker: Boolean,
     useDarkTheme: Boolean
 ) {
-    val isColorLight = color.isColorLight()
+    val isColorLight = ColorUtils.isLightColor(color)
     val disabled = context.color(
         if (useDarkTheme) R.color.ate_button_disabled_dark
         else R.color.ate_button_disabled_light
     )
-    val pressed = color.shiftColor(if (darker) 0.9f else 1.1f)
-    val activated = color.shiftColor(if (darker) 1.1f else 0.9f)
+    val pressed = ColorUtils.shiftColor(color, if (darker) 0.9f else 1.1f)
+    val activated = ColorUtils.shiftColor(color, if (darker) 1.1f else 0.9f)
     val rippleColor = defaultRippleColor(context, isColorLight)
     val textColor = context.color(
         if (isColorLight) R.color.ate_primary_text_light
@@ -164,7 +164,7 @@ internal fun RadioButton.setTint(
         ),
         intArrayOf(
             // Radio button includes own alpha for disabled state
-            disabledColor.stripAlpha(),
+            ColorUtils.stripAlpha(disabledColor),
             defaultColor,
             tintColor
         )
@@ -454,9 +454,9 @@ private fun checkableColorStateList(
 ): ColorStateList {
     var tint = requestedTint
     if (useDarker) {
-        tint = tint.shiftColor(1.1f)
+        tint = ColorUtils.shiftColor(tint, 1.1f)
     }
-    tint = tint.adjustAlpha(if (compatSwitch && !thumb) 0.5f else 1.0f)
+    tint = ColorUtils.adjustAlpha(tint, if (compatSwitch && !thumb) 0.5f else 1.0f)
 
     val disabled: Int
     var normal: Int
@@ -482,7 +482,7 @@ private fun checkableColorStateList(
 
     // Stock switch includes its own alpha
     if (!compatSwitch) {
-        normal = normal.stripAlpha()
+        normal = ColorUtils.stripAlpha(normal)
     }
 
     return ColorStateList(

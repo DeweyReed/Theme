@@ -51,7 +51,7 @@ internal class ThemeToolbar(
     private fun invalidateColors(color: Int) {
         this.menuIconColor = color
         setOverflowButtonColor(color)
-        tintMenu(menu, color, color.darkenColor())
+        tintMenu(menu, color, ColorUtils.darker(color))
         if (navigationIcon != null) {
             this.navigationIcon = navigationIcon
         }

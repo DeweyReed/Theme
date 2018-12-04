@@ -9,8 +9,8 @@ import androidx.appcompat.widget.AppCompatButton
 import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
+import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.colorForAttrName
-import xyz.aprildown.theme.utils.isColorLight
 import xyz.aprildown.theme.utils.setTintAuto
 
 internal class ThemeButton(
@@ -36,7 +36,7 @@ internal class ThemeButton(
                 intArrayOf(-android.R.attr.state_enabled)
             ),
             intArrayOf(
-                if (state.color.isColorLight()) BLACK else WHITE,
+                if (ColorUtils.isLightColor(state.color)) BLACK else WHITE,
                 if (state.isDark) WHITE else BLACK
             )
         )
