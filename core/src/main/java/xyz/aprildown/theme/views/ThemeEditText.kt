@@ -7,7 +7,10 @@ import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.utils.*
+import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.setTintAuto
+import xyz.aprildown.theme.utils.textColorPrimary
+import xyz.aprildown.theme.utils.textColorSecondary
 
 internal class ThemeEditText(
     context: Context,
@@ -27,11 +30,11 @@ internal class ThemeEditText(
         }
 
         theme.colorForAttrName(textColorValue, context.textColorPrimary)?.let {
-            changeTextColor(it)
+            setTextColor(it)
         }
 
         theme.colorForAttrName(textColorHintValue, context.textColorSecondary)?.let {
-            changeHintTextColor(it)
+            setHintTextColor(it)
         }
     }
 
