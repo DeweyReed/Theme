@@ -3,6 +3,7 @@ package xyz.aprildown.theme.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
@@ -43,20 +44,24 @@ internal fun Context.attrKey(@AttrRes attrId: Int): String {
 @CheckResult
 internal fun attrKey(name: String) = String.format(KEY_ATTRIBUTE, name)
 
-internal fun Theme.invalidateStatusBar() {
+internal fun Theme.refreshStatusBar() {
     with(safeContext as? Activity ?: return) {
         val color = colorStatusBar
 
-        val rootView = (findViewById<ViewGroup>(android.R.id.content).getChildAt(0) as ViewGroup)
+        val rootView: ViewGroup? = (findViewById<View>(android.R.id.content) as? ViewGroup)?.run {
+            if (childCount > 0) getChildAt(0) as? ViewGroup else null
+        }
         if (rootView is DrawerLayout) {
             // Color is set to DrawerLayout, Activity gets transparent status bar
-            setLightStatusBarCompat(false)
             setStatusBarColorCompat(Color.TRANSPARENT)
+            setLightStatusBarCompat(false)
             rootView.setStatusBarBackgroundColor(color)
         } else {
             setStatusBarColorCompat(color)
+            // Use colorPrimary to avoid
+            // the situation where the toolbar text color and status bar icon color are different
+            setLightStatusBarCompat(ColorUtils.isLightColor(colorPrimary))
         }
-        setLightStatusBarCompat(ColorUtils.isLightColor(color))
     }
 }
 

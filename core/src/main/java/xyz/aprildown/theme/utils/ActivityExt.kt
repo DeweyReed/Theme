@@ -13,15 +13,11 @@ import android.os.Build
 import android.view.View
 import androidx.annotation.ColorInt
 
+// region status bar
+
 internal fun Activity.setStatusBarColorCompat(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window.statusBarColor = color
-    }
-}
-
-internal fun Activity?.setNavBarColorCompat(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        this?.window?.navigationBarColor = color
     }
 }
 
@@ -38,7 +34,17 @@ internal fun Activity?.setLightStatusBarCompat(lightMode: Boolean) {
     }
 }
 
-internal fun Activity?.setLightNavBarCompat(lightMode: Boolean) {
+// endregion status bar
+
+// region navigation bar
+
+internal fun Activity?.setNavigationBarColorCompat(@ColorInt color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        this?.window?.navigationBarColor = color
+    }
+}
+
+internal fun Activity?.setLightNavigationBarCompat(lightMode: Boolean) {
     val view = this?.window?.decorView ?: return
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         var flags = view.systemUiVisibility
@@ -50,6 +56,8 @@ internal fun Activity?.setLightNavBarCompat(lightMode: Boolean) {
         view.systemUiVisibility = flags
     }
 }
+
+// endregion navigation bar
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 internal fun Activity?.setTaskDescriptionColor(@ColorInt requestedColor: Int) {

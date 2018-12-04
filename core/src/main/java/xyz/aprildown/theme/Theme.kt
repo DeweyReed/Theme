@@ -139,11 +139,11 @@ class Theme private constructor(private var context: Context?) {
                 initPrefs()
                 (c as? Activity)?.let {
                     it.setTaskDescriptionColor(colorPrimary)
-                    invalidateStatusBar()
+                    refreshStatusBar()
                     if (safePrefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
-                        it.setNavBarColorCompat(navColor)
-                        it.setLightNavBarCompat(ColorUtils.isLightColor(navColor))
+                        it.setNavigationBarColorCompat(navColor)
+                        it.setLightNavigationBarCompat(ColorUtils.isLightColor(navColor))
                     }
                 }
             }
