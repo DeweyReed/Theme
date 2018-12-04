@@ -3,6 +3,7 @@ package xyz.aprildown.theme.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.view.ViewGroup
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
@@ -46,7 +47,7 @@ internal fun Theme.invalidateStatusBar() {
     with(safeContext as? Activity ?: return) {
         val color = colorStatusBar
 
-        val rootView = getRootView()
+        val rootView = (findViewById<ViewGroup>(android.R.id.content).getChildAt(0) as ViewGroup)
         if (rootView is DrawerLayout) {
             // Color is set to DrawerLayout, Activity gets transparent status bar
             setLightStatusBarCompat(false)

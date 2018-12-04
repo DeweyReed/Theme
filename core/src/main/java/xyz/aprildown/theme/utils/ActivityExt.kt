@@ -3,46 +3,31 @@ package xyz.aprildown.theme.utils
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.ActivityManager
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.*
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.LayoutInflaterCompat.setFactory2
-import xyz.aprildown.theme.internal.InflationDelegate
-import xyz.aprildown.theme.internal.InflationInterceptor
-
-@Suppress("unused")
-internal fun AppCompatActivity.setInflaterFactory(
-    li: LayoutInflater,
-    delegates: Array<out InflationDelegate>
-) = setFactory2(li, InflationInterceptor(delegates))
 
 internal fun Activity.setStatusBarColorCompat(@ColorInt color: Int) {
-    if (SDK_INT >= LOLLIPOP) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window.statusBarColor = color
     }
 }
 
-internal fun Activity.getRootView(): ViewGroup {
-    val content = findViewById<ViewGroup>(android.R.id.content)
-    return content.getChildAt(0) as ViewGroup
-}
-
 internal fun Activity?.setNavBarColorCompat(@ColorInt color: Int) {
-    if (SDK_INT >= LOLLIPOP) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         this?.window?.navigationBarColor = color
     }
 }
 
 internal fun Activity?.setLightStatusBarCompat(lightMode: Boolean) {
     val view = this?.window?.decorView ?: return
-    if (SDK_INT >= M) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         var flags = view.systemUiVisibility
         flags = if (lightMode) {
             flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -55,7 +40,7 @@ internal fun Activity?.setLightStatusBarCompat(lightMode: Boolean) {
 
 internal fun Activity?.setLightNavBarCompat(lightMode: Boolean) {
     val view = this?.window?.decorView ?: return
-    if (SDK_INT >= O) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         var flags = view.systemUiVisibility
         flags = if (lightMode) {
             flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
@@ -68,13 +53,13 @@ internal fun Activity?.setLightNavBarCompat(lightMode: Boolean) {
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 internal fun Activity?.setTaskDescriptionColor(@ColorInt requestedColor: Int) {
-    if (this == null || SDK_INT <= LOLLIPOP) return
+    if (this == null || Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) return
     var color = requestedColor
 
     // Task description requires fully opaque color
     color = ColorUtils.stripAlpha(color)
     // Default is app's launcher icon
-    val icon: Bitmap? = if (Build.VERSION.SDK_INT >= 26) {
+    val icon: Bitmap? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         packageManager.getAppIcon(packageName)
     } else {
         (applicationInfo.loadIcon(packageManager) as BitmapDrawable)
@@ -86,4 +71,33 @@ internal fun Activity?.setTaskDescriptionColor(@ColorInt requestedColor: Int) {
         val td = ActivityManager.TaskDescription(title as String, icon, color)
         setTaskDescription(td)
     }
+}
+
+private fun PackageManager.getAppIcon(packageName: String): Bitmap? {
+    try {
+        val drawable = getApplicationIcon(packageName)
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+            && drawable is AdaptiveIconDrawable
+        ) {
+            val drr = arrayOf(drawable.background, drawable.foreground)
+            val layerDrawable = LayerDrawable(drr)
+
+            val width = layerDrawable.intrinsicWidth
+            val height = layerDrawable.intrinsicHeight
+
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+
+            layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
+            layerDrawable.draw(canvas)
+
+            return bitmap
+        }
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+
+    return null
 }
