@@ -13,17 +13,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:title="DrawerLayout" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="DrawerLayout" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="This library only tints that hamburg but I bet you can't help but opening the drawer."
+            android:text="Cannot help opening the drawer"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             tools:ignore="HardcodedText" />

@@ -37,10 +37,10 @@ class MainFragment1 : Fragment() {
 
         view.btnDefault.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.colorPrimaryDefault)
-                setColorPrimaryDarkRes(R.color.colorPrimaryDarkDefault, true)
-                setColorAccentRes(R.color.colorAccentDefault)
-                setColorNavigationBarRes(R.color.colorPrimaryDefault)
+                setColorPrimaryRes(R.color.colorPrimary)
+                setColorPrimaryDarkRes(R.color.colorPrimaryDark, true)
+                setColorAccentRes(R.color.colorAccent)
+                setColorNavigationBarRes(R.color.colorPrimary)
             }
             reloadTheme()
         }
