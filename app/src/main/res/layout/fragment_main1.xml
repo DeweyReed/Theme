@@ -24,42 +24,43 @@
 
         <Button
             android:id="@+id/btnDefault"
-            style="@style/ThemeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Default" />
 
         <Button
             android:id="@+id/btnAmberPurple"
-            style="@style/ThemeButton"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Amber + Purple" />
 
         <Button
             android:id="@+id/btnBluePink"
-            style="@style/ThemeButton"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Blue + Pink" />
+            android:text="Blue + Pink"
+            app:icon="@drawable/ic_search" />
 
         <Button
             android:id="@+id/btnGreyGreen"
-            style="@style/ThemeButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Grey + Green" />
 
         <Button
             android:id="@+id/btnRedLime"
-            style="@style/ThemeButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Red + Lime" />
+            android:text="Red + Lime"
+            app:icon="@drawable/ic_arrow_back" />
 
         <Button
             android:id="@+id/btnBlackGrey"
-            style="@style/ThemeButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Black + White" />
@@ -118,11 +119,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            app:icon="@drawable/ic_search"
             android:text="Disabled" />
 
         <Button
             android:id="@+id/btnBorderless"
-            style="?borderlessButtonStyle"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Borderless" />

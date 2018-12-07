@@ -19,6 +19,8 @@ object MaterialInflationDelegate : InflationDelegate {
         // Besides, ThemeSnackBarContentLayout only tints the button text color for now.
 //        "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
 //            ThemeSnackBarContentLayout(context, attrs)
+        "Button", "$GOOGLE_MATERIAL.button.MaterialButton" ->
+            ThemeMaterialButton(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
             ThemeTextInputLayout(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->

@@ -12,14 +12,12 @@
 
     <Button
         android:id="@+id/btnToDrawer"
-        style="@style/ThemeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DrawerLayout + BottomNavigation" />
 
     <Button
         android:id="@+id/btnToCoordinator"
-        style="@style/ThemeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Coordinator + Fab + RecyclerView" />

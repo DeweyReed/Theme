@@ -19,7 +19,7 @@ package xyz.aprildown.theme.utils
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
-import androidx.core.graphics.ColorUtils
+import androidx.core.graphics.ColorUtils as AndroidColorUtils
 
 class ColorUtils private constructor() {
 
@@ -100,7 +100,7 @@ class ColorUtils private constructor() {
                 to = 1.0
             ) luminance: Double
         ): Boolean {
-            return ColorUtils.calculateLuminance(color) <= luminance
+            return AndroidColorUtils.calculateLuminance(color) <= luminance
         }
 
         /**
@@ -128,7 +128,7 @@ class ColorUtils private constructor() {
                 to = 1.0
             ) luminance: Double = 0.5
         ): Boolean {
-            return ColorUtils.calculateLuminance(color) >= luminance
+            return AndroidColorUtils.calculateLuminance(color) >= luminance
         }
 
         /**
