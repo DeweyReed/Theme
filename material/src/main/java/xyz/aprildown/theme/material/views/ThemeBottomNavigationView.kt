@@ -10,9 +10,8 @@ import androidx.annotation.ColorInt
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.material.R
-import xyz.aprildown.theme.material.utils.adjustAlpha
 import xyz.aprildown.theme.material.utils.color
-import xyz.aprildown.theme.material.utils.isColorLight
+import xyz.aprildown.theme.utils.ColorUtils
 
 internal class ThemeBottomNavigationView(
     context: Context?,
@@ -31,10 +30,10 @@ internal class ThemeBottomNavigationView(
         selectedColor: Int
     ) {
         val baseColor = context.color(
-            if (backgroundColor.isColorLight()) R.color.ate_icon_light
+            if (ColorUtils.isLightColor(backgroundColor)) R.color.ate_icon_light
             else R.color.ate_icon_dark
         )
-        val unselectedIconTextColor = baseColor.adjustAlpha(.87f)
+        val unselectedIconTextColor = ColorUtils.adjustAlpha(baseColor, .87f)
         val iconColor = ColorStateList(
             arrayOf(
                 intArrayOf(-android.R.attr.state_checked),
@@ -58,7 +57,7 @@ internal class ThemeBottomNavigationView(
         this.backgroundColor = color
         this.itemBackground = null
         if (lastTextIconColor == Color.TRANSPARENT) {
-            lastTextIconColor = if (color.isColorLight()) BLACK else WHITE
+            lastTextIconColor = if (ColorUtils.isLightColor(color)) BLACK else WHITE
         }
         invalidateIconTextColor(color, lastTextIconColor)
     }
