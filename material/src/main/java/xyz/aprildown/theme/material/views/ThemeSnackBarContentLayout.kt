@@ -16,20 +16,6 @@ internal class ThemeSnackBarContentLayout(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-//        messageView.setTextColor(0)
         actionView.setTextColor(get(context).colorAccent)
     }
-
-//    private fun invalidateBgColors(color: Int) {
-//        setBackgroundColor(color)
-//        val parent = this.parent
-//        if (parent is Snackbar.SnackbarLayout) {
-//            val background = parent.background
-//            if (background != null) {
-//                parent.background = background.tint(color)
-//            } else {
-//                parent.setBackgroundColor(color)
-//            }
-//        }
-//    }
 }
