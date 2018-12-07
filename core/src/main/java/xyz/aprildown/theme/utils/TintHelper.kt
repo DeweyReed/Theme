@@ -12,12 +12,10 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.*
 import android.view.View
 import android.widget.*
-import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.TintableBackgroundView
 import androidx.core.view.ViewCompat
 import xyz.aprildown.theme.R
@@ -72,7 +70,7 @@ internal fun View.setTintAuto(
         } else if (this.background != null) {
             val drawable: Drawable? = this.background
             if (drawable != null) {
-                setBackgroundCompat(drawable.tint(color))
+                ViewCompat.setBackground(this, drawable.tint(color))
             }
         }
     }
@@ -129,7 +127,7 @@ internal fun View.setTintSelector(
 
     val drawable: Drawable? = this.background
     if (drawable != null) {
-        setBackgroundCompat(drawable.tint(sl))
+        ViewCompat.setBackground(this, drawable.tint(sl))
     }
 
     if (this is TextView && this !is Button) {
@@ -381,23 +379,6 @@ internal fun ProgressBar.setTint(
 }
 
 internal fun ImageView.setTint(@ColorInt color: Int) = setColorFilter(color, SRC_ATOP)
-
-@CheckResult
-fun Drawable?.tint(@ColorInt color: Int): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintMode(result, SRC_IN)
-    DrawableCompat.setTint(result, color)
-    return result
-}
-
-@CheckResult
-fun Drawable?.tint(sl: ColorStateList): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintList(result, sl)
-    return result
-}
 
 @SuppressLint("PrivateResource")
 @ColorInt

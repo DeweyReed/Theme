@@ -10,7 +10,12 @@ import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.darkenColor
 import xyz.aprildown.theme.material.utils.tint
-import xyz.aprildown.theme.utils.*
+import xyz.aprildown.theme.tint.setOverflowButtonColor
+import xyz.aprildown.theme.tint.tintMenu
+import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.toolbarIconColor
+import xyz.aprildown.theme.utils.toolbarSubtitleColor
+import xyz.aprildown.theme.utils.toolbarTitleColor
 
 class ThemeBottomAppBar(
     context: Context,

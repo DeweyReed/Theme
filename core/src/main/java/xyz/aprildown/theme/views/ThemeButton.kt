@@ -6,9 +6,9 @@ import android.graphics.Color.BLACK
 import android.graphics.Color.WHITE
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
+import xyz.aprildown.theme.internal.ColorIsDarkState
 import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTintAuto

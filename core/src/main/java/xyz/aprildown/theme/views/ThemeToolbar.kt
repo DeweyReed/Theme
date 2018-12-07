@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
+import xyz.aprildown.theme.tint.setOverflowButtonColor
+import xyz.aprildown.theme.tint.tintMenu
 import xyz.aprildown.theme.utils.*
 
 internal class ThemeToolbar(

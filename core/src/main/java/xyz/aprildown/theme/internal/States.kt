@@ -1,4 +1,4 @@
-package xyz.aprildown.theme
+package xyz.aprildown.theme.internal
 
 import androidx.annotation.ColorInt
 

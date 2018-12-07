@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.internal
+package xyz.aprildown.theme
 
 import android.content.Context
 import android.util.AttributeSet

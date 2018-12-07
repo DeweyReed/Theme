@@ -1,17 +1,14 @@
 package xyz.aprildown.theme.utils
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 
 // region derived colors
 
@@ -31,18 +28,6 @@ val Theme.toolbarSubtitleColor
     get() = ColorUtils.adjustAlpha(toolbarTitleColor, .87f)
 
 // endregion derived colors
-
-@CheckResult
-internal fun Context.attrKey(@AttrRes attrId: Int): String {
-    var name = resources.safeResourceName(attrId)
-    if (!name.startsWith("android")) {
-        name = name.substring(name.indexOf(':') + 1)
-    }
-    return attrKey(name)
-}
-
-@CheckResult
-internal fun attrKey(name: String) = String.format(KEY_ATTRIBUTE, name)
 
 internal fun Theme.refreshStatusBar() {
     with(safeContext as? Activity ?: return) {

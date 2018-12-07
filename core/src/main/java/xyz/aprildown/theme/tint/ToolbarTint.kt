@@ -1,9 +1,8 @@
-package xyz.aprildown.theme.utils
+package xyz.aprildown.theme.tint
 
 import android.R.attr
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.view.Menu
 import android.view.View
 import android.widget.EditText
@@ -11,16 +10,8 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import xyz.aprildown.theme.utils.*
 import java.lang.reflect.Field
-
-@Suppress("DEPRECATION")
-internal fun View.setBackgroundCompat(drawable: Drawable?) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-        background = drawable
-    } else {
-        setBackgroundDrawable(drawable)
-    }
-}
 
 fun Toolbar.setOverflowButtonColor(@ColorInt color: Int) {
     val overflowDrawable = overflowIcon
@@ -62,7 +53,7 @@ fun Toolbar.tintMenu(
     }
 }
 
-internal fun SearchView.setColors(
+private fun SearchView.setColors(
     activeColor: Int,
     inactiveColor: Int
 ) {
@@ -80,6 +71,20 @@ internal fun SearchView.setColors(
             mSearchSrcTextView.setHintTextColor(inactiveColor)
             mSearchSrcTextView.setCursorTint(activeColor)
         }
+
+        @Throws(Exception::class)
+        fun tintImageView(
+            target: Any,
+            field: Field,
+            colors: ColorStateList
+        ) {
+            field.isAccessible = true
+            val imageView = field.get(target) as ImageView
+            if (imageView.drawable != null) {
+                imageView.setImageDrawable(imageView.drawable.tint(colors))
+            }
+        }
+
         Reflection.getField(this, "mSearchButton")?.let { field ->
             tintImageView(this, field, tintColors)
         }
@@ -110,18 +115,5 @@ internal fun SearchView.setColors(
         }
     } catch (e: Exception) {
         e.printStackTrace()
-    }
-}
-
-@Throws(Exception::class)
-internal fun tintImageView(
-    target: Any,
-    field: Field,
-    colors: ColorStateList
-) {
-    field.isAccessible = true
-    val imageView = field.get(target) as ImageView
-    if (imageView.drawable != null) {
-        imageView.setImageDrawable(imageView.drawable.tint(colors))
     }
 }

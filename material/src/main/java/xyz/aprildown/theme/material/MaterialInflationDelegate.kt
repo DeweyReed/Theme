@@ -5,7 +5,7 @@ package xyz.aprildown.theme.material
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import xyz.aprildown.theme.internal.InflationDelegate
+import xyz.aprildown.theme.InflationDelegate
 import xyz.aprildown.theme.material.views.*
 
 object MaterialInflationDelegate : InflationDelegate {

@@ -23,7 +23,7 @@ import java.lang.reflect.Method
 /**
  * Contains helper methods to get/set fields/methods via reflection
  */
-class Reflection private constructor() {
+internal class Reflection private constructor() {
 
     init {
         throw AssertionError("no instances")

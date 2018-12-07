@@ -3,9 +3,9 @@ package xyz.aprildown.theme.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
-import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
+import xyz.aprildown.theme.internal.ColorIsDarkState
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTint
 
