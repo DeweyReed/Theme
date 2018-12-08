@@ -37,57 +37,62 @@ class MainFragment1 : Fragment() {
 
         view.btnDefault.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.colorPrimary)
-                setColorPrimaryDarkRes(R.color.colorPrimaryDark, true)
-                setColorAccentRes(R.color.colorAccent)
-                setColorNavigationBarRes(R.color.colorPrimary)
+                colorPrimaryRes = R.color.colorPrimary
+                colorPrimaryDarkRes = R.color.colorPrimaryDark
+                autoColorStatusBar()
+                colorAccentRes = R.color.colorAccent
+                colorNavigationBarRes = R.color.colorPrimary
             }
             reloadTheme()
         }
 
         view.btnAmberPurple.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.md_amber_500, true)
-                setColorAccentRes(R.color.md_deep_purple_400)
-                setColorNavigationBarRes(R.color.md_amber_500)
+                colorPrimaryRes = R.color.md_amber_500
+                autoPrimaryDarkAndStatusBar()
+                colorAccentRes = R.color.md_deep_purple_400
+                colorNavigationBarRes = R.color.md_amber_500
             }
             reloadTheme()
         }
 
         view.btnBluePink.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.md_blue_500)
-                setColorPrimaryDarkRes(R.color.md_blue_800)
-                setColorStatusBarRes(R.color.md_blue_800)
-                setColorAccentRes(R.color.md_pink_500)
-                setColorNavigationBarRes(R.color.md_blue_500)
+                colorPrimaryRes = R.color.md_blue_500
+                colorPrimaryDarkRes = R.color.md_blue_800
+                colorStatusBarRes = R.color.md_blue_800
+                colorAccentRes = R.color.md_pink_500
+                colorNavigationBarRes = R.color.md_blue_500
             }
             reloadTheme()
         }
 
         view.btnGreyGreen.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.md_grey_500, true)
-                setColorAccentRes(R.color.md_green_800)
-                setColorNavigationBarRes(R.color.md_grey_500)
+                colorPrimaryRes = R.color.md_grey_500
+                autoPrimaryDarkAndStatusBar()
+                colorAccentRes = R.color.md_green_800
+                colorNavigationBarRes = R.color.md_grey_500
             }
             reloadTheme()
         }
 
         view.btnRedLime.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.md_red_500, true)
-                setColorAccentRes(R.color.md_lime_800)
-                setColorNavigationBarRes(R.color.md_red_500)
+                colorPrimaryRes = R.color.md_red_500
+                autoPrimaryDarkAndStatusBar()
+                colorAccentRes = R.color.md_lime_800
+                colorNavigationBarRes = R.color.md_red_500
             }
             reloadTheme()
         }
 
         view.btnBlackGrey.setOnClickListener {
             Theme.edit(c) {
-                setColorPrimaryRes(R.color.md_grey_900, true)
-                setColorAccentRes(R.color.md_grey_400)
-                setColorNavigationBarRes(R.color.md_grey_900)
+                colorPrimaryRes = R.color.md_grey_900
+                autoPrimaryDarkAndStatusBar()
+                colorAccentRes = R.color.md_grey_400
+                colorNavigationBarRes = R.color.md_grey_900
             }
             reloadTheme()
         }

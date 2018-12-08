@@ -15,9 +15,10 @@ class App : Application() {
         LeakCanary.install(this)
 
         Theme.init(this) {
-            setColorPrimaryRes(R.color.colorPrimary)
-            setColorPrimaryDarkRes(R.color.colorPrimaryDark, true)
-            setColorAccentRes(R.color.colorAccent)
+            colorPrimaryRes = R.color.colorPrimary
+            colorPrimaryDarkRes = R.color.colorPrimaryDark
+            autoColorStatusBar()
+            colorAccentRes = R.color.colorAccent
         }
     }
 }
