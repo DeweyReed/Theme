@@ -22,19 +22,26 @@ internal class ThemeMaterialButton(
         val wizard = AttrWizard(context, attrs)
 
         val theme = Theme.get(context)
+        val accentColor = theme.colorAccent
 
         var style = attrs?.styleAttribute
         if (style == 0) {
             style = MaterialR.style.Widget_MaterialComponents_Button
         }
+        val viewId = id
         if (
             style == MaterialR.style.Widget_MaterialComponents_Button_TextButton ||
             style == MaterialR.style.Widget_MaterialComponents_Button_TextButton_Icon ||
+            style == MaterialR.style.Widget_MaterialComponents_Button_TextButton_Dialog ||
+            style == MaterialR.style.Widget_MaterialComponents_Button_TextButton_Dialog_Icon ||
             style == MaterialR.style.Widget_MaterialComponents_Button_OutlinedButton ||
-            style == MaterialR.style.Widget_MaterialComponents_Button_OutlinedButton_Icon
+            style == MaterialR.style.Widget_MaterialComponents_Button_OutlinedButton_Icon ||
+            viewId == android.R.id.button1 ||
+            viewId == android.R.id.button2 ||
+            viewId == android.R.id.button3
         ) {
             val textColorValue = wizard.getRawValue(android.R.attr.textColor)
-            theme.colorForAttrName(textColorValue, theme.colorAccent)?.let {
+            theme.colorForAttrName(textColorValue, accentColor)?.let {
                 // mtrl_text_btn_text_color_selector
                 val csl = ColorStateList(
                     arrayOf(
@@ -58,7 +65,7 @@ internal class ThemeMaterialButton(
             style == MaterialR.style.Widget_MaterialComponents_Button_UnelevatedButton_Icon
         ) {
             val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-            theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
+            theme.colorForAttrName(backgroundColorValue, accentColor)?.let {
                 backgroundTintList = ColorStateList.valueOf(it)
             }
         }
