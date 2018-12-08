@@ -90,7 +90,7 @@ internal fun Resources.safeResourceName(resId: Int): String {
 }
 
 @CheckResult
-fun Drawable?.tint(@ColorInt color: Int): Drawable? {
+internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
     var result: Drawable = this ?: return null
     result = DrawableCompat.wrap(result.mutate())
     DrawableCompat.setTintMode(
@@ -102,7 +102,7 @@ fun Drawable?.tint(@ColorInt color: Int): Drawable? {
 }
 
 @CheckResult
-fun Drawable?.tint(sl: ColorStateList): Drawable? {
+internal fun Drawable?.tint(sl: ColorStateList): Drawable? {
     var result: Drawable = this ?: return null
     result = DrawableCompat.wrap(result.mutate())
     DrawableCompat.setTintList(result, sl)

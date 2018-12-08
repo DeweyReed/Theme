@@ -12,9 +12,9 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.color
+import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.colorForAttrName
-import xyz.aprildown.theme.utils.tint
 
 internal class ThemeFloatingActionButton(
     context: Context,

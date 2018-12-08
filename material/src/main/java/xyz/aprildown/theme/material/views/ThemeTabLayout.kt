@@ -7,8 +7,8 @@ import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import com.google.android.material.tabs.TabLayout
 import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.utils.ColorUtils
-import xyz.aprildown.theme.utils.tint
 import xyz.aprildown.theme.utils.toolbarIconColor
 import xyz.aprildown.theme.utils.toolbarTitleColor
 

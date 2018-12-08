@@ -44,7 +44,7 @@ import xyz.aprildown.theme.utils.Reflection
  * }
  * ```
  */
-class EdgeEffectTint private constructor() {
+internal class EdgeEffectTint private constructor() {
 
     init {
         throw IllegalStateException("no instances")

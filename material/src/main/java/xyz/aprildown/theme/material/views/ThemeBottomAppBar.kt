@@ -13,7 +13,7 @@ import xyz.aprildown.theme.tint.setOverflowButtonColor
 import xyz.aprildown.theme.tint.tintMenu
 import xyz.aprildown.theme.utils.*
 
-class ThemeBottomAppBar(
+internal class ThemeBottomAppBar(
     context: Context,
     attrs: AttributeSet? = null
 ) : BottomAppBar(context, attrs) {

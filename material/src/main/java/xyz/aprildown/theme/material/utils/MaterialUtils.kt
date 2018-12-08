@@ -1,6 +1,7 @@
 package xyz.aprildown.theme.material.utils
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import androidx.annotation.CheckResult
@@ -25,5 +26,13 @@ internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
     result = DrawableCompat.wrap(result.mutate())
     DrawableCompat.setTintMode(result, PorterDuff.Mode.SRC_IN)
     DrawableCompat.setTint(result, color)
+    return result
+}
+
+@CheckResult
+internal fun Drawable?.tint(sl: ColorStateList): Drawable? {
+    var result: Drawable = this ?: return null
+    result = DrawableCompat.wrap(result.mutate())
+    DrawableCompat.setTintList(result, sl)
     return result
 }
