@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatEditText
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.internal.ColorIsDarkState
 import xyz.aprildown.theme.utils.colorForAttrName
 import xyz.aprildown.theme.utils.setTintAuto
 import xyz.aprildown.theme.utils.textColorPrimary
@@ -26,7 +25,7 @@ internal class ThemeEditText(
         val theme = get(context)
 
         theme.colorForAttrName(tintColorValue, theme.colorAccent)?.let {
-            invalidateColors(ColorIsDarkState(it, theme.isDark))
+            invalidateColors(it, theme.isDark)
         }
 
         theme.colorForAttrName(textColorValue, context.textColorPrimary)?.let {
@@ -38,6 +37,5 @@ internal class ThemeEditText(
         }
     }
 
-    private fun invalidateColors(state: ColorIsDarkState) =
-        setTintAuto(state.color, true, state.isDark)
+    private fun invalidateColors(color: Int, isDark: Boolean) = setTintAuto(color, true, isDark)
 }
