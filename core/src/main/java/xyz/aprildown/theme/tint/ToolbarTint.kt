@@ -33,11 +33,14 @@ fun Toolbar.tintMenu(
     )
 
     // The collapse icon displays when action views are expanded (e.g. SearchView)
-    Reflection.getField(this, "mCollapseIcon")?.let { field ->
-        val collapseIcon = field.get(this) as? Drawable
-        if (collapseIcon != null) {
-            field.set(this, collapseIcon.tint(colors))
+    try {
+        Reflection.getField(this, "mCollapseIcon")?.let { field ->
+            val collapseIcon = field.get(this) as? Drawable
+            if (collapseIcon != null) {
+                field.set(this, collapseIcon.tint(colors))
+            }
         }
+    } catch (e: Exception) {
     }
 
     // Theme menu action views

@@ -3,6 +3,7 @@ package xyz.aprildown.theme.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.graphics.PorterDuff.Mode.SRC_ATOP
 import android.graphics.PorterDuff.Mode.SRC_IN
 import android.graphics.drawable.Drawable
@@ -15,7 +16,6 @@ import android.widget.*
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.TintableBackgroundView
 import androidx.core.view.ViewCompat
 import xyz.aprildown.theme.R
@@ -340,19 +340,23 @@ internal fun EditText.setTint(
 }
 
 internal fun EditText.setCursorTint(@ColorInt color: Int) {
-    Reflection.getField(this, "mCursorDrawableRes")?.let { fCursorDrawableRes ->
-        Reflection.getField(this, "mEditor")?.let { fEditor ->
-            fEditor.get(this)?.let { editor ->
-                Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
-                    val cursorDrawableRes = fCursorDrawableRes.getInt(this)
-                    ContextCompat.getDrawable(this.context, cursorDrawableRes)?.tint(color)
-                        ?.let { drawable ->
-                            val drawables = arrayOf(drawable, drawable)
-                            fCursorDrawable.set(editor, drawables)
+    try {
+        Reflection.getField(this, "mCursorDrawableRes")
+            ?.let { fCursorDrawableRes ->
+                Reflection.getField(this, "mEditor")?.let { fEditor ->
+                    fEditor.get(this)?.let { editor ->
+                        Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
+                            val cursorDrawableRes = fCursorDrawableRes.getInt(this)
+                            context.drawable(cursorDrawableRes)?.let { drawable ->
+                                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                                val drawables = arrayOf(drawable, drawable)
+                                fCursorDrawable.set(editor, drawables)
+                            }
                         }
+                    }
                 }
             }
-        }
+    } catch (e: Exception) {
     }
 }
 
