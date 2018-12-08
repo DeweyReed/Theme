@@ -16,15 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="CollapsingToolbarTitle"
-            app:toolbarId="@id/toolbar">
+            app:title="CollapsingToolbar"
+            app:toolbarId="@+id/toolbar">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="?actionBarSize"
                 android:background="?colorPrimary"
-                app:layout_collapseMode="parallax"
                 tools:ignore="ContentDescription" />
 
             <androidx.appcompat.widget.Toolbar
@@ -39,10 +37,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_coordinator" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
@@ -51,11 +46,12 @@
         app:layout_anchorGravity="bottom|end" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bar"
+        android:id="@+id/bottomBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:fabAlignmentMode="end"
         app:hideOnScroll="true"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
@@ -64,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search"
-        app:layout_anchor="@id/bar" />
+        app:layout_anchor="@id/bottomBar"
+        app:layout_anchorGravity="start" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -17,8 +17,9 @@ class App : Application() {
         Theme.init(this) {
             colorPrimaryRes = R.color.colorPrimary
             colorPrimaryDarkRes = R.color.colorPrimaryDark
-            autoColorStatusBar()
             colorAccentRes = R.color.colorAccent
+            colorStatusBar = R.color.colorPrimaryDark
         }
+
     }
 }

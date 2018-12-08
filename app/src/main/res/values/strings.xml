@@ -1,11 +1,4 @@
 <resources>
     <string name="app_name">Theme</string>
-
-    <string name="title_activity_drawer">DrawerActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="title_activity_coordinator">CoordinatorActivity</string>
+    <string name="title_activity_material">MaterialActivity</string>
 </resources>
