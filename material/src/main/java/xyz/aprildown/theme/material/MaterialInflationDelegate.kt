@@ -5,7 +5,7 @@ package xyz.aprildown.theme.material
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import xyz.aprildown.theme.internal.InflationDelegate
+import xyz.aprildown.theme.InflationDelegate
 import xyz.aprildown.theme.material.views.*
 
 object MaterialInflationDelegate : InflationDelegate {
@@ -15,10 +15,10 @@ object MaterialInflationDelegate : InflationDelegate {
         name: String,
         viewId: Int
     ): View? = when (name) {
-        // Actually, even if we don't tint here, ThemeButton will do it for us.
-        // Besides, ThemeSnackBarContentLayout only tints the button text color for now.
-//        "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
-//            ThemeSnackBarContentLayout(context, attrs)
+        "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
+            ThemeSnackBarContentLayout(context, attrs)
+        "Button", "$GOOGLE_MATERIAL.button.MaterialButton" ->
+            ThemeMaterialButton(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
             ThemeTextInputLayout(context, attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->

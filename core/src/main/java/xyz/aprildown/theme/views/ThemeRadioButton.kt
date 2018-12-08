@@ -3,7 +3,6 @@ package xyz.aprildown.theme.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
-import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.colorForAttrName
@@ -20,9 +19,9 @@ internal class ThemeRadioButton(
 
         val theme = get(context)
         theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
-            invalidateColors(ColorIsDarkState(it, theme.isDark))
+            invalidateColors(it, theme.isDark)
         }
     }
 
-    private fun invalidateColors(state: ColorIsDarkState) = setTint(state.color, state.isDark)
+    private fun invalidateColors(color: Int, isDark: Boolean) = setTint(color, isDark)
 }

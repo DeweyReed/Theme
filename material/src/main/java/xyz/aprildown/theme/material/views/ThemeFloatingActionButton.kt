@@ -1,5 +1,6 @@
 package xyz.aprildown.theme.material.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color.BLACK
@@ -11,11 +12,9 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.color
-import xyz.aprildown.theme.material.utils.defaultRippleColor
-import xyz.aprildown.theme.material.utils.isColorLight
-import xyz.aprildown.theme.material.utils.shiftColor
+import xyz.aprildown.theme.material.utils.tint
+import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.colorForAttrName
-import xyz.aprildown.theme.utils.tint
 
 internal class ThemeFloatingActionButton(
     context: Context,
@@ -38,14 +37,18 @@ internal class ThemeFloatingActionButton(
 
     private fun invalidateColors(color: Int) {
         setTintSelector(color)
-        iconColor = if (color.isColorLight()) BLACK else WHITE
+        iconColor = if (ColorUtils.isLightColor(color)) BLACK else WHITE
         setImageDrawable(drawable)
     }
 
+    @SuppressLint("PrivateResource")
     private fun setTintSelector(color: Int) {
-        val isColorLight = color.isColorLight()
-        val rippleColor = defaultRippleColor(context, isColorLight)
-        val pressed = color.shiftColor(1.1f)
+        val isColorLight = ColorUtils.isLightColor(color)
+        val rippleColor = context.color(
+            if (isColorLight) R.color.ripple_material_light
+            else R.color.ripple_material_dark
+        )
+        val pressed = ColorUtils.shiftColor(color, 1.1f)
         val textColor = context.color(
             if (isColorLight) R.color.ate_primary_text_light
             else R.color.ate_primary_text_dark

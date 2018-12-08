@@ -4,29 +4,16 @@ package xyz.aprildown.theme.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import xyz.aprildown.theme.BuildConfig
-import xyz.aprildown.theme.internal.PREFS_NAME
-
-private fun Context.safeContext(): Context =
-    takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !isDeviceProtectedStorage }?.let {
-        ContextCompat.createDeviceProtectedStorageContext(it) ?: it
-    } ?: this
-
-internal fun Context.getThemePrefs(): SharedPreferences =
-    safeContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-@ColorInt
-internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
-    return if (contains(key)) getInt(key, 0) else or.invoke()
-}
 
 @ColorInt
 internal fun Context.color(@ColorRes color: Int): Int {
@@ -92,7 +79,32 @@ internal fun Resources.safeResourceName(resId: Int): String {
     return try {
         getResourceName(resId)
     } catch (_: Resources.NotFoundException) {
-        if (BuildConfig.DEBUG) Log.w("AttrWizard", "Unable to get resource name for $resId")
+        if (BuildConfig.DEBUG) {
+            Log.w(
+                "AttrWizard",
+                "Unable to get resource name for $resId"
+            )
+        }
         ""
     }
+}
+
+@CheckResult
+internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
+    var result: Drawable = this ?: return null
+    result = DrawableCompat.wrap(result.mutate())
+    DrawableCompat.setTintMode(
+        result,
+        PorterDuff.Mode.SRC_IN
+    )
+    DrawableCompat.setTint(result, color)
+    return result
+}
+
+@CheckResult
+internal fun Drawable?.tint(sl: ColorStateList): Drawable? {
+    var result: Drawable = this ?: return null
+    result = DrawableCompat.wrap(result.mutate())
+    DrawableCompat.setTintList(result, sl)
+    return result
 }

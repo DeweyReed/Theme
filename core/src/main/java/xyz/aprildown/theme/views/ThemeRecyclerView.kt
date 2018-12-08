@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.utils.EdgeGlowUtil.setEdgeGlowColor
+import xyz.aprildown.theme.tint.EdgeEffectTint
 
 internal class ThemeRecyclerView(
     context: Context,
@@ -12,8 +12,7 @@ internal class ThemeRecyclerView(
 ) : RecyclerView(context, attrs) {
 
     init {
-        invalidateColors(get(context).colorAccent)
+        EdgeEffectTint.setEdgeGlowColor(this, get(context).colorAccent)
     }
 
-    private fun invalidateColors(color: Int) = setEdgeGlowColor(this, color, null)
 }

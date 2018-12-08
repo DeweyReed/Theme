@@ -1,22 +1,21 @@
 package xyz.aprildown.theme.utils
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Color
-import androidx.annotation.AttrRes
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.internal.KEY_ATTRIBUTE
 
 // region derived colors
 
 val Theme.toolbarIconColor
     @ColorInt
     get() = safeContext.color(
-        if (colorPrimary.isColorLight()) R.color.ate_icon_light
+        if (ColorUtils.isLightColor(colorPrimary)) R.color.ate_icon_light
         else R.color.ate_icon_dark
     )
 
@@ -26,36 +25,28 @@ val Theme.toolbarTitleColor
 
 val Theme.toolbarSubtitleColor
     @ColorInt
-    get() = toolbarTitleColor.adjustAlpha(.87f)
+    get() = ColorUtils.adjustAlpha(toolbarTitleColor, .87f)
 
 // endregion derived colors
 
-@CheckResult
-internal fun Context.attrKey(@AttrRes attrId: Int): String {
-    var name = resources.safeResourceName(attrId)
-    if (!name.startsWith("android")) {
-        name = name.substring(name.indexOf(':') + 1)
-    }
-    return attrKey(name)
-}
-
-@CheckResult
-internal fun attrKey(name: String) = String.format(KEY_ATTRIBUTE, name)
-
-internal fun Theme.invalidateStatusBar() {
+internal fun Theme.refreshStatusBar() {
     with(safeContext as? Activity ?: return) {
         val color = colorStatusBar
 
-        val rootView = getRootView()
+        val rootView: ViewGroup? = (findViewById<View>(android.R.id.content) as? ViewGroup)?.run {
+            if (childCount > 0) getChildAt(0) as? ViewGroup else null
+        }
         if (rootView is DrawerLayout) {
             // Color is set to DrawerLayout, Activity gets transparent status bar
-            setLightStatusBarCompat(false)
             setStatusBarColorCompat(Color.TRANSPARENT)
+            setLightStatusBarCompat(false)
             rootView.setStatusBarBackgroundColor(color)
         } else {
             setStatusBarColorCompat(color)
+            // Use colorPrimary to avoid
+            // the situation where the toolbar text color and status bar icon color are different
+            setLightStatusBarCompat(ColorUtils.isLightColor(colorPrimary))
         }
-        setLightStatusBarCompat(color.isColorLight())
     }
 }
 

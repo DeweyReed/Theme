@@ -3,6 +3,7 @@ package xyz.aprildown.theme.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.graphics.PorterDuff.Mode.SRC_ATOP
 import android.graphics.PorterDuff.Mode.SRC_IN
 import android.graphics.drawable.Drawable
@@ -12,11 +13,9 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.*
 import android.view.View
 import android.widget.*
-import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.TintableBackgroundView
 import androidx.core.view.ViewCompat
 import xyz.aprildown.theme.R
@@ -49,7 +48,7 @@ internal fun View.setTintAuto(
                 if (isDark) R.color.ripple_material_dark
                 else R.color.ripple_material_light
             )
-            val checked = color.adjustAlpha(0.4f)
+            val checked = ColorUtils.adjustAlpha(color, 0.4f)
             val sl = ColorStateList(
                 arrayOf(
                     intArrayOf(
@@ -71,7 +70,7 @@ internal fun View.setTintAuto(
         } else if (this.background != null) {
             val drawable: Drawable? = this.background
             if (drawable != null) {
-                setBackgroundCompat(drawable.tint(color))
+                ViewCompat.setBackground(this, drawable.tint(color))
             }
         }
     }
@@ -82,13 +81,13 @@ internal fun View.setTintSelector(
     darker: Boolean,
     useDarkTheme: Boolean
 ) {
-    val isColorLight = color.isColorLight()
+    val isColorLight = ColorUtils.isLightColor(color)
     val disabled = context.color(
         if (useDarkTheme) R.color.ate_button_disabled_dark
         else R.color.ate_button_disabled_light
     )
-    val pressed = color.shiftColor(if (darker) 0.9f else 1.1f)
-    val activated = color.shiftColor(if (darker) 1.1f else 0.9f)
+    val pressed = ColorUtils.shiftColor(color, if (darker) 0.9f else 1.1f)
+    val activated = ColorUtils.shiftColor(color, if (darker) 1.1f else 0.9f)
     val rippleColor = defaultRippleColor(context, isColorLight)
     val textColor = context.color(
         if (isColorLight) R.color.ate_primary_text_light
@@ -128,7 +127,7 @@ internal fun View.setTintSelector(
 
     val drawable: Drawable? = this.background
     if (drawable != null) {
-        setBackgroundCompat(drawable.tint(sl))
+        ViewCompat.setBackground(this, drawable.tint(sl))
     }
 
     if (this is TextView && this !is Button) {
@@ -164,7 +163,7 @@ internal fun RadioButton.setTint(
         ),
         intArrayOf(
             // Radio button includes own alpha for disabled state
-            disabledColor.stripAlpha(),
+            ColorUtils.stripAlpha(disabledColor),
             defaultColor,
             tintColor
         )
@@ -342,22 +341,22 @@ internal fun EditText.setTint(
 
 internal fun EditText.setCursorTint(@ColorInt color: Int) {
     try {
-        val fCursorDrawableRes = TextView::class.findField("mCursorDrawableRes")
-        val mCursorDrawableRes = fCursorDrawableRes.getInt(this)
-
-        val fEditor = TextView::class.findField("mEditor")
-        val editor = fEditor.get(this)!!
-        val fCursorDrawable = editor::class.findField(
-            "mDrawableForCursor", "mCursorDrawable"
-        )
-
-        val drawables = arrayOf(
-            context.drawable(mCursorDrawableRes).tint(color),
-            context.drawable(mCursorDrawableRes).tint(color)
-        )
-        fCursorDrawable.set(editor, drawables)
+        Reflection.getField(this, "mCursorDrawableRes")
+            ?.let { fCursorDrawableRes ->
+                Reflection.getField(this, "mEditor")?.let { fEditor ->
+                    fEditor.get(this)?.let { editor ->
+                        Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
+                            val cursorDrawableRes = fCursorDrawableRes.getInt(this)
+                            context.drawable(cursorDrawableRes)?.let { drawable ->
+                                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                                val drawables = arrayOf(drawable, drawable)
+                                fCursorDrawable.set(editor, drawables)
+                            }
+                        }
+                    }
+                }
+            }
     } catch (e: Exception) {
-        e.printStackTrace()
     }
 }
 
@@ -384,23 +383,6 @@ internal fun ProgressBar.setTint(
 }
 
 internal fun ImageView.setTint(@ColorInt color: Int) = setColorFilter(color, SRC_ATOP)
-
-@CheckResult
-fun Drawable?.tint(@ColorInt color: Int): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintMode(result, SRC_IN)
-    DrawableCompat.setTint(result, color)
-    return result
-}
-
-@CheckResult
-fun Drawable?.tint(sl: ColorStateList): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintList(result, sl)
-    return result
-}
 
 @SuppressLint("PrivateResource")
 @ColorInt
@@ -454,9 +436,9 @@ private fun checkableColorStateList(
 ): ColorStateList {
     var tint = requestedTint
     if (useDarker) {
-        tint = tint.shiftColor(1.1f)
+        tint = ColorUtils.shiftColor(tint, 1.1f)
     }
-    tint = tint.adjustAlpha(if (compatSwitch && !thumb) 0.5f else 1.0f)
+    tint = ColorUtils.adjustAlpha(tint, if (compatSwitch && !thumb) 0.5f else 1.0f)
 
     val disabled: Int
     var normal: Int
@@ -482,7 +464,7 @@ private fun checkableColorStateList(
 
     // Stock switch includes its own alpha
     if (!compatSwitch) {
-        normal = normal.stripAlpha()
+        normal = ColorUtils.stripAlpha(normal)
     }
 
     return ColorStateList(

@@ -1,27 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:title="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <Switch
+            android:id="@+id/switchDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </androidx.viewpager.widget.ViewPager>
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:text="Dark Theme" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Default" />
+
+        <Button
+            android:id="@+id/btnTheme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Amber + Purple" />
+
+        <Button
+            android:id="@+id/btnTheme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Red + Blue" />
+
+        <Button
+            android:id="@+id/btnTheme3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Blue + Pink" />
+
+        <Button
+            android:id="@+id/btnTheme4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Gray + Green" />
+
+        <Button
+            android:id="@+id/btnTheme5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateTheme"
+            android:text="Black + White" />
+
+        <Button
+            android:id="@+id/btnMaterial"
+            style="?borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Material Showcase" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:text="Hello, friend"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?colorAccent" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Disabled Button" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="EditText"
+            android:inputType="text"
+            tools:ignore="Autofill" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:checked="true"
+            android:text="CheckBox"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:checked="true"
+            android:text="RadioButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:checked="true"
+            android:text="Switch"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:checked="true"
+            android:text="Switch Compat"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:progress="75" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:entries="@array/entries" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -7,8 +7,8 @@ import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import com.google.android.material.tabs.TabLayout
 import xyz.aprildown.theme.Theme.Companion.get
-import xyz.aprildown.theme.material.utils.adjustAlpha
-import xyz.aprildown.theme.utils.tint
+import xyz.aprildown.theme.material.utils.tint
+import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.toolbarIconColor
 import xyz.aprildown.theme.utils.toolbarTitleColor
 
@@ -27,7 +27,10 @@ internal class ThemeTabLayout(
         setIconsColor(theme.toolbarIconColor)
 
         val toolbarTitleColor = theme.toolbarTitleColor
-        setTabTextColors(toolbarTitleColor.adjustAlpha(UNFOCUSED_ALPHA), toolbarTitleColor)
+        setTabTextColors(
+            ColorUtils.adjustAlpha(toolbarTitleColor, UNFOCUSED_ALPHA),
+            toolbarTitleColor
+        )
 
         setBackgroundColor(theme.colorPrimary)
 
@@ -43,7 +46,10 @@ internal class ThemeTabLayout(
         setIconsColor(theme.toolbarIconColor)
 
         val toolbarTitleColor = theme.toolbarTitleColor
-        setTabTextColors(toolbarTitleColor.adjustAlpha(UNFOCUSED_ALPHA), toolbarTitleColor)
+        setTabTextColors(
+            ColorUtils.adjustAlpha(toolbarTitleColor, UNFOCUSED_ALPHA),
+            toolbarTitleColor
+        )
     }
 
     private fun setIconsColor(color: Int) {
@@ -53,7 +59,7 @@ internal class ThemeTabLayout(
                 intArrayOf(android.R.attr.state_selected)
             ),
             intArrayOf(
-                color.adjustAlpha(UNFOCUSED_ALPHA),
+                ColorUtils.adjustAlpha(color, UNFOCUSED_ALPHA),
                 color
             )
         )

@@ -12,6 +12,7 @@ import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.LayoutInflaterCompat
 import xyz.aprildown.theme.internal.*
 import xyz.aprildown.theme.utils.*
 
@@ -124,7 +125,10 @@ class Theme private constructor(private var context: Context?) {
                 initPrefs()
             }
             (c as? AppCompatActivity)?.let {
-                it.setInflaterFactory(it.layoutInflater, delegates)
+                LayoutInflaterCompat.setFactory2(
+                    it.layoutInflater,
+                    InflationInterceptor(delegates)
+                )
             }
         }
 
@@ -135,11 +139,11 @@ class Theme private constructor(private var context: Context?) {
                 initPrefs()
                 (c as? Activity)?.let {
                     it.setTaskDescriptionColor(colorPrimary)
-                    invalidateStatusBar()
+                    refreshStatusBar()
                     if (safePrefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
-                        it.setNavBarColorCompat(navColor)
-                        it.setLightNavBarCompat(navColor.isColorLight())
+                        it.setNavigationBarColorCompat(navColor)
+                        it.setLightNavigationBarCompat(ColorUtils.isLightColor(navColor))
                     }
                 }
             }

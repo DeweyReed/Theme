@@ -9,8 +9,8 @@ import android.util.AttributeSet
 import com.google.android.material.navigation.NavigationView
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.material.R
-import xyz.aprildown.theme.material.utils.adjustAlpha
 import xyz.aprildown.theme.material.utils.color
+import xyz.aprildown.theme.utils.ColorUtils
 
 internal class ThemeNavigationView(
     context: Context,
@@ -24,8 +24,8 @@ internal class ThemeNavigationView(
 
     private fun invalidateColors(selectedColor: Int, isDark: Boolean) {
         val baseColor = if (isDark) Color.WHITE else Color.BLACK
-        val unselectedIconColor = baseColor.adjustAlpha(.54f)
-        val unselectedTextColor = baseColor.adjustAlpha(.87f)
+        val unselectedIconColor = ColorUtils.adjustAlpha(baseColor, .54f)
+        val unselectedTextColor = ColorUtils.adjustAlpha(baseColor, .87f)
 
         val selectedItemBgColor = context.color(
             if (isDark) R.color.ate_navigation_drawer_selected_dark

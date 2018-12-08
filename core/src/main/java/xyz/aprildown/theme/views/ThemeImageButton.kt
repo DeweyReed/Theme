@@ -6,8 +6,6 @@ import androidx.appcompat.widget.AppCompatImageButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.utils.changeBackgroundColor
-import xyz.aprildown.theme.utils.changeImageTint
 import xyz.aprildown.theme.utils.colorForAttrName
 
 internal class ThemeImageButton(
@@ -23,11 +21,11 @@ internal class ThemeImageButton(
         val theme = get(context)
 
         theme.colorForAttrName(backgroundColorValue)?.let {
-            changeBackgroundColor(it)
+            setBackgroundColor(it)
         }
 
         theme.colorForAttrName(tintColorValue)?.let {
-            changeImageTint(it)
+            setColorFilter(it)
         }
     }
 }

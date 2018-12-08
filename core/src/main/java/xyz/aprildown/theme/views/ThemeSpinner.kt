@@ -3,7 +3,6 @@ package xyz.aprildown.theme.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatSpinner
-import xyz.aprildown.theme.ColorIsDarkState
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.colorForAttrName
@@ -20,10 +19,9 @@ internal class ThemeSpinner(
 
         val theme = get(context)
         theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
-            invalidateColors(ColorIsDarkState(it, theme.isDark))
+            invalidateColors(it, theme.isDark)
         }
     }
 
-    private fun invalidateColors(state: ColorIsDarkState) =
-        setTintAuto(state.color, true, state.isDark)
+    private fun invalidateColors(color: Int, isDark: Boolean) = setTintAuto(color, true, isDark)
 }
