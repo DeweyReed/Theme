@@ -2,7 +2,6 @@
 
 package xyz.aprildown.theme.internal
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -31,14 +30,13 @@ internal class InflationInterceptor(
 ) : LayoutInflater.Factory2 {
 
     override fun onCreateView(
-        name: String?,
-        context: Context?,
+        name: String,
+        context: Context,
         attrs: AttributeSet?
-    ): View {
-        return onCreateView(name, context, attrs)
+    ): View? {
+        return onCreateView(null, name, context, attrs)
     }
 
-    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         parent: View?,
         name: String,
