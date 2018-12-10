@@ -1,122 +1,70 @@
 package xyz.aprildown.theme.tint
 
-import android.R.attr
-import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
+import android.graphics.PorterDuff
 import android.view.Menu
-import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
+import android.view.MenuItem
 import androidx.annotation.ColorInt
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import xyz.aprildown.theme.utils.*
-import java.lang.reflect.Field
+import xyz.aprildown.theme.utils.tint
 
-fun Toolbar.setOverflowButtonColor(@ColorInt color: Int) {
-    val overflowDrawable = overflowIcon
-    if (overflowDrawable != null) {
-        overflowIcon = overflowDrawable.tint(color)
+class ToolbarTint private constructor() {
+
+    init {
+        throw IllegalStateException()
     }
-}
 
-fun Toolbar.tintMenu(
-    menu: Menu,
-    activeColor: Int,
-    inactiveColor: Int
-) {
-    val colors = ColorStateList(
-        arrayOf(
-            intArrayOf(attr.state_enabled), intArrayOf(-attr.state_enabled)
-        ),
-        intArrayOf(activeColor, inactiveColor)
-    )
+    companion object {
 
-    // The collapse icon displays when action views are expanded (e.g. SearchView)
-    try {
-        Reflection.getField(this, "mCollapseIcon")?.let { field ->
-            val collapseIcon = field.get(this) as? Drawable
-            if (collapseIcon != null) {
-                field.set(this, collapseIcon.tint(colors))
+        fun setOverflowButtonColor(toolbar: Toolbar, @ColorInt color: Int) {
+            val overflowDrawable = toolbar.overflowIcon
+            if (overflowDrawable != null) {
+                toolbar.overflowIcon = overflowDrawable.tint(color)
             }
         }
-    } catch (e: Exception) {
-    }
 
-    // Theme menu action views
-    for (i in 0 until menu.size()) {
-        val menuItem = menu.getItem(i)
-        val actionView = menuItem.actionView
-        if (actionView is SearchView) {
-            actionView.setColors(activeColor, inactiveColor)
-        }
-        if (menu.getItem(i).icon != null) {
-            menuItem.icon = menuItem.icon.tint(colors)
-        }
-    }
-}
-
-private fun SearchView.setColors(
-    activeColor: Int,
-    inactiveColor: Int
-) {
-    val tintColors = ColorStateList(
-        arrayOf(
-            intArrayOf(attr.state_enabled), intArrayOf(-attr.state_enabled)
-        ),
-        intArrayOf(activeColor, inactiveColor)
-    )
-
-    try {
-        Reflection.getField(this, "mSearchSrcTextView")?.let { mSearchSrcTextViewField ->
-            val mSearchSrcTextView = mSearchSrcTextViewField.get(this) as EditText
-            mSearchSrcTextView.setTextColor(activeColor)
-            mSearchSrcTextView.setHintTextColor(inactiveColor)
-            mSearchSrcTextView.setCursorTint(activeColor)
-        }
-
-        @Throws(Exception::class)
-        fun tintImageView(
-            target: Any,
-            field: Field,
-            colors: ColorStateList
+        fun tintMenu(
+            menu: Menu,
+            @ColorInt menuIconColor: Int,
+            @ColorInt subIconColor: Int = menuIconColor
         ) {
-            field.isAccessible = true
-            val imageView = field.get(target) as ImageView
-            if (imageView.drawable != null) {
-                imageView.setImageDrawable(imageView.drawable.tint(colors))
+            for (i in 0 until menu.size()) {
+                val item = menu.getItem(i)
+                colorMenuItem(item, menuIconColor)
+                colorSubMenus(item, subIconColor)
             }
         }
 
-        Reflection.getField(this, "mSearchButton")?.let { field ->
-            tintImageView(this, field, tintColors)
-        }
-        Reflection.getField(this, "mGoButton")?.let { field ->
-            tintImageView(this, field, tintColors)
-        }
-        Reflection.getField(this, "mCloseButton")?.let { field ->
-            tintImageView(this, field, tintColors)
-        }
-        Reflection.getField(this, "mVoiceButton")?.let { field ->
-            tintImageView(this, field, tintColors)
-        }
-
-        Reflection.getField(this, "mSearchPlate")?.let { field ->
-            (field.get(this) as View).apply {
-                setTintAuto(
-                    color = activeColor,
-                    requestBackground = true,
-                    isDark = ColorUtils.isDarkColor(activeColor)
-                )
+        /**
+         * Sets the color filter and/or the alpha transparency on a [MenuItem]'s icon.
+         *
+         * @param menuItem The [MenuItem] to theme.
+         * @param color The color to set for the color filter or `null` for no changes.
+         */
+        private fun colorMenuItem(menuItem: MenuItem, color: Int?) {
+            menuItem.icon?.let { icon ->
+                val drawable = icon.mutate()
+                color?.let { drawable.setColorFilter(it, PorterDuff.Mode.SRC_IN) }
+                menuItem.icon = drawable
             }
         }
 
-        Reflection.getField(this, "mSearchHintIcon")?.let { field ->
-            (field.get(this) as Drawable).apply {
-                field.set(this@setColors, this@apply.tint(tintColors))
+        /**
+         * Sets the color filter and/or the alpha transparency on a [MenuItem]'s sub menus
+         *
+         * @param item The [MenuItem] to theme.
+         * @param color The color to set for the color filter or `null` for no changes.
+         */
+        private fun colorSubMenus(item: MenuItem, color: Int?) {
+            if (item.hasSubMenu()) {
+                item.subMenu?.let { menu ->
+                    val size = menu.size()
+                    for (i in 0 until size) {
+                        val menuItem = menu.getItem(i)
+                        colorMenuItem(menuItem, color)
+                        colorSubMenus(menuItem, color)
+                    }
+                }
             }
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 }

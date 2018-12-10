@@ -7,8 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.tint.setOverflowButtonColor
-import xyz.aprildown.theme.tint.tintMenu
+import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.*
 
 internal class ThemeToolbar(
@@ -16,46 +15,46 @@ internal class ThemeToolbar(
     attrs: AttributeSet? = null
 ) : Toolbar(context, attrs) {
 
-    private var menuIconColor: Int? = null
+    private val menuIconColor: Int
 
-    private val wizard = AttrWizard(context, attrs)
-    private val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-    private val titleTextColorValue = wizard.getRawValue(R.attr.titleTextColor)
-    private val subtitleTextColorValue = wizard.getRawValue(R.attr.subtitleTextColor)
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
+    init {
         val theme = get(context)
-        theme.colorForAttrName(backgroundColorValue, theme.colorPrimary)?.let {
+        menuIconColor = theme.toolbarIconColor
+
+        val wizard = AttrWizard(context, attrs)
+
+        theme.colorForAttrName(
+            wizard.getRawValue(android.R.attr.background),
+            theme.colorPrimary
+        )?.let {
             setBackgroundColor(it)
         }
 
-        invalidateColors(theme.toolbarIconColor)
-
-        theme.colorForAttrName(titleTextColorValue, theme.toolbarTitleColor)?.let {
+        theme.colorForAttrName(
+            wizard.getRawValue(R.attr.titleTextColor),
+            theme.toolbarTitleColor
+        )?.let {
             setTitleTextColor(it)
         }
 
-        theme.colorForAttrName(subtitleTextColorValue, theme.toolbarSubtitleColor)?.let {
+        theme.colorForAttrName(
+            wizard.getRawValue(R.attr.subtitleTextColor),
+            theme.toolbarSubtitleColor
+        )?.let {
             setSubtitleTextColor(it)
+        }
+
+        // Sometimes overflow icon won't be tinted. Use post to fix it.
+        post {
+            val toolbarIconColor = theme.toolbarIconColor
+            ToolbarTint.setOverflowButtonColor(this, toolbarIconColor)
+            ToolbarTint.tintMenu(menu, toolbarIconColor)
+            // Trigger setNavigationIcon
+            navigationIcon = navigationIcon
         }
     }
 
     override fun setNavigationIcon(icon: Drawable?) {
-        if (menuIconColor == null) {
-            super.setNavigationIcon(icon)
-            return
-        }
-        super.setNavigationIcon(icon.tint(menuIconColor!!))
-    }
-
-    private fun invalidateColors(color: Int) {
-        this.menuIconColor = color
-        setOverflowButtonColor(color)
-        tintMenu(menu, color, ColorUtils.darker(color))
-        if (navigationIcon != null) {
-            this.navigationIcon = navigationIcon
-        }
+        super.setNavigationIcon(icon.tint(menuIconColor))
     }
 }

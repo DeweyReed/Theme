@@ -4,61 +4,61 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import androidx.annotation.ColorInt
 import com.google.android.material.bottomappbar.BottomAppBar
+import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme.Companion.get
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.tint
-import xyz.aprildown.theme.tint.setOverflowButtonColor
-import xyz.aprildown.theme.tint.tintMenu
-import xyz.aprildown.theme.utils.*
+import xyz.aprildown.theme.tint.ToolbarTint
+import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.toolbarIconColor
+import xyz.aprildown.theme.utils.toolbarSubtitleColor
+import xyz.aprildown.theme.utils.toolbarTitleColor
 
 internal class ThemeBottomAppBar(
     context: Context,
     attrs: AttributeSet? = null
 ) : BottomAppBar(context, attrs) {
 
-    private var menuIconColor: Int? = null
+    private val menuIconColor: Int
 
     init {
-        val wizard = AttrWizard(context, attrs)
-        val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-
         val theme = get(context)
+        menuIconColor = theme.toolbarIconColor
 
-        theme.colorForAttrName(backgroundColorValue, theme.colorPrimary)?.let {
+        val wizard = AttrWizard(context, attrs)
+
+        theme.colorForAttrName(
+            wizard.getRawValue(android.R.attr.background),
+            theme.colorPrimary
+        )?.let {
             backgroundTint = ColorStateList.valueOf(it)
         }
 
-        invalidateColors(theme.toolbarIconColor)
+        theme.colorForAttrName(
+            wizard.getRawValue(R.attr.titleTextColor),
+            theme.toolbarTitleColor
+        )?.let {
+            setTitleTextColor(it)
+        }
 
-        setTitleTextColor(theme.toolbarTitleColor)
+        theme.colorForAttrName(
+            wizard.getRawValue(R.attr.subtitleTextColor),
+            theme.toolbarSubtitleColor
+        )?.let {
+            setSubtitleTextColor(it)
+        }
 
-        setSubtitleTextColor(theme.toolbarSubtitleColor)
+        // Check ThemeToolbar's implementation
+        post {
+            val toolbarIconColor = theme.toolbarIconColor
+            ToolbarTint.setOverflowButtonColor(this, toolbarIconColor)
+            ToolbarTint.tintMenu(menu, toolbarIconColor)
+            navigationIcon = navigationIcon
+        }
     }
 
     override fun setNavigationIcon(icon: Drawable?) {
-        if (menuIconColor == null) {
-            super.setNavigationIcon(icon)
-            return
-        }
-        super.setNavigationIcon(icon.tint(menuIconColor!!))
-    }
-
-    fun setNavigationIcon(icon: Drawable?, @ColorInt color: Int) {
-        if (menuIconColor == null) {
-            super.setNavigationIcon(icon)
-            return
-        }
-        super.setNavigationIcon(icon.tint(color))
-    }
-
-    private fun invalidateColors(color: Int) {
-        this.menuIconColor = color
-        setOverflowButtonColor(color)
-        tintMenu(menu, color, ColorUtils.darker(color))
-        if (navigationIcon != null) {
-            this.navigationIcon = navigationIcon
-        }
+        super.setNavigationIcon(icon.tint(menuIconColor))
     }
 }

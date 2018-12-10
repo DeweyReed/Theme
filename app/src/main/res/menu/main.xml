@@ -5,12 +5,10 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_search"
-        android:title="Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"
-        tools:ignore="AppCompatResource" />
+        android:id="@+id/hello_world_item"
+        android:icon="@drawable/ic_brightness"
+        android:title="Hello"
+        app:showAsAction="ifRoom" />
 
     <group android:checkableBehavior="single">
 

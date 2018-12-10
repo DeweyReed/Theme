@@ -8,12 +8,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
+import android.view.Menu
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.LayoutInflaterCompat
 import xyz.aprildown.theme.internal.*
+import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.*
 
 class Theme private constructor(private var context: Context?) {
@@ -81,6 +83,17 @@ class Theme private constructor(private var context: Context?) {
         }
 
     // endregion colors
+
+    /**
+     * When using default action bar(without adding Toolbar to xml), you don't need this method.
+     *
+     * Otherwise, you needs to call this method **after** menu inflation in the onCreateOptionsMenu.
+     *
+     * @param menu onCreateOptionsMenu's parameter
+     */
+    fun tintMenu(menu: Menu) {
+        ToolbarTint.tintMenu(menu, toolbarIconColor)
+    }
 
     private fun initPrefs() {
         _prefs = safeContext.getThemePrefs()
