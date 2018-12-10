@@ -5,7 +5,13 @@ package xyz.aprildown.theme.material
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.InflationDelegate
+import xyz.aprildown.theme.material.tint.decorate
 import xyz.aprildown.theme.material.views.*
 
 object MaterialInflationDelegate : InflationDelegate {
@@ -18,15 +24,15 @@ object MaterialInflationDelegate : InflationDelegate {
         "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
             ThemeSnackBarContentLayout(context, attrs)
         "Button", "$GOOGLE_MATERIAL.button.MaterialButton" ->
-            ThemeMaterialButton(context, attrs)
+            MaterialButton(context, attrs).decorate(attrs)
         "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
-            ThemeTextInputLayout(context, attrs)
+            TextInputLayout(context, attrs).decorate()
         "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
-            ThemeTextInputEditText(context, attrs)
+            TextInputEditText(context, attrs).decorate()
         "$GOOGLE_MATERIAL.tabs.TabLayout" ->
             ThemeTabLayout(context, attrs)
         "$GOOGLE_MATERIAL.navigation.NavigationView" ->
-            ThemeNavigationView(context, attrs)
+            NavigationView(context, attrs).decorate()
         "$GOOGLE_MATERIAL.bottomnavigation.BottomNavigationView" ->
             ThemeBottomNavigationView(context, attrs)
         "$GOOGLE_MATERIAL.floatingactionbutton.FloatingActionButton" ->
@@ -36,7 +42,7 @@ object MaterialInflationDelegate : InflationDelegate {
         "androidx.coordinatorlayout.widget.CoordinatorLayout" ->
             ThemeCoordinatorLayout(context, attrs)
         "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
-            ThemeSwipeRefreshLayout(context, attrs)
+            SwipeRefreshLayout(context, attrs).decorate()
         else -> null
     }
 

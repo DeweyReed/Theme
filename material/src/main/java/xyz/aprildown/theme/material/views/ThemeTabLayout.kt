@@ -1,6 +1,5 @@
 package xyz.aprildown.theme.material.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -37,7 +36,6 @@ internal class ThemeTabLayout(
         setSelectedTabIndicatorColor(theme.colorAccent)
     }
 
-    @SuppressLint("CheckResult")
     override fun setBackgroundColor(@ColorInt color: Int) {
         super.setBackgroundColor(color)
 
