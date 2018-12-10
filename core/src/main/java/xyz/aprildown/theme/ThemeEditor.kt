@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import androidx.collection.ArrayMap
 import xyz.aprildown.theme.internal.*
 import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.attrKey
@@ -18,9 +17,17 @@ class ThemeEditor(private val context: Context) {
     private val editor = context.getThemePrefs().edit()
 
     var isDark = false
+        set(value) {
+            field = value
+            editor.putBoolean(KEY_IS_DARK, value)
+        }
 
     @ColorInt
     var colorPrimary = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_PRIMARY_COLOR, value)
+        }
     @ColorRes
     var colorPrimaryRes = 0
         set(value) {
@@ -29,6 +36,10 @@ class ThemeEditor(private val context: Context) {
 
     @ColorInt
     var colorPrimaryDark = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_PRIMARY_DARK_COLOR, value)
+        }
     @ColorRes
     var colorPrimaryDarkRes = 0
         set(value) {
@@ -37,6 +48,10 @@ class ThemeEditor(private val context: Context) {
 
     @ColorInt
     var colorAccent = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_ACCENT_COLOR, value)
+        }
     @ColorRes
     var colorAccentRes = 0
         set(value) {
@@ -45,6 +60,10 @@ class ThemeEditor(private val context: Context) {
 
     @ColorInt
     var colorStatusBar = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_STATUS_BAR_COLOR, value)
+        }
     @ColorRes
     var colorStatusBarRes = 0
         set(value) {
@@ -52,14 +71,20 @@ class ThemeEditor(private val context: Context) {
         }
 
     @ColorInt
-    var colorNavigationBar: Int? = 0
+    var colorNavigationBar: Int? = null
+        set(value) {
+            field = value
+            if (value != null) {
+                editor.putInt(KEY_NAV_BAR_COLOR, value)
+            } else {
+                editor.remove(KEY_NAV_BAR_COLOR)
+            }
+        }
     @ColorRes
     var colorNavigationBarRes = 0
         set(value) {
             colorNavigationBar = context.color(value)
         }
-
-    private val attributeMap = ArrayMap<String, Int>()
 
     fun autoColorPrimaryDark() = apply {
         colorPrimary = ColorUtils.darker(colorPrimary)
@@ -76,7 +101,7 @@ class ThemeEditor(private val context: Context) {
     }
 
     fun setAttribute(@AttrRes attrId: Int, @ColorInt color: Int) = apply {
-        attributeMap[context.attrKey(attrId)] = color
+        editor.putInt(context.attrKey(attrId), color)
     }
 
     fun setAttributeRes(@AttrRes attrId: Int, @ColorRes colorRes: Int) = apply {
@@ -84,21 +109,6 @@ class ThemeEditor(private val context: Context) {
     }
 
     fun save(commit: Boolean = false) {
-        editor.run {
-            putBoolean(KEY_IS_DARK, isDark)
-            putInt(KEY_PRIMARY_COLOR, colorPrimary)
-            putInt(KEY_PRIMARY_DARK_COLOR, colorPrimaryDark)
-            putInt(KEY_ACCENT_COLOR, colorAccent)
-            putInt(KEY_STATUS_BAR_COLOR, colorStatusBar)
-
-            colorNavigationBar?.let {
-                putInt(KEY_NAV_BAR_COLOR, it)
-            }
-
-            for (i in 0 until attributeMap.size) {
-                putInt(attributeMap.keyAt(i), attributeMap.valueAt(i))
-            }
-        }
         if (commit) editor.commit() else editor.apply()
     }
 }

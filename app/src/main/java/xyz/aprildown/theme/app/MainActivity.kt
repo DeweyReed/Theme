@@ -43,6 +43,7 @@ class MainActivity : ThemeActivity() {
                     colorPrimaryDarkRes = R.color.colorPrimaryDark
                     colorAccentRes = R.color.colorAccent
                     colorStatusBarRes = R.color.colorPrimaryDark
+                    colorNavigationBar = null
                 }
                 R.id.btnTheme1 -> {
                     colorPrimaryRes = R.color.md_amber_500
@@ -84,5 +85,6 @@ class MainActivity : ThemeActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//        recreate()
     }
 }

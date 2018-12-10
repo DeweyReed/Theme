@@ -18,7 +18,7 @@ class App : Application() {
             colorPrimaryRes = R.color.colorPrimary
             colorPrimaryDarkRes = R.color.colorPrimaryDark
             colorAccentRes = R.color.colorAccent
-            colorStatusBar = R.color.colorPrimaryDark
+            colorStatusBarRes = R.color.colorPrimaryDark
         }
 
     }
