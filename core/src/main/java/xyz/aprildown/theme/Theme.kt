@@ -11,7 +11,6 @@ import android.graphics.Color
 import android.os.Build
 import android.view.Menu
 import androidx.annotation.AttrRes
-import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.LayoutInflaterCompat
@@ -23,8 +22,7 @@ class Theme private constructor(internal val context: Context) {
 
     private var _prefs: SharedPreferences? = null
 
-    private val safePrefs
-        @CheckResult
+    private val safePrefs: SharedPreferences
         get() = _prefs
             ?: throw IllegalStateException("Accessing prefs when the app is in the background")
 

@@ -12,15 +12,15 @@ import xyz.aprildown.theme.Theme
 
 // region derived colors
 
-val Theme.toolbarIconColor
+val Theme.toolbarIconColor: Int
     @ColorInt
     get() = context.color(if (isPrimaryLight) R.color.ate_icon_light else R.color.ate_icon_dark)
 
-val Theme.toolbarTitleColor
+val Theme.toolbarTitleColor: Int
     @ColorInt
     get() = toolbarIconColor
 
-val Theme.toolbarSubtitleColor
+val Theme.toolbarSubtitleColor: Int
     @ColorInt
     get() = ColorUtils.adjustAlpha(toolbarTitleColor, .87f)
 
