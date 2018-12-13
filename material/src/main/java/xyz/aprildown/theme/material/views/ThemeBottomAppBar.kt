@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.google.android.material.bottomappbar.BottomAppBar
 import xyz.aprildown.theme.R
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.tint.ToolbarTint
@@ -23,7 +23,7 @@ internal class ThemeBottomAppBar(
     private val menuIconColor: Int
 
     init {
-        val theme = get(context)
+        val theme = Theme.get()
         menuIconColor = theme.toolbarIconColor
 
         val wizard = AttrWizard(context, attrs)

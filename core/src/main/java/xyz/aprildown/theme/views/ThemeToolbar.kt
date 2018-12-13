@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.Toolbar
 import xyz.aprildown.theme.R
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.*
@@ -18,7 +18,7 @@ internal class ThemeToolbar(
     private val menuIconColor: Int
 
     init {
-        val theme = get(context)
+        val theme = Theme.get()
         menuIconColor = theme.toolbarIconColor
 
         val wizard = AttrWizard(context, attrs)

@@ -19,7 +19,7 @@ class CoordinatorActivity : MaterialThemeActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
-        Theme.get(this).tintMenu(menu!!)
+        Theme.get().tintMenu(menu!!)
         return true
     }
 }

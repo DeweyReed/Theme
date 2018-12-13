@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.toolbarTitleColor
 
 internal class ThemeCoordinatorLayout(
@@ -26,7 +26,7 @@ internal class ThemeCoordinatorLayout(
             }
         }
 
-        val theme = get(context)
+        val theme = Theme.get()
         collapsingToolbarLayout?.run {
             val color = theme.colorPrimary
             setContentScrimColor(color)

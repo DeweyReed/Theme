@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.aprildown.theme.R
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.color
 import xyz.aprildown.theme.material.utils.tint
@@ -26,7 +26,7 @@ internal class ThemeFloatingActionButton(
     private var iconColor: Int = 0
 
     init {
-        val theme = get(context)
+        val theme = Theme.get()
         theme.colorForAttrName(backgroundColorValue, theme.colorAccent)?.let {
             invalidateColors(it)
         }

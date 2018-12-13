@@ -4,6 +4,7 @@ package xyz.aprildown.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -18,14 +19,9 @@ import xyz.aprildown.theme.internal.*
 import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.*
 
-class Theme private constructor(private var context: Context?) {
+class Theme private constructor(internal val context: Context) {
 
     private var _prefs: SharedPreferences? = null
-
-    internal val safeContext
-        @CheckResult
-        get() = context
-            ?: throw IllegalStateException("Accessing context when the app is in the background")
 
     private val safePrefs
         @CheckResult
@@ -39,8 +35,8 @@ class Theme private constructor(private var context: Context?) {
 
     @ColorInt
     fun attribute(@AttrRes attrId: Int): Int {
-        return safePrefs.getColorOrDefault(safeContext.attrKey(attrId)) {
-            safeContext.colorAttr(attr = attrId)
+        return safePrefs.getColorOrDefault(context.attrKey(attrId)) {
+            context.colorAttr(attr = attrId)
         }
     }
 
@@ -53,19 +49,19 @@ class Theme private constructor(private var context: Context?) {
     val colorPrimary: Int
         @ColorInt
         get() = safePrefs.getColorOrDefault(KEY_PRIMARY_COLOR) {
-            safeContext.colorAttr(attr = R.attr.colorPrimary)
+            context.colorAttr(attr = R.attr.colorPrimary)
         }
 
     val colorPrimaryDark: Int
         @ColorInt
         get() = safePrefs.getColorOrDefault(KEY_PRIMARY_DARK_COLOR) {
-            safeContext.colorAttr(attr = R.attr.colorPrimaryDark)
+            context.colorAttr(attr = R.attr.colorPrimaryDark)
         }
 
     val colorAccent: Int
         @ColorInt
         get() = safePrefs.getColorOrDefault(KEY_ACCENT_COLOR) {
-            safeContext.colorAttr(attr = R.attr.colorAccent)
+            context.colorAttr(attr = R.attr.colorAccent)
         }
 
     val colorStatusBar: Int
@@ -78,15 +74,17 @@ class Theme private constructor(private var context: Context?) {
         @ColorInt
         get() = safePrefs.getColorOrDefault(KEY_NAV_BAR_COLOR) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                safeContext.colorAttr(android.R.attr.navigationBarColor)
+                context.colorAttr(android.R.attr.navigationBarColor)
             else Color.BLACK
         }
 
     // endregion colors
 
+    val isPrimaryLight: Boolean
+        get() = safePrefs.getBoolean(KEY_IS_PRIMARY_LIGHT, true)
+
     /**
      * When using default action bar(without adding Toolbar to xml), you don't need this method.
-     *
      * Otherwise, you needs to call this method **after** menu inflation in the onCreateOptionsMenu.
      *
      * @param menu onCreateOptionsMenu's parameter
@@ -96,7 +94,7 @@ class Theme private constructor(private var context: Context?) {
     }
 
     private fun initPrefs() {
-        _prefs = safeContext.getThemePrefs()
+        _prefs = context.getThemePrefs()
     }
 
     private fun deInitPrefs() {
@@ -105,20 +103,13 @@ class Theme private constructor(private var context: Context?) {
 
     companion object {
 
+        // We're holding an application context
         @SuppressLint("StaticFieldLeak")
         private var instance: Theme? = null
 
-        private fun getInstance(): Theme =
-            instance ?: throw IllegalStateException("App.init isn't called.")
-
-        /**
-         * Safe call version of [Theme.get())].
-         */
         @JvmStatic
-        fun get(context: Context): Theme = (instance
-            ?: throw IllegalStateException("App.init isn't called.")).also {
-            if (it.context == null) {
-                it.context = context
+        fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init")).also {
+            if (it._prefs == null) {
                 it.initPrefs()
             }
         }
@@ -132,60 +123,49 @@ class Theme private constructor(private var context: Context?) {
         }
 
         @JvmStatic
-        fun attach(c: Context, vararg delegates: InflationDelegate) {
-            getInstance().run {
-                context = c
-                initPrefs()
-            }
-            (c as? AppCompatActivity)?.let {
+        fun attach(context: Context, vararg delegates: InflationDelegate) {
+            (context as? AppCompatActivity)?.let { activity ->
                 LayoutInflaterCompat.setFactory2(
-                    it.layoutInflater,
+                    activity.layoutInflater,
                     InflationInterceptor(delegates)
                 )
             }
         }
 
         @JvmStatic
-        fun resume(c: Context) {
-            getInstance().run {
-                context = c
-                initPrefs()
-                (c as? Activity)?.let {
-                    it.setTaskDescriptionColor(colorPrimary)
-                    refreshStatusBar()
+        fun resume(context: Context) {
+            get().run {
+                (context as? Activity)?.let { activity ->
+                    activity.setTaskDescriptionColor(colorPrimary)
+                    activity.refreshStatusBar(
+                        colorStatusBar = colorStatusBar,
+                        lightMode = isPrimaryLight
+                    )
                     if (safePrefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
-                        it.setNavigationBarColorCompat(navColor)
-                        it.setLightNavigationBarCompat(ColorUtils.isLightColor(navColor))
+                        activity.setNavigationBarColorCompat(navColor)
+                        activity.setLightNavigationBarCompat(ColorUtils.isLightColor(navColor))
                     }
                 }
             }
         }
 
         @JvmStatic
-        fun pause(c: Context) {
-            getInstance().run {
-                if (c is Activity && c.isFinishing && context == c) {
-                    deInitPrefs()
-                    context = null
-                }
-            }
+        fun pause() {
+            instance?.deInitPrefs()
         }
 
         @JvmStatic
-        fun init(c: Context, f: ThemeEditor.() -> Unit) {
-            val applicationContext = c.applicationContext
-            if (instance == null) {
-                instance = Theme(applicationContext)
-            }
-            val theme = getInstance()
-            theme.initPrefs()
-            val prefs = theme.safePrefs
-            if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
-                prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
-                val editor = ThemeEditor(applicationContext)
-                editor.f()
-                editor.save()
+        fun init(app: Application, f: ThemeEditor.() -> Unit) {
+            (instance ?: Theme(app).also { instance = it }).run {
+                initPrefs()
+                val prefs = safePrefs
+                if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
+                    prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
+                    val editor = ThemeEditor(app)
+                    editor.f()
+                    editor.save()
+                }
             }
         }
     }

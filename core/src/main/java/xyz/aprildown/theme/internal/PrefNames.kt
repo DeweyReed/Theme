@@ -15,3 +15,7 @@ internal const val KEY_PRIMARY_COLOR = "primary_color"
 internal const val KEY_PRIMARY_DARK_COLOR = "primary_dark_color"
 internal const val KEY_ACCENT_COLOR = "accent_color"
 
+// Helpers
+
+internal const val KEY_IS_PRIMARY_LIGHT = "is_primary_light"
+

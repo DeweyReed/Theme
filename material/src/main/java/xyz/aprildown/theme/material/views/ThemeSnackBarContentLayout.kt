@@ -6,7 +6,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.snackbar.SnackbarContentLayout
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 
 @SuppressLint("RestrictedApi")
 internal class ThemeSnackBarContentLayout(
@@ -16,6 +16,6 @@ internal class ThemeSnackBarContentLayout(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        actionView.setTextColor(get(context).colorAccent)
+        actionView.setTextColor(Theme.get().colorAccent)
     }
 }

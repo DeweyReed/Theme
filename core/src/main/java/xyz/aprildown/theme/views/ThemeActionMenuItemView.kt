@@ -6,7 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.view.menu.ActionMenuItemView
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.tint
 import xyz.aprildown.theme.utils.toolbarIconColor
@@ -24,7 +24,7 @@ internal class ThemeActionMenuItemView(
     private var icon: Drawable? = null
 
     init {
-        invalidateColors(get(context).toolbarIconColor)
+        invalidateColors(Theme.get().toolbarIconColor)
     }
 
     private fun invalidateColors(color: Int) {
@@ -49,7 +49,7 @@ internal class ThemeActionMenuItemView(
         // We need to retrieve the color again here.
         // For some reason, without this, a transparent color is used and the icon disappears
         // when the overflow menu opens.
-        invalidateColors(get(context).toolbarIconColor)
+        invalidateColors(Theme.get().toolbarIconColor)
     }
 
     @Suppress("MemberVisibilityCanBePrivate")

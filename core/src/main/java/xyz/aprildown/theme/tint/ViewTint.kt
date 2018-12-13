@@ -17,19 +17,17 @@ import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.utils.*
 
 internal fun AppCompatTextView.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    Theme.get(c).colorForAttrName(wizard.getRawValue(android.R.attr.textColor))?.let {
+    Theme.get().colorForAttrName(wizard.getRawValue(android.R.attr.textColor))?.let {
         setTextColor(it)
     }
 }
 
 internal fun AppCompatButton.decorateNormalButton(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(
         wizard.getRawValue(android.R.attr.background),
         theme.colorAccent
@@ -55,7 +53,7 @@ internal fun AppCompatButton.decorateNormalButton(attrs: AttributeSet?) = apply 
 }
 
 internal fun AppCompatButton.decorateBorderlessButton() = apply {
-    val color = Theme.get(context).colorAccent
+    val color = Theme.get().colorAccent
     val textColorSl = ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -74,24 +72,22 @@ internal fun AppCompatButton.decorateBorderlessButton() = apply {
 }
 
 internal fun AppCompatButton.decorateDialogButton() = apply {
-    setTextColor(Theme.get(context).colorAccent)
+    setTextColor(Theme.get().colorAccent)
 }
 
 internal fun AppCompatCheckBox.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTint(it, theme.isDark)
     }
 }
 
 internal fun AppCompatEditText.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(R.attr.tint), theme.colorAccent)?.let {
         setTintAuto(it, true, theme.isDark)
     }
@@ -112,10 +108,9 @@ internal fun AppCompatEditText.decorate(attrs: AttributeSet?) = apply {
 }
 
 internal fun AppCompatImageView.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background))?.let {
         setBackgroundColor(it)
     }
@@ -126,10 +121,9 @@ internal fun AppCompatImageView.decorate(attrs: AttributeSet?) = apply {
 }
 
 internal fun AppCompatImageButton.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background))?.let {
         setBackgroundColor(it)
     }
@@ -140,75 +134,70 @@ internal fun AppCompatImageButton.decorate(attrs: AttributeSet?) = apply {
 }
 
 internal fun Switch.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTint(it, theme.isDark)
     }
 }
 
 internal fun SwitchCompat.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTint(it, theme.isDark)
     }
 }
 
 internal fun AppCompatRadioButton.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTint(it, theme.isDark)
     }
 }
 
 internal fun AppCompatSeekBar.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTint(it, theme.isDark)
     }
 }
 
 internal fun AppCompatSpinner.decorate(attrs: AttributeSet?) = apply {
-    val c = context
-    val wizard = AttrWizard(c, attrs)
+    val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(c)
+    val theme = Theme.get()
     theme.colorForAttrName(wizard.getRawValue(android.R.attr.background), theme.colorAccent)?.let {
         setTintAuto(it, true, theme.isDark)
     }
 }
 
 internal fun ProgressBar.decorate() = apply {
-    setTint(Theme.get(context).colorAccent)
+    setTint(Theme.get().colorAccent)
 }
 
 internal fun ListView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get(context).colorAccent)
+    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
 }
 
 internal fun ScrollView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get(context).colorAccent)
+    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
 }
 
 internal fun NestedScrollView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get(context).colorAccent)
+    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
 }
 
 internal fun RecyclerView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get(context).colorAccent)
+    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
 }
 
 internal fun ViewPager.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get(context).colorAccent)
+    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
 }

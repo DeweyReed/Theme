@@ -27,6 +27,7 @@ class ThemeEditor(private val context: Context) {
         set(value) {
             field = value
             editor.putInt(KEY_PRIMARY_COLOR, value)
+            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, ColorUtils.isLightColor(value))
         }
     @ColorRes
     var colorPrimaryRes = 0

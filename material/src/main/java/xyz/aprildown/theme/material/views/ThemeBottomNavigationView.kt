@@ -8,7 +8,7 @@ import android.graphics.Color.WHITE
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import xyz.aprildown.theme.Theme.Companion.get
+import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.material.R
 import xyz.aprildown.theme.material.utils.color
 import xyz.aprildown.theme.utils.ColorUtils
@@ -63,7 +63,7 @@ internal class ThemeBottomNavigationView(
     }
 
     private fun onState() {
-        val theme = get(context)
+        val theme = Theme.get()
         lastTextIconColor = theme.colorAccent
         invalidateWithBackgroundColor()
 

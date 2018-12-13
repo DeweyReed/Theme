@@ -25,7 +25,7 @@ import com.google.android.material.R as MaterialR
 internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
     val wizard = AttrWizard(context, attrs)
 
-    val theme = Theme.get(context)
+    val theme = Theme.get()
     val accentColor = theme.colorAccent
 
     var style = attrs?.styleAttribute
@@ -76,15 +76,15 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
 }
 
 internal fun TextInputEditText.decorate() = apply {
-    ViewCompat.setBackgroundTintList(this, ColorStateList.valueOf(Theme.get(context).colorAccent))
+    ViewCompat.setBackgroundTintList(this, ColorStateList.valueOf(Theme.get().colorAccent))
 }
 
 internal fun TextInputLayout.decorate() = apply {
-    defaultHintTextColor = ColorStateList.valueOf(Theme.get(context).colorAccent)
+    defaultHintTextColor = ColorStateList.valueOf(Theme.get().colorAccent)
 }
 
 internal fun NavigationView.decorate() = apply {
-    val theme = Theme.get(context)
+    val theme = Theme.get()
 
     val selectedColor = theme.colorPrimary
     val isDark = theme.isDark
@@ -125,5 +125,5 @@ internal fun NavigationView.decorate() = apply {
 }
 
 internal fun SwipeRefreshLayout.decorate() = apply {
-    setColorSchemeColors(Theme.get(context).colorAccent)
+    setColorSchemeColors(Theme.get().colorAccent)
 }
