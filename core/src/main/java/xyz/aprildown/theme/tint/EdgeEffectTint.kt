@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("SpellCheckingInspection")
+
 package xyz.aprildown.theme.tint
 
 import android.graphics.PorterDuff
@@ -36,13 +38,6 @@ import xyz.aprildown.theme.utils.Reflection
 /**
  * Provides utility methods to set the color of an [EdgeEffect].
  *
- * Example usage:
- *
- * ```kotlin
- * if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
- *     EdgeEffectTint(activity).tint(ContextCompat.getColor(activity, R.color.cyanea_primary))
- * }
- * ```
  */
 internal class EdgeEffectTint private constructor() {
 

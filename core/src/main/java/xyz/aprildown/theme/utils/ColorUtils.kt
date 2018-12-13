@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package xyz.aprildown.theme.utils
 
 import android.graphics.Color

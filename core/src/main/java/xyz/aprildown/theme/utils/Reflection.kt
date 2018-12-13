@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("SpellCheckingInspection")
+
 package xyz.aprildown.theme.utils
 
 import java.lang.reflect.AccessibleObject
