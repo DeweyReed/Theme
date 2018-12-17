@@ -14,7 +14,7 @@ import xyz.aprildown.theme.Theme
 
 val Theme.toolbarIconColor: Int
     @ColorInt
-    get() = context.color(if (isPrimaryLight) R.color.ate_icon_light else R.color.ate_icon_dark)
+    get() = context.color(if (isPrimaryLight) R.color.theme_icon_light else R.color.theme_icon_dark)
 
 val Theme.toolbarTitleColor: Int
     @ColorInt

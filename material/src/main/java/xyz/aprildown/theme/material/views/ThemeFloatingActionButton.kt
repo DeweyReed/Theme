@@ -50,8 +50,8 @@ internal class ThemeFloatingActionButton(
         )
         val pressed = ColorUtils.shiftColor(color, 1.1f)
         val textColor = context.color(
-            if (isColorLight) R.color.ate_primary_text_light
-            else R.color.ate_primary_text_dark
+            if (isColorLight) R.color.theme_primary_text_light
+            else R.color.theme_primary_text_dark
         )
         // FloatingActionButton doesn't support disabled state?
         val sl = ColorStateList(

@@ -94,8 +94,8 @@ internal fun NavigationView.decorate() = apply {
     val unselectedTextColor = ColorUtils.adjustAlpha(baseColor, .87f)
 
     val selectedItemBgColor = context.color(
-        if (isDark) R.color.ate_navigation_drawer_selected_dark
-        else R.color.ate_navigation_drawer_selected_light
+        if (isDark) R.color.theme_md_navigation_drawer_selected_dark
+        else R.color.theme_md_navigation_drawer_selected_light
     )
 
     val iconSl = ColorStateList(

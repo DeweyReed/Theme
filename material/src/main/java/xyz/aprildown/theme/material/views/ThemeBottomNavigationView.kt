@@ -30,8 +30,8 @@ internal class ThemeBottomNavigationView(
         selectedColor: Int
     ) {
         val baseColor = context.color(
-            if (ColorUtils.isLightColor(backgroundColor)) R.color.ate_icon_light
-            else R.color.ate_icon_dark
+            if (ColorUtils.isLightColor(backgroundColor)) R.color.theme_icon_light
+            else R.color.theme_icon_dark
         )
         val unselectedIconTextColor = ColorUtils.adjustAlpha(baseColor, .87f)
         val iconColor = ColorStateList(
@@ -69,8 +69,8 @@ internal class ThemeBottomNavigationView(
 
         setBackgroundColor(
             context.color(
-                if (theme.isDark) R.color.ate_bottom_nav_default_dark_bg
-                else R.color.ate_bottom_nav_default_light_bg
+                if (theme.isDark) R.color.theme_md_bottom_nav_default_dark_bg
+                else R.color.theme_md_bottom_nav_default_light_bg
             )
         )
     }

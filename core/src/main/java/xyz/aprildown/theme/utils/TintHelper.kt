@@ -83,15 +83,15 @@ internal fun View.setTintSelector(
 ) {
     val isColorLight = ColorUtils.isLightColor(color)
     val disabled = context.color(
-        if (useDarkTheme) R.color.ate_button_disabled_dark
-        else R.color.ate_button_disabled_light
+        if (useDarkTheme) R.color.theme_button_disabled_dark
+        else R.color.theme_button_disabled_light
     )
     val pressed = ColorUtils.shiftColor(color, if (darker) 0.9f else 1.1f)
     val activated = ColorUtils.shiftColor(color, if (darker) 1.1f else 0.9f)
     val rippleColor = defaultRippleColor(context, isColorLight)
     val textColor = context.color(
-        if (isColorLight) R.color.ate_primary_text_light
-        else R.color.ate_primary_text_dark
+        if (isColorLight) R.color.theme_primary_text_light
+        else R.color.theme_primary_text_dark
     )
 
     val sl: ColorStateList
@@ -108,8 +108,8 @@ internal fun View.setTintSelector(
                 disabledColorStateList(
                     textColor,
                     context.color(
-                        if (useDarkTheme) R.color.ate_button_text_disabled_dark
-                        else R.color.ate_button_text_disabled_light
+                        if (useDarkTheme) R.color.theme_button_text_disabled_dark
+                        else R.color.theme_button_text_disabled_light
                     )
                 )
             )
@@ -135,8 +135,8 @@ internal fun View.setTintSelector(
             disabledColorStateList(
                 textColor,
                 context.color(
-                    if (isColorLight) R.color.ate_text_disabled_light
-                    else R.color.ate_text_disabled_dark
+                    if (isColorLight) R.color.theme_text_disabled_light
+                    else R.color.theme_text_disabled_dark
                 )
             )
         )
@@ -148,12 +148,12 @@ internal fun RadioButton.setTint(
     useDarker: Boolean
 ) {
     val disabledColor = context.color(
-        if (useDarker) R.color.ate_control_disabled_dark
-        else R.color.ate_control_disabled_light
+        if (useDarker) R.color.theme_control_disabled_dark
+        else R.color.theme_control_disabled_light
     )
     val defaultColor = context.color(
-        if (useDarker) R.color.ate_control_normal_dark
-        else R.color.ate_control_normal_light
+        if (useDarker) R.color.theme_control_normal_dark
+        else R.color.theme_control_normal_light
     )
     val sl = ColorStateList(
         arrayOf(
@@ -184,8 +184,8 @@ internal fun AbsSeekBar.setTint(
     val s1 = disabledColorStateList(
         color,
         context.color(
-            if (useDarker) R.color.ate_control_disabled_dark
-            else R.color.ate_control_disabled_light
+            if (useDarker) R.color.theme_control_disabled_dark
+            else R.color.theme_control_disabled_light
         )
     )
     if (SDK_INT >= LOLLIPOP) {
@@ -207,12 +207,12 @@ internal fun CheckBox.setTint(
     useDarker: Boolean
 ) {
     val disabledColor = context.color(
-        if (useDarker) R.color.ate_control_disabled_dark
-        else R.color.ate_control_disabled_light
+        if (useDarker) R.color.theme_control_disabled_dark
+        else R.color.theme_control_disabled_light
     )
     val defaultColor = context.color(
-        if (useDarker) R.color.ate_control_normal_dark
-        else R.color.ate_control_normal_light
+        if (useDarker) R.color.theme_control_normal_dark
+        else R.color.theme_control_normal_light
     )
     val sl = ColorStateList(
         arrayOf(
@@ -308,12 +308,12 @@ internal fun EditText.setTint(
     useDarker: Boolean
 ) {
     val disabledColor = context.color(
-        if (useDarker) R.color.ate_text_disabled_dark
-        else R.color.ate_text_disabled_light
+        if (useDarker) R.color.theme_text_disabled_dark
+        else R.color.theme_text_disabled_light
     )
     val defaultColor = context.color(
-        if (useDarker) R.color.ate_control_normal_dark
-        else R.color.ate_control_normal_light
+        if (useDarker) R.color.theme_control_normal_dark
+        else R.color.theme_control_normal_light
     )
     val editTextColorStateList = ColorStateList(
         arrayOf(
@@ -444,21 +444,21 @@ private fun checkableColorStateList(
     var normal: Int
     if (thumb) {
         disabled = context.color(
-            if (useDarker) R.color.ate_switch_thumb_disabled_dark
-            else R.color.ate_switch_thumb_disabled_light
+            if (useDarker) R.color.theme_switch_thumb_disabled_dark
+            else R.color.theme_switch_thumb_disabled_light
         )
         normal = context.color(
-            if (useDarker) R.color.ate_switch_thumb_normal_dark
-            else R.color.ate_switch_thumb_normal_light
+            if (useDarker) R.color.theme_switch_thumb_normal_dark
+            else R.color.theme_switch_thumb_normal_light
         )
     } else {
         disabled = context.color(
-            if (useDarker) R.color.ate_switch_track_disabled_dark
-            else R.color.ate_switch_track_disabled_light
+            if (useDarker) R.color.theme_switch_track_disabled_dark
+            else R.color.theme_switch_track_disabled_light
         )
         normal = context.color(
-            if (useDarker) R.color.ate_switch_track_normal_dark
-            else R.color.ate_switch_track_normal_light
+            if (useDarker) R.color.theme_switch_track_normal_dark
+            else R.color.theme_switch_track_normal_light
         )
     }
 
