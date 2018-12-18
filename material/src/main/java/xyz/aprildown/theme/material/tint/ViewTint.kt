@@ -34,6 +34,25 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
     }
     val viewId = id
     if (
+        style == MaterialR.style.Widget_MaterialComponents_Button ||
+        style == MaterialR.style.Widget_MaterialComponents_Button_Icon ||
+        style == MaterialR.style.Widget_MaterialComponents_Button_UnelevatedButton ||
+        style == MaterialR.style.Widget_MaterialComponents_Button_UnelevatedButton_Icon
+    ) {
+        theme.colorForAttrName(wizard.getRawValue(R.attr.backgroundTint), accentColor)?.let {
+            // mtrl_btn_bg_color_selector.xml
+            backgroundTintList = ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_enabled),
+                    intArrayOf()
+                ),
+                intArrayOf(
+                    it,
+                    context.color(R.color.mtrl_btn_bg_color_disabled)
+                )
+            )
+        }
+    } else if (
         style == MaterialR.style.Widget_MaterialComponents_Button_TextButton ||
         style == MaterialR.style.Widget_MaterialComponents_Button_TextButton_Icon ||
         style == MaterialR.style.Widget_MaterialComponents_Button_TextButton_Dialog ||
@@ -46,7 +65,7 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
     ) {
         val textColorValue = wizard.getRawValue(android.R.attr.textColor)
         theme.colorForAttrName(textColorValue, accentColor)?.let {
-            // mtrl_text_btn_text_color_selector
+            // mtrl_text_btn_text_color_selector.xml
             val csl = ColorStateList(
                 arrayOf(
                     intArrayOf(android.R.attr.state_enabled),
@@ -60,17 +79,29 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
 
             setTextColor(csl)
             iconTint = csl
-            rippleColor = ColorStateList.valueOf(it)
-        }
-    } else if (
-        style == MaterialR.style.Widget_MaterialComponents_Button ||
-        style == MaterialR.style.Widget_MaterialComponents_Button_Icon ||
-        style == MaterialR.style.Widget_MaterialComponents_Button_UnelevatedButton ||
-        style == MaterialR.style.Widget_MaterialComponents_Button_UnelevatedButton_Icon
-    ) {
-        val backgroundColorValue = wizard.getRawValue(android.R.attr.background)
-        theme.colorForAttrName(backgroundColorValue, accentColor)?.let {
-            backgroundTintList = ColorStateList.valueOf(it)
+
+            // mtrl_btn_text_btn_ripple.color.xml
+            // This doesn't work well if using materia:1.0.0 but this is a bug from MaterialButton
+            // which has been fixed in later releases(https://github.com/material-components/material-components-android/commit/ba44d62af4e8201647dab5e887479ff9c3cb5ce0#diff-a613bdc9eafb809ab741177bbca088b0)
+            // However, for later releases, something like colorOnPrimary is used.
+            rippleColor = ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_pressed),
+                    intArrayOf(android.R.attr.state_focused, android.R.attr.state_hovered),
+                    intArrayOf(android.R.attr.state_focused),
+                    intArrayOf(android.R.attr.state_hovered),
+                    intArrayOf()
+                ),
+                intArrayOf(
+                    ColorUtils.adjustAlpha(it, 0.16f),
+                    ColorUtils.adjustAlpha(it, 0.12f),
+                    ColorUtils.adjustAlpha(it, 0.12f),
+                    ColorUtils.adjustAlpha(it, 0.04f),
+                    // A thick color better than nothing
+//                    ColorUtils.adjustAlpha(it, 0.00f)
+                    it
+                )
+            )
         }
     }
 }
