@@ -8,8 +8,6 @@ import com.google.android.material.tabs.TabLayout
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.utils.ColorUtils
-import xyz.aprildown.theme.utils.toolbarIconColor
-import xyz.aprildown.theme.utils.toolbarTitleColor
 
 internal class ThemeTabLayout(
     context: Context,

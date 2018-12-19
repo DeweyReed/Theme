@@ -9,7 +9,6 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.tint
-import xyz.aprildown.theme.utils.toolbarIconColor
 
 @SuppressLint("RestrictedApi")
 internal class ThemeActionMenuItemView(

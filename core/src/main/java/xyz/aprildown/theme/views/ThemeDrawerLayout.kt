@@ -6,7 +6,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.utils.toolbarIconColor
 
 internal class ThemeDrawerLayout(
     context: Context,

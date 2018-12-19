@@ -11,9 +11,6 @@ import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.colorForAttrName
-import xyz.aprildown.theme.utils.toolbarIconColor
-import xyz.aprildown.theme.utils.toolbarSubtitleColor
-import xyz.aprildown.theme.utils.toolbarTitleColor
 
 internal class ThemeBottomAppBar(
     context: Context,

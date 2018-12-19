@@ -6,7 +6,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.utils.toolbarTitleColor
 
 internal class ThemeCoordinatorLayout(
     context: Context,
