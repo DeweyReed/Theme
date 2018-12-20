@@ -16,14 +16,13 @@ internal fun Activity.refreshStatusBar(@ColorInt colorStatusBar: Int, lightMode:
     if (rootView is DrawerLayout) {
         // Color is set to DrawerLayout, Activity gets transparent status bar
         setStatusBarColorCompat(Color.TRANSPARENT)
-        setLightStatusBarCompat(false)
         rootView.setStatusBarBackgroundColor(colorStatusBar)
     } else {
         setStatusBarColorCompat(colorStatusBar)
-        // Use colorPrimary to avoid
-        // the situation where the toolbar text color and status bar icon color are different
-        setLightStatusBarCompat(lightMode)
     }
+    // Use colorPrimary to avoid
+    // the situation where the toolbar text color and status bar icon color are different
+    setLightStatusBarCompat(lightMode)
 }
 
 @CheckResult
