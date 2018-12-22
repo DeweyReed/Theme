@@ -88,7 +88,7 @@ class ThemeEditor(private val context: Context) {
         }
 
     fun autoColorPrimaryDark() = apply {
-        colorPrimary = ColorUtils.darker(colorPrimary)
+        colorPrimaryDark = ColorUtils.darker(colorPrimary)
     }
 
     fun autoColorStatusBar() = apply {
