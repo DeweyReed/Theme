@@ -5,7 +5,6 @@ package xyz.aprildown.theme.material
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
@@ -41,8 +40,6 @@ object MaterialInflationDelegate : InflationDelegate {
             ThemeBottomAppBar(context, attrs)
         "androidx.coordinatorlayout.widget.CoordinatorLayout" ->
             ThemeCoordinatorLayout(context, attrs)
-        "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
-            SwipeRefreshLayout(context, attrs).decorate()
         else -> null
     }
 

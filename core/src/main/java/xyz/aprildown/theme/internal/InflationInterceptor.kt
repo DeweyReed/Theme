@@ -14,6 +14,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.widget.*
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import xyz.aprildown.theme.InflationDelegate
 import xyz.aprildown.theme.tint.decorate
@@ -117,6 +118,9 @@ internal class InflationInterceptor(
 
             "Spinner", "$APPCOMPAT_WIDGET.AppCompatSpinner" ->
                 AppCompatSpinner(context, attrs).decorate(attrs)
+
+            "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
+                SwipeRefreshLayout(context, attrs).decorate()
             else -> null
         }
     }

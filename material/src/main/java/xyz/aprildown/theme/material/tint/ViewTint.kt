@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import androidx.core.view.ViewCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
@@ -153,8 +152,4 @@ internal fun NavigationView.decorate() = apply {
         ColorDrawable(selectedItemBgColor)
     )
     itemBackground = bgDrawable
-}
-
-internal fun SwipeRefreshLayout.decorate() = apply {
-    setColorSchemeColors(Theme.get().colorAccent)
 }

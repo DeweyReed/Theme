@@ -10,6 +10,7 @@ import android.widget.Switch
 import androidx.appcompat.widget.*
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
@@ -200,4 +201,8 @@ internal fun RecyclerView.decorate() = apply {
 
 internal fun ViewPager.decorate() = apply {
     EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+}
+
+internal fun SwipeRefreshLayout.decorate() = apply {
+    setColorSchemeColors(Theme.get().colorAccent)
 }
