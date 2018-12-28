@@ -5,8 +5,10 @@ package xyz.aprildown.theme.material.views
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.SnackbarContentLayout
 import xyz.aprildown.theme.Theme
+import xyz.aprildown.theme.material.tint.decorateTextButton
 
 @SuppressLint("RestrictedApi")
 internal class ThemeSnackBarContentLayout(
@@ -16,6 +18,11 @@ internal class ThemeSnackBarContentLayout(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        actionView.setTextColor(Theme.get().colorAccent)
+        val actionBtn = actionView
+        if (actionBtn is MaterialButton) {
+            actionBtn.decorateTextButton("?attr/colorAccent")
+        } else {
+            actionBtn.setTextColor(Theme.get().colorAccent)
+        }
     }
 }
