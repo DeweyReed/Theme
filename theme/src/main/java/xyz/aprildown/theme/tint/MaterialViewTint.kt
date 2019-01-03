@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
@@ -114,12 +115,15 @@ internal fun MaterialButton.decorateTextButton(textColorName: String) {
     }
 }
 
-internal fun TextInputEditText.decorate() = apply {
+internal fun TextInputEditText.decorate(attrs: AttributeSet?) = apply {
+    (this as AppCompatEditText).decorate(attrs)
     ViewCompat.setBackgroundTintList(this, ColorStateList.valueOf(Theme.get().colorAccent))
 }
 
 internal fun TextInputLayout.decorate() = apply {
-    defaultHintTextColor = ColorStateList.valueOf(Theme.get().colorAccent)
+    val accent = Theme.get().colorAccent
+    boxStrokeColor = accent
+    defaultHintTextColor = ColorStateList.valueOf(accent)
 }
 
 internal fun NavigationView.decorate() = apply {

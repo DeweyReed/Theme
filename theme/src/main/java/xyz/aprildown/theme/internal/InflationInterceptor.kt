@@ -111,7 +111,7 @@ internal class InflationInterceptor(
             "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
                 TextInputLayout(context, attrs).decorate()
             "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
-                TextInputEditText(context, attrs).decorate()
+                TextInputEditText(context, attrs).decorate(attrs)
             "$GOOGLE_MATERIAL.tabs.TabLayout" ->
                 ThemeTabLayout(context, attrs)
             "$GOOGLE_MATERIAL.navigation.NavigationView" ->
