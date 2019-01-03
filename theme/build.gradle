@@ -12,6 +12,10 @@ android {
         versionName versions.version_name
     }
 
+    lintOptions {
+        disable "LogNotTimber"
+    }
+
     resourcePrefix 'theme_'
 }
 

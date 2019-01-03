@@ -8,7 +8,8 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
 import xyz.aprildown.theme.tint.ToolbarTint
-import xyz.aprildown.theme.utils.*
+import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.tint
 
 internal class ThemeToolbar(
     context: Context,
