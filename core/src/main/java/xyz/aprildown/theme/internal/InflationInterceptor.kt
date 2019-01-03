@@ -61,64 +61,55 @@ internal class InflationInterceptor(
         @IdRes viewId: Int
     ): View? {
         return when (this) {
+            "TextView", "$APPCOMPAT_WIDGET.AppCompatTextView" ->
+                AppCompatTextView(context, attrs).decorate(attrs)
             "ImageView", "$APPCOMPAT_WIDGET.AppCompatImageView" ->
                 AppCompatImageView(context, attrs).decorate(attrs)
-            "ImageButton", "$APPCOMPAT_WIDGET.AppCompatImageButton" ->
-                AppCompatImageButton(context, attrs).decorate(attrs)
-
-            "androidx.drawerlayout.widget.DrawerLayout" ->
-                ThemeDrawerLayout(context, attrs)
-            "Toolbar", "$APPCOMPAT_WIDGET.Toolbar" ->
-                ThemeToolbar(context, attrs)
-
-            "$APPCOMPAT_WIDGET.AppCompatTextView", "TextView" ->
-                AppCompatTextView(context, attrs).decorate(attrs)
-
             "Button", "$APPCOMPAT_WIDGET.AppCompatButton" ->
                 AppCompatButton(context, attrs).apply {
                     if (viewId == android.R.id.button1 ||
                         viewId == android.R.id.button2 ||
                         viewId == android.R.id.button3
-                    ) {
-                        decorateDialogButton()
-                    } else if (isBorderlessButton(context, attrs)) {
-                        decorateBorderlessButton()
-                    } else {
-                        decorateNormalButton(attrs)
-                    }
+                    ) decorateDialogButton()
+                    else if (isBorderlessButton(context, attrs)) decorateBorderlessButton()
+                    else decorateNormalButton(attrs)
                 }
-
-            "$APPCOMPAT_WIDGET.AppCompatCheckBox", "CheckBox" ->
-                AppCompatCheckBox(context, attrs).decorate(attrs)
-            "$APPCOMPAT_WIDGET.AppCompatRadioButton", "RadioButton" ->
-                AppCompatRadioButton(context, attrs).decorate(attrs)
-            "$APPCOMPAT_WIDGET.AppCompatEditText", "EditText" ->
+            "EditText", "$APPCOMPAT_WIDGET.AppCompatEditText" ->
                 AppCompatEditText(context, attrs).decorate(attrs)
+            "Spinner", "$APPCOMPAT_WIDGET.AppCompatSpinner" ->
+                AppCompatSpinner(context, attrs).decorate(attrs)
+            "ImageButton", "$APPCOMPAT_WIDGET.AppCompatImageButton" ->
+                AppCompatImageButton(context, attrs).decorate(attrs)
+            "CheckBox", "$APPCOMPAT_WIDGET.AppCompatCheckBox" ->
+                AppCompatCheckBox(context, attrs).decorate(attrs)
+            "RadioButton", "$APPCOMPAT_WIDGET.AppCompatRadioButton" ->
+                AppCompatRadioButton(context, attrs).decorate(attrs)
+            "SeekBar", "$APPCOMPAT_WIDGET.AppCompatSeekBar" ->
+                AppCompatSeekBar(context, attrs).decorate(attrs)
+
             "Switch" ->
                 Switch(context, attrs).decorate(attrs)
-            "$APPCOMPAT_WIDGET.SwitchCompat" ->
-                SwitchCompat(context, attrs).decorate(attrs)
-            "$APPCOMPAT_WIDGET.AppCompatSeekBar", "SeekBar" ->
-                AppCompatSeekBar(context, attrs).decorate(attrs)
             "ProgressBar" ->
                 ProgressBar(context, attrs).decorate()
+            "Toolbar", "$APPCOMPAT_WIDGET.Toolbar" ->
+                ThemeToolbar(context, attrs)
             "$APPCOMPAT_VIEW.ActionMenuItemView" ->
                 ThemeActionMenuItemView(context, attrs)
+            "$APPCOMPAT_WIDGET.SwitchCompat" ->
+                SwitchCompat(context, attrs).decorate(attrs)
 
-            "$APPCOMPAT_WIDGET.RecyclerView" ->
-                RecyclerView(context, attrs).decorate()
-            "$ANDROIDX_WIDGET.NestedScrollView" ->
-                NestedScrollView(context, attrs).decorate()
             "ListView" ->
                 ListView(context, attrs).decorate()
             "ScrollView" ->
                 ScrollView(context, attrs).decorate()
+            "$APPCOMPAT_WIDGET.RecyclerView" ->
+                RecyclerView(context, attrs).decorate()
+            "$ANDROIDX_WIDGET.NestedScrollView" ->
+                NestedScrollView(context, attrs).decorate()
             "androidx.viewpager.widget.ViewPager" ->
                 ViewPager(context, attrs).decorate()
-
-            "Spinner", "$APPCOMPAT_WIDGET.AppCompatSpinner" ->
-                AppCompatSpinner(context, attrs).decorate(attrs)
-
+            "androidx.drawerlayout.widget.DrawerLayout" ->
+                ThemeDrawerLayout(context, attrs)
             "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
                 SwipeRefreshLayout(context, attrs).decorate()
             else -> null
