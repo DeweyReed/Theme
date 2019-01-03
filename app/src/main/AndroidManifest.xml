@@ -22,22 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MaterialActivity"
-            android:label="@string/title_activity_material"
+            android:name=".CoordinatorActivity"
+            android:label="CoordinatorActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/MaterialAppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.aprildown.theme.app.MainActivity" />
-        </activity>
-        <activity
-            android:name=".CoordinatorActivity"
-            android:label="CoordinatorActivity"
-            android:parentActivityName=".MaterialActivity"
-            android:theme="@style/MaterialAppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="xyz.aprildown.theme.app.MaterialActivity" />
         </activity>
     </application>
 

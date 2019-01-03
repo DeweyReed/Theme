@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import kotlinx.android.synthetic.main.activity_coordinator.*
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.material.MaterialThemeActivity
 
-class CoordinatorActivity : MaterialThemeActivity() {
+class CoordinatorActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

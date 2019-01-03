@@ -1,5 +1,5 @@
 <resources>
 
-    <style name="BaseMaterialAppTheme" parent="Theme.MaterialComponents" />
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents" />
 
 </resources>

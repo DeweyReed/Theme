@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar" />
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar" />
 
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -19,14 +19,4 @@
 
     <style name="BaseMaterialAppTheme" parent="Theme.MaterialComponents.Light" />
 
-    <style name="MaterialAppTheme" parent="BaseMaterialAppTheme">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="MaterialAppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 </resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:text="Hello, friend"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?colorAccent" />
+
+        <Switch
+            android:id="@+id/switchDark"
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:text="Dark Theme" />
+
+        <Button
+            android:id="@+id/btnDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Default" />
+
+        <Button
+            android:id="@+id/btnTheme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amber + Purple" />
+
+        <Button
+            android:id="@+id/btnTheme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Red + Blue" />
+
+        <Button
+            android:id="@+id/btnTheme3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blue + Pink" />
+
+        <Button
+            android:id="@+id/btnTheme4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gray + Green" />
+
+        <Button
+            android:id="@+id/btnTheme5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Black + White" />
+
+    </LinearLayout>
+
+</ScrollView>

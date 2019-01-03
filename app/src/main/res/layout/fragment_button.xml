@@ -59,10 +59,4 @@
         android:text="TextButton.Icon"
         app:icon="@drawable/ic_palette" />
 
-    <Button
-        android:id="@+id/btnShowDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dialog" />
-
 </LinearLayout>
