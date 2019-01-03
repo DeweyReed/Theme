@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.material.views
+package xyz.aprildown.theme.views.material
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -8,10 +8,10 @@ import android.graphics.Color.WHITE
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.material.R
-import xyz.aprildown.theme.material.utils.color
 import xyz.aprildown.theme.utils.ColorUtils
+import xyz.aprildown.theme.utils.color
 
 internal class ThemeBottomNavigationView(
     context: Context?,

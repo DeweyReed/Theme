@@ -1,7 +1,5 @@
 package xyz.aprildown.theme.tint
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.ListView
 import android.widget.ProgressBar
@@ -23,57 +21,6 @@ internal fun AppCompatTextView.decorate(attrs: AttributeSet?) = apply {
     Theme.get().colorForAttrName(wizard.getRawValue(android.R.attr.textColor))?.let {
         setTextColor(it)
     }
-}
-
-internal fun AppCompatButton.decorateNormalButton(attrs: AttributeSet?) = apply {
-    val wizard = AttrWizard(context, attrs)
-
-    val theme = Theme.get()
-    theme.colorForAttrName(
-        wizard.getRawValue(android.R.attr.background),
-        theme.colorAccent
-    )?.let { color ->
-        val isDark = theme.isDark
-        setTintAuto(color, true, isDark)
-        val textColorSl = ColorStateList(
-            arrayOf(
-                intArrayOf(android.R.attr.state_enabled),
-                intArrayOf(-android.R.attr.state_enabled)
-            ),
-            intArrayOf(
-                if (ColorUtils.isLightColor(color)) Color.BLACK else Color.WHITE,
-                if (isDark) Color.WHITE else Color.BLACK
-            )
-        )
-        setTextColor(textColorSl)
-
-        // Hack around button color not updating
-        isEnabled = !isEnabled
-        isEnabled = !isEnabled
-    }
-}
-
-internal fun AppCompatButton.decorateBorderlessButton() = apply {
-    val color = Theme.get().colorAccent
-    val textColorSl = ColorStateList(
-        arrayOf(
-            intArrayOf(android.R.attr.state_enabled),
-            intArrayOf(-android.R.attr.state_enabled)
-        ),
-        intArrayOf(
-            color,
-            ColorUtils.adjustAlpha(color, 0.56f)
-        )
-    )
-    setTextColor(textColorSl)
-
-    // Hack around button color not updating
-    isEnabled = !isEnabled
-    isEnabled = !isEnabled
-}
-
-internal fun AppCompatButton.decorateDialogButton() = apply {
-    setTextColor(Theme.get().colorAccent)
 }
 
 internal fun AppCompatCheckBox.decorate(attrs: AttributeSet?) = apply {

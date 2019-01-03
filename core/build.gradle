@@ -12,13 +12,6 @@ android {
         versionName versions.version_name
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
     resourcePrefix 'theme_'
 }
 
@@ -26,4 +19,6 @@ dependencies {
     implementation libs.kotlin_stdlib_jdk7
     implementation libs.androidx_appcompat
     implementation libs.androidx_recyclerview
+
+    implementation libs.material
 }

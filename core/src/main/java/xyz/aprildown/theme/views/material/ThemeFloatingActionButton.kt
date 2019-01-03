@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.material.views
+package xyz.aprildown.theme.views.material
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,10 +11,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.material.utils.color
-import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.utils.ColorUtils
+import xyz.aprildown.theme.utils.color
 import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.tint
 
 internal class ThemeFloatingActionButton(
     context: Context,

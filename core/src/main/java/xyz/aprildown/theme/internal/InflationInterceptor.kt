@@ -10,21 +10,22 @@ import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Switch
-import androidx.annotation.IdRes
 import androidx.appcompat.widget.*
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.InflationDelegate
 import xyz.aprildown.theme.tint.decorate
-import xyz.aprildown.theme.tint.decorateBorderlessButton
-import xyz.aprildown.theme.tint.decorateDialogButton
-import xyz.aprildown.theme.tint.decorateNormalButton
 import xyz.aprildown.theme.utils.resId
 import xyz.aprildown.theme.views.ThemeActionMenuItemView
 import xyz.aprildown.theme.views.ThemeDrawerLayout
 import xyz.aprildown.theme.views.ThemeToolbar
+import xyz.aprildown.theme.views.material.*
 
 internal class InflationInterceptor(
     private val delegates: Array<out InflationDelegate>
@@ -51,29 +52,21 @@ internal class InflationInterceptor(
             view = delegate.createView(context, attrs, name, viewId)
             if (view != null) return view
         }
-        view = name.viewForName(context, attrs, viewId)
+        view = name.viewForName(context, attrs)
         return view
     }
 
     private fun String.viewForName(
         context: Context,
-        attrs: AttributeSet?,
-        @IdRes viewId: Int
+        attrs: AttributeSet?
     ): View? {
         return when (this) {
             "TextView", "$APPCOMPAT_WIDGET.AppCompatTextView" ->
                 AppCompatTextView(context, attrs).decorate(attrs)
             "ImageView", "$APPCOMPAT_WIDGET.AppCompatImageView" ->
                 AppCompatImageView(context, attrs).decorate(attrs)
-            "Button", "$APPCOMPAT_WIDGET.AppCompatButton" ->
-                AppCompatButton(context, attrs).apply {
-                    if (viewId == android.R.id.button1 ||
-                        viewId == android.R.id.button2 ||
-                        viewId == android.R.id.button3
-                    ) decorateDialogButton()
-                    else if (isBorderlessButton(context, attrs)) decorateBorderlessButton()
-                    else decorateNormalButton(attrs)
-                }
+            "Button", "$GOOGLE_MATERIAL.button.MaterialButton", "$APPCOMPAT_WIDGET.AppCompatButton" ->
+                MaterialButton(context, attrs).decorate(attrs)
             "EditText", "$APPCOMPAT_WIDGET.AppCompatEditText" ->
                 AppCompatEditText(context, attrs).decorate(attrs)
             "Spinner", "$APPCOMPAT_WIDGET.AppCompatSpinner" ->
@@ -112,6 +105,26 @@ internal class InflationInterceptor(
                 ThemeDrawerLayout(context, attrs)
             "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
                 SwipeRefreshLayout(context, attrs).decorate()
+
+            "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
+                ThemeSnackBarContentLayout(context, attrs)
+            "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->
+                TextInputLayout(context, attrs).decorate()
+            "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
+                TextInputEditText(context, attrs).decorate()
+            "$GOOGLE_MATERIAL.tabs.TabLayout" ->
+                ThemeTabLayout(context, attrs)
+            "$GOOGLE_MATERIAL.navigation.NavigationView" ->
+                NavigationView(context, attrs).decorate()
+            "$GOOGLE_MATERIAL.bottomnavigation.BottomNavigationView" ->
+                ThemeBottomNavigationView(context, attrs)
+            "$GOOGLE_MATERIAL.floatingactionbutton.FloatingActionButton" ->
+                ThemeFloatingActionButton(context, attrs)
+            "$GOOGLE_MATERIAL.bottomappbar.BottomAppBar" ->
+                ThemeBottomAppBar(context, attrs)
+            "androidx.coordinatorlayout.widget.CoordinatorLayout" ->
+                ThemeCoordinatorLayout(context, attrs)
+
             else -> null
         }
     }
@@ -122,19 +135,7 @@ internal class InflationInterceptor(
         private const val APPCOMPAT_WIDGET = "androidx.appcompat.widget"
         private const val APPCOMPAT_VIEW = "androidx.appcompat.view"
 
-        private fun isBorderlessButton(
-            context: Context?,
-            attrs: AttributeSet?
-        ): Boolean {
-            if (context == null || attrs == null) {
-                return false
-            }
-            val backgroundRes = context.resId(attrs, android.R.attr.background)
-            if (backgroundRes == 0) {
-                return false
-            }
-            val resName = context.resources.getResourceEntryName(backgroundRes)
-            return resName.endsWith("btn_borderless_material")
-        }
+        private const val GOOGLE_MATERIAL = "com.google.android.material"
+
     }
 }

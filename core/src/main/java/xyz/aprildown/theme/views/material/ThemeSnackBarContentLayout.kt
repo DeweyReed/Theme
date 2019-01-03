@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package xyz.aprildown.theme.material.views
+package xyz.aprildown.theme.views.material
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.SnackbarContentLayout
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.theme.material.tint.decorateTextButton
+import xyz.aprildown.theme.tint.decorateTextButton
 
 @SuppressLint("RestrictedApi")
 internal class ThemeSnackBarContentLayout(

@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.material.views
+package xyz.aprildown.theme.views.material
 
 import android.content.Context
 import android.util.AttributeSet

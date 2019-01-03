@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.material.views
+package xyz.aprildown.theme.views.material
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -8,9 +8,9 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.material.utils.tint
 import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.utils.colorForAttrName
+import xyz.aprildown.theme.utils.tint
 
 internal class ThemeBottomAppBar(
     context: Context,

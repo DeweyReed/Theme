@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.material.tint
+package xyz.aprildown.theme.tint
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -11,11 +11,11 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
-import xyz.aprildown.theme.material.R
-import xyz.aprildown.theme.material.utils.color
 import xyz.aprildown.theme.utils.ColorUtils
+import xyz.aprildown.theme.utils.color
 import xyz.aprildown.theme.utils.colorForAttrName
 import com.google.android.material.R as MaterialR
 
@@ -50,6 +50,7 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
     }
 }
 
+@SuppressLint("PrivateResource")
 @Suppress("SpellCheckingInspection")
 internal fun MaterialButton.decorateNormalButton(backgroundTintName: String) {
     val theme = Theme.get()
