@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package xyz.aprildown.theme.tint
 
 import android.annotation.SuppressLint
@@ -10,6 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.R
@@ -52,7 +55,6 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
 }
 
 @SuppressLint("PrivateResource")
-@Suppress("SpellCheckingInspection")
 internal fun MaterialButton.decorateNormalButton(backgroundTintName: String) {
     val theme = Theme.get()
     theme.colorForAttrName(backgroundTintName, theme.colorAccent)?.let {
@@ -70,7 +72,6 @@ internal fun MaterialButton.decorateNormalButton(backgroundTintName: String) {
     }
 }
 
-@Suppress("SpellCheckingInspection")
 @SuppressLint("PrivateResource")
 internal fun MaterialButton.decorateTextButton(textColorName: String) {
     val theme = Theme.get()
@@ -165,4 +166,70 @@ internal fun NavigationView.decorate() = apply {
         ColorDrawable(selectedItemBgColor)
     )
     itemBackground = bgDrawable
+}
+
+@SuppressLint("PrivateResource")
+internal fun TabLayout.decorate(attrs: AttributeSet?) = apply {
+    val theme = Theme.get()
+    val accentColor = theme.colorAccent
+
+    val style = attrs?.styleAttribute ?: 0
+    if (
+        style == MaterialR.style.Widget_MaterialComponents_TabLayout ||
+        style == 0
+    ) {
+        setSelectedTabIndicatorColor(accentColor)
+
+        // mtrl_tabs_icon_color_selector.xml
+        val newIconCsl = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_selected),
+                intArrayOf()
+            ),
+            intArrayOf(
+                accentColor,
+                Color.parseColor("#99000000")
+            )
+        )
+        tabIconTint = newIconCsl
+        tabTextColors = newIconCsl
+
+        // mtrl_tabs_ripple_color.xml
+        val unselectedColor = Color.parseColor("#000000")
+        val newRippleCsl = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_pressed, android.R.attr.state_selected),
+                intArrayOf(
+                    android.R.attr.state_focused,
+                    android.R.attr.state_hovered,
+                    android.R.attr.state_selected
+                ),
+                intArrayOf(android.R.attr.state_focused, android.R.attr.state_selected),
+                intArrayOf(android.R.attr.state_hovered, android.R.attr.state_selected),
+                intArrayOf(android.R.attr.state_selected),
+
+                intArrayOf(android.R.attr.state_pressed),
+                intArrayOf(android.R.attr.state_focused, android.R.attr.state_hovered),
+                intArrayOf(android.R.attr.state_focused),
+                intArrayOf(android.R.attr.state_hovered),
+                intArrayOf()
+            ),
+            intArrayOf(
+                ColorUtils.adjustAlpha(accentColor, 0.08f),
+                ColorUtils.adjustAlpha(accentColor, 0.16f),
+                ColorUtils.adjustAlpha(accentColor, 0.12f),
+                ColorUtils.adjustAlpha(accentColor, 0.04f),
+                ColorUtils.adjustAlpha(accentColor, 0.00f),
+
+                ColorUtils.adjustAlpha(unselectedColor, 0.08f),
+                ColorUtils.adjustAlpha(unselectedColor, 0.16f),
+                ColorUtils.adjustAlpha(unselectedColor, 0.12f),
+                ColorUtils.adjustAlpha(unselectedColor, 0.04f),
+                ColorUtils.adjustAlpha(unselectedColor, 0.00f)
+            )
+        )
+        tabRippleColor = newRippleCsl
+    } else if (style == MaterialR.style.Widget_MaterialComponents_TabLayout_Colored) {
+        setBackgroundColor(accentColor)
+    }
 }

@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.InflationDelegate
@@ -113,7 +114,7 @@ internal class InflationInterceptor(
             "$GOOGLE_MATERIAL.textfield.TextInputEditText" ->
                 TextInputEditText(context, attrs).decorate(attrs)
             "$GOOGLE_MATERIAL.tabs.TabLayout" ->
-                ThemeTabLayout(context, attrs)
+                TabLayout(context, attrs).decorate(attrs)
             "$GOOGLE_MATERIAL.navigation.NavigationView" ->
                 NavigationView(context, attrs).decorate()
             "$GOOGLE_MATERIAL.bottomnavigation.BottomNavigationView" ->
