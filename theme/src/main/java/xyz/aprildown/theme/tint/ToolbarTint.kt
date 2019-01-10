@@ -7,7 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
 import xyz.aprildown.theme.utils.tint
 
-class ToolbarTint private constructor() {
+internal class ToolbarTint private constructor() {
 
     init {
         throw IllegalStateException()

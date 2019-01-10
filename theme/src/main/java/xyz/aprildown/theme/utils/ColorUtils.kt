@@ -23,7 +23,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.core.graphics.ColorUtils as AndroidColorUtils
 
-class ColorUtils private constructor() {
+internal class ColorUtils private constructor() {
 
     init {
         throw AssertionError("no instances")

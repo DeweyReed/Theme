@@ -26,7 +26,7 @@ internal fun Activity.refreshStatusBar(@ColorInt colorStatusBar: Int, lightMode:
 }
 
 @CheckResult
-fun Theme.colorForAttrName(
+internal fun Theme.colorForAttrName(
     name: String,
     fallback: Int? = null
 ): Int? {

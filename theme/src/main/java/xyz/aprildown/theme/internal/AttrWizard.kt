@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import xyz.aprildown.theme.utils.safeResourceName
 
-class AttrWizard(
+internal class AttrWizard(
     private val context: Context,
     private val attrs: AttributeSet?
 ) {
