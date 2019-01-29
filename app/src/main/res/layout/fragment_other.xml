@@ -34,6 +34,19 @@
                 android:layout_height="wrap_content"
                 app:menu="@menu/common_menu" />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="16dp"
+                app:cardElevation="4dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="?colorPrimary"
+                app:cardElevation="4dp" />
+
             <Button
                 android:id="@+id/btnShowDialog"
                 android:layout_width="match_parent"

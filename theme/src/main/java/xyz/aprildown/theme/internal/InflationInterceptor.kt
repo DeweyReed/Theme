@@ -11,11 +11,13 @@ import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Switch
 import androidx.appcompat.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
@@ -107,6 +109,11 @@ internal class InflationInterceptor(
             "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
                 SwipeRefreshLayout(context, attrs).decorate()
 
+            "androidx.cardview.widget.CardView" ->
+                CardView(context, attrs).decorate(attrs)
+
+            "$GOOGLE_MATERIAL.card.MaterialCardView" ->
+                MaterialCardView(context, attrs).decorate(attrs)
             "$GOOGLE_MATERIAL.snackbar.SnackbarContentLayout" ->
                 ThemeSnackBarContentLayout(context, attrs)
             "$GOOGLE_MATERIAL.textfield.TextInputLayout" ->

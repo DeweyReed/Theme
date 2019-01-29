@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
@@ -113,6 +114,14 @@ internal fun MaterialButton.decorateTextButton(textColorName: String) {
                 it
             )
         )
+    }
+}
+
+internal fun CardView.decorate(attrs: AttributeSet?) = apply {
+    val theme = Theme.get()
+    val wizard = AttrWizard(context, attrs)
+    theme.colorForAttrName(wizard.getRawValue(R.attr.cardBackgroundColor))?.let {
+        setCardBackgroundColor(it)
     }
 }
 
