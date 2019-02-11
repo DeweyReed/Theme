@@ -4,6 +4,7 @@ package xyz.aprildown.theme.tint
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
@@ -182,11 +183,18 @@ internal fun TabLayout.decorate(attrs: AttributeSet?) = apply {
     val theme = Theme.get()
     val accentColor = theme.colorAccent
 
-    val style = attrs?.styleAttribute ?: 0
-    if (
-        style == MaterialR.style.Widget_MaterialComponents_TabLayout ||
-        style == 0
-    ) {
+    var style = attrs?.styleAttribute ?: 0
+
+    // TabLayout has different default style in the day mode and night mode.
+    style = if (style == 0 &&
+        context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
+        Configuration.UI_MODE_NIGHT_YES
+    )
+        MaterialR.style.Widget_MaterialComponents_TabLayout_Colored
+    else MaterialR.style.Widget_MaterialComponents_TabLayout
+
+
+    if (style == MaterialR.style.Widget_MaterialComponents_TabLayout) {
         setSelectedTabIndicatorColor(accentColor)
 
         // mtrl_tabs_icon_color_selector.xml
