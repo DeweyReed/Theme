@@ -1,15 +1,10 @@
 package xyz.aprildown.theme.tint
 
 import android.util.AttributeSet
-import android.widget.ListView
 import android.widget.ProgressBar
-import android.widget.ScrollView
 import android.widget.Switch
 import androidx.appcompat.widget.*
-import androidx.core.widget.NestedScrollView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.ViewPager
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.internal.AttrWizard
@@ -130,25 +125,25 @@ internal fun ProgressBar.decorate() = apply {
     setTint(Theme.get().colorAccent)
 }
 
-internal fun ListView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
-}
-
-internal fun ScrollView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
-}
-
-internal fun NestedScrollView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
-}
-
-internal fun RecyclerView.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
-}
-
-internal fun ViewPager.decorate() = apply {
-    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
-}
+//internal fun ListView.decorate() = apply {
+//    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+//}
+//
+//internal fun ScrollView.decorate() = apply {
+//    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+//}
+//
+//internal fun NestedScrollView.decorate() = apply {
+//    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+//}
+//
+//internal fun RecyclerView.decorate() = apply {
+//    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+//}
+//
+//internal fun ViewPager.decorate() = apply {
+//    EdgeEffectTint.setEdgeGlowColor(this, Theme.get().colorAccent)
+//}
 
 internal fun SwipeRefreshLayout.decorate() = apply {
     setColorSchemeColors(Theme.get().colorAccent)

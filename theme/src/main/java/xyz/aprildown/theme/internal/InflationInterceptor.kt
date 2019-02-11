@@ -6,16 +6,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ListView
 import android.widget.ProgressBar
-import android.widget.ScrollView
 import android.widget.Switch
 import androidx.appcompat.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.widget.NestedScrollView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
@@ -94,16 +89,16 @@ internal class InflationInterceptor(
             "$APPCOMPAT_WIDGET.SwitchCompat" ->
                 SwitchCompat(context, attrs).decorate(attrs)
 
-            "ListView" ->
-                ListView(context, attrs).decorate()
-            "ScrollView" ->
-                ScrollView(context, attrs).decorate()
-            "$APPCOMPAT_WIDGET.RecyclerView" ->
-                RecyclerView(context, attrs).decorate()
-            "$ANDROIDX_WIDGET.NestedScrollView" ->
-                NestedScrollView(context, attrs).decorate()
-            "androidx.viewpager.widget.ViewPager" ->
-                ViewPager(context, attrs).decorate()
+//            "ListView" ->
+//                ListView(context, attrs).decorate()
+//            "ScrollView" ->
+//                ScrollView(context, attrs).decorate()
+//            "$APPCOMPAT_WIDGET.RecyclerView" ->
+//                RecyclerView(context, attrs).decorate()
+//            "$ANDROIDX_WIDGET.NestedScrollView" ->
+//                NestedScrollView(context, attrs).decorate()
+//            "androidx.viewpager.widget.ViewPager" ->
+//                ViewPager(context, attrs).decorate()
             "androidx.drawerlayout.widget.DrawerLayout" ->
                 ThemeDrawerLayout(context, attrs)
             "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" ->
@@ -139,7 +134,7 @@ internal class InflationInterceptor(
 
     companion object {
 
-        private const val ANDROIDX_WIDGET = "androidx.core.widget"
+        //        private const val ANDROIDX_WIDGET = "androidx.core.widget"
         private const val APPCOMPAT_WIDGET = "androidx.appcompat.widget"
         private const val APPCOMPAT_VIEW = "androidx.appcompat.view"
 
