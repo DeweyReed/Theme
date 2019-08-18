@@ -1,7 +1,7 @@
 ext {
     versions = [
-            android_gradle           : '3.3.2',
-            kotlin                   : '1.3.30',
+            android_gradle           : '3.4.2',
+            kotlin                   : '1.3.41',
 
             compile_sdk              : 28,
             min_sdk                  : 16,
