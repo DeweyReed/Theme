@@ -32,12 +32,8 @@ dependencies {
     implementation libs.material
 
     debugImplementation libs.leak_cannary
-    debugImplementation libs.leak_cannary_fragment
-    releaseImplementation libs.leak_cannary_no_op
 
     // We need its complete material color palette
-    implementation "com.mikepenz:materialize:1.2.0"
+    implementation libs.materialize
 
-    implementation libs.kotlin_anko_common
-    implementation libs.kotlin_anko_design
 }
