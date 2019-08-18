@@ -43,8 +43,9 @@ internal fun Theme.colorForAttrName(
         "?attr/colorPrimaryDark", "?android:attr/colorPrimaryDark" -> colorPrimaryDark
         "?attr/colorAccent", "?android:attr/colorAccent" -> colorAccent
 
-        "?android:attr/statusBarColor" -> colorStatusBar
-        "?android:attr/navigationBarColor" -> colorNavigationBar
+        // Why use these values in XML files?
+        // "?android:attr/statusBarColor" -> colorStatusBar
+        // "?android:attr/navigationBarColor" -> colorNavigationBar
 
         else -> fallback ?: attribute(name.substring(1))
     }
