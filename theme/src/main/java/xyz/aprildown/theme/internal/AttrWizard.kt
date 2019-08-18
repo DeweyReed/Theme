@@ -10,6 +10,10 @@ internal class AttrWizard(
     private val attrs: AttributeSet?
 ) {
 
+    /**
+     * @param attrId android.R.attr.textColor
+     * @return "?attr/colorAccent"
+     */
     fun getRawValue(@AttrRes attrId: Int): String {
         if (attrs == null || attrId == 0) {
             return ""

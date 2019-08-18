@@ -4,7 +4,6 @@ import android.app.Activity
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.drawerlayout.widget.DrawerLayout
 import xyz.aprildown.theme.Theme
@@ -25,7 +24,10 @@ internal fun Activity.refreshStatusBar(@ColorInt colorStatusBar: Int, lightMode:
     setLightStatusBarCompat(lightMode)
 }
 
-@CheckResult
+/**
+ * @param name ?attr/colorAccent"
+ * @return Theme customized color or null
+ */
 internal fun Theme.colorForAttrName(
     name: String,
     fallback: Int? = null
