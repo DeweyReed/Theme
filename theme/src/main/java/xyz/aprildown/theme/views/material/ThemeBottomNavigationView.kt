@@ -14,7 +14,7 @@ import xyz.aprildown.theme.utils.ColorUtils
 import xyz.aprildown.theme.utils.color
 
 internal class ThemeBottomNavigationView(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet? = null
 ) : BottomNavigationView(context, attrs) {
 

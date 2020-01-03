@@ -3,12 +3,16 @@
 package xyz.aprildown.theme
 
 import android.content.Context
-import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import xyz.aprildown.theme.internal.*
+import xyz.aprildown.theme.internal.KEY_ACCENT_COLOR
+import xyz.aprildown.theme.internal.KEY_IS_DARK
+import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
+import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
+import xyz.aprildown.theme.internal.KEY_PRIMARY_COLOR
+import xyz.aprildown.theme.internal.KEY_PRIMARY_DARK_COLOR
+import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
 import xyz.aprildown.theme.utils.ColorUtils
-import xyz.aprildown.theme.utils.attrKey
 import xyz.aprildown.theme.utils.color
 import xyz.aprildown.theme.utils.getThemePrefs
 
@@ -99,14 +103,6 @@ class ThemeEditor(private val context: Context) {
         val color = ColorUtils.darker(colorPrimary)
         colorPrimaryDark = color
         colorStatusBar = color
-    }
-
-    fun setAttribute(@AttrRes attrId: Int, @ColorInt color: Int) = apply {
-        editor.putInt(context.attrKey(attrId), color)
-    }
-
-    fun setAttributeRes(@AttrRes attrId: Int, @ColorRes colorRes: Int) = apply {
-        setAttribute(attrId, context.color(colorRes))
     }
 
     fun save(commit: Boolean = false) {

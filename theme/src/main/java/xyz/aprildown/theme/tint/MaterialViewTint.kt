@@ -58,20 +58,6 @@ internal fun MaterialButton.decorate(attrs: AttributeSet?) = apply {
 
 @SuppressLint("PrivateResource")
 internal fun MaterialButton.decorateNormalButton(backgroundTintName: String) {
-    val theme = Theme.get()
-    theme.colorForAttrName(backgroundTintName, theme.colorAccent)?.let {
-        // mtrl_btn_bg_color_selector.xml
-        backgroundTintList = ColorStateList(
-            arrayOf(
-                intArrayOf(android.R.attr.state_enabled),
-                intArrayOf()
-            ),
-            intArrayOf(
-                it,
-                context.color(R.color.mtrl_btn_bg_color_disabled)
-            )
-        )
-    }
 }
 
 @SuppressLint("PrivateResource")
