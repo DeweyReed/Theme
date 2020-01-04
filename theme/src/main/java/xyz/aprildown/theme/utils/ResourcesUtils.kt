@@ -4,16 +4,38 @@ package xyz.aprildown.theme.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
-import androidx.annotation.*
+import androidx.annotation.AttrRes
+import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import xyz.aprildown.theme.BuildConfig
+import xyz.aprildown.theme.internal.PREFS_NAME
+
+private fun Context.safeContext(): Context =
+    takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !isDeviceProtectedStorage }?.let {
+        ContextCompat.createDeviceProtectedStorageContext(it) ?: it
+    } ?: this
+
+internal fun Context.getThemePrefs(): SharedPreferences =
+    safeContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+@ColorInt
+internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
+    return if (contains(key)) getInt(key, 0) else or.invoke()
+}
 
 @ColorInt
 internal fun Context.color(@ColorRes color: Int): Int {
@@ -25,12 +47,10 @@ internal fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
 }
 
 @ColorInt
-internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    val a = theme.obtainStyledAttributes(intArrayOf(attr))
-    return try {
-        a.getColor(0, fallback)
-    } catch (ignored: Throwable) {
-        fallback
+fun Context.themeColor(@AttrRes attrRes: Int): Int {
+    val a = obtainStyledAttributes(null, intArrayOf(attrRes))
+    try {
+        return a.getColor(0, Color.RED)
     } finally {
         a.recycle()
     }
@@ -38,19 +58,19 @@ internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0):
 
 internal val Context.textColorPrimary: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorPrimary)
+    get() = themeColor(android.R.attr.textColorPrimary)
 
 internal val Context.textColorPrimaryInverse: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorPrimaryInverse)
+    get() = themeColor(android.R.attr.textColorPrimaryInverse)
 
 internal val Context.textColorSecondary: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorSecondary)
+    get() = themeColor(android.R.attr.textColorSecondary)
 
 internal val Context.textColorSecondaryInverse: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorSecondaryInverse)
+    get() = themeColor(android.R.attr.textColorSecondaryInverse)
 
 @SuppressLint("Recycle")
 @IdRes

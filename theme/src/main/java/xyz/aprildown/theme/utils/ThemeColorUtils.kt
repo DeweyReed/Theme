@@ -23,8 +23,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.core.graphics.ColorUtils as AndroidColorUtils
 
-internal object ColorUtils {
-
+internal object ThemeColorUtils {
 
     /**
      * Darkens a color by a given factor.
@@ -49,28 +48,28 @@ internal object ColorUtils {
         )
     }
 
-//        /**
-//         * Lightens a color by a given factor.
-//         *
-//         * @param color The color to lighten
-//         * @param factor The factor to lighten the color. 0 will make the color unchanged. 1 will make the color white.
-//         * @return lighter version of the specified color.
-//         */
-//        @JvmStatic
-//        @JvmOverloads
-//        @ColorInt
-//        fun lighter(
-//            @ColorInt color: Int, @FloatRange(
-//                from = 0.0,
-//                to = 1.0
-//            ) factor: Float = 0.15f
-//        ): Int {
-//            val alpha = Color.alpha(color)
-//            val red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255).toInt()
-//            val green = ((Color.green(color) * (1 - factor) / 255 + factor) * 255).toInt()
-//            val blue = ((Color.blue(color) * (1 - factor) / 255 + factor) * 255).toInt()
-//            return Color.argb(alpha, red, green, blue)
-//        }
+    /**
+     * Lightens a color by a given factor.
+     *
+     * @param color The color to lighten
+     * @param factor The factor to lighten the color. 0 will make the color unchanged. 1 will make the color white.
+     * @return lighter version of the specified color.
+     */
+    @JvmStatic
+    @JvmOverloads
+    @ColorInt
+    fun lighter(
+        @ColorInt color: Int, @FloatRange(
+            from = 0.0,
+            to = 1.0
+        ) factor: Float = 0.15f
+    ): Int {
+        val alpha = Color.alpha(color)
+        val red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255).toInt()
+        val green = ((Color.green(color) * (1 - factor) / 255 + factor) * 255).toInt()
+        val blue = ((Color.blue(color) * (1 - factor) / 255 + factor) * 255).toInt()
+        return Color.argb(alpha, red, green, blue)
+    }
 
     /**
      * Returns `true` if the luminance of the color is less than or equal to 0.5
