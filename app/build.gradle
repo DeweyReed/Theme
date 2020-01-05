@@ -22,7 +22,7 @@ android {
         }
     }
     lintOptions {
-        disable 'HardcodedText', 'GoogleAppIndexingWarning'
+        disable 'HardcodedText', 'GoogleAppIndexingWarning', 'ContentDescription'
     }
 }
 
@@ -41,5 +41,7 @@ dependencies {
     implementation libs.androidx_navigation_ui
 
     debugImplementation libs.leak_cannary
+
+    implementation libs.fast_adapter
 
 }

@@ -16,7 +16,7 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
             R.styleable.Theme_TextView,
             android.R.attr.textViewStyle
         ) { textView, helper ->
-            helper.findThemeColor(R.styleable.Theme_TextView_android_textColor) {
+            helper.findThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
                 textView.setTextColor(it)
             }
         }

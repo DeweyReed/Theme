@@ -25,5 +25,7 @@ ext {
             androidx_navigation_ui      : 'androidx.navigation:navigation-ui-ktx:2.1.0',
 
             leak_cannary                : 'com.squareup.leakcanary:leakcanary-android:2.1',
+
+            fast_adapter                : 'com.mikepenz:fastadapter:4.1.2',
     ]
 }

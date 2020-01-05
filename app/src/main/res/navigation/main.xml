@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/textViewFragment">
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="xyz.aprildown.theme.app.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/textViewFragment"

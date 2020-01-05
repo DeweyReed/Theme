@@ -10,19 +10,22 @@ import androidx.core.content.withStyledAttributes
 import xyz.aprildown.theme.Theme
 
 internal class ThemeHelper(private val typedArray: TypedArray) {
-    fun findThemeColor(@StyleableRes index: Int, onGet: (Int) -> Unit) {
+    fun findThemeColor(@StyleableRes index: Int): Int? {
         val resourceId = typedArray.getResourceId(index, -1)
-        if (resourceId != -1) {
-            Theme.get().run {
+        return if (resourceId != -1) {
+            return Theme.get().run {
                 when (context.resources.getResourceEntryName(resourceId)) {
-                    "colorPrimary" -> onGet(colorPrimary)
-                    "colorPrimaryVariant" -> onGet(colorPrimaryVariant)
-                    "colorOnPrimary" -> onGet(colorOnPrimary)
-                    "colorSecondary" -> onGet(colorSecondary)
-                    "colorSecondaryVariant" -> onGet(colorSecondaryVariant)
-                    "colorOnSecondary" -> onGet(colorOnPrimary)
+                    "colorPrimary" -> colorPrimary
+                    "colorPrimaryVariant" -> colorPrimaryVariant
+                    "colorOnPrimary" -> colorOnPrimary
+                    "colorSecondary" -> colorSecondary
+                    "colorSecondaryVariant" -> colorSecondaryVariant
+                    "colorOnSecondary" -> colorOnPrimary
+                    else -> null
                 }
             }
+        } else {
+            null
         }
     }
 }
