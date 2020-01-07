@@ -128,7 +128,7 @@ class ThemeEditor(private val context: Context) {
 
     fun lighter(@ColorInt color: Int): Int = ThemeColorUtils.lighter(color)
 
-    fun calculateOnColor(@ColorInt color: Int) = if (ThemeColorUtils.isLightColor(color)) {
+    fun on(@ColorInt color: Int): Int = if (ThemeColorUtils.isLightColor(color)) {
         Color.BLACK
     } else {
         Color.WHITE

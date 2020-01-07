@@ -33,6 +33,7 @@ dependencies {
     implementation libs.kotlin_stdlib_jdk7
 
     implementation libs.androidx_appcompat
+    implementation libs.androidx_preference
     implementation libs.androidx_constraintlayout
 
     implementation libs.material
@@ -43,5 +44,6 @@ dependencies {
     debugImplementation libs.leak_cannary
 
     implementation libs.fast_adapter
+    implementation libs.materialize
 
 }

@@ -14,8 +14,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="textColor: #FFB11B"
-        android:textColor="#FFB11B" />
+        android:text="textColor: #5C007A"
+        android:textColor="#5C007A" />
 
     <TextView
         android:layout_width="match_parent"

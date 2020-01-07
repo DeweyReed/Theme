@@ -19,25 +19,20 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?selectableItemBackgroundBorderless"
-                app:srcCompat="@drawable/ic_on"
-                app:tint="@android:color/holo_green_light" />
-
-            <ImageButton
+                android:id="@+id/btnMainPickTheme"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_palette"
-                app:tint="@android:color/holo_green_light" />
+                app:tint="@android:color/holo_green_dark" />
 
             <ImageButton
+                android:id="@+id/btnMainDayNight"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_day"
-                app:tint="@android:color/holo_green_light" />
+                app:tint="@android:color/holo_green_dark" />
 
         </LinearLayout>
 

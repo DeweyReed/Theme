@@ -12,10 +12,10 @@ class App : Application() {
         Theme.init(ContextThemeWrapper(this, R.style.AppTheme)) {
             colorPrimaryRes = R.color.colorPrimary
             colorPrimaryVariantRes = R.color.colorPrimaryVariant
-            colorOnPrimary = calculateOnColor(colorPrimary)
+            colorOnPrimary = on(colorPrimary)
             colorSecondaryRes = R.color.colorSecondary
             colorSecondaryVariantRes = R.color.colorSecondaryVariant
-            colorOnSecondary = calculateOnColor(colorSecondary)
+            colorOnSecondary = on(colorSecondary)
         }
     }
 }
