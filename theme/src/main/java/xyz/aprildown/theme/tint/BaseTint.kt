@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.utils
+package xyz.aprildown.theme.tint
 
 import android.content.res.TypedArray
 import android.util.AttributeSet
@@ -8,6 +8,25 @@ import androidx.annotation.StyleRes
 import androidx.annotation.StyleableRes
 import androidx.core.content.withStyledAttributes
 import xyz.aprildown.theme.Theme
+
+internal abstract class BaseTint<T : View>(
+    private val attrs: IntArray,
+    @AttrRes private val defStyleAttr: Int = 0,
+    @StyleRes private val defStyleRes: Int = 0,
+    private val onTint: (view: T, helper: ThemeHelper) -> Unit
+) {
+
+    fun apply(view: T, set: AttributeSet?): T {
+        view.context.withStyledAttributes(set, attrs, defStyleAttr, defStyleRes) {
+            onTint.invoke(view, ThemeHelper(this))
+        }
+        return view
+    }
+}
+
+internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
+    return tint.apply(this, attrs)
+}
 
 internal class ThemeHelper(private val typedArray: TypedArray) {
     fun findThemeColor(@StyleableRes index: Int): Int? {
@@ -28,18 +47,4 @@ internal class ThemeHelper(private val typedArray: TypedArray) {
             null
         }
     }
-}
-
-internal fun <T : View> T.decorateWithTheme(
-    set: AttributeSet? = null,
-    attrs: IntArray,
-    @AttrRes defStyleAttr: Int = 0,
-    @StyleRes defStyleRes: Int = 0,
-    onGet: (T, ThemeHelper) -> Unit
-): T {
-    val context = context
-    context.withStyledAttributes(set, attrs, defStyleAttr, defStyleRes) {
-        onGet.invoke(this@decorateWithTheme, ThemeHelper(this))
-    }
-    return this
 }
