@@ -18,9 +18,9 @@ import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
 import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
 import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
 import xyz.aprildown.theme.tint.ToolbarTint
-import xyz.aprildown.theme.utils.ThemeColorUtils
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
+import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setLightNavigationBarCompat
 import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
@@ -140,7 +140,7 @@ class Theme private constructor(internal val context: Context) {
                     if (prefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
                         activity.window?.navigationBarColor = navColor
-                        activity.setLightNavigationBarCompat(ThemeColorUtils.isLightColor(navColor))
+                        activity.setLightNavigationBarCompat(navColor.isLightColor)
                     }
                 }
             }

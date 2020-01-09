@@ -1,4 +1,3 @@
-@file:Suppress("MemberVisibilityCanBePrivate", "unused")
 
 package xyz.aprildown.theme
 
@@ -15,9 +14,11 @@ import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
 import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
 import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
 import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
-import xyz.aprildown.theme.utils.ThemeColorUtils
 import xyz.aprildown.theme.utils.color
+import xyz.aprildown.theme.utils.darker
 import xyz.aprildown.theme.utils.getThemePrefs
+import xyz.aprildown.theme.utils.isLightColor
+import xyz.aprildown.theme.utils.lighter
 
 class ThemeEditor(private val context: Context) {
 
@@ -28,7 +29,7 @@ class ThemeEditor(private val context: Context) {
         set(value) {
             field = value
             editor.putInt(KEY_COLOR_PRIMARY, value)
-            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, ThemeColorUtils.isLightColor(value))
+            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, value.isLightColor)
         }
     @ColorRes
     var colorPrimaryRes = 0
@@ -124,11 +125,11 @@ class ThemeEditor(private val context: Context) {
             colorNavigationBar = context.color(value)
         }
 
-    fun darker(@ColorInt color: Int): Int = ThemeColorUtils.darker(color)
+    fun darker(@ColorInt color: Int): Int = color.darker()
 
-    fun lighter(@ColorInt color: Int): Int = ThemeColorUtils.lighter(color)
+    fun lighter(@ColorInt color: Int): Int = color.lighter()
 
-    fun on(@ColorInt color: Int): Int = if (ThemeColorUtils.isLightColor(color)) {
+    fun on(@ColorInt color: Int): Int = if (color.isLightColor) {
         Color.BLACK
     } else {
         Color.WHITE

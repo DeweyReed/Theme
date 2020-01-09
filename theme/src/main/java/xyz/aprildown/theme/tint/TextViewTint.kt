@@ -12,7 +12,7 @@ internal class TextViewTint : BaseTint<AppCompatTextView>(
     attrs = R.styleable.Theme_TextView,
     defStyleAttr = android.R.attr.textViewStyle,
     onTint = { view, helper ->
-        helper.findThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
+        helper.findThemeColor(R.styleable.Theme_TextView_android_textColor) {
             view.setTextColor(it)
         }
     }

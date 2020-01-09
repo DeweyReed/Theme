@@ -3,4 +3,12 @@
     <declare-styleable name="Theme_TextView">
         <attr name="android:textColor" />
     </declare-styleable>
+
+    <declare-styleable name="Theme_Button">
+        <attr name="android:textColor" />
+        <attr name="backgroundTint" />
+        <attr name="iconTint" />
+        <attr name="strokeColor" />
+        <attr name="rippleColor" />
+    </declare-styleable>
 </resources>

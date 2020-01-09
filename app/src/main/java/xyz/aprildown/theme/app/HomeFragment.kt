@@ -24,6 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(
                     when (position) {
                         0 -> R.id.textViewFragment
+                        1 -> R.id.buttonFragment
                         else -> throw IllegalStateException()
                     }
                 )
@@ -34,7 +35,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             itemAdapter.set(
                 listOf(
-                    "TextView"
+                    "TextView",
+                    "Button"
                 ).map { WidgetItem(it) }
             )
         }

@@ -17,4 +17,10 @@
         android:label="TextView"
         tools:layout="@layout/fragment_text_view" />
 
+    <fragment
+        android:id="@+id/buttonFragment"
+        android:name="xyz.aprildown.theme.app.ButtonFragment"
+        android:label="Button"
+        tools:layout="@layout/fragment_button" />
+
 </navigation>

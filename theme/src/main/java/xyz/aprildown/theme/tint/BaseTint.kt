@@ -29,22 +29,25 @@ internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
 }
 
 internal class ThemeHelper(private val typedArray: TypedArray) {
-    fun findThemeColor(@StyleableRes index: Int): Int? {
+
+    fun findThemeColor(
+        @StyleableRes index: Int,
+        fallback: ((resourceId: Int) -> Unit)? = null,
+        onGet: (color: Int) -> Unit
+    ) {
         val resourceId = typedArray.getResourceId(index, -1)
-        return if (resourceId != -1) {
-            return Theme.get().run {
+        if (resourceId != -1) {
+            Theme.get().run {
                 when (context.resources.getResourceEntryName(resourceId)) {
-                    "colorPrimary" -> colorPrimary
-                    "colorPrimaryVariant" -> colorPrimaryVariant
-                    "colorOnPrimary" -> colorOnPrimary
-                    "colorSecondary" -> colorSecondary
-                    "colorSecondaryVariant" -> colorSecondaryVariant
-                    "colorOnSecondary" -> colorOnPrimary
-                    else -> null
+                    "colorPrimary" -> onGet(colorPrimary)
+                    "colorPrimaryVariant" -> onGet(colorPrimaryVariant)
+                    "colorOnPrimary" -> onGet(colorOnPrimary)
+                    "colorSecondary" -> onGet(colorSecondary)
+                    "colorSecondaryVariant" -> onGet(colorSecondaryVariant)
+                    "colorOnSecondary" -> onGet(colorOnPrimary)
+                    else -> fallback?.invoke(resourceId)
                 }
             }
-        } else {
-            null
         }
     }
 }

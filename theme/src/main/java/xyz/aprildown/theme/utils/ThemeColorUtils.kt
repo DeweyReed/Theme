@@ -21,157 +21,56 @@ package xyz.aprildown.theme.utils
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
+import kotlin.math.roundToInt
 import androidx.core.graphics.ColorUtils as AndroidColorUtils
 
-internal object ThemeColorUtils {
+@ColorInt
+internal fun Int.darker(@FloatRange(from = 0.0, to = 1.0) factor: Float = 0.85f): Int {
+    return Color.argb(
+        Color.alpha(this), (Color.red(this) * factor).toInt().coerceAtLeast(0),
+        (Color.green(this) * factor).toInt().coerceAtLeast(0),
+        (Color.blue(this) * factor).toInt().coerceAtLeast(0)
+    )
+}
 
-    /**
-     * Darkens a color by a given factor.
-     *
-     * @param color The color to darken
-     * @param factor The factor to darken the color.
-     * @return darker version of specified color.
-     */
-    @JvmStatic
-    @JvmOverloads
-    @ColorInt
-    fun darker(
-        @ColorInt color: Int, @FloatRange(
-            from = 0.0,
-            to = 1.0
-        ) factor: Float = 0.85f
-    ): Int {
-        return Color.argb(
-            Color.alpha(color), Math.max((Color.red(color) * factor).toInt(), 0),
-            Math.max((Color.green(color) * factor).toInt(), 0),
-            Math.max((Color.blue(color) * factor).toInt(), 0)
-        )
-    }
+@ColorInt
+internal fun Int.lighter(@FloatRange(from = 0.0, to = 1.0) factor: Float = 0.15f): Int {
+    val alpha = Color.alpha(this)
+    val red = ((Color.red(this) * (1 - factor) / 255 + factor) * 255).toInt()
+    val green = ((Color.green(this) * (1 - factor) / 255 + factor) * 255).toInt()
+    val blue = ((Color.blue(this) * (1 - factor) / 255 + factor) * 255).toInt()
+    return Color.argb(alpha, red, green, blue)
+}
 
-    /**
-     * Lightens a color by a given factor.
-     *
-     * @param color The color to lighten
-     * @param factor The factor to lighten the color. 0 will make the color unchanged. 1 will make the color white.
-     * @return lighter version of the specified color.
-     */
-    @JvmStatic
-    @JvmOverloads
-    @ColorInt
-    fun lighter(
-        @ColorInt color: Int, @FloatRange(
-            from = 0.0,
-            to = 1.0
-        ) factor: Float = 0.15f
-    ): Int {
-        val alpha = Color.alpha(color)
-        val red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255).toInt()
-        val green = ((Color.green(color) * (1 - factor) / 255 + factor) * 255).toInt()
-        val blue = ((Color.blue(color) * (1 - factor) / 255 + factor) * 255).toInt()
-        return Color.argb(alpha, red, green, blue)
-    }
+internal val Int.isDarkColor: Boolean get() = this.isDarkColor(0.5)
 
-    /**
-     * Returns `true` if the luminance of the color is less than or equal to 0.5
-     *
-     * @param color The color to calculate the luminance.
-     * @return `true` if the color is dark
-     */
-    @JvmStatic
-    fun isDarkColor(@ColorInt color: Int): Boolean {
-        return isDarkColor(color, 0.5)
-    }
+internal fun Int.isDarkColor(@FloatRange(from = 0.0, to = 1.0) luminance: Double): Boolean {
+    return AndroidColorUtils.calculateLuminance(this) <= luminance
+}
 
-    /**
-     * Returns `true` if the luminance of the color is less than or equal to the luminance factor
-     *
-     * @param color The color to calculate the luminance.
-     * @param luminance Value from 0-1. 1 = white. 0 = black.
-     * @return `true` if the color is dark
-     */
-    @JvmStatic
-    fun isDarkColor(
-        @ColorInt color: Int, @FloatRange(
-            from = 0.0,
-            to = 1.0
-        ) luminance: Double
-    ): Boolean {
-        return AndroidColorUtils.calculateLuminance(color) <= luminance
-    }
+internal val Int.isLightColor: Boolean get() = this.isLightColor(0.5)
 
-    /**
-     * Returns `true` if the luminance of the color is greater than or equal to 0.5
-     *
-     * @param color The color to calculate the luminance.
-     * @return `true` if the color is light
-     */
-    @JvmStatic
-    fun isLightColor(@ColorInt color: Int): Boolean {
-        return isLightColor(color, 0.5)
-    }
+internal fun Int.isLightColor(@FloatRange(from = 0.0, to = 1.0) luminance: Double = 0.5): Boolean {
+    return AndroidColorUtils.calculateLuminance(this) >= luminance
+}
 
-    /**
-     * Returns `true` if the luminance of the color is less than or equal to the luminance factor
-     *
-     * @param color The color to calculate the luminance.
-     * @param luminance Value from 0-1. 1 = white. 0 = black.
-     * @return `true` if the color is light
-     */
-    @JvmStatic
-    fun isLightColor(
-        @ColorInt color: Int, @FloatRange(
-            from = 0.0,
-            to = 1.0
-        ) luminance: Double = 0.5
-    ): Boolean {
-        return AndroidColorUtils.calculateLuminance(color) >= luminance
-    }
+@ColorInt
+internal fun Int.adjustAlpha(@FloatRange(from = 0.0, to = 1.0) factor: Float): Int {
+    val alpha = (Color.alpha(this) * factor).roundToInt()
+    val red = Color.red(this)
+    val green = Color.green(this)
+    val blue = Color.blue(this)
+    return Color.argb(alpha, red, green, blue)
+}
 
-    /**
-     * Manipulate the alpha bytes of a color
-     *
-     * @param color The color to adjust the alpha on
-     * @param factor 0.0f - 1.0f
-     * @return The new color value
-     */
-    @JvmStatic
-    @ColorInt
-    fun adjustAlpha(
-        @ColorInt color: Int, @FloatRange(
-            from = 0.0,
-            to = 1.0
-        ) factor: Float
-    ): Int {
-        val alpha = Math.round(Color.alpha(color) * factor)
-        val red = Color.red(color)
-        val green = Color.green(color)
-        val blue = Color.blue(color)
-        return Color.argb(alpha, red, green, blue)
-    }
+@ColorInt
+internal fun Int.stripAlpha(): Int = Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
 
-    /**
-     * Remove alpha from a color
-     *
-     * @param color The color to modify
-     * @return The color without any transparency
-     */
-    @JvmStatic
-    @ColorInt
-    fun stripAlpha(@ColorInt color: Int): Int =
-        Color.rgb(Color.red(color), Color.green(color), Color.blue(color))
-
-    /**
-     * @param color The color to shift
-     * @param by 0.0f - 2.0f
-     * @return The color without any transparency
-     */
-    @JvmStatic
-    @ColorInt
-    fun shiftColor(@ColorInt color: Int, @FloatRange(from = 0.0, to = 2.0) by: Float): Int {
-        if (by == 1f) return color
-        val hsv = FloatArray(3)
-        Color.colorToHSV(color, hsv)
-        hsv[2] *= by // value component
-        return Color.HSVToColor(hsv)
-    }
+@ColorInt
+internal fun Int.shiftColor(@FloatRange(from = 0.0, to = 2.0) by: Float): Int {
+    if (by == 1f) return this
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[2] *= by // value component
+    return Color.HSVToColor(hsv)
 }
