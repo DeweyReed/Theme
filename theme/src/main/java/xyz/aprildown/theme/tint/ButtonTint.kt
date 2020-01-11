@@ -1,8 +1,10 @@
 package xyz.aprildown.theme.tint
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
@@ -28,15 +30,15 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     button.setTextColor(it)
                 }
             )
-            // helper.findThemeColor(
-            //     R.styleable.Theme_Button_backgroundTint,
-            //     fallback = { resourceId ->
-            //         withBackgroundTint(resourceId, view)
-            //     },
-            //     onGet = {
-            //         ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(it))
-            //     }
-            // )
+            helper.findThemeColor(
+                R.styleable.Theme_Button_backgroundTint,
+                fallback = { resourceId ->
+                    withBackgroundTint(resourceId, button)
+                },
+                onGet = {
+                    ViewCompat.setBackgroundTintList(button, ColorStateList.valueOf(it))
+                }
+            )
         }
     }
 )
@@ -98,4 +100,39 @@ private fun View.mtrl_text_btn_text_color_selector(): ColorStateList {
 }
 
 private fun withBackgroundTint(resourceId: Int, view: AppCompatButton) {
+    when (resourceId) {
+        R.color.mtrl_btn_bg_color_selector -> {
+            view.mtrl_btn_bg_color_selector()
+        }
+        R.color.mtrl_btn_text_btn_bg_color_selector -> {
+            view.mtrl_btn_text_btn_bg_color_selector()
+        }
+        else -> null
+    }?.let {
+        ViewCompat.setBackgroundTintList(view, it)
+    }
 }
+
+// R.color.mtrl_btn_bg_color_selector
+private fun View.mtrl_btn_bg_color_selector(): ColorStateList = ColorStateList(
+    arrayOf(
+        intArrayOf(android.R.attr.state_enabled),
+        intArrayOf()
+    ),
+    intArrayOf(
+        Theme.get().colorPrimary,
+        context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
+    )
+)
+
+// R.color.mtrl_btn_text_btn_bg_color_selector
+private fun View.mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateList(
+    arrayOf(
+        intArrayOf(android.R.attr.checked),
+        intArrayOf(-android.R.attr.checked)
+    ),
+    intArrayOf(
+        Theme.get().colorPrimary.adjustAlpha(0.08f),
+        Color.TRANSPARENT
+    )
+)
