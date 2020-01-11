@@ -18,6 +18,7 @@
 
 package xyz.aprildown.theme.utils
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
@@ -74,3 +75,5 @@ internal fun Int.shiftColor(@FloatRange(from = 0.0, to = 2.0) by: Float): Int {
     hsv[2] *= by // value component
     return Color.HSVToColor(hsv)
 }
+
+internal fun Int.toColorStateList(): ColorStateList = ColorStateList.valueOf(this)

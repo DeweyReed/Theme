@@ -10,6 +10,7 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
+import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * [MaterialButton]
@@ -36,7 +37,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     withBackgroundTint(resourceId, button)
                 },
                 onGet = {
-                    ViewCompat.setBackgroundTintList(button, ColorStateList.valueOf(it))
+                    ViewCompat.setBackgroundTintList(button, it.toColorStateList())
                 }
             )
             helper.findThemeColor(
@@ -45,7 +46,16 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     withIconTint(resourceId, button)
                 },
                 onGet = {
-                    button.iconTint = ColorStateList.valueOf(it)
+                    button.iconTint = it.toColorStateList()
+                }
+            )
+            helper.findThemeColor(
+                R.styleable.Theme_Button_strokeColor,
+                fallback = { resourceId ->
+                    withStrokeColor(resourceId, button)
+                },
+                onGet = {
+                    button.strokeColor = it.toColorStateList()
                 }
             )
         }
@@ -160,5 +170,28 @@ private fun View.mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorSt
     intArrayOf(
         Theme.get().colorPrimary.adjustAlpha(0.08f),
         Color.TRANSPARENT
+    )
+)
+
+private fun withStrokeColor(resourceId: Int, view: MaterialButton) {
+    when (resourceId) {
+        R.color.mtrl_btn_stroke_color_selector -> {
+            view.mtrl_btn_stroke_color_selector()
+        }
+        else -> null
+    }?.let {
+        view.strokeColor = it
+    }
+}
+
+// R.color.mtrl_btn_stroke_color_selector
+private fun View.mtrl_btn_stroke_color_selector(): ColorStateList = ColorStateList(
+    arrayOf(
+        intArrayOf(android.R.attr.checked),
+        intArrayOf(-android.R.attr.checked)
+    ),
+    intArrayOf(
+        Theme.get().colorPrimary,
+        context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
     )
 )
