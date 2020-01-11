@@ -39,11 +39,20 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     ViewCompat.setBackgroundTintList(button, ColorStateList.valueOf(it))
                 }
             )
+            helper.findThemeColor(
+                R.styleable.Theme_Button_iconTint,
+                fallback = { resourceId ->
+                    withIconTint(resourceId, button)
+                },
+                onGet = {
+                    button.iconTint = ColorStateList.valueOf(it)
+                }
+            )
         }
     }
 )
 
-private fun withTextColor(resourceId: Int, view: AppCompatButton) {
+private fun withTextColor(resourceId: Int, view: MaterialButton) {
     when (resourceId) {
         R.color.mtrl_btn_text_color_selector -> {
             view.mtrl_btn_text_color_selector()
@@ -54,6 +63,23 @@ private fun withTextColor(resourceId: Int, view: AppCompatButton) {
         else -> null
     }?.let {
         view.setTextColor(it)
+    }
+}
+
+/**
+ * Icon tint shares the same states with text colors.
+ */
+private fun withIconTint(resourceId: Int, view: MaterialButton) {
+    when (resourceId) {
+        R.color.mtrl_btn_text_color_selector -> {
+            view.mtrl_btn_text_color_selector()
+        }
+        R.color.mtrl_text_btn_text_color_selector -> {
+            view.mtrl_text_btn_text_color_selector()
+        }
+        else -> null
+    }?.let {
+        view.iconTint = it
     }
 }
 
@@ -99,7 +125,7 @@ private fun View.mtrl_text_btn_text_color_selector(): ColorStateList {
     )
 }
 
-private fun withBackgroundTint(resourceId: Int, view: AppCompatButton) {
+private fun withBackgroundTint(resourceId: Int, view: MaterialButton) {
     when (resourceId) {
         R.color.mtrl_btn_bg_color_selector -> {
             view.mtrl_btn_bg_color_selector()

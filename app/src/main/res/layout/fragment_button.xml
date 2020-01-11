@@ -12,14 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Plain"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="Disabled Plain"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Unelevated"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
         app:layout_wrapBefore="true" />
 
     <Button
@@ -35,7 +38,8 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="Disabled Unelevated"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -43,6 +47,7 @@
         android:layout_height="wrap_content"
         android:text="Outlined"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
         app:layout_wrapBefore="true" />
 
     <Button
@@ -51,7 +56,8 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="Disabled Outlined"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -59,6 +65,7 @@
         android:layout_height="wrap_content"
         android:text="Text"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
         app:layout_wrapBefore="true" />
 
     <Button
@@ -67,7 +74,8 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="Disabled Text"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
@@ -75,6 +83,7 @@
         android:layout_height="wrap_content"
         android:text="TextButton.Dialog"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
         app:layout_wrapBefore="true" />
 
     <Button
@@ -82,7 +91,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextButton.Dialog.Flush"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
