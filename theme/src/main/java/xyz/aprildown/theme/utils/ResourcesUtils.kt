@@ -17,9 +17,11 @@ import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import xyz.aprildown.theme.BuildConfig
 import xyz.aprildown.theme.internal.PREFS_NAME
@@ -36,6 +38,9 @@ internal fun Context.getThemePrefs(): SharedPreferences =
 internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
     return if (contains(key)) getInt(key, 0) else or.invoke()
 }
+
+internal fun Context.float(@DimenRes dimenRes: Int): Float =
+    ResourcesCompat.getFloat(resources, dimenRes)
 
 @ColorInt
 internal fun Context.color(@ColorRes color: Int): Int {

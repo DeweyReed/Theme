@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.float
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
@@ -56,6 +57,15 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                 },
                 onGet = {
                     button.strokeColor = it.toColorStateList()
+                }
+            )
+            helper.findThemeColor(
+                R.styleable.Theme_Button_rippleColor,
+                fallback = { resourceId ->
+                    withRippleColor(resourceId, button)
+                },
+                onGet = {
+                    button.rippleColor = it.toColorStateList()
                 }
             )
         }
@@ -195,3 +205,60 @@ private fun View.mtrl_btn_stroke_color_selector(): ColorStateList = ColorStateLi
         context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
     )
 )
+
+private fun withRippleColor(resourceId: Int, view: MaterialButton) {
+    when (resourceId) {
+        R.color.mtrl_btn_ripple_color -> {
+            view.mtrl_btn_ripple_color()
+        }
+        R.color.mtrl_btn_text_btn_ripple_color -> {
+            view.mtrl_btn_text_btn_ripple_color()
+        }
+        else -> null
+    }?.let {
+        view.rippleColor = it
+    }
+}
+
+// R.color.mtrl_btn_ripple_color
+private fun View.mtrl_btn_ripple_color(): ColorStateList {
+    val context = context
+    val color = Theme.get().colorOnPrimary
+    return ColorStateList(
+        arrayOf(
+            intArrayOf(android.R.attr.state_pressed),
+            intArrayOf(android.R.attr.state_focused, android.R.attr.state_hovered),
+            intArrayOf(android.R.attr.state_focused),
+            intArrayOf(android.R.attr.state_hovered),
+            intArrayOf()
+        ),
+        intArrayOf(
+            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_pressed_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_hovered_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_default_alpha))
+        )
+    )
+}
+
+// R.color.mtrl_btn_text_btn_ripple_color
+private fun View.mtrl_btn_text_btn_ripple_color(): ColorStateList {
+    val color = Theme.get().colorPrimary
+    return ColorStateList(
+        arrayOf(
+            intArrayOf(android.R.attr.state_pressed),
+            intArrayOf(android.R.attr.state_focused, android.R.attr.state_hovered),
+            intArrayOf(android.R.attr.state_focused),
+            intArrayOf(android.R.attr.state_hovered),
+            intArrayOf()
+        ),
+        intArrayOf(
+            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_pressed_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_hovered_alpha)),
+            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_default_alpha))
+        )
+    )
+}
