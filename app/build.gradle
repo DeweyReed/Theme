@@ -45,5 +45,6 @@ dependencies {
 
     implementation libs.fast_adapter
     implementation libs.materialize
+    implementation libs.flexbox
 
 }

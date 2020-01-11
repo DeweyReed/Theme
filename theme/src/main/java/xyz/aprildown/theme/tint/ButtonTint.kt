@@ -1,6 +1,7 @@
 package xyz.aprildown.theme.tint
 
 import android.content.res.ColorStateList
+import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.button.MaterialButton
 import xyz.aprildown.theme.R
@@ -15,37 +16,47 @@ import xyz.aprildown.theme.utils.themeColor
 internal class ButtonTint : BaseTint<AppCompatButton>(
     attrs = R.styleable.Theme_Button,
     defStyleAttr = R.attr.materialButtonStyle,
-    onTint = { view, helper ->
-        if (view is MaterialButton) {
+    onTint = { helper ->
+        val button = helper.view
+        if (button is MaterialButton) {
             helper.findThemeColor(
                 R.styleable.Theme_Button_android_textColor,
                 fallback = { resourceId ->
-                    val theme = Theme.get()
-                    when (resourceId) {
-                        R.color.mtrl_btn_text_color_selector -> {
-                            theme.mtrl_btn_text_color_selector()
-                        }
-                        R.color.mtrl_text_btn_text_color_selector -> {
-                            theme.mtrl_text_btn_text_color_selector()
-                        }
-                        else -> null
-                    }?.let {
-                        view.setTextColor(it)
-                    }
+                    withTextColor(resourceId, button)
                 },
                 onGet = {
-                    view.setTextColor(it)
+                    button.setTextColor(it)
                 }
             )
-            // helper.findThemeColor(R.styleable.Theme_Button_backgroundTint) {
-            //     ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(it))
-            // }
+            // helper.findThemeColor(
+            //     R.styleable.Theme_Button_backgroundTint,
+            //     fallback = { resourceId ->
+            //         withBackgroundTint(resourceId, view)
+            //     },
+            //     onGet = {
+            //         ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(it))
+            //     }
+            // )
         }
     }
 )
 
+private fun withTextColor(resourceId: Int, view: AppCompatButton) {
+    when (resourceId) {
+        R.color.mtrl_btn_text_color_selector -> {
+            view.mtrl_btn_text_color_selector()
+        }
+        R.color.mtrl_text_btn_text_color_selector -> {
+            view.mtrl_text_btn_text_color_selector()
+        }
+        else -> null
+    }?.let {
+        view.setTextColor(it)
+    }
+}
+
 // R.color.mtrl_btn_text_color_selector
-private fun Theme.mtrl_btn_text_color_selector(): ColorStateList = ColorStateList(
+private fun View.mtrl_btn_text_color_selector(): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_enabled),
         intArrayOf()
@@ -57,8 +68,10 @@ private fun Theme.mtrl_btn_text_color_selector(): ColorStateList = ColorStateLis
 )
 
 // R.color.mtrl_text_btn_text_color_selector
-private fun Theme.mtrl_text_btn_text_color_selector(): ColorStateList {
-    val colorPrimary = colorPrimary
+private fun View.mtrl_text_btn_text_color_selector(): ColorStateList {
+    val theme = Theme.get()
+    val colorPrimary = theme.colorPrimary
+    // We need to use the view's context to get the correct color.
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(
@@ -82,4 +95,7 @@ private fun Theme.mtrl_text_btn_text_color_selector(): ColorStateList {
             colorOnSurface.adjustAlpha(0.38f)
         )
     )
+}
+
+private fun withBackgroundTint(resourceId: Int, view: AppCompatButton) {
 }

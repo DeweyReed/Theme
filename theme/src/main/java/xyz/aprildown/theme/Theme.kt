@@ -26,7 +26,7 @@ import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
 import xyz.aprildown.theme.utils.themeColor
 
-class Theme private constructor(internal val context: Context) {
+class Theme private constructor(private val context: Context) {
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 

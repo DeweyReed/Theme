@@ -13,12 +13,12 @@ internal abstract class BaseTint<T : View>(
     private val attrs: IntArray,
     @AttrRes private val defStyleAttr: Int = 0,
     @StyleRes private val defStyleRes: Int = 0,
-    private val onTint: (view: T, helper: ThemeHelper) -> Unit
+    private val onTint: (helper: ThemeHelper<T>) -> Unit
 ) {
 
     fun apply(view: T, set: AttributeSet?): T {
         view.context.withStyledAttributes(set, attrs, defStyleAttr, defStyleRes) {
-            onTint.invoke(view, ThemeHelper(this))
+            onTint.invoke(ThemeHelper(view, this))
         }
         return view
     }
@@ -28,7 +28,7 @@ internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
     return tint.apply(this, attrs)
 }
 
-internal class ThemeHelper(private val typedArray: TypedArray) {
+internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
     fun findThemeColor(
         @StyleableRes index: Int,
@@ -38,7 +38,7 @@ internal class ThemeHelper(private val typedArray: TypedArray) {
         val resourceId = typedArray.getResourceId(index, -1)
         if (resourceId != -1) {
             Theme.get().run {
-                when (context.resources.getResourceEntryName(resourceId)) {
+                when (view.resources.getResourceEntryName(resourceId)) {
                     "colorPrimary" -> onGet(colorPrimary)
                     "colorPrimaryVariant" -> onGet(colorPrimaryVariant)
                     "colorOnPrimary" -> onGet(colorOnPrimary)
