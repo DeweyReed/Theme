@@ -9,6 +9,7 @@ import androidx.annotation.StyleRes
 import androidx.annotation.StyleableRes
 import androidx.core.content.withStyledAttributes
 import xyz.aprildown.theme.Theme
+import xyz.aprildown.theme.utils.themeRes
 
 internal abstract class BaseTint<T : View>(
     private val attrs: IntArray,
@@ -59,10 +60,20 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
         return if (resourceId != -1) resourceId else null
     }
 
+    fun findAttributeColor(@AttrRes attrRes: Int): Int? {
+        val theme = Theme.get()
+        return when (view.context.themeRes(attrRes)) {
+            theme.colorPrimaryRes -> theme.colorPrimary
+            theme.colorSecondaryRes -> theme.colorSecondary
+            else -> null
+        }
+    }
+
     fun withColorOrResourceId(
         @StyleableRes index: Int,
         onColor: (color: Int) -> Unit,
-        onResourceId: (resourceId: Int) -> Unit
+        onResourceId: (resourceId: Int) -> Unit,
+        fallback: (() -> Unit)? = null
     ) {
         val color = findThemeColor(index)
         if (color != null) {
@@ -71,6 +82,8 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
             val resourceId = findResourceId(index)
             if (resourceId != null) {
                 onResourceId.invoke(resourceId)
+            } else {
+                fallback?.invoke()
             }
         }
     }

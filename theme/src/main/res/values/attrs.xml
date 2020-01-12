@@ -11,4 +11,9 @@
         <attr name="strokeColor" />
         <attr name="rippleColor" />
     </declare-styleable>
+
+    <declare-styleable name="Theme_CheckBox">
+        <attr name="buttonTint" />
+    </declare-styleable>
+
 </resources>

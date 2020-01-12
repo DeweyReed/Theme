@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.Menu
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
 import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
 import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
@@ -26,7 +27,11 @@ import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
 import xyz.aprildown.theme.utils.themeColor
 
-class Theme private constructor(private val context: Context) {
+class Theme private constructor(
+    private val context: Context,
+    @ColorRes internal val colorPrimaryRes: Int,
+    @ColorRes internal val colorSecondaryRes: Int
+) {
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 
@@ -108,9 +113,21 @@ class Theme private constructor(private val context: Context) {
         @JvmStatic
         fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init"))
 
+        /**
+         * To resolve values like [R.attr.colorControlActivated], we need your R.color.colorPrimary.
+         */
         @JvmStatic
-        fun init(context: Context, f: (ThemeEditor.() -> Unit)? = null) {
-            instance ?: (Theme(context).also {
+        fun init(
+            context: Context,
+            @ColorRes colorPrimaryRes: Int,
+            @ColorRes colorSecondaryRes: Int,
+            f: (ThemeEditor.() -> Unit)? = null
+        ) {
+            instance ?: (Theme(
+                context,
+                colorPrimaryRes = colorPrimaryRes,
+                colorSecondaryRes = colorSecondaryRes
+            ).also {
                 instance = it
                 if (f != null) {
                     val editor = ThemeEditor(context)

@@ -22,6 +22,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
+import com.google.android.material.color.MaterialColors
 import kotlin.math.roundToInt
 import androidx.core.graphics.ColorUtils as AndroidColorUtils
 
@@ -77,3 +78,28 @@ internal fun Int.shiftColor(@FloatRange(from = 0.0, to = 2.0) by: Float): Int {
 }
 
 internal fun Int.toColorStateList(): ColorStateList = ColorStateList.valueOf(this)
+
+/**
+ * [MaterialColors]
+ * Calculates a color that represents the layering of the `overlayColor` on top of the
+ * `backgroundColor`.
+ */
+@ColorInt
+fun layer(@ColorInt backgroundColor: Int, @ColorInt overlayColor: Int): Int {
+    return AndroidColorUtils.compositeColors(overlayColor, backgroundColor)
+}
+
+/**
+ * [MaterialColors]
+ * Calculates a color that represents the layering of the `overlayColor` (with `overlayAlpha` applied) on top of the `backgroundColor`.
+ */
+@ColorInt
+fun layer(
+    @ColorInt backgroundColor: Int,
+    @ColorInt overlayColor: Int,
+    @FloatRange(from = 0.0, to = 1.0) overlayAlpha: Float
+): Int {
+    val computedAlpha = (Color.alpha(overlayColor) * overlayAlpha).roundToInt()
+    val computedOverlayColor = AndroidColorUtils.setAlphaComponent(overlayColor, computedAlpha)
+    return layer(backgroundColor, computedOverlayColor)
+}

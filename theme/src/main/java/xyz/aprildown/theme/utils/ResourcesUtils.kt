@@ -61,6 +61,16 @@ fun Context.themeColor(@AttrRes attrRes: Int): Int {
     }
 }
 
+@ColorRes
+fun Context.themeRes(@AttrRes attrRes: Int): Int {
+    val a = obtainStyledAttributes(null, intArrayOf(attrRes))
+    try {
+        return a.getResourceId(0, -1)
+    } finally {
+        a.recycle()
+    }
+}
+
 internal val Context.textColorPrimary: Int
     @ColorInt
     get() = themeColor(android.R.attr.textColorPrimary)

@@ -25,6 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     when (position) {
                         0 -> R.id.textViewFragment
                         1 -> R.id.buttonFragment
+                        2 -> R.id.checkBoxFragment
                         else -> throw IllegalStateException()
                     }
                 )
@@ -36,7 +37,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             itemAdapter.set(
                 listOf(
                     "TextView",
-                    "Button"
+                    "Button",
+                    "CheckBox"
                 ).map { WidgetItem(it) }
             )
         }

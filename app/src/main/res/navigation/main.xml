@@ -23,4 +23,10 @@
         android:label="Button"
         tools:layout="@layout/fragment_button" />
 
+    <fragment
+        android:id="@+id/checkBoxFragment"
+        android:name="xyz.aprildown.theme.app.CheckBoxFragment"
+        android:label="CheckBox"
+        tools:layout="@layout/fragment_check_box" />
+
 </navigation>

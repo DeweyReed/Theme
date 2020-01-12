@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:dividerDrawable="@drawable/divider_buttons"
+    app:dividerDrawable="@drawable/divider_horizontal"
     app:flexWrap="wrap"
     app:showDivider="middle">
 
