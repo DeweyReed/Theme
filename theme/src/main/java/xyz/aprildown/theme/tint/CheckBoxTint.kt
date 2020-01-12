@@ -12,7 +12,7 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * [MaterialCheckBox]
- * https://github.com/material-components/material-components-android/blob/master/docs/components/CheckBox.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/Checkbox.md
  */
 internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
     attrs = R.styleable.Theme_CheckBox,

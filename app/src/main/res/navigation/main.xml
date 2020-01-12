@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_button" />
 
     <fragment
-        android:id="@+id/checkBoxFragment"
-        android:name="xyz.aprildown.theme.app.CheckBoxFragment"
-        android:label="CheckBox"
-        tools:layout="@layout/fragment_check_box" />
+        android:id="@+id/compoundButtonFragment"
+        android:name="xyz.aprildown.theme.app.CompoundButtonFragment"
+        android:label="CompoundButton"
+        tools:layout="@layout/fragment_compound_button" />
 
 </navigation>

@@ -36,6 +36,8 @@ dependencies {
     implementation libs.androidx_preference
     implementation libs.androidx_constraintlayout
 
+    implementation libs.androidx_core_ktx
+
     implementation libs.material
 
     implementation libs.androidx_navigation_fragment
