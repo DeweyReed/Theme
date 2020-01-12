@@ -20,15 +20,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val fastAdapter =
                 FastAdapter.with(itemAdapter)
 
-            fastAdapter.onClickListener = { _, _, _, position ->
-                findNavController().navigate(
-                    when (position) {
-                        0 -> R.id.textViewFragment
-                        1 -> R.id.buttonFragment
-                        2 -> R.id.compoundButtonFragment
-                        else -> throw IllegalStateException()
-                    }
-                )
+            fastAdapter.onClickListener = { _, _, item, _ ->
+                findNavController().navigate(item.pair.second)
                 true
             }
 
@@ -36,15 +29,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             itemAdapter.set(
                 listOf(
-                    "TextView",
-                    "Button",
-                    "CompoundButton"
+                    "TextView" to R.id.textViewFragment,
+                    "Button" to R.id.buttonFragment,
+                    "CompoundButton" to R.id.compoundButtonFragment,
+                    "ImageView" to R.id.imageViewFragment
                 ).map { WidgetItem(it) }
             )
         }
     }
 
-    private class WidgetItem(private val title: String) : AbstractItem<WidgetItem.ViewHolder>() {
+    private class WidgetItem(val pair: Pair<String, Int>) : AbstractItem<WidgetItem.ViewHolder>() {
 
         override val layoutRes: Int =
             R.layout.item_widget
@@ -54,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         override fun bindView(holder: ViewHolder, payloads: MutableList<Any>) {
             super.bindView(holder, payloads)
             holder.run {
-                titleView.text = title
+                titleView.text = pair.first
             }
         }
 

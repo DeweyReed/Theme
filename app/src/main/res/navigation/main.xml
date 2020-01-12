@@ -29,4 +29,10 @@
         android:label="CompoundButton"
         tools:layout="@layout/fragment_compound_button" />
 
+    <fragment
+        android:id="@+id/imageViewFragment"
+        android:name="xyz.aprildown.theme.app.ImageViewFragment"
+        android:label="ImageView"
+        tools:layout="@layout/fragment_image_view" />
+
 </navigation>

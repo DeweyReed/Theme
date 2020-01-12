@@ -43,7 +43,7 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
                         "colorOnPrimary" -> colorOnPrimary
                         "colorSecondary" -> colorSecondary
                         "colorSecondaryVariant" -> colorSecondaryVariant
-                        "colorOnSecondary" -> colorOnPrimary
+                        "colorOnSecondary" -> colorOnSecondary
                         else -> null
                     }
                 }

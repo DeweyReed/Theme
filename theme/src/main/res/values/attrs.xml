@@ -16,4 +16,9 @@
         <attr name="buttonTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ImageView">
+        <attr name="android:background" />
+        <attr name="tint" />
+    </declare-styleable>
+
 </resources>
