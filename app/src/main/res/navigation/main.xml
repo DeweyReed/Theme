@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_compound_button" />
 
     <fragment
-        android:id="@+id/imageViewFragment"
-        android:name="xyz.aprildown.theme.app.ImageViewFragment"
-        android:label="ImageView"
-        tools:layout="@layout/fragment_image_view" />
+        android:id="@+id/imageFragment"
+        android:name="xyz.aprildown.theme.app.ImageFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image" />
 
 </navigation>

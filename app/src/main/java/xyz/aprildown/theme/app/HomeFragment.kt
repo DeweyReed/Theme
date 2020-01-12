@@ -32,7 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     "TextView" to R.id.textViewFragment,
                     "Button" to R.id.buttonFragment,
                     "CompoundButton" to R.id.compoundButtonFragment,
-                    "ImageView" to R.id.imageViewFragment
+                    "Image" to R.id.imageFragment
                 ).map { WidgetItem(it) }
             )
         }

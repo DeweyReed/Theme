@@ -6,6 +6,7 @@ import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSpinner
@@ -14,6 +15,7 @@ import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.EditTextTint
+import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.SpinnerTint
@@ -55,6 +57,10 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createSpinner(context: Context?, attrs: AttributeSet?): AppCompatSpinner {
         return super.createSpinner(context, attrs).decorate(attrs, SpinnerTint())
+    }
+
+    override fun createImageButton(context: Context?, attrs: AttributeSet?): AppCompatImageButton {
+        return super.createImageButton(context, attrs).decorate(attrs, ImageButtonTint())
     }
 
     // endregion AppCompatViewInflater

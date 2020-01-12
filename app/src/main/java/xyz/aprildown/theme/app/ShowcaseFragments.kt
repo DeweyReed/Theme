@@ -34,4 +34,4 @@ class CompoundButtonFragment : Fragment(R.layout.fragment_compound_button) {
     }
 }
 
-class ImageViewFragment : Fragment(R.layout.fragment_image_view)
+class ImageFragment : Fragment(R.layout.fragment_image)
