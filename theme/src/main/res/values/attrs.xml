@@ -27,4 +27,8 @@
         <attr name="backgroundTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_Spinner">
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
 </resources>
