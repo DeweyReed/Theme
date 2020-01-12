@@ -29,10 +29,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             itemAdapter.set(
                 listOf(
-                    "TextView" to R.id.textViewFragment,
+                    "Text View" to R.id.textViewFragment,
                     "Button" to R.id.buttonFragment,
-                    "CompoundButton" to R.id.compoundButtonFragment,
-                    "Image" to R.id.imageFragment
+                    "Compound Button" to R.id.compoundButtonFragment,
+                    "Image" to R.id.imageFragment,
+                    "App Bar" to R.id.appBarFragment
                 ).map { WidgetItem(it) }
             )
         }

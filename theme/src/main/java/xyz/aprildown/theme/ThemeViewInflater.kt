@@ -2,6 +2,7 @@ package xyz.aprildown.theme
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -11,7 +12,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.theme.MaterialComponentsViewInflater
+import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.EditTextTint
@@ -64,4 +67,12 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
     }
 
     // endregion AppCompatViewInflater
+
+    override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
+        return when (name) {
+            "com.google.android.material.bottomappbar.BottomAppBar" ->
+                BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
+            else -> super.createView(context, name, attrs)
+        }
+    }
 }

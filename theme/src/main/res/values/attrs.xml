@@ -31,4 +31,8 @@
         <attr name="backgroundTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_BottomAppBar">
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
 </resources>

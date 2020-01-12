@@ -35,4 +35,10 @@
         android:label="Image"
         tools:layout="@layout/fragment_image" />
 
+    <fragment
+        android:id="@+id/appBarFragment"
+        android:name="xyz.aprildown.theme.app.AppBarFragment"
+        android:label="App Bar"
+        tools:layout="@layout/fragment_app_bar" />
+
 </navigation>
