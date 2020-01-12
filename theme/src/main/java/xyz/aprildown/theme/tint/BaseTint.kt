@@ -1,5 +1,6 @@
 package xyz.aprildown.theme.tint
 
+import android.content.res.Resources
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
@@ -30,23 +31,46 @@ internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
 
 internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
-    fun findThemeColor(
-        @StyleableRes index: Int,
-        fallback: ((resourceId: Int) -> Unit)? = null,
-        onGet: (color: Int) -> Unit
-    ) {
+    fun findThemeColor(@StyleableRes index: Int): Int? {
         val resourceId = typedArray.getResourceId(index, -1)
-        if (resourceId != -1) {
-            Theme.get().run {
-                when (view.resources.getResourceEntryName(resourceId)) {
-                    "colorPrimary" -> onGet(colorPrimary)
-                    "colorPrimaryVariant" -> onGet(colorPrimaryVariant)
-                    "colorOnPrimary" -> onGet(colorOnPrimary)
-                    "colorSecondary" -> onGet(colorSecondary)
-                    "colorSecondaryVariant" -> onGet(colorSecondaryVariant)
-                    "colorOnSecondary" -> onGet(colorOnPrimary)
-                    else -> fallback?.invoke(resourceId)
+        return try {
+            if (resourceId != -1) {
+                Theme.get().run {
+                    when (view.resources.getResourceEntryName(resourceId)) {
+                        "colorPrimary" -> colorPrimary
+                        "colorPrimaryVariant" -> colorPrimaryVariant
+                        "colorOnPrimary" -> colorOnPrimary
+                        "colorSecondary" -> colorSecondary
+                        "colorSecondaryVariant" -> colorSecondaryVariant
+                        "colorOnSecondary" -> colorOnPrimary
+                        else -> null
+                    }
                 }
+            } else {
+                null
+            }
+        } catch (e: Resources.NotFoundException) {
+            null
+        }
+    }
+
+    fun findResourceId(@StyleableRes index: Int): Int? {
+        val resourceId = typedArray.getResourceId(index, -1)
+        return if (resourceId != -1) resourceId else null
+    }
+
+    fun withColorOrResourceId(
+        @StyleableRes index: Int,
+        onColor: (color: Int) -> Unit,
+        onResourceId: (resourceId: Int) -> Unit
+    ) {
+        val color = findThemeColor(index)
+        if (color != null) {
+            onColor.invoke(color)
+        } else {
+            val resourceId = findResourceId(index)
+            if (resourceId != null) {
+                onResourceId.invoke(resourceId)
             }
         }
     }

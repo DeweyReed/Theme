@@ -11,8 +11,6 @@ android {
         versionCode versions.version_code
         versionName versions.version_name
     }
-
-    resourcePrefix 'theme_'
 }
 
 dependencies {

@@ -23,49 +23,51 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
     onTint = { helper ->
         val button = helper.view
         if (button is MaterialButton) {
-            helper.findThemeColor(
+            helper.withColorOrResourceId(
                 R.styleable.Theme_Button_android_textColor,
-                fallback = { resourceId ->
-                    withTextColor(resourceId, button)
-                },
-                onGet = {
+                onColor = {
                     button.setTextColor(it)
+                },
+                onResourceId = {
+                    withTextColor(it, button)
                 }
             )
-            helper.findThemeColor(
+            helper.withColorOrResourceId(
                 R.styleable.Theme_Button_backgroundTint,
-                fallback = { resourceId ->
-                    withBackgroundTint(resourceId, button)
-                },
-                onGet = {
+                onColor = {
                     ViewCompat.setBackgroundTintList(button, it.toColorStateList())
+
+                },
+                onResourceId = {
+                    withBackgroundTint(it, button)
                 }
             )
-            helper.findThemeColor(
+            helper.withColorOrResourceId(
                 R.styleable.Theme_Button_iconTint,
-                fallback = { resourceId ->
-                    withIconTint(resourceId, button)
-                },
-                onGet = {
+                onColor = {
                     button.iconTint = it.toColorStateList()
+                },
+                onResourceId = {
+                    withIconTint(it, button)
                 }
             )
-            helper.findThemeColor(
+            helper.withColorOrResourceId(
                 R.styleable.Theme_Button_strokeColor,
-                fallback = { resourceId ->
-                    withStrokeColor(resourceId, button)
-                },
-                onGet = {
+                onColor = {
                     button.strokeColor = it.toColorStateList()
+
+                },
+                onResourceId = {
+                    withStrokeColor(it, button)
                 }
             )
-            helper.findThemeColor(
+            helper.withColorOrResourceId(
                 R.styleable.Theme_Button_rippleColor,
-                fallback = { resourceId ->
-                    withRippleColor(resourceId, button)
-                },
-                onGet = {
+                onColor = {
                     button.rippleColor = it.toColorStateList()
+                },
+                onResourceId = {
+                    withRippleColor(it, button)
                 }
             )
         }
