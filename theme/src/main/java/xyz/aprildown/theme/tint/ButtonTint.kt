@@ -20,10 +20,10 @@ import xyz.aprildown.theme.utils.toColorStateList
 internal class ButtonTint : BaseTint<AppCompatButton>(
     attrs = R.styleable.Theme_Button,
     defStyleAttr = R.attr.materialButtonStyle,
-    onTint = { helper ->
-        val button = helper.view
+    onTint = {
+        val button = view
         if (button is MaterialButton) {
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_Button_android_textColor,
                 onColor = {
                     button.setTextColor(it)
@@ -32,7 +32,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     withTextColor(it, button)
                 }
             )
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_Button_backgroundTint,
                 onColor = {
                     ViewCompat.setBackgroundTintList(button, it.toColorStateList())
@@ -42,7 +42,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     withBackgroundTint(it, button)
                 }
             )
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_Button_iconTint,
                 onColor = {
                     button.iconTint = it.toColorStateList()
@@ -51,17 +51,16 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     withIconTint(it, button)
                 }
             )
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_Button_strokeColor,
                 onColor = {
                     button.strokeColor = it.toColorStateList()
-
                 },
                 onResourceId = {
                     withStrokeColor(it, button)
                 }
             )
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_Button_rippleColor,
                 onColor = {
                     button.rippleColor = it.toColorStateList()

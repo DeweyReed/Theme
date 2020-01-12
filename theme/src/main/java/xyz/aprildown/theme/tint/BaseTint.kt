@@ -15,7 +15,7 @@ internal abstract class BaseTint<T : View>(
     private val attrs: IntArray,
     @AttrRes private val defStyleAttr: Int = 0,
     @StyleRes private val defStyleRes: Int = 0,
-    private val onTint: (helper: ThemeHelper<T>) -> Unit
+    private val onTint: ThemeHelper<T>.() -> Unit
 ) {
 
     fun apply(view: T, set: AttributeSet?): T {
@@ -72,16 +72,20 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
     fun withColorOrResourceId(
         @StyleableRes index: Int,
         onColor: (color: Int) -> Unit,
-        onResourceId: (resourceId: Int) -> Unit,
+        onResourceId: ((resourceId: Int) -> Unit)? = null,
         fallback: (() -> Unit)? = null
     ) {
         val color = findThemeColor(index)
         if (color != null) {
             onColor.invoke(color)
         } else {
-            val resourceId = findResourceId(index)
-            if (resourceId != null) {
-                onResourceId.invoke(resourceId)
+            if (onResourceId != null) {
+                val resourceId = findResourceId(index)
+                if (resourceId != null) {
+                    onResourceId.invoke(resourceId)
+                } else {
+                    fallback?.invoke()
+                }
             } else {
                 fallback?.invoke()
             }

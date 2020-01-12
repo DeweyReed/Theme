@@ -11,9 +11,9 @@ import xyz.aprildown.theme.R
 internal class TextViewTint : BaseTint<AppCompatTextView>(
     attrs = R.styleable.Theme_TextView,
     defStyleAttr = android.R.attr.textViewStyle,
-    onTint = { helper ->
-        val textView = helper.view
-        helper.findThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
+    onTint = {
+        val textView = view
+        findThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
             textView.setTextColor(it)
         }
     }

@@ -17,3 +17,5 @@ fun isNMR1OrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR
 fun isOOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
 fun isPOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+
+fun isQOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q

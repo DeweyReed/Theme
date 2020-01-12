@@ -19,18 +19,16 @@ import xyz.aprildown.theme.utils.toColorStateList
 internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
     attrs = R.styleable.Theme_CheckBox,
     defStyleAttr = android.R.attr.checkboxStyle,
-    onTint = { helper ->
-        val checkBox = helper.view
+    onTint = {
+        val checkBox = view
         if (checkBox is MaterialCheckBox) {
-            helper.withColorOrResourceId(
+            withColorOrResourceId(
                 R.styleable.Theme_CheckBox_buttonTint,
                 onColor = {
                     CompoundButtonCompat.setButtonTintList(checkBox, it.toColorStateList())
                 },
-                onResourceId = {
-                },
                 fallback = {
-                    helper.createCompoundButtonTint()?.let {
+                    createCompoundButtonTint()?.let {
                         CompoundButtonCompat.setButtonTintList(checkBox, it)
                     }
                 }
@@ -46,10 +44,10 @@ internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
 internal class RadioButtonTint : BaseTint<AppCompatRadioButton>(
     attrs = intArrayOf(),
     defStyleAttr = android.R.attr.radioButtonStyle,
-    onTint = { helper ->
-        val radioButton = helper.view
+    onTint = {
+        val radioButton = view
         if (radioButton is MaterialRadioButton) {
-            helper.createCompoundButtonTint()?.let {
+            createCompoundButtonTint()?.let {
                 CompoundButtonCompat.setButtonTintList(radioButton, it)
             }
         }

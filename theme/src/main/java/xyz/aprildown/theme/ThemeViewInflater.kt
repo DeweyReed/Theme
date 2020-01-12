@@ -5,12 +5,14 @@ import android.util.AttributeSet
 import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
+import xyz.aprildown.theme.tint.EditTextTint
 import xyz.aprildown.theme.tint.ImageViewTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.TextViewTint
@@ -43,6 +45,10 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createImageView(context: Context?, attrs: AttributeSet?): AppCompatImageView {
         return super.createImageView(context, attrs).decorate(attrs, ImageViewTint())
+    }
+
+    override fun createEditText(context: Context?, attrs: AttributeSet?): AppCompatEditText {
+        return super.createEditText(context, attrs).decorate(attrs, EditTextTint())
     }
 
     // endregion AppCompatViewInflater
