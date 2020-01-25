@@ -12,8 +12,9 @@
         <attr name="rippleColor" />
     </declare-styleable>
 
-    <declare-styleable name="Theme_CheckBox">
+    <declare-styleable name="Theme_CompoundButton">
         <attr name="buttonTint" />
+        <attr name="android:textColor" />
     </declare-styleable>
 
     <declare-styleable name="Theme_ImageView">

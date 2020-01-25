@@ -13,17 +13,21 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
+ * TODO: I don't know how to tint the compound buttons' ripple color.
+ */
+
+/**
  * [MaterialCheckBox]
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Checkbox.md
  */
 internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
-    attrs = R.styleable.Theme_CheckBox,
+    attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.checkboxStyle,
     onTint = {
         val checkBox = view
         if (checkBox is MaterialCheckBox) {
             withColorOrResourceId(
-                R.styleable.Theme_CheckBox_buttonTint,
+                R.styleable.Theme_CompoundButton_buttonTint,
                 onColor = {
                     CompoundButtonCompat.setButtonTintList(checkBox, it.toColorStateList())
                 },
@@ -34,6 +38,9 @@ internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
                 }
             )
         }
+        findThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
+            checkBox.setTextColor(it)
+        }
     }
 )
 
@@ -42,14 +49,25 @@ internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
  *https://github.com/material-components/material-components-android/blob/master/docs/components/RadioButton.md
  */
 internal class RadioButtonTint : BaseTint<AppCompatRadioButton>(
-    attrs = intArrayOf(),
+    attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.radioButtonStyle,
     onTint = {
         val radioButton = view
         if (radioButton is MaterialRadioButton) {
-            createCompoundButtonTint()?.let {
-                CompoundButtonCompat.setButtonTintList(radioButton, it)
-            }
+            withColorOrResourceId(
+                R.styleable.Theme_CompoundButton_buttonTint,
+                onColor = {
+                    CompoundButtonCompat.setButtonTintList(radioButton, it.toColorStateList())
+                },
+                fallback = {
+                    createCompoundButtonTint()?.let {
+                        CompoundButtonCompat.setButtonTintList(radioButton, it)
+                    }
+                }
+            )
+        }
+        findThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
+            radioButton.setTextColor(it)
         }
     }
 )
