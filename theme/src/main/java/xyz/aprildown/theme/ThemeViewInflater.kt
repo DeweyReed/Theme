@@ -13,8 +13,10 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
+import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.EditTextTint
@@ -72,6 +74,8 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
         return when (name) {
             "com.google.android.material.bottomappbar.BottomAppBar" ->
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
+            "com.google.android.material.bottomnavigation.BottomNavigationView" ->
+                BottomNavigationView(context, attrs).decorate(attrs, BottomNavigationViewTint())
             else -> super.createView(context, name, attrs)
         }
     }

@@ -36,4 +36,11 @@
         <attr name="backgroundTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_BottomNavigationView">
+        <attr name="android:background" />
+        <attr name="itemIconTint" />
+        <attr name="itemTextColor" />
+        <attr name="itemRippleColor" />
+    </declare-styleable>
+
 </resources>

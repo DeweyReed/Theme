@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_day"
         android:title="Day"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action2"
+        android:icon="@drawable/ic_night"
+        android:title="Day"
+        app:showAsAction="ifRoom" />
 </menu>
