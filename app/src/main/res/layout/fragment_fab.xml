@@ -21,4 +21,26 @@
         app:srcCompat="@drawable/ic_day"
         app:tint="?colorOnPrimary" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="Extended"
+        app:icon="@drawable/ic_day"
+        app:layout_wrapBefore="true" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="Custom Extended"
+        android:textColor="?colorOnPrimary"
+        app:backgroundTint="?colorPrimary"
+        app:icon="@drawable/ic_day"
+        app:iconTint="?colorOnPrimary"
+        app:rippleColor="?colorOnPrimary"
+        app:strokeColor="?colorSecondary"
+        app:strokeWidth="2dp" />
+
 </com.google.android.flexbox.FlexboxLayout>

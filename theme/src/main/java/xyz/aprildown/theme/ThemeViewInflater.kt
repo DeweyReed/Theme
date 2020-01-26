@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
@@ -23,6 +24,7 @@ import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.ChipTint
 import xyz.aprildown.theme.tint.EditTextTint
+import xyz.aprildown.theme.tint.ExtendedFloatingActionButtonTint
 import xyz.aprildown.theme.tint.FloatingActionButtonTint
 import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
@@ -84,6 +86,9 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
                 Chip(context, attrs).decorate(attrs, ChipTint())
             "com.google.android.material.floatingactionbutton.FloatingActionButton" ->
                 FloatingActionButton(context, attrs).decorate(attrs, FloatingActionButtonTint())
+            "com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton" ->
+                ExtendedFloatingActionButton(context, attrs)
+                    .decorate(attrs, ExtendedFloatingActionButtonTint())
             else -> super.createView(context, name, attrs)
         }
     }

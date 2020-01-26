@@ -59,4 +59,12 @@
         <attr name="rippleColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ExtendedFloatingActionButton">
+        <attr name="android:textColor" />
+        <attr name="backgroundTint" />
+        <attr name="iconTint" />
+        <attr name="strokeColor" />
+        <attr name="rippleColor" />
+    </declare-styleable>
+
 </resources>

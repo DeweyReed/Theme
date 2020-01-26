@@ -11,7 +11,6 @@ import xyz.aprildown.theme.utils.float
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * [R.style.Widget_MaterialComponents_FloatingActionButton]
  * https://github.com/material-components/material-components-android/blob/master/docs/components/FloatingActionButton.md
  */
 internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
