@@ -35,7 +35,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     "Image" to R.id.imageFragment,
                     "App Bar" to R.id.appBarFragment,
                     "Chip" to R.id.chipFragment,
-                    "Fab" to R.id.fabFragment
+                    "Fab" to R.id.fabFragment,
+                    "Card" to R.id.cardFragment
                 ).map { WidgetItem(it) }
             )
         }

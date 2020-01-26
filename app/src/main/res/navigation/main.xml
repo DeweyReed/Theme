@@ -53,4 +53,10 @@
         android:label="Fab"
         tools:layout="@layout/fragment_fab" />
 
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="xyz.aprildown.theme.app.CardFragment"
+        android:label="Card"
+        tools:layout="@layout/fragment_card" />
+
 </navigation>

@@ -12,8 +12,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,6 +23,7 @@ import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
+import xyz.aprildown.theme.tint.CardViewTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.ChipTint
 import xyz.aprildown.theme.tint.EditTextTint
@@ -28,6 +31,7 @@ import xyz.aprildown.theme.tint.ExtendedFloatingActionButtonTint
 import xyz.aprildown.theme.tint.FloatingActionButtonTint
 import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
+import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.TextViewTint
@@ -89,6 +93,10 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
             "com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton" ->
                 ExtendedFloatingActionButton(context, attrs)
                     .decorate(attrs, ExtendedFloatingActionButtonTint())
+            "androidx.cardview.widget.CardView" ->
+                CardView(context, attrs).decorate(attrs, CardViewTint())
+            "com.google.android.material.card.MaterialCardView" ->
+                MaterialCardView(context, attrs).decorate(attrs, MaterialCardViewTint())
             else -> super.createView(context, name, attrs)
         }
     }

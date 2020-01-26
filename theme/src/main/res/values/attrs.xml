@@ -67,4 +67,12 @@
         <attr name="rippleColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_MaterialCardView">
+        <attr name="cardBackgroundColor" />
+        <attr name="cardForegroundColor" />
+        <attr name="checkedIconTint" />
+        <attr name="rippleColor" />
+        <attr name="strokeColor" />
+    </declare-styleable>
+
 </resources>
