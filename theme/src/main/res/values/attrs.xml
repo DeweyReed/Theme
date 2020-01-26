@@ -75,4 +75,10 @@
         <attr name="strokeColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_NavigationView">
+        <attr name="itemIconTint" />
+        <attr name="itemShapeFillColor" />
+        <attr name="itemTextColor" />
+    </declare-styleable>
+
 </resources>
