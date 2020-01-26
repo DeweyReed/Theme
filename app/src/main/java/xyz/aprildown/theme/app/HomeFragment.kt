@@ -33,7 +33,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     "Button" to R.id.buttonFragment,
                     "Compound Button" to R.id.compoundButtonFragment,
                     "Image" to R.id.imageFragment,
-                    "App Bar" to R.id.appBarFragment
+                    "App Bar" to R.id.appBarFragment,
+                    "Chip" to R.id.chipFragment
                 ).map { WidgetItem(it) }
             )
         }

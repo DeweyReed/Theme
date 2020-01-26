@@ -43,4 +43,14 @@
         <attr name="itemRippleColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_Chip">
+        <attr name="android:textColor" />
+        <attr name="chipBackgroundColor" />
+        <attr name="chipSurfaceColor" />
+        <attr name="chipStrokeColor" />
+        <attr name="rippleColor" />
+        <attr name="closeIconTint" />
+        <attr name="chipIconTint" />
+    </declare-styleable>
+
 </resources>

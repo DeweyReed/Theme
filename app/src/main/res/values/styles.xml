@@ -22,4 +22,10 @@
 
     <style name="BaseMaterialAppTheme" parent="Theme.MaterialComponents.Light" />
 
+    <style name="ShowcaseFlexbox">
+        <item name="flexWrap">wrap</item>
+        <item name="showDivider">middle</item>
+        <item name="dividerDrawable">@drawable/divider_horizontal</item>
+    </style>
+
 </resources>

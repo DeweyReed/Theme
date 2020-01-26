@@ -14,11 +14,13 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.chip.Chip
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CheckBoxTint
+import xyz.aprildown.theme.tint.ChipTint
 import xyz.aprildown.theme.tint.EditTextTint
 import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
@@ -76,6 +78,8 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
             "com.google.android.material.bottomnavigation.BottomNavigationView" ->
                 BottomNavigationView(context, attrs).decorate(attrs, BottomNavigationViewTint())
+            "com.google.android.material.chip.Chip" ->
+                Chip(context, attrs).decorate(attrs, ChipTint())
             else -> super.createView(context, name, attrs)
         }
     }
