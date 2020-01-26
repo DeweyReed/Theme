@@ -32,7 +32,7 @@ internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
 
 internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
-    fun findThemeColor(@StyleableRes index: Int): Int? {
+    fun matchThemeColor(@StyleableRes index: Int): Int? {
         val resourceId = typedArray.getResourceId(index, -1)
         return try {
             if (resourceId != -1) {
@@ -55,11 +55,6 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
         }
     }
 
-    fun findResourceId(@StyleableRes index: Int): Int? {
-        val resourceId = typedArray.getResourceId(index, -1)
-        return if (resourceId != -1) resourceId else null
-    }
-
     fun findAttributeColor(@AttrRes attrRes: Int): Int? {
         val theme = Theme.get()
         return when (view.context.themeRes(attrRes)) {
@@ -71,23 +66,21 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
     fun withColorOrResourceId(
         @StyleableRes index: Int,
-        onColor: (color: Int) -> Unit,
-        onResourceId: ((resourceId: Int) -> Unit)? = null,
-        fallback: (() -> Unit)? = null
+        applySolidColor: (color: Int) -> Unit,
+        applyResource: ((resourceId: Int) -> Unit)? = null,
+        applyDefault: (() -> Unit)? = null
     ) {
-        val color = findThemeColor(index)
+        val color = matchThemeColor(index)
         if (color != null) {
-            onColor.invoke(color)
+            applySolidColor.invoke(color)
         } else {
-            if (onResourceId != null) {
-                val resourceId = findResourceId(index)
-                if (resourceId != null) {
-                    onResourceId.invoke(resourceId)
-                } else {
-                    fallback?.invoke()
+            if (typedArray.hasValue(index)) {
+                val resourceId = typedArray.getResourceId(index, -1)
+                if (resourceId != -1 && applyResource != null) {
+                    applyResource.invoke(resourceId)
                 }
             } else {
-                fallback?.invoke()
+                applyDefault?.invoke()
             }
         }
     }

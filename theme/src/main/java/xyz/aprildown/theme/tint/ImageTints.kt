@@ -25,10 +25,10 @@ internal class ImageButtonTint : BaseTint<AppCompatImageButton>(
 
 private fun ThemeHelper<*>.tintImageView() {
     val imageView = view as ImageView
-    findThemeColor(R.styleable.Theme_ImageView_android_background)?.let {
+    matchThemeColor(R.styleable.Theme_ImageView_android_background)?.let {
         ViewCompat.setBackgroundTintList(imageView, it.toColorStateList())
     }
-    findThemeColor(R.styleable.Theme_ImageView_tint)?.let {
+    matchThemeColor(R.styleable.Theme_ImageView_tint)?.let {
         ImageViewCompat.setImageTintList(imageView, it.toColorStateList())
     }
 }

@@ -1,20 +1,20 @@
 package xyz.aprildown.theme.tint
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.core.view.ViewCompat
 import androidx.core.widget.CompoundButtonCompat
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.radiobutton.MaterialRadioButton
 import xyz.aprildown.theme.R
+import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.layer
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
-
-/**
- * TODO: I don't know how to tint the compound buttons' ripple color.
- */
 
 /**
  * [MaterialCheckBox]
@@ -28,17 +28,19 @@ internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
         if (checkBox is MaterialCheckBox) {
             withColorOrResourceId(
                 R.styleable.Theme_CompoundButton_buttonTint,
-                onColor = {
+                applySolidColor = {
                     CompoundButtonCompat.setButtonTintList(checkBox, it.toColorStateList())
+                    ViewCompat.setBackground(checkBox, createCompoundButtonBackground(it))
                 },
-                fallback = {
+                applyDefault = {
                     createCompoundButtonTint()?.let {
                         CompoundButtonCompat.setButtonTintList(checkBox, it)
                     }
+                    ViewCompat.setBackground(checkBox, createCompoundButtonBackground())
                 }
             )
         }
-        findThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
+        matchThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
             checkBox.setTextColor(it)
         }
     }
@@ -56,17 +58,17 @@ internal class RadioButtonTint : BaseTint<AppCompatRadioButton>(
         if (radioButton is MaterialRadioButton) {
             withColorOrResourceId(
                 R.styleable.Theme_CompoundButton_buttonTint,
-                onColor = {
+                applySolidColor = {
                     CompoundButtonCompat.setButtonTintList(radioButton, it.toColorStateList())
                 },
-                fallback = {
+                applyDefault = {
                     createCompoundButtonTint()?.let {
                         CompoundButtonCompat.setButtonTintList(radioButton, it)
                     }
                 }
             )
         }
-        findThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
+        matchThemeColor(R.styleable.Theme_CompoundButton_android_textColor)?.let {
             radioButton.setTextColor(it)
         }
     }
@@ -93,4 +95,33 @@ private fun ThemeHelper<*>.createCompoundButtonTint(): ColorStateList? {
             layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED)
         )
     )
+}
+
+private fun ThemeHelper<*>.createCompoundButtonBackground(colorSecondary: Int? = null): Drawable {
+    val currentBackground = view.background
+    if (currentBackground is RippleDrawable) {
+        // @style/Widget.Material.CompoundButton.CheckBox
+        // R.drawable.control_background_40dp_material
+        val context = view.context
+        val colorControlActivated = colorSecondary
+            ?: findAttributeColor(R.attr.colorControlActivated)
+            ?: context.themeColor(R.attr.colorControlActivated)
+        val colorControlHighlight = findAttributeColor(R.attr.colorControlHighlight)
+            ?: context.themeColor(R.attr.colorControlHighlight)
+        currentBackground.setColor(
+            ColorStateList(
+                arrayOf(
+                    intArrayOf(android.R.attr.state_checked, android.R.attr.state_enabled),
+                    intArrayOf()
+                ),
+                intArrayOf(
+                    // Use the hard-coded value 0.1f instead of the resource id
+                    // because the resource id is redefined by the appcompat.
+                    colorControlActivated.adjustAlpha(0.1f),
+                    colorControlHighlight
+                )
+            )
+        )
+    }
+    return currentBackground
 }

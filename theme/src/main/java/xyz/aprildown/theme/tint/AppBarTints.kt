@@ -18,7 +18,7 @@ internal class BottomAppBarTint : BaseTint<BottomAppBar>(
     defStyleAttr = R.attr.bottomAppBarStyle,
     onTint = {
         val bottomAppBar = view
-        findThemeColor(R.styleable.Theme_BottomAppBar_backgroundTint)?.let {
+        matchThemeColor(R.styleable.Theme_BottomAppBar_backgroundTint)?.let {
             bottomAppBar.backgroundTint = it.toColorStateList()
         }
     }
@@ -32,33 +32,33 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
     defStyleAttr = R.attr.bottomNavigationStyle,
     onTint = {
         val bottomNavigationView = view
-        findThemeColor(R.styleable.Theme_BottomNavigationView_android_background)?.let {
+        matchThemeColor(R.styleable.Theme_BottomNavigationView_android_background)?.let {
             bottomNavigationView.setBackgroundColor(it)
         }
         withColorOrResourceId(
             R.styleable.Theme_BottomNavigationView_itemIconTint,
-            onColor = {
+            applySolidColor = {
                 bottomNavigationView.itemIconTintList = it.toColorStateList()
             },
-            onResourceId = {
+            applyResource = {
                 bottomNavigationView.withItemIconTint(it)
             }
         )
         withColorOrResourceId(
             R.styleable.Theme_BottomNavigationView_itemTextColor,
-            onColor = {
+            applySolidColor = {
                 bottomNavigationView.itemTextColor = it.toColorStateList()
             },
-            onResourceId = {
+            applyResource = {
                 bottomNavigationView.withItemTextTint(it)
             }
         )
         withColorOrResourceId(
             R.styleable.Theme_BottomNavigationView_itemRippleColor,
-            onColor = {
+            applySolidColor = {
                 bottomNavigationView.itemRippleColor = it.toColorStateList()
             },
-            onResourceId = {
+            applyResource = {
                 bottomNavigationView.withItemRippleTint(it)
             }
         )

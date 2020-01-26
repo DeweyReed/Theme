@@ -25,47 +25,47 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
         if (button is MaterialButton) {
             withColorOrResourceId(
                 R.styleable.Theme_Button_android_textColor,
-                onColor = {
+                applySolidColor = {
                     button.setTextColor(it)
                 },
-                onResourceId = {
+                applyResource = {
                     withTextColor(it, button)
                 }
             )
             withColorOrResourceId(
                 R.styleable.Theme_Button_backgroundTint,
-                onColor = {
+                applySolidColor = {
                     ViewCompat.setBackgroundTintList(button, it.toColorStateList())
 
                 },
-                onResourceId = {
+                applyResource = {
                     withBackgroundTint(it, button)
                 }
             )
             withColorOrResourceId(
                 R.styleable.Theme_Button_iconTint,
-                onColor = {
+                applySolidColor = {
                     button.iconTint = it.toColorStateList()
                 },
-                onResourceId = {
+                applyResource = {
                     withIconTint(it, button)
                 }
             )
             withColorOrResourceId(
                 R.styleable.Theme_Button_strokeColor,
-                onColor = {
+                applySolidColor = {
                     button.strokeColor = it.toColorStateList()
                 },
-                onResourceId = {
+                applyResource = {
                     withStrokeColor(it, button)
                 }
             )
             withColorOrResourceId(
                 R.styleable.Theme_Button_rippleColor,
-                onColor = {
+                applySolidColor = {
                     button.rippleColor = it.toColorStateList()
                 },
-                onResourceId = {
+                applyResource = {
                     withRippleColor(it, button)
                 }
             )
