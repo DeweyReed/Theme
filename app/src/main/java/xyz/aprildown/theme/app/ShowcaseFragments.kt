@@ -39,3 +39,5 @@ class ImageFragment : Fragment(R.layout.fragment_image)
 class AppBarFragment : Fragment(R.layout.fragment_app_bar)
 
 class ChipFragment : Fragment(R.layout.fragment_chip)
+
+class FabFragment : Fragment(R.layout.fragment_fab)

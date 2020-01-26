@@ -47,4 +47,10 @@
         android:label="Chip"
         tools:layout="@layout/fragment_chip" />
 
+    <fragment
+        android:id="@+id/fabFragment"
+        android:name="xyz.aprildown.theme.app.FabFragment"
+        android:label="Fab"
+        tools:layout="@layout/fragment_fab" />
+
 </navigation>

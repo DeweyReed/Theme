@@ -53,4 +53,10 @@
         <attr name="chipIconTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_FloatingActionButton">
+        <attr name="tint" />
+        <attr name="backgroundTint" />
+        <attr name="rippleColor" />
+    </declare-styleable>
+
 </resources>
