@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
@@ -22,6 +23,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             fastAdapter.onClickListener = { _, _, item, _ ->
                 findNavController().navigate(item.pair.second)
+                true
+            }
+
+            fastAdapter.onLongClickListener = { _, _, item, _ ->
+                Snackbar.make(view, item.pair.first, Snackbar.LENGTH_SHORT)
+                    .setAction("Action") {}
+                    .show()
                 true
             }
 
