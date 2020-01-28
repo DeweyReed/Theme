@@ -87,4 +87,12 @@
         <attr name="itemTextColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_TabLayout">
+        <attr name="android:background" />
+        <attr name="tabIconTint" />
+        <attr name="tabTextColor" />
+        <attr name="tabIndicatorColor" />
+        <attr name="tabRippleColor" />
+    </declare-styleable>
+
 </resources>
