@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 
 class TextViewFragment : Fragment(R.layout.fragment_text_view)
 
+class TextInputFragment : Fragment(R.layout.fragment_text_input)
+
 class ButtonFragment : Fragment(R.layout.fragment_button)
 
 class CompoundButtonFragment : Fragment(R.layout.fragment_compound_button) {

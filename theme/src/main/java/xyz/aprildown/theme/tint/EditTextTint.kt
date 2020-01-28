@@ -1,12 +1,14 @@
 package xyz.aprildown.theme.tint
 
+import android.content.res.ColorStateList
+import android.widget.EditText
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.isQOrLater
-import xyz.aprildown.theme.utils.toColorStateList
+import xyz.aprildown.theme.utils.themeColor
 
 /**
  * I don't recommend using EditText directly because it doesn't provide many customization.
@@ -23,26 +25,36 @@ internal class EditTextTint : BaseTint<AppCompatEditText>(
             editText.setHintTextColor(it)
         }
 
-        fun tintEditTextBackground(@ColorInt color: Int) {
-            editText.highlightColor = color
-            // This tint all EditTexts on the screen. It's a problem.
-            ViewCompat.setBackgroundTintList(editText, color.toColorStateList())
-            if (isQOrLater()) {
-                editText.textCursorDrawable?.setTint(color)
-                editText.textSelectHandle?.setTint(color)
-            }
-        }
-
         withColorOrResourceId(
             R.styleable.Theme_EditText_backgroundTint,
             applySolidColor = {
-                tintEditTextBackground(it)
-            },
-            applyResource = {
+                editText.tintBackground(it)
             },
             applyDefault = {
-                tintEditTextBackground(Theme.get().colorSecondary)
+                editText.tintBackground(Theme.get().colorSecondary)
             }
         )
     }
 )
+
+private fun EditText.tintBackground(@ColorInt color: Int) {
+    highlightColor = color
+    // This implementation is dumb and doesn't have any reference although it looks fine.
+    // Use TextInputLayout instead.
+    ViewCompat.setBackgroundTintList(
+        this, ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_focused),
+                intArrayOf()
+            ),
+            intArrayOf(
+                color,
+                context.themeColor(R.attr.colorControlNormal)
+            )
+        )
+    )
+    if (isQOrLater()) {
+        textCursorDrawable?.setTint(color)
+        textSelectHandle?.setTint(color)
+    }
+}

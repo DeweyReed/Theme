@@ -38,6 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             itemAdapter.set(
                 listOf(
                     "Text View" to R.id.textViewFragment,
+                    "Text Input" to R.id.textInputFragment,
                     "Button" to R.id.buttonFragment,
                     "Compound Button" to R.id.compoundButtonFragment,
                     "Image" to R.id.imageFragment,

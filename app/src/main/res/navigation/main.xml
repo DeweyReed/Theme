@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_text_view" />
 
     <fragment
+        android:id="@+id/textInputFragment"
+        android:name="xyz.aprildown.theme.app.TextInputFragment"
+        android:label="TextInput"
+        tools:layout="@layout/fragment_text_input" />
+
+    <fragment
         android:id="@+id/buttonFragment"
         android:name="xyz.aprildown.theme.app.ButtonFragment"
         android:label="Button"
