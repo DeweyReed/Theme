@@ -20,6 +20,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
@@ -36,6 +37,7 @@ import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.SpinnerTint
+import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.decorate
 
@@ -101,6 +103,8 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
                 MaterialCardView(context, attrs).decorate(attrs, MaterialCardViewTint())
             "com.google.android.material.navigation.NavigationView" ->
                 NavigationView(context, attrs).decorate(attrs, NavigationViewTint())
+            "com.google.android.material.switchmaterial.SwitchMaterial" ->
+                SwitchMaterial(context, attrs).decorate(attrs, SwitchMaterialTint())
             else -> super.createView(context, name, attrs)
         }
     }

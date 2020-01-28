@@ -13,8 +13,14 @@
     </declare-styleable>
 
     <declare-styleable name="Theme_CompoundButton">
-        <attr name="buttonTint" />
         <attr name="android:textColor" />
+        <attr name="buttonTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Switch">
+        <attr name="android:textColor" />
+        <attr name="thumbTint" />
+        <attr name="trackTint" />
     </declare-styleable>
 
     <declare-styleable name="Theme_ImageView">
