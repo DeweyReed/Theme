@@ -95,4 +95,18 @@
         <attr name="tabRippleColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_TextInputLayout">
+        <attr name="android:textColorHint" />
+        <attr name="hintTextColor" />
+        <attr name="helperTextTextColor" />
+        <attr name="errorTextColor" />
+        <attr name="errorIconTint" />
+        <attr name="counterTextColor" />
+        <attr name="counterOverflowTextColor" />
+        <attr name="startIconTint" />
+        <attr name="endIconTint" />
+        <attr name="boxStrokeColor" />
+        <attr name="boxBackgroundColor" />
+    </declare-styleable>
+
 </resources>

@@ -53,8 +53,15 @@ private fun EditText.tintBackground(@ColorInt color: Int) {
             )
         )
     )
+    tintCursorAndSelectHandle(color)
+}
+
+internal fun EditText.tintCursorAndSelectHandle(@ColorInt color: Int) {
     if (isQOrLater()) {
         textCursorDrawable?.setTint(color)
         textSelectHandle?.setTint(color)
+        textSelectHandleLeft?.setTint(color)
+        textSelectHandleRight?.setTint(color)
     }
+    // I don't want to use reflection to tint on Pre-O devices.
 }

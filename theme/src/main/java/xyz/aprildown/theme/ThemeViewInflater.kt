@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
@@ -40,6 +41,7 @@ import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
+import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.decorate
 
@@ -109,6 +111,8 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
                 SwitchMaterial(context, attrs).decorate(attrs, SwitchMaterialTint())
             "com.google.android.material.tabs.TabLayout" ->
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
+            "com.google.android.material.textfield.TextInputLayout" ->
+                TextInputLayout(context, attrs).decorate(attrs, TextInputLayoutTint())
             else -> super.createView(context, name, attrs)
         }
     }
