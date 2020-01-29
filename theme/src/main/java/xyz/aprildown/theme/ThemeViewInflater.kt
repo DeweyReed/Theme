@@ -12,7 +12,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -24,6 +26,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.theme.MaterialComponentsViewInflater
+import xyz.aprildown.theme.tint.AppBarLayoutTint
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
@@ -43,6 +46,7 @@ import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
+import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.tint.decorate
 
 @Keep // Make proguard keep this class as it's accessed reflectively by AppCompat
@@ -90,6 +94,10 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
         return when (name) {
+            "com.google.android.material.appbar.AppBarLayout" ->
+                AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
+            "androidx.appcompat.widget.Toolbar" ->
+                Toolbar(context, attrs).decorate(attrs, ToolbarTint())
             "com.google.android.material.bottomappbar.BottomAppBar" ->
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
             "com.google.android.material.bottomnavigation.BottomNavigationView" ->

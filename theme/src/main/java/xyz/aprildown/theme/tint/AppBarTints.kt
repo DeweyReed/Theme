@@ -2,6 +2,8 @@ package xyz.aprildown.theme.tint
 
 import android.content.res.ColorStateList
 import android.view.View
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
@@ -9,6 +11,31 @@ import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
+
+/**
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/AppBarLayout.md
+ */
+internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
+    attrs = R.styleable.Theme_AppBarLayout,
+    defStyleAttr = R.attr.appBarLayoutStyle,
+    onTint = {
+        val appBarLayout = view
+        matchThemeColor(R.styleable.Theme_AppBarLayout_android_background)?.let {
+            appBarLayout.setBackgroundColor(it)
+        }
+    }
+)
+
+internal class ToolbarTint : BaseTint<Toolbar>(
+    attrs = R.styleable.Theme_ToolbarLayout,
+    defStyleAttr = R.attr.toolbarStyle,
+    onTint = {
+        val toolbar = view
+        matchThemeColor(R.styleable.Theme_ToolbarLayout_android_background)?.let {
+            toolbar.setBackgroundColor(it)
+        }
+    }
+)
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/BottomAppBar.md
