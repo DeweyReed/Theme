@@ -71,4 +71,10 @@
         android:label="Basic Activity"
         tools:layout="@layout/activity_showcase_basic" />
 
+    <activity
+        android:id="@+id/showcaseCollapsingToolbarActivity"
+        android:name="xyz.aprildown.theme.app.ShowcaseCollapsingToolbarActivity"
+        android:label="Collapsing Toolbar Activity"
+        tools:layout="@layout/activity_showcase_collapsing_toolbar" />
+
 </navigation>

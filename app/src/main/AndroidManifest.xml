@@ -29,6 +29,15 @@
                 android:value="xyz.aprildown.theme.app.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".ShowcaseCollapsingToolbarActivity"
+            android:label="Collapsing Toolbar Activity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.aprildown.theme.app.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

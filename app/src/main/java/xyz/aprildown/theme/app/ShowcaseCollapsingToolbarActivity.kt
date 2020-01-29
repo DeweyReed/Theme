@@ -6,12 +6,15 @@ import android.view.MotionEvent
 import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_showcase_basic.*
 
-class ShowcaseBasicActivity : BaseActivity() {
+class ShowcaseCollapsingToolbarActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_showcase_basic)
+        setContentView(R.layout.activity_showcase_collapsing_toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         val detector = GestureDetectorCompat(this,
             object : GestureDetector.SimpleOnGestureListener() {
