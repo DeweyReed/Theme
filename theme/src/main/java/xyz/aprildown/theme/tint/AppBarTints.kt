@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
@@ -22,6 +23,19 @@ internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
         val appBarLayout = view
         matchThemeColor(R.styleable.Theme_AppBarLayout_android_background)?.let {
             appBarLayout.setBackgroundColor(it)
+        }
+    }
+)
+
+internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
+    attrs = R.styleable.Theme_CollapsingToolbarLayout,
+    onTint = {
+        val ctl = view
+        matchThemeColor(R.styleable.Theme_CollapsingToolbarLayout_contentScrim)?.let {
+            ctl.setContentScrimColor(it)
+        }
+        matchThemeColor(R.styleable.Theme_CollapsingToolbarLayout_statusBarScrim)?.let {
+            ctl.setStatusBarScrimColor(it)
         }
     }
 )

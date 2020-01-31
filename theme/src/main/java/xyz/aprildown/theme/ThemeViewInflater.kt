@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -33,6 +34,7 @@ import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CardViewTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.ChipTint
+import xyz.aprildown.theme.tint.CollapsingToolbarLayoutTint
 import xyz.aprildown.theme.tint.EditTextTint
 import xyz.aprildown.theme.tint.ExtendedFloatingActionButtonTint
 import xyz.aprildown.theme.tint.FloatingActionButtonTint
@@ -96,6 +98,11 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
         return when (name) {
             "com.google.android.material.appbar.AppBarLayout" ->
                 AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
+            "com.google.android.material.appbar.CollapsingToolbarLayout" ->
+                CollapsingToolbarLayout(context, attrs).decorate(
+                    attrs,
+                    CollapsingToolbarLayoutTint()
+                )
             "androidx.appcompat.widget.Toolbar" ->
                 Toolbar(context, attrs).decorate(attrs, ToolbarTint())
             "com.google.android.material.bottomappbar.BottomAppBar" ->
