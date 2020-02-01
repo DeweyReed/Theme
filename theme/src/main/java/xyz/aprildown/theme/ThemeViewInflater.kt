@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -105,6 +106,8 @@ class ThemeViewInflater : MaterialComponentsViewInflater() {
                 )
             "androidx.appcompat.widget.Toolbar" ->
                 Toolbar(context, attrs).decorate(attrs, ToolbarTint())
+            "com.google.android.material.appbar.MaterialToolbar" ->
+                MaterialToolbar(context, attrs).decorate(attrs, ToolbarTint())
             "com.google.android.material.bottomappbar.BottomAppBar" ->
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
             "com.google.android.material.bottomnavigation.BottomNavigationView" ->

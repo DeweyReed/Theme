@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.core.view.GestureDetectorCompat
-import kotlinx.android.synthetic.main.activity_showcase_basic.*
+import kotlinx.android.synthetic.main.activity_showcase_collapsing_toolbar.*
 
 class ShowcaseCollapsingToolbarActivity : BaseActivity() {
 

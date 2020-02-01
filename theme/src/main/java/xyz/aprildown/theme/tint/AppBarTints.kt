@@ -10,8 +10,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.colorStateList
+import xyz.aprildown.theme.utils.float
+import xyz.aprildown.theme.utils.isLightColor
+import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
+import xyz.aprildown.theme.utils.withAlpha
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/AppBarLayout.md
@@ -22,7 +27,7 @@ internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
     onTint = {
         val appBarLayout = view
         matchThemeColor(R.styleable.Theme_AppBarLayout_android_background)?.let {
-            appBarLayout.setBackgroundColor(it)
+            appBarLayout.setMaterialBackgroundColor(it)
         }
     }
 )
@@ -41,15 +46,84 @@ internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
 )
 
 internal class ToolbarTint : BaseTint<Toolbar>(
-    attrs = R.styleable.Theme_ToolbarLayout,
+    attrs = R.styleable.Theme_Toolbar,
     defStyleAttr = R.attr.toolbarStyle,
     onTint = {
         val toolbar = view
-        matchThemeColor(R.styleable.Theme_ToolbarLayout_android_background)?.let {
-            toolbar.setBackgroundColor(it)
+        var isToolbarBackgroundLight = Theme.get().isPrimaryLight
+        matchThemeColor(R.styleable.Theme_Toolbar_android_background)?.let {
+            isToolbarBackgroundLight = it.isLightColor
+            // Check MaterialToolbar.initBackground
+            toolbar.setMaterialBackgroundColor(it)
         }
+        /**
+         * Here is the problem.
+         * Normally, we use AppTheme.AppBarOverlay and AppTheme.PopupOverlay to define toolbar text
+         * and icons color. This means we know if the primary color is light before hand.
+         * However, with Theme, we don't know that so we have to calculate at run time.
+         */
+        withColorOrResourceId(
+            R.styleable.Theme_Toolbar_titleTextColor,
+            applySolidColor = {
+                toolbar.setTitleTextColor(it)
+            },
+            applyResource = { resourceId ->
+                if (resourceId == R.color.abc_primary_text_material_dark ||
+                    resourceId == R.color.abc_primary_text_material_light
+                ) {
+                    toolbar.context.colorStateList(
+                        if (isToolbarBackgroundLight) {
+                            // Weired names.
+                            R.color.abc_primary_text_material_light
+                        } else {
+                            R.color.abc_primary_text_material_dark
+                        }
+                    )?.let {
+                        toolbar.setTitleTextColor(it)
+                        // The navigationIcon may not be inflated now, post it.
+                        toolbar.post {
+                            // Use the same color.
+                            toolbar.navigationIcon?.setTintList(it)
+                        }
+                    }
+                }
+            }
+        )
+        withColorOrResourceId(
+            R.styleable.Theme_Toolbar_subtitleTextColor,
+            applySolidColor = {
+                toolbar.setSubtitleTextColor(it)
+            },
+            applyResource = { resourceId ->
+                when (resourceId) {
+                    R.color.material_on_primary_emphasis_medium -> {
+                        toolbar.setSubtitleTextColor(toolbar.material_on_primary_emphasis_medium())
+                    }
+                    R.color.abc_secondary_text_material_dark,
+                    R.color.abc_secondary_text_material_light -> {
+                        toolbar.context.colorStateList(
+                            if (isToolbarBackgroundLight) {
+                                R.color.abc_secondary_text_material_light
+                            } else {
+                                R.color.abc_secondary_text_material_dark
+                            }
+                        )?.let {
+                            toolbar.setSubtitleTextColor(it)
+                        }
+                    }
+                }
+            }
+        )
     }
 )
+
+// R.color.material_on_primary_emphasis_medium
+private fun View.material_on_primary_emphasis_medium(): ColorStateList {
+    return ColorStateList(
+        arrayOf(intArrayOf()),
+        intArrayOf(Theme.get().colorOnPrimary withAlpha context.float(R.dimen.material_emphasis_medium))
+    )
+}
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/BottomAppBar.md
@@ -74,7 +148,7 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
     onTint = {
         val bottomNavigationView = view
         matchThemeColor(R.styleable.Theme_BottomNavigationView_android_background)?.let {
-            bottomNavigationView.setBackgroundColor(it)
+            bottomNavigationView.setMaterialBackgroundColor(it)
         }
         withColorOrResourceId(
             R.styleable.Theme_BottomNavigationView_itemIconTint,

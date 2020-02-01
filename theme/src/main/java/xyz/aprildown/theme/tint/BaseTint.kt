@@ -76,13 +76,13 @@ internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
     fun withColorOrResourceId(
         @StyleableRes index: Int,
-        applySolidColor: (color: Int) -> Unit,
+        applySolidColor: ((color: Int) -> Unit)? = null,
         applyResource: ((resourceId: Int) -> Unit)? = null,
         applyDefault: (() -> Unit)? = null
     ) {
         val color = matchThemeColor(index)
         if (color != null) {
-            applySolidColor.invoke(color)
+            applySolidColor?.invoke(color)
         } else {
             if (typedArray.hasValue(index)) {
                 val resourceId = typedArray.getResourceId(index, -1)

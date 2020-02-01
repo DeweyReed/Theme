@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
 import androidx.annotation.ColorInt
@@ -20,9 +21,11 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.google.android.material.shape.MaterialShapeDrawable
 import xyz.aprildown.theme.BuildConfig
 import xyz.aprildown.theme.internal.PREFS_NAME
 
@@ -47,8 +50,21 @@ internal fun Context.color(@ColorRes color: Int): Int {
     return ContextCompat.getColor(this, color)
 }
 
+internal fun Context.colorStateList(@ColorRes color: Int): ColorStateList? {
+    return AppCompatResources.getColorStateList(this, color)
+}
+
 internal fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
-    return ContextCompat.getDrawable(this, drawable)
+    return AppCompatResources.getDrawable(this, drawable)
+}
+
+internal fun View.setMaterialBackgroundColor(@ColorInt color: Int) {
+    val currentBackground = background
+    if (currentBackground is MaterialShapeDrawable) {
+        currentBackground.fillColor = color.toColorStateList()
+    } else {
+        setBackgroundColor(color)
+    }
 }
 
 @ColorInt

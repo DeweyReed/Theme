@@ -6,6 +6,7 @@ import com.google.android.material.tabs.TabLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
@@ -18,7 +19,7 @@ internal class TabLayoutTint : BaseTint<TabLayout>(
     onTint = {
         val tabLayout = view
         matchThemeColor(R.styleable.Theme_TabLayout_android_background)?.let {
-            tabLayout.setBackgroundColor(it)
+            tabLayout.setMaterialBackgroundColor(it)
         }
         withColorOrResourceId(
             R.styleable.Theme_TabLayout_tabIconTint,

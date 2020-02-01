@@ -48,8 +48,10 @@
         <attr name="statusBarScrim" />
     </declare-styleable>
 
-    <declare-styleable name="Theme_ToolbarLayout">
+    <declare-styleable name="Theme_Toolbar">
         <attr name="android:background" />
+        <attr name="titleTextColor" />
+        <attr name="subtitleTextColor" />
     </declare-styleable>
 
     <declare-styleable name="Theme_BottomAppBar">

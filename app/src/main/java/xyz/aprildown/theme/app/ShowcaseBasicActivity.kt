@@ -12,6 +12,9 @@ class ShowcaseBasicActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_showcase_basic)
         setSupportActionBar(toolbar)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         val detector = GestureDetectorCompat(this,
             object : GestureDetector.SimpleOnGestureListener() {
