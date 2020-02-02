@@ -12,6 +12,7 @@ import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.colorStateList
 import xyz.aprildown.theme.utils.float
+import xyz.aprildown.theme.utils.getMaterialBackgroundColor
 import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.themeColor
@@ -32,6 +33,14 @@ internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
     }
 )
 
+private fun View.findAppBarLayout(): AppBarLayout? {
+    var parent = parent
+    while (parent != null && parent !is AppBarLayout) {
+        parent = parent.parent
+    }
+    return parent as? AppBarLayout
+}
+
 internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
     attrs = R.styleable.Theme_CollapsingToolbarLayout,
     onTint = {
@@ -45,11 +54,19 @@ internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
         matchThemeColor(R.styleable.Theme_CollapsingToolbarLayout_statusBarScrim)?.let {
             ctl.setStatusBarScrimColor(it)
         }
+
+        // This is hack and ignores your setters in the activity's onCreate.
         withColorOrResourceId(
             R.styleable.Theme_CollapsingToolbarLayout_expandedTitleTextAppearance,
             applyDefault = {
-                ctl.textColorOnToolbar(isPrimaryLight)?.let {
-                    ctl.setExpandedTitleTextColor(it)
+                // Post because AppBarLayout isn't available now.
+                ctl.post {
+                    val isAppbarLayoutLight =
+                        ctl.findAppBarLayout()?.getMaterialBackgroundColor()?.isLightColor
+                            ?: isPrimaryLight
+                    ctl.textColorOnToolbar(isAppbarLayoutLight)?.let {
+                        ctl.setExpandedTitleTextColor(it)
+                    }
                 }
             }
         )

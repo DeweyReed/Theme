@@ -9,6 +9,7 @@ import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
@@ -64,6 +65,15 @@ internal fun View.setMaterialBackgroundColor(@ColorInt color: Int) {
         currentBackground.fillColor = color.toColorStateList()
     } else {
         setBackgroundColor(color)
+    }
+}
+
+@ColorInt
+internal fun View.getMaterialBackgroundColor(): Int? {
+    return when (val background = background) {
+        is ColorDrawable -> background.color
+        is MaterialShapeDrawable -> background.fillColor?.defaultColor
+        else -> null
     }
 }
 
