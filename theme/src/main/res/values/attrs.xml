@@ -46,6 +46,8 @@
         <!-- We need to set this value to make the collapsing content fade.-->
         <attr name="contentScrim" />
         <attr name="statusBarScrim" />
+        <attr name="expandedTitleTextAppearance" />
+        <attr name="collapsedTitleTextAppearance" />
     </declare-styleable>
 
     <declare-styleable name="Theme_Toolbar">

@@ -36,12 +36,31 @@ internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
     attrs = R.styleable.Theme_CollapsingToolbarLayout,
     onTint = {
         val ctl = view
+        val isPrimaryLight = Theme.get().isPrimaryLight
+        var isCollapsedToolbarLight = isPrimaryLight
         matchThemeColor(R.styleable.Theme_CollapsingToolbarLayout_contentScrim)?.let {
+            isCollapsedToolbarLight = it.isLightColor
             ctl.setContentScrimColor(it)
         }
         matchThemeColor(R.styleable.Theme_CollapsingToolbarLayout_statusBarScrim)?.let {
             ctl.setStatusBarScrimColor(it)
         }
+        withColorOrResourceId(
+            R.styleable.Theme_CollapsingToolbarLayout_expandedTitleTextAppearance,
+            applyDefault = {
+                ctl.textColorOnToolbar(isPrimaryLight)?.let {
+                    ctl.setExpandedTitleTextColor(it)
+                }
+            }
+        )
+        withColorOrResourceId(
+            R.styleable.Theme_CollapsingToolbarLayout_collapsedTitleTextAppearance,
+            applyDefault = {
+                ctl.textColorOnToolbar(isCollapsedToolbarLight)?.let {
+                    ctl.setCollapsedTitleTextColor(it)
+                }
+            }
+        )
     }
 )
 
@@ -71,16 +90,10 @@ internal class ToolbarTint : BaseTint<Toolbar>(
                 if (resourceId == R.color.abc_primary_text_material_dark ||
                     resourceId == R.color.abc_primary_text_material_light
                 ) {
-                    toolbar.context.colorStateList(
-                        if (isToolbarBackgroundLight) {
-                            // Weired names.
-                            R.color.abc_primary_text_material_light
-                        } else {
-                            R.color.abc_primary_text_material_dark
-                        }
-                    )?.let {
+                    toolbar.textColorOnToolbar(isToolbarBackgroundLight)?.let {
                         toolbar.setTitleTextColor(it)
                         // The navigationIcon may not be inflated now, post it.
+                        // But it'll override any tint in the Activity's onCreate
                         toolbar.post {
                             // Use the same color.
                             toolbar.navigationIcon?.setTintList(it)
@@ -122,6 +135,20 @@ private fun View.material_on_primary_emphasis_medium(): ColorStateList {
     return ColorStateList(
         arrayOf(intArrayOf()),
         intArrayOf(Theme.get().colorOnPrimary withAlpha context.float(R.dimen.material_emphasis_medium))
+    )
+}
+
+/**
+ * TODO: Still unable to find the right color for the night theme.
+ */
+private fun View.textColorOnToolbar(isToolbarLight: Boolean): ColorStateList? {
+    return context.colorStateList(
+        if (isToolbarLight) {
+            // Weired names.
+            R.color.abc_primary_text_material_light
+        } else {
+            R.color.abc_primary_text_material_dark
+        }
     )
 }
 
@@ -282,7 +309,7 @@ private fun View.mtrl_bottom_nav_ripple_color(): ColorStateList {
 }
 
 // R.color.mtrl_bottom_nav_colored_ripple_color
-private fun View.mtrl_bottom_nav_colored_ripple_color(): ColorStateList {
+private fun mtrl_bottom_nav_colored_ripple_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(
