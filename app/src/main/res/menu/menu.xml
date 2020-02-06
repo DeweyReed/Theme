@@ -11,5 +11,5 @@
         android:id="@+id/action2"
         android:icon="@drawable/ic_night"
         android:title="Day"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 </menu>

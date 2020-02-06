@@ -2,6 +2,7 @@ package xyz.aprildown.theme.app
 
 import android.os.Bundle
 import android.view.GestureDetector
+import android.view.Menu
 import android.view.MotionEvent
 import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_showcase_basic.*
@@ -31,5 +32,11 @@ class ShowcaseBasicActivity : BaseActivity() {
         fab.setOnTouchListener { _, event ->
             detector.onTouchEvent(event)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu)
+        return true
     }
 }

@@ -8,7 +8,6 @@ import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -150,22 +149,14 @@ internal fun Resources.safeResourceName(resId: Int): String {
     }
 }
 
-@CheckResult
-internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintMode(
-        result,
-        PorterDuff.Mode.SRC_IN
-    )
+internal fun Drawable.tinted(@ColorInt color: Int): Drawable {
+    val result = DrawableCompat.wrap(this.mutate())
     DrawableCompat.setTint(result, color)
     return result
 }
 
-@CheckResult
-internal fun Drawable?.tint(sl: ColorStateList): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintList(result, sl)
+internal fun Drawable.tinted(csl: ColorStateList): Drawable {
+    val result = DrawableCompat.wrap(this.mutate())
+    DrawableCompat.setTintList(result, csl)
     return result
 }

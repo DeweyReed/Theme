@@ -18,7 +18,7 @@ import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
 import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
 import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
 import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
-import xyz.aprildown.theme.tint.ToolbarTint
+import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
 import xyz.aprildown.theme.utils.isLightColor
@@ -94,14 +94,8 @@ class Theme private constructor(
 
     // endregion helpers
 
-    /**
-     * When using default action bar(without adding Toolbar to xml), you don't need this method.
-     * Otherwise, you needs to call this method **after** menu inflation in the onCreateOptionsMenu.
-     *
-     * @param menu onCreateOptionsMenu's parameter
-     */
     fun tintMenu(menu: Menu) {
-        ToolbarTint.tintMenu(menu, colorOnPrimary)
+        menu.tintMenuWithHack(context)
     }
 
     companion object {
