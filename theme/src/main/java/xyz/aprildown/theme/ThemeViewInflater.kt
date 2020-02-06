@@ -53,7 +53,7 @@ import xyz.aprildown.theme.tint.ToolbarTint
 import xyz.aprildown.theme.tint.decorate
 
 @Keep // Make proguard keep this class as it's accessed reflectively by AppCompat
-class ThemeViewInflater : MaterialComponentsViewInflater() {
+open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     // region MaterialComponentsViewInflater
 
