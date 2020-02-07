@@ -17,6 +17,8 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
     attrs = R.styleable.Theme_ExtendedFloatingActionButton,
     defStyleAttr = R.attr.extendedFloatingActionButtonStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton
+        // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon
         val fab = view
         withColorOrResourceId(
             R.styleable.Theme_ExtendedFloatingActionButton_android_textColor,

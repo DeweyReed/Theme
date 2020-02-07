@@ -9,6 +9,7 @@ internal class SpinnerTint : BaseTint<AppCompatSpinner>(
     attrs = R.styleable.Theme_Spinner,
     defStyleAttr = R.attr.spinnerStyle,
     onTint = {
+        // R.style.Widget_AppCompat_Spinner
         val spinner = view
         matchThemeColor(R.styleable.Theme_Spinner_backgroundTint)?.let {
             ViewCompat.setBackgroundTintList(spinner, it.toColorStateList())

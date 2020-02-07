@@ -19,6 +19,7 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
     attrs = R.styleable.Theme_NavigationView,
     defStyleAttr = R.attr.navigationViewStyle,
     onTint = {
+        // R.style.Widget_Design_NavigationView
         val nav = view
         withColorOrResourceId(
             R.styleable.Theme_NavigationView_itemIconTint,

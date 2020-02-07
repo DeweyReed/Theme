@@ -18,6 +18,8 @@ internal class BottomAppBarTint : BaseTint<BottomAppBar>(
     attrs = R.styleable.Theme_BottomAppBar,
     defStyleAttr = R.attr.bottomAppBarStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_BottomAppBar
+        // R.style.Widget_MaterialComponents_BottomAppBar_Colored
         val bottomAppBar = view
         matchThemeColor(R.styleable.Theme_BottomAppBar_backgroundTint)?.let {
             bottomAppBar.backgroundTint = it.toColorStateList()
@@ -32,6 +34,8 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
     attrs = R.styleable.Theme_BottomNavigationView,
     defStyleAttr = R.attr.bottomNavigationStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_BottomNavigationView
+        // R.style.Widget_MaterialComponents_BottomNavigationView_Colored
         val bottomNavigationView = view
         matchThemeColor(R.styleable.Theme_BottomNavigationView_android_background)?.let {
             bottomNavigationView.setMaterialBackgroundColor(it)

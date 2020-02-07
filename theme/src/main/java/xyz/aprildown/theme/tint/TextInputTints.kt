@@ -13,6 +13,8 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
     attrs = R.styleable.Theme_TextInputLayout,
     defStyleAttr = R.attr.textInputStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_TextInputLayout_FilledBox
+        // R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox
         val textInputLayout = view
         matchThemeColor(R.styleable.Theme_TextInputLayout_android_textColorHint)?.let {
             textInputLayout.defaultHintTextColor = it.toColorStateList()

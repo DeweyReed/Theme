@@ -17,6 +17,8 @@ internal class TabLayoutTint : BaseTint<TabLayout>(
     attrs = R.styleable.Theme_TabLayout,
     defStyleAttr = R.attr.tabStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_TabLayout
+        // R.style.Widget_MaterialComponents_TabLayout_Colored
         val tabLayout = view
         matchThemeColor(R.styleable.Theme_TabLayout_android_background)?.let {
             tabLayout.setMaterialBackgroundColor(it)

@@ -11,13 +11,16 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * [Chip]
- *https://github.com/material-components/material-components-android/blob/master/docs/components/Chip.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/Chip.md
  */
 internal class ChipTint : BaseTint<Chip>(
     attrs = R.styleable.Theme_Chip,
     defStyleAttr = R.attr.chipStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_Chip_Entry
+        // R.style.Widget_MaterialComponents_Chip_Action
+        // R.style.Widget_MaterialComponents_Chip_Choice
+        // R.style.Widget_MaterialComponents_Chip_Filter
         val chip = view
         withColorOrResourceId(
             R.styleable.Theme_Chip_android_textColor,

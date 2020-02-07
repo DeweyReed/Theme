@@ -26,6 +26,8 @@ internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
     attrs = R.styleable.Theme_AppBarLayout,
     defStyleAttr = R.attr.appBarLayoutStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_AppBarLayout_Surface
+        // R.style.Widget_MaterialComponents_AppBarLayout_Primary
         val appBarLayout = view
         matchThemeColor(R.styleable.Theme_AppBarLayout_android_background)?.let {
             appBarLayout.setMaterialBackgroundColor(it)
@@ -44,6 +46,7 @@ private fun View.findAppBarLayout(): AppBarLayout? {
 internal class CollapsingToolbarLayoutTint : BaseTint<CollapsingToolbarLayout>(
     attrs = R.styleable.Theme_CollapsingToolbarLayout,
     onTint = {
+        // R.style.Widget_Design_CollapsingToolbar
         val ctl = view
         val context = ctl.context
         val isPrimaryLight = Theme.get().isPrimaryLight
@@ -88,6 +91,9 @@ internal class ToolbarTint : BaseTint<Toolbar>(
     attrs = R.styleable.Theme_Toolbar,
     defStyleAttr = R.attr.toolbarStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_Toolbar
+        // R.style.Widget_MaterialComponents_Toolbar_Primary
+        // R.style.Widget_MaterialComponents_Toolbar_Surface
         val toolbar = view
         val context = toolbar.context
         isNearestToolbarBackgroundLight = Theme.get().isPrimaryLight

@@ -17,6 +17,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
     attrs = R.styleable.Theme_FloatingActionButton,
     defStyleAttr = R.attr.floatingActionButtonStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_FloatingActionButton
         val fab = view
         matchThemeColor(R.styleable.Theme_FloatingActionButton_backgroundTint)?.let {
             ViewCompat.setBackgroundTintList(fab, it.toColorStateList())

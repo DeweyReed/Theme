@@ -17,6 +17,7 @@ internal class CardViewTint : BaseTint<CardView>(
     attrs = R.styleable.Theme_MaterialCardView,
     defStyleAttr = R.attr.cardViewStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_CardView
         val card = view
         matchThemeColor(R.styleable.Theme_MaterialCardView_cardBackgroundColor)?.let {
             card.setCardBackgroundColor(it)
@@ -31,6 +32,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
     attrs = R.styleable.Theme_MaterialCardView,
     defStyleAttr = R.attr.materialCardViewStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_CardView
         val card = view
         matchThemeColor(R.styleable.Theme_MaterialCardView_cardBackgroundColor)?.let {
             card.setCardBackgroundColor(it)

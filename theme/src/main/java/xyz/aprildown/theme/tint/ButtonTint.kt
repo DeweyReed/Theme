@@ -14,13 +14,16 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * [MaterialButton]
  * https://github.com/material-components/material-components-android/blob/master/docs/components/MaterialButton.md
  */
 internal class ButtonTint : BaseTint<AppCompatButton>(
     attrs = R.styleable.Theme_Button,
     defStyleAttr = R.attr.materialButtonStyle,
     onTint = {
+        // R.style.Widget_MaterialComponents_Button
+        // R.style.Widget_MaterialComponents_Button_UnelevatedButton
+        // R.style.Widget_MaterialComponents_Button_OutlinedButton
+        // R.style.Widget_MaterialComponents_Button_TextButton
         val button = view
         if (button is MaterialButton) {
             withColorOrResourceId(

@@ -20,13 +20,13 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * [MaterialCheckBox]
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Checkbox.md
  */
 internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
     attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.checkboxStyle,
     onTint = {
+        // R.style.Widget_AppCompat_CompoundButton_CheckBox
         val checkBox = view
         if (checkBox is MaterialCheckBox) {
             withColorOrResourceId(
@@ -57,6 +57,7 @@ internal class RadioButtonTint : BaseTint<AppCompatRadioButton>(
     attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.radioButtonStyle,
     onTint = {
+        // R.style.Widget_AppCompat_CompoundButton_RadioButton
         val radioButton = view
         if (radioButton is MaterialRadioButton) {
             withColorOrResourceId(
@@ -145,6 +146,7 @@ internal class SwitchMaterialTint : BaseTint<SwitchMaterial>(
     attrs = R.styleable.Theme_Switch,
     defStyleAttr = android.R.attr.switchStyle,
     onTint = {
+        // R.style.Widget_AppCompat_CompoundButton_Switch
         val switch = view
         withColorOrResourceId(
             R.styleable.Theme_Switch_thumbTint,

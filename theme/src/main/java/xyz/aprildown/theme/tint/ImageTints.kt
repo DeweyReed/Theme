@@ -19,6 +19,7 @@ internal class ImageButtonTint : BaseTint<AppCompatImageButton>(
     attrs = R.styleable.Theme_ImageView,
     defStyleAttr = R.attr.imageButtonStyle,
     onTint = {
+        // R.style.Widget_AppCompat_ImageButton
         tintImageView()
     }
 )
