@@ -7,8 +7,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
+import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.themeColor
+import xyz.aprildown.theme.utils.tinted
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
@@ -21,8 +23,21 @@ internal class BottomAppBarTint : BaseTint<BottomAppBar>(
         // R.style.Widget_MaterialComponents_BottomAppBar
         // R.style.Widget_MaterialComponents_BottomAppBar_Colored
         val bottomAppBar = view
+        val context = bottomAppBar.context
         matchThemeColor(R.styleable.Theme_BottomAppBar_backgroundTint)?.let {
             bottomAppBar.backgroundTint = it.toColorStateList()
+        }
+        val isBackgroundLight =
+            bottomAppBar.backgroundTint?.defaultColor?.isLightColor
+                ?: Theme.get().isPrimaryLight
+        context.textColorOnToolbar(isBackgroundLight)?.let { textColorOnToolbar ->
+            bottomAppBar.navigationIcon?.let {
+                bottomAppBar.navigationIcon = it.tinted(textColorOnToolbar)
+            }
+            bottomAppBar.overflowIcon?.let {
+                bottomAppBar.overflowIcon = it.tinted(textColorOnToolbar)
+            }
+            bottomAppBar.menu.tintMenu(textColorOnToolbar)
         }
     }
 )

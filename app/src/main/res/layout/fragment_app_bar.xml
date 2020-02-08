@@ -73,7 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        app:navigationIcon="@drawable/ic_day" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -81,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="70dp"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        app:navigationIcon="@drawable/ic_day" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

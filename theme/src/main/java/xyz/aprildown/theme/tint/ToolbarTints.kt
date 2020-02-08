@@ -171,7 +171,7 @@ private fun View.material_on_primary_emphasis_medium(): ColorStateList {
     )
 }
 
-private fun Context.textColorOnToolbar(isToolbarLight: Boolean): ColorStateList? {
+internal fun Context.textColorOnToolbar(isToolbarLight: Boolean): ColorStateList? {
     return colorStateList(
         if (isToolbarLight) {
             // Weired names.
@@ -182,7 +182,7 @@ private fun Context.textColorOnToolbar(isToolbarLight: Boolean): ColorStateList?
     )
 }
 
-private fun Menu.tintMenu(csl: ColorStateList) {
+internal fun Menu.tintMenu(csl: ColorStateList) {
     fun MenuItem.tint(csl: ColorStateList) {
         icon?.let {
             icon = icon.tinted(csl)
