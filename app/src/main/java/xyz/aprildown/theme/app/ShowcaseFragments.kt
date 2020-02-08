@@ -45,3 +45,5 @@ class ChipFragment : Fragment(R.layout.fragment_chip)
 class FabFragment : Fragment(R.layout.fragment_fab)
 
 class CardFragment : Fragment(R.layout.fragment_card)
+
+class BarFragment : Fragment(R.layout.fragment_bar)

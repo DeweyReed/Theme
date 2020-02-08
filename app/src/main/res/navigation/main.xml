@@ -65,6 +65,12 @@
         android:label="Card"
         tools:layout="@layout/fragment_card" />
 
+    <fragment
+        android:id="@+id/barFragment"
+        android:name="xyz.aprildown.theme.app.BarFragment"
+        android:label="Bar"
+        tools:layout="@layout/fragment_bar" />
+
     <activity
         android:id="@+id/showcaseBasicActivity"
         android:name="xyz.aprildown.theme.app.ShowcaseBasicActivity"

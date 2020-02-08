@@ -3,6 +3,7 @@ package xyz.aprildown.theme
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ProgressBar
 import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -43,6 +44,7 @@ import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
+import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
@@ -97,6 +99,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
         return when (name) {
+            "ProgressBar" ->
+                ProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
             "com.google.android.material.appbar.AppBarLayout" ->
                 AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
             "com.google.android.material.appbar.CollapsingToolbarLayout" ->

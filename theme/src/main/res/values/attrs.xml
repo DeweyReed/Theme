@@ -127,4 +127,9 @@
         <attr name="boxBackgroundColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ProgressBar">
+        <attr name="android:indeterminateTint" />
+        <attr name="android:progressTint" />
+    </declare-styleable>
+
 </resources>
