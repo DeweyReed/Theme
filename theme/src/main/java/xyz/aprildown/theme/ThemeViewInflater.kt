@@ -141,7 +141,20 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
             "com.google.android.material.textfield.TextInputLayout" ->
                 TextInputLayout(context, attrs).decorate(attrs, TextInputLayoutTint())
-            else -> super.createView(context, name, attrs)
+            else -> {
+                if (name == null) {
+                    null
+                } else {
+                    var result: View? = null
+                    for (delegate in Theme.get().delegates) {
+                        result = delegate.createView(context, name, attrs)
+                        if (result != null) {
+                            break
+                        }
+                    }
+                    result
+                } ?: super.createView(context, name, attrs)
+            }
         }
     }
 }

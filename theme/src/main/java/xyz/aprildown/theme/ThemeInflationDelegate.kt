@@ -3,13 +3,11 @@ package xyz.aprildown.theme
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.IdRes
 
-interface InflationDelegate {
+interface ThemeInflationDelegate {
     fun createView(
         context: Context,
-        attrs: AttributeSet?,
         name: String,
-        @IdRes viewId: Int
+        attrs: AttributeSet?
     ): View?
 }

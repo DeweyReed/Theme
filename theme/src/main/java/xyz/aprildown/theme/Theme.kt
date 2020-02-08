@@ -35,6 +35,8 @@ class Theme private constructor(
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 
+    internal val delegates = mutableListOf<ThemeInflationDelegate>()
+
     // region colors
 
     val colorPrimary: Int
@@ -129,6 +131,14 @@ class Theme private constructor(
                     editor.save()
                 }
             })
+        }
+
+        /**
+         * Order matters.
+         */
+        @JvmStatic
+        fun installDelegates(vararg delegates: ThemeInflationDelegate) {
+            get().delegates.addAll(delegates)
         }
 
         @JvmStatic
