@@ -132,4 +132,9 @@
         <attr name="android:progressTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_SeekBar">
+        <attr name="android:thumbTint" />
+        <attr name="android:progressTint" />
+    </declare-styleable>
+
 </resources>

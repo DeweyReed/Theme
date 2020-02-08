@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
@@ -46,6 +47,7 @@ import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
+import xyz.aprildown.theme.tint.SeekBarTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
@@ -73,6 +75,10 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createRadioButton(context: Context?, attrs: AttributeSet?): AppCompatRadioButton {
         return super.createRadioButton(context, attrs).decorate(attrs, RadioButtonTint())
+    }
+
+    override fun createSeekBar(context: Context?, attrs: AttributeSet?): AppCompatSeekBar {
+        return super.createSeekBar(context, attrs).decorate(attrs, SeekBarTint())
     }
 
     // endregion MaterialComponentsViewInflater
