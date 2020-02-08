@@ -3,7 +3,10 @@ package xyz.aprildown.theme
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.HorizontalScrollView
+import android.widget.ListView
 import android.widget.ProgressBar
+import android.widget.ScrollView
 import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -16,6 +19,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.MaterialToolbar
@@ -41,12 +45,16 @@ import xyz.aprildown.theme.tint.CollapsingToolbarLayoutTint
 import xyz.aprildown.theme.tint.EditTextTint
 import xyz.aprildown.theme.tint.ExtendedFloatingActionButtonTint
 import xyz.aprildown.theme.tint.FloatingActionButtonTint
+import xyz.aprildown.theme.tint.HorizontalScrollViewTint
 import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
+import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
+import xyz.aprildown.theme.tint.RecyclerViewTint
+import xyz.aprildown.theme.tint.ScrollViewTint
 import xyz.aprildown.theme.tint.SeekBarTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
@@ -141,6 +149,14 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
             "com.google.android.material.textfield.TextInputLayout" ->
                 TextInputLayout(context, attrs).decorate(attrs, TextInputLayoutTint())
+            "ScrollView" ->
+                ScrollView(context, attrs).decorate(attrs, ScrollViewTint())
+            "HorizontalScrollView" ->
+                HorizontalScrollView(context, attrs).decorate(attrs, HorizontalScrollViewTint())
+            "ListView" ->
+                ListView(context, attrs).decorate(attrs, ListViewTint())
+            "androidx.recyclerview.widget.RecyclerView" ->
+                RecyclerView(context, attrs).decorate(attrs, RecyclerViewTint())
             else -> {
                 if (name == null) {
                     null
