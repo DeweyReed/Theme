@@ -91,8 +91,10 @@ abstract class BaseActivity : AppCompatActivity() {
                     "Amber + Blue"
                 ),
                 themeValue
-            ) { _, which ->
+            ) { dialog, which ->
                 themeValue = which
+                // It won't close on Lollipop devices.
+                dialog.dismiss()
             }
             .show()
     }
