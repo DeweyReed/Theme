@@ -25,7 +25,7 @@ ext {
             androidx_navigation_fragment: 'androidx.navigation:navigation-fragment-ktx:2.2.1',
             androidx_navigation_ui      : 'androidx.navigation:navigation-ui-ktx:2.2.1',
 
-            leak_cannary                : 'com.squareup.leakcanary:leakcanary-android:2.1',
+            leak_cannary                : 'com.squareup.leakcanary:leakcanary-android:2.2',
 
             fast_adapter                : 'com.mikepenz:fastadapter:4.1.2',
             materialize                 : 'com.mikepenz:materialize:1.2.1',
