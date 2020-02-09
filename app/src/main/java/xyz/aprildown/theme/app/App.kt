@@ -3,18 +3,16 @@
 package xyz.aprildown.theme.app
 
 import android.app.Application
+import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.Theme
 
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        Theme.init(this) {
-            colorPrimaryRes = R.color.colorPrimary
-            colorPrimaryDarkRes = R.color.colorPrimaryDark
-            colorAccentRes = R.color.colorAccent
-            colorStatusBarRes = R.color.colorPrimaryDark
-        }
-
+        Theme.init(
+            ContextThemeWrapper(this, R.style.AppTheme),
+            colorPrimaryRes = R.color.colorPrimary,
+            colorSecondaryRes = R.color.colorSecondary
+        )
     }
 }

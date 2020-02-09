@@ -12,14 +12,23 @@ android {
         versionName versions.version_name
     }
 
-    resourcePrefix 'theme_'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation libs.kotlin_stdlib_jdk7
+
     implementation libs.androidx_appcompat
     implementation libs.androidx_cardview
-    implementation libs.androidx_recyclerview
+    implementation libs.androidx_swiperefreshlayout
+    implementation libs.androidx_core_ktx
 
     implementation libs.material
 }

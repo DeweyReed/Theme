@@ -4,33 +4,93 @@ package xyz.aprildown.theme.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.PorterDuff
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
-import androidx.annotation.*
+import android.view.View
+import androidx.annotation.AttrRes
+import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.google.android.material.shape.MaterialShapeDrawable
 import xyz.aprildown.theme.BuildConfig
+import xyz.aprildown.theme.internal.PREFS_NAME
+
+private fun Context.safeContext(): Context =
+    takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !isDeviceProtectedStorage }?.let {
+        ContextCompat.createDeviceProtectedStorageContext(it) ?: it
+    } ?: this
+
+internal fun Context.getThemePrefs(): SharedPreferences =
+    safeContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+@ColorInt
+internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
+    return if (contains(key)) getInt(key, 0) else or.invoke()
+}
+
+internal fun Context.float(@DimenRes dimenRes: Int): Float =
+    ResourcesCompat.getFloat(resources, dimenRes)
 
 @ColorInt
 internal fun Context.color(@ColorRes color: Int): Int {
     return ContextCompat.getColor(this, color)
 }
 
+internal fun Context.colorStateList(@ColorRes color: Int): ColorStateList? {
+    return AppCompatResources.getColorStateList(this, color)
+}
+
 internal fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
-    return ContextCompat.getDrawable(this, drawable)
+    return AppCompatResources.getDrawable(this, drawable)
+}
+
+internal fun View.setMaterialBackgroundColor(@ColorInt color: Int) {
+    val currentBackground = background
+    if (currentBackground is MaterialShapeDrawable) {
+        currentBackground.fillColor = color.toColorStateList()
+    } else {
+        setBackgroundColor(color)
+    }
 }
 
 @ColorInt
-internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    val a = theme.obtainStyledAttributes(intArrayOf(attr))
-    return try {
-        a.getColor(0, fallback)
-    } catch (ignored: Throwable) {
-        fallback
+internal fun View.getMaterialBackgroundColor(): Int? {
+    return when (val background = background) {
+        is ColorDrawable -> background.color
+        is MaterialShapeDrawable -> background.fillColor?.defaultColor
+        else -> null
+    }
+}
+
+@ColorInt
+fun Context.themeColor(@AttrRes attrRes: Int): Int {
+    val a = obtainStyledAttributes(null, intArrayOf(attrRes))
+    try {
+        return a.getColor(0, Color.RED)
+    } finally {
+        a.recycle()
+    }
+}
+
+@ColorRes
+fun Context.themeRes(@AttrRes attrRes: Int): Int {
+    val a = obtainStyledAttributes(null, intArrayOf(attrRes))
+    try {
+        return a.getResourceId(0, -1)
     } finally {
         a.recycle()
     }
@@ -38,19 +98,19 @@ internal fun Context.colorAttr(@AttrRes attr: Int, @ColorInt fallback: Int = 0):
 
 internal val Context.textColorPrimary: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorPrimary)
+    get() = themeColor(android.R.attr.textColorPrimary)
 
 internal val Context.textColorPrimaryInverse: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorPrimaryInverse)
+    get() = themeColor(android.R.attr.textColorPrimaryInverse)
 
 internal val Context.textColorSecondary: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorSecondary)
+    get() = themeColor(android.R.attr.textColorSecondary)
 
 internal val Context.textColorSecondaryInverse: Int
     @ColorInt
-    get() = colorAttr(android.R.attr.textColorSecondaryInverse)
+    get() = themeColor(android.R.attr.textColorSecondaryInverse)
 
 @SuppressLint("Recycle")
 @IdRes
@@ -89,22 +149,14 @@ internal fun Resources.safeResourceName(resId: Int): String {
     }
 }
 
-@CheckResult
-internal fun Drawable?.tint(@ColorInt color: Int): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintMode(
-        result,
-        PorterDuff.Mode.SRC_IN
-    )
+internal fun Drawable.tinted(@ColorInt color: Int): Drawable {
+    val result = DrawableCompat.wrap(this.mutate())
     DrawableCompat.setTint(result, color)
     return result
 }
 
-@CheckResult
-internal fun Drawable?.tint(sl: ColorStateList): Drawable? {
-    var result: Drawable = this ?: return null
-    result = DrawableCompat.wrap(result.mutate())
-    DrawableCompat.setTintList(result, sl)
+internal fun Drawable.tinted(csl: ColorStateList): Drawable {
+    val result = DrawableCompat.wrap(this.mutate())
+    DrawableCompat.setTintList(result, csl)
     return result
 }

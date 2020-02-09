@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme_TextView">
+        <attr name="android:textColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Button">
+        <attr name="android:textColor" />
+        <attr name="backgroundTint" />
+        <attr name="iconTint" />
+        <attr name="strokeColor" />
+        <attr name="rippleColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_CompoundButton">
+        <attr name="android:textColor" />
+        <attr name="buttonTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Switch">
+        <attr name="android:textColor" />
+        <attr name="thumbTint" />
+        <attr name="trackTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_ImageView">
+        <attr name="android:background" />
+        <attr name="tint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_EditText">
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Spinner">
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_AppBarLayout">
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_CollapsingToolbarLayout">
+        <!-- We need to set this value to make the collapsing content fade.-->
+        <attr name="contentScrim" />
+        <attr name="statusBarScrim" />
+        <attr name="expandedTitleTextAppearance" />
+        <attr name="collapsedTitleTextAppearance" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Toolbar">
+        <attr name="android:background" />
+        <attr name="titleTextColor" />
+        <attr name="subtitleTextColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_BottomAppBar">
+        <attr name="backgroundTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_BottomNavigationView">
+        <attr name="android:background" />
+        <attr name="itemIconTint" />
+        <attr name="itemTextColor" />
+        <attr name="itemRippleColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Chip">
+        <attr name="android:textColor" />
+        <attr name="chipBackgroundColor" />
+        <attr name="chipSurfaceColor" />
+        <attr name="chipStrokeColor" />
+        <attr name="rippleColor" />
+        <attr name="closeIconTint" />
+        <attr name="chipIconTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_FloatingActionButton">
+        <attr name="tint" />
+        <attr name="backgroundTint" />
+        <attr name="rippleColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_ExtendedFloatingActionButton">
+        <attr name="android:textColor" />
+        <attr name="backgroundTint" />
+        <attr name="iconTint" />
+        <attr name="strokeColor" />
+        <attr name="rippleColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_MaterialCardView">
+        <attr name="cardBackgroundColor" />
+        <attr name="cardForegroundColor" />
+        <attr name="checkedIconTint" />
+        <attr name="rippleColor" />
+        <attr name="strokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_NavigationView">
+        <attr name="itemIconTint" />
+        <attr name="itemShapeFillColor" />
+        <attr name="itemTextColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_TabLayout">
+        <attr name="android:background" />
+        <attr name="tabIconTint" />
+        <attr name="tabTextColor" />
+        <attr name="tabIndicatorColor" />
+        <attr name="tabRippleColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_TextInputLayout">
+        <attr name="android:textColorHint" />
+        <attr name="hintTextColor" />
+        <attr name="helperTextTextColor" />
+        <attr name="errorTextColor" />
+        <attr name="errorIconTint" />
+        <attr name="counterTextColor" />
+        <attr name="counterOverflowTextColor" />
+        <attr name="startIconTint" />
+        <attr name="endIconTint" />
+        <attr name="boxStrokeColor" />
+        <attr name="boxBackgroundColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_ProgressBar">
+        <attr name="android:indeterminateTint" />
+        <attr name="android:progressTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_SeekBar">
+        <attr name="android:thumbTint" />
+        <attr name="android:progressTint" />
+    </declare-styleable>
+
+</resources>

@@ -1,1 +1,3 @@
+rootProject.name='Theme'
+
 include ':app', ':theme'

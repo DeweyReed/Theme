@@ -12,12 +12,26 @@ android {
         targetSdkVersion versions.target_sdk
         versionCode versions.version_code
         versionName versions.version_name
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        disable 'HardcodedText', 'GoogleAppIndexingWarning', 'ContentDescription'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -28,12 +42,20 @@ dependencies {
     implementation libs.kotlin_stdlib_jdk7
 
     implementation libs.androidx_appcompat
+    implementation libs.androidx_preference
     implementation libs.androidx_constraintlayout
+
+    implementation libs.androidx_core_ktx
+
     implementation libs.material
+
+    implementation libs.androidx_navigation_fragment
+    implementation libs.androidx_navigation_ui
 
     debugImplementation libs.leak_cannary
 
-    // We need its complete material color palette
+    implementation libs.fast_adapter
     implementation libs.materialize
+    implementation libs.flexbox
 
 }

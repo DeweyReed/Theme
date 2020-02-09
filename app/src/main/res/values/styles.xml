@@ -1,22 +1,31 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar" />
-
-    <style name="AppTheme" parent="BaseAppTheme">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="AppTheme.WithTheme">
+        <item name="viewInflaterClass">xyz.aprildown.theme.ThemeViewInflater</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.WithoutTheme" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="BaseMaterialAppTheme" parent="Theme.MaterialComponents.Light" />
+
+    <style name="ShowcaseFlexbox">
+        <item name="flexWrap">wrap</item>
+        <item name="showDivider">middle</item>
+        <item name="dividerDrawable">@drawable/divider_horizontal</item>
+    </style>
 
 </resources>

@@ -4,72 +4,87 @@ package xyz.aprildown.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.os.Build
 import android.view.Menu
-import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.LayoutInflaterCompat
-import xyz.aprildown.theme.internal.*
-import xyz.aprildown.theme.tint.ToolbarTint
-import xyz.aprildown.theme.utils.*
+import androidx.annotation.ColorRes
+import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
+import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
+import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
+import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY_VARIANT
+import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY
+import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
+import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
+import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
+import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
+import xyz.aprildown.theme.tint.tintMenuWithHack
+import xyz.aprildown.theme.utils.getColorOrDefault
+import xyz.aprildown.theme.utils.getThemePrefs
+import xyz.aprildown.theme.utils.isLightColor
+import xyz.aprildown.theme.utils.setLightNavigationBarCompat
+import xyz.aprildown.theme.utils.setStatusBarColorCompat
+import xyz.aprildown.theme.utils.setTaskDescriptionColor
+import xyz.aprildown.theme.utils.themeColor
 
-class Theme private constructor(internal val context: Context) {
+class Theme private constructor(
+    private val context: Context,
+    @ColorRes internal val colorPrimaryRes: Int,
+    @ColorRes internal val colorSecondaryRes: Int
+) {
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 
+    internal val delegates = mutableListOf<ThemeInflationDelegate>()
+
     // region colors
-
-    val isDark: Boolean
-        get() = prefs.getBoolean(KEY_IS_DARK, false)
-
-    @ColorInt
-    fun attribute(@AttrRes attrId: Int): Int {
-        return prefs.getColorOrDefault(context.attrKey(attrId)) {
-            context.colorAttr(attr = attrId)
-        }
-    }
-
-    @ColorInt
-    fun attribute(name: String): Int? {
-        val key = attrKey(name)
-        return if (prefs.contains(key)) prefs.getInt(key, 0) else null
-    }
 
     val colorPrimary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_PRIMARY_COLOR) {
-            context.colorAttr(attr = R.attr.colorPrimary)
+        get() = prefs.getColorOrDefault(KEY_COLOR_PRIMARY) {
+            context.themeColor(R.attr.colorPrimary)
         }
 
-    val colorPrimaryDark: Int
+    val colorPrimaryVariant: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_PRIMARY_DARK_COLOR) {
-            context.colorAttr(attr = R.attr.colorPrimaryDark)
+        get() = prefs.getColorOrDefault(KEY_COLOR_PRIMARY_VARIANT) {
+            context.themeColor(R.attr.colorPrimaryVariant)
         }
 
-    val colorAccent: Int
+    val colorOnPrimary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_ACCENT_COLOR) {
-            context.colorAttr(attr = R.attr.colorAccent)
+        get() = prefs.getColorOrDefault(KEY_COLOR_ON_PRIMARY) {
+            context.themeColor(R.attr.colorOnPrimary)
+        }
+
+    val colorSecondary: Int
+        @ColorInt
+        get() = prefs.getColorOrDefault(KEY_COLOR_SECONDARY) {
+            context.themeColor(R.attr.colorSecondary)
+        }
+
+    val colorSecondaryVariant: Int
+        @ColorInt
+        get() = prefs.getColorOrDefault(KEY_COLOR_SECONDARY_VARIANT) {
+            context.themeColor(R.attr.colorSecondaryVariant)
+        }
+
+    val colorOnSecondary: Int
+        @ColorInt
+        get() = prefs.getColorOrDefault(KEY_COLOR_ON_SECONDARY) {
+            context.themeColor(R.attr.colorOnSecondary)
         }
 
     val colorStatusBar: Int
         @ColorInt
         get() = prefs.getColorOrDefault(KEY_STATUS_BAR_COLOR) {
-            colorPrimaryDark
+            colorPrimaryVariant
         }
 
     val colorNavigationBar: Int
         @ColorInt
         get() = prefs.getColorOrDefault(KEY_NAV_BAR_COLOR) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                context.colorAttr(android.R.attr.navigationBarColor)
-            else Color.BLACK
+            context.themeColor(android.R.attr.navigationBarColor)
         }
 
     // endregion colors
@@ -79,28 +94,10 @@ class Theme private constructor(internal val context: Context) {
     val isPrimaryLight: Boolean
         get() = prefs.getBoolean(KEY_IS_PRIMARY_LIGHT, true)
 
-    val toolbarIconColor: Int
-        @ColorInt
-        get() = context.color(if (isPrimaryLight) R.color.theme_icon_light else R.color.theme_icon_dark)
-
-    val toolbarTitleColor: Int
-        @ColorInt
-        get() = toolbarIconColor
-
-    val toolbarSubtitleColor: Int
-        @ColorInt
-        get() = ColorUtils.adjustAlpha(toolbarTitleColor, .87f)
-
     // endregion helpers
 
-    /**
-     * When using default action bar(without adding Toolbar to xml), you don't need this method.
-     * Otherwise, you needs to call this method **after** menu inflation in the onCreateOptionsMenu.
-     *
-     * @param menu onCreateOptionsMenu's parameter
-     */
     fun tintMenu(menu: Menu) {
-        ToolbarTint.tintMenu(menu, toolbarIconColor)
+        menu.tintMenuWithHack(context)
     }
 
     companion object {
@@ -112,6 +109,38 @@ class Theme private constructor(internal val context: Context) {
         @JvmStatic
         fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init"))
 
+        /**
+         * To resolve values like [R.attr.colorControlActivated], we need your R.color.colorPrimary.
+         */
+        @JvmStatic
+        fun init(
+            context: Context,
+            @ColorRes colorPrimaryRes: Int,
+            @ColorRes colorSecondaryRes: Int,
+            f: (ThemeEditor.() -> Unit)? = null
+        ) {
+            instance ?: (Theme(
+                context,
+                colorPrimaryRes = colorPrimaryRes,
+                colorSecondaryRes = colorSecondaryRes
+            ).also {
+                instance = it
+                if (f != null) {
+                    val editor = ThemeEditor(context)
+                    editor.f()
+                    editor.save()
+                }
+            })
+        }
+
+        /**
+         * Order matters.
+         */
+        @JvmStatic
+        fun installDelegates(vararg delegates: ThemeInflationDelegate) {
+            get().delegates.addAll(delegates)
+        }
+
         @JvmStatic
         fun edit(context: Context, f: ThemeEditor.() -> Unit) {
             ThemeEditor(context).run {
@@ -121,42 +150,19 @@ class Theme private constructor(internal val context: Context) {
         }
 
         @JvmStatic
-        fun attach(context: Context, vararg delegates: InflationDelegate) {
-            (context as? AppCompatActivity)?.let { activity ->
-                LayoutInflaterCompat.setFactory2(
-                    activity.layoutInflater,
-                    InflationInterceptor(delegates)
-                )
-            }
-        }
-
-        @JvmStatic
         fun resume(context: Context) {
             get().run {
                 (context as? Activity)?.let { activity ->
                     activity.setTaskDescriptionColor(colorPrimary)
-                    activity.refreshStatusBar(
+                    activity.setStatusBarColorCompat(
                         colorStatusBar = colorStatusBar,
                         lightMode = isPrimaryLight
                     )
                     if (prefs.contains(KEY_NAV_BAR_COLOR)) {
                         val navColor = colorNavigationBar
-                        activity.setNavigationBarColorCompat(navColor)
-                        activity.setLightNavigationBarCompat(ColorUtils.isLightColor(navColor))
+                        activity.window?.navigationBarColor = navColor
+                        activity.setLightNavigationBarCompat(navColor.isLightColor)
                     }
-                }
-            }
-        }
-
-        @JvmStatic
-        fun init(app: Application, f: ThemeEditor.() -> Unit) {
-            (instance ?: Theme(app).also { instance = it }).run {
-                val prefs = prefs
-                if (prefs.getBoolean(KEY_FIRST_TIME, true)) {
-                    prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
-                    val editor = ThemeEditor(app)
-                    editor.f()
-                    editor.save()
                 }
             }
         }

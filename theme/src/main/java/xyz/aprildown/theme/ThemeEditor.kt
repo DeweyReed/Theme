@@ -1,33 +1,35 @@
-@file:Suppress("MemberVisibilityCanBePrivate", "unused")
 
 package xyz.aprildown.theme
 
 import android.content.Context
-import androidx.annotation.AttrRes
+import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import xyz.aprildown.theme.internal.*
-import xyz.aprildown.theme.utils.ColorUtils
-import xyz.aprildown.theme.utils.attrKey
+import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
+import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
+import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
+import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY_VARIANT
+import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY
+import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
+import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
+import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
+import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
 import xyz.aprildown.theme.utils.color
+import xyz.aprildown.theme.utils.darker
 import xyz.aprildown.theme.utils.getThemePrefs
+import xyz.aprildown.theme.utils.isLightColor
+import xyz.aprildown.theme.utils.lighter
 
 class ThemeEditor(private val context: Context) {
 
     private val editor = context.getThemePrefs().edit()
 
-    var isDark = false
-        set(value) {
-            field = value
-            editor.putBoolean(KEY_IS_DARK, value)
-        }
-
     @ColorInt
     var colorPrimary = 0
         set(value) {
             field = value
-            editor.putInt(KEY_PRIMARY_COLOR, value)
-            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, ColorUtils.isLightColor(value))
+            editor.putInt(KEY_COLOR_PRIMARY, value)
+            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, value.isLightColor)
         }
     @ColorRes
     var colorPrimaryRes = 0
@@ -36,27 +38,63 @@ class ThemeEditor(private val context: Context) {
         }
 
     @ColorInt
-    var colorPrimaryDark = 0
+    var colorPrimaryVariant = 0
         set(value) {
             field = value
-            editor.putInt(KEY_PRIMARY_DARK_COLOR, value)
+            editor.putInt(KEY_COLOR_PRIMARY_VARIANT, value)
         }
     @ColorRes
-    var colorPrimaryDarkRes = 0
+    var colorPrimaryVariantRes = 0
         set(value) {
-            colorPrimaryDark = context.color(value)
+            colorPrimaryVariant = context.color(value)
         }
 
     @ColorInt
-    var colorAccent = 0
+    var colorOnPrimary = 0
         set(value) {
             field = value
-            editor.putInt(KEY_ACCENT_COLOR, value)
+            editor.putInt(KEY_COLOR_ON_PRIMARY, value)
         }
     @ColorRes
-    var colorAccentRes = 0
+    var colorOnPrimaryRes = 0
         set(value) {
-            colorAccent = context.color(value)
+            colorOnPrimary = context.color(value)
+        }
+
+    @ColorInt
+    var colorSecondary = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_COLOR_SECONDARY, value)
+        }
+    @ColorRes
+    var colorSecondaryRes = 0
+        set(value) {
+            colorSecondary = context.color(value)
+        }
+
+    @ColorInt
+    var colorSecondaryVariant = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_COLOR_SECONDARY_VARIANT, value)
+        }
+    @ColorRes
+    var colorSecondaryVariantRes = 0
+        set(value) {
+            colorSecondaryVariant = context.color(value)
+        }
+
+    @ColorInt
+    var colorOnSecondary = 0
+        set(value) {
+            field = value
+            editor.putInt(KEY_COLOR_ON_SECONDARY, value)
+        }
+    @ColorRes
+    var colorOnSecondaryRes = 0
+        set(value) {
+            colorOnSecondary = context.color(value)
         }
 
     @ColorInt
@@ -87,26 +125,26 @@ class ThemeEditor(private val context: Context) {
             colorNavigationBar = context.color(value)
         }
 
-    fun autoColorPrimaryDark() = apply {
-        colorPrimaryDark = ColorUtils.darker(colorPrimary)
+    fun darker(@ColorInt color: Int): Int = color.darker()
+
+    fun lighter(@ColorInt color: Int): Int = color.lighter()
+
+    fun on(@ColorInt color: Int): Int = if (color.isLightColor) {
+        Color.BLACK
+    } else {
+        Color.WHITE
     }
 
-    fun autoColorStatusBar() = apply {
-        colorStatusBar = ColorUtils.darker(colorPrimary)
-    }
-
-    fun autoPrimaryDarkAndStatusBar() = apply {
-        val color = ColorUtils.darker(colorPrimary)
-        colorPrimaryDark = color
-        colorStatusBar = color
-    }
-
-    fun setAttribute(@AttrRes attrId: Int, @ColorInt color: Int) = apply {
-        editor.putInt(context.attrKey(attrId), color)
-    }
-
-    fun setAttributeRes(@AttrRes attrId: Int, @ColorRes colorRes: Int) = apply {
-        setAttribute(attrId, context.color(colorRes))
+    fun clear() {
+        editor.remove(KEY_COLOR_PRIMARY)
+            .remove(KEY_COLOR_PRIMARY_VARIANT)
+            .remove(KEY_COLOR_ON_PRIMARY)
+            .remove(KEY_COLOR_SECONDARY)
+            .remove(KEY_COLOR_SECONDARY_VARIANT)
+            .remove(KEY_COLOR_ON_SECONDARY)
+            .remove(KEY_STATUS_BAR_COLOR)
+            .remove(KEY_NAV_BAR_COLOR)
+            .remove(KEY_IS_PRIMARY_LIGHT)
     }
 
     fun save(commit: Boolean = false) {

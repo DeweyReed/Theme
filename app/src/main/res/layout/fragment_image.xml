@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:flexWrap="wrap">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimaryVariant" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorOnPrimary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorSecondary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorSecondaryVariant" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorOnSecondary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?colorOnPrimary"
+        app:layout_wrapBefore="true"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondary"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimary" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?colorSecondaryVariant"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimary" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_wrapBefore="true"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorPrimary" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondary"
+        app:srcCompat="@drawable/ic_day"
+        app:tint="?colorOnSecondary" />
+
+</com.google.android.flexbox.FlexboxLayout>

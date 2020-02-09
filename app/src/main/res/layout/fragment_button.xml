@@ -1,62 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ShowcaseFlexbox"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:ignore="HardcodedText">
+    android:orientation="vertical">
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Plain"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button.Icon"
-        app:icon="@drawable/ic_palette" />
+        android:enabled="false"
+        android:text="Disabled Plain"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UnelevatedButton" />
+        android:text="Unelevated"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
+        app:layout_wrapBefore="true" />
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button.UnelevatedButton.Icon"
-        app:icon="@drawable/ic_palette" />
+        android:enabled="false"
+        android:text="Disabled Unelevated"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OutlinedButton" />
+        android:text="Outlined"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
+        app:layout_wrapBefore="true" />
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OutlinedButton.Icon"
-        app:icon="@drawable/ic_palette" />
+        android:enabled="false"
+        android:text="Disabled Outlined"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextButton.Icon" />
+        android:text="Text"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
+        app:layout_wrapBefore="true" />
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextButton.Icon"
-        app:icon="@drawable/ic_palette" />
+        android:enabled="false"
+        android:text="Disabled Text"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
 
-</LinearLayout>
+    <Button
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextButton.Dialog"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day"
+        app:layout_wrapBefore="true" />
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextButton.Dialog.Flush"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_day" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AppCompatButton"
+        android:textAllCaps="false"
+        app:layout_wrapBefore="true" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Disabled AppCompatButton"
+        android:textAllCaps="false" />
+
+</com.google.android.flexbox.FlexboxLayout>
