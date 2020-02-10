@@ -3,6 +3,7 @@ package xyz.aprildown.theme.app
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.edit
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.theme.Theme
+import kotlin.random.Random
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -31,7 +33,6 @@ abstract class BaseActivity : AppCompatActivity() {
             setTheme(R.style.AppTheme_WithoutTheme)
         } else {
             setTheme(R.style.AppTheme_WithTheme)
-            applyTheme(themeValue)
         }
         super.onCreate(savedInstanceState)
         safeSharedPreference.registerOnSharedPreferenceChangeListener(spListener)
@@ -66,7 +67,17 @@ abstract class BaseActivity : AppCompatActivity() {
                     colorOnSecondary = on(colorSecondary)
                 }
             }
-            else -> {
+            THEME_SHUFFLE -> {
+                Theme.edit(this) {
+                    colorPrimary = randomColor
+                    colorPrimaryVariant = darker(colorPrimary)
+                    colorOnPrimary = on(colorPrimary)
+                    colorSecondary = randomColor
+                    colorSecondaryVariant = darker(colorSecondary)
+                    colorOnSecondary = on(colorSecondary)
+                }
+            }
+            THEME_DEFAULT -> {
                 Theme.edit(this) {
                     colorPrimaryRes = R.color.colorPrimary
                     colorPrimaryVariantRes = R.color.colorPrimaryVariant
@@ -85,12 +96,14 @@ abstract class BaseActivity : AppCompatActivity() {
                 arrayOf(
                     "Disable",
                     "Default",
-                    "Amber + Blue"
+                    "Amber + Blue",
+                    "Shuffle"
                 ),
                 themeValue
             ) { dialog, which ->
+                applyTheme(which)
                 themeValue = which
-                // It won't close on Lollipop devices.
+                // It won't close on Lollipop devices so we force closing..
                 dialog.dismiss()
             }
             .show()
@@ -112,7 +125,11 @@ const val PREF_THEME = "theme"
 const val THEME_NONE = 0
 const val THEME_DEFAULT = 1
 const val THEME_COLOR_1 = 2
+const val THEME_SHUFFLE = 3
 
 val Context.isDarkTheme: Boolean
     get() =
         resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+
+private val randomColor: Int
+    get() = Color.rgb(Random.nextInt(), Random.nextInt(), Random.nextInt())
