@@ -9,10 +9,6 @@ import xyz.aprildown.theme.Theme
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Theme.init(
-            ContextThemeWrapper(this, R.style.AppTheme),
-            colorPrimaryRes = R.color.colorPrimary,
-            colorSecondaryRes = R.color.colorSecondary
-        )
+        Theme.init(ContextThemeWrapper(this, R.style.AppTheme))
     }
 }

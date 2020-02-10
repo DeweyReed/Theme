@@ -87,7 +87,7 @@ fun Context.themeColor(@AttrRes attrRes: Int): Int {
 }
 
 @ColorRes
-fun Context.themeRes(@AttrRes attrRes: Int): Int {
+fun Context.findAttrFinalResourceId(@AttrRes attrRes: Int): Int {
     val a = obtainStyledAttributes(null, intArrayOf(attrRes))
     try {
         return a.getResourceId(0, -1)
