@@ -9,6 +9,9 @@ import xyz.aprildown.theme.Theme
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Theme.init(ContextThemeWrapper(this, R.style.AppTheme))
+        Theme.init(
+            context = ContextThemeWrapper(this, R.style.AppTheme),
+            appIconRes = R.mipmap.ic_launcher
+        )
     }
 }

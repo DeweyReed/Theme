@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.Menu
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
 import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
 import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
@@ -26,7 +27,10 @@ import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
 import xyz.aprildown.theme.utils.themeColor
 
-class Theme private constructor(private val context: Context) {
+class Theme private constructor(
+    private val context: Context,
+    @DrawableRes private val appIconRes: Int = 0
+) {
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 
@@ -105,12 +109,16 @@ class Theme private constructor(private val context: Context) {
         fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init"))
 
         /**
-         * To resolve values like [R.attr.colorControlActivated], we need your R.color.colorPrimary.
+         * @param appIconRes Optional. To use a better way to tint the app icon in the recent apps screen.
          */
         @JvmOverloads
         @JvmStatic
-        fun init(context: Context, f: (ThemeEditor.() -> Unit)? = null) {
-            instance ?: (Theme(context).also {
+        fun init(
+            context: Context,
+            @DrawableRes appIconRes: Int = 0,
+            f: (ThemeEditor.() -> Unit)? = null
+        ) {
+            instance ?: (Theme(context = context, appIconRes = appIconRes).also {
                 instance = it
                 if (f != null) {
                     val editor = ThemeEditor(context)
@@ -137,12 +145,13 @@ class Theme private constructor(private val context: Context) {
         }
 
         @JvmStatic
-        fun resume(context: Context) {
+        fun tintSystemUi(context: Context) {
             get().run {
                 (context as? Activity)?.let { activity ->
-                    activity.setTaskDescriptionColor(colorPrimary)
+                    activity.setTaskDescriptionColor(appIconRes, colorPrimary)
                     activity.setStatusBarColorCompat(
                         colorStatusBar = colorStatusBar,
+                        // Make sure the toolbar text color and the status bar icon color are same.
                         lightMode = isPrimaryLight
                     )
                     if (prefs.contains(KEY_NAV_BAR_COLOR)) {

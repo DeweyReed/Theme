@@ -35,12 +35,9 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         safeSharedPreference.registerOnSharedPreferenceChangeListener(spListener)
-    }
 
-    override fun onResume() {
-        super.onResume()
         if (themeValue != THEME_NONE) {
-            Theme.resume(this)
+            Theme.tintSystemUi(this)
         }
     }
 
