@@ -112,6 +112,15 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
     // endregion AppCompatViewInflater
 
     override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
+        if (name == null) return null
+
+        for (delegate in Theme.get().delegates) {
+            val result = delegate.createView(context, name, attrs)
+            if (result != null) {
+                return result
+            }
+        }
+
         return when (name) {
             "ProgressBar" ->
                 ProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
@@ -157,20 +166,7 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 ListView(context, attrs).decorate(attrs, ListViewTint())
             "androidx.recyclerview.widget.RecyclerView" ->
                 RecyclerView(context, attrs).decorate(attrs, RecyclerViewTint())
-            else -> {
-                if (name == null) {
-                    null
-                } else {
-                    var result: View? = null
-                    for (delegate in Theme.get().delegates) {
-                        result = delegate.createView(context, name, attrs)
-                        if (result != null) {
-                            break
-                        }
-                    }
-                    result
-                } ?: super.createView(context, name, attrs)
-            }
+            else -> null
         }
     }
 }
