@@ -19,7 +19,8 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
     attrs = R.styleable.Theme_NavigationView,
     defStyleAttr = R.attr.navigationViewStyle,
     onTint = {
-        // R.style.Widget_Design_NavigationView
+        // Why is this style private?
+        // R.style.Widget_MaterialComponents_NavigationView
         val nav = view
         withColorOrResourceId(
             R.styleable.Theme_NavigationView_itemIconTint,
@@ -56,7 +57,7 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
             },
             applyResource = {
                 when (it) {
-                    R.color.mtrl_navigation_item_background_color -> {
+                    R.color.mtrl_navigation_item_text_color -> {
                         nav.itemTextColor = nav.mtrl_navigation_item_text_color()
                     }
                 }
