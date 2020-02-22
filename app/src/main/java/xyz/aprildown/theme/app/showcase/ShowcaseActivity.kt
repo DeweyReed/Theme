@@ -50,6 +50,10 @@ class ShowcaseActivity : BaseActivity() {
             pickTheme()
             true
         }
+        R.id.action_shuffle_theme -> {
+            shuffleTheme()
+            true
+        }
         R.id.action_day_night -> {
             toggleDayNight()
             true

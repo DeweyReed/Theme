@@ -121,6 +121,14 @@
             app:cav_fill_color="?colorOnError"
             app:cav_stroke_color="?colorOnBackground" />
 
+        <Button
+            android:id="@+id/btnShowcaseSubsystemWidgets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:text="Check Widgets" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

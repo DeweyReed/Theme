@@ -20,6 +20,9 @@ class MainActivity : BaseActivity() {
         btnMainPickTheme.setOnClickListener {
             pickTheme()
         }
+        btnMainShuffleTheme.setOnClickListener {
+            shuffleTheme()
+        }
         btnMainDayNight.setOnClickListener {
             toggleDayNight()
         }

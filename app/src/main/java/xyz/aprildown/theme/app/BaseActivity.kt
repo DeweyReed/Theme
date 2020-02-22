@@ -58,16 +58,6 @@ abstract class BaseActivity : AppCompatActivity() {
                     colorOnSecondary = on(colorSecondary)
                 }
             }
-            THEME_SHUFFLE -> {
-                Theme.edit(this) {
-                    colorPrimary = randomColor
-                    colorPrimaryVariant = darker(colorPrimary)
-                    colorOnPrimary = on(colorPrimary)
-                    colorSecondary = randomColor
-                    colorSecondaryVariant = darker(colorSecondary)
-                    colorOnSecondary = on(colorSecondary)
-                }
-            }
             THEME_DEFAULT -> {
                 Theme.edit(this) {
                     colorPrimaryRes = R.color.colorPrimary
@@ -81,14 +71,25 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    protected fun shuffleTheme() {
+        Theme.edit(this) {
+            colorPrimary = randomColor
+            colorPrimaryVariant = darker(colorPrimary)
+            colorOnPrimary = on(colorPrimary)
+            colorSecondary = randomColor
+            colorSecondaryVariant = darker(colorSecondary)
+            colorOnSecondary = on(colorSecondary)
+        }
+        themeValue = THEME_SHUFFLE + Random.nextInt()
+    }
+
     protected fun pickTheme() {
         MaterialAlertDialogBuilder(this)
             .setSingleChoiceItems(
                 arrayOf(
                     "Disable",
                     "Default",
-                    "Amber + Blue",
-                    "Shuffle"
+                    "Amber + Blue"
                 ),
                 themeValue
             ) { dialog, which ->

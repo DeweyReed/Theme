@@ -27,12 +27,20 @@
                 app:tint="@android:color/holo_green_dark" />
 
             <ImageButton
+                android:id="@+id/btnMainShuffleTheme"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/ic_shuffle"
+                app:tint="@android:color/holo_orange_dark" />
+
+            <ImageButton
                 android:id="@+id/btnMainDayNight"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_day"
-                app:tint="@android:color/holo_green_dark" />
+                app:tint="@android:color/holo_purple" />
 
         </LinearLayout>
 
