@@ -13,5 +13,6 @@ class App : Application() {
             context = ContextThemeWrapper(this, R.style.AppTheme),
             appIconRes = R.mipmap.ic_launcher
         )
+        Theme.installDelegates(AppComponentsDelegate())
     }
 }

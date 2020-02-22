@@ -7,80 +7,74 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="xyz.aprildown.theme.app.HomeFragment"
+        android:name="xyz.aprildown.theme.app.widgets.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/textViewFragment"
-        android:name="xyz.aprildown.theme.app.TextViewFragment"
+        android:name="xyz.aprildown.theme.app.widgets.TextViewFragment"
         android:label="TextView"
         tools:layout="@layout/fragment_text_view" />
 
     <fragment
         android:id="@+id/textInputFragment"
-        android:name="xyz.aprildown.theme.app.TextInputFragment"
+        android:name="xyz.aprildown.theme.app.widgets.TextInputFragment"
         android:label="TextInput"
         tools:layout="@layout/fragment_text_input" />
 
     <fragment
         android:id="@+id/buttonFragment"
-        android:name="xyz.aprildown.theme.app.ButtonFragment"
+        android:name="xyz.aprildown.theme.app.widgets.ButtonFragment"
         android:label="Button"
         tools:layout="@layout/fragment_button" />
 
     <fragment
         android:id="@+id/compoundButtonFragment"
-        android:name="xyz.aprildown.theme.app.CompoundButtonFragment"
+        android:name="xyz.aprildown.theme.app.widgets.CompoundButtonFragment"
         android:label="CompoundButton"
         tools:layout="@layout/fragment_compound_button" />
 
     <fragment
         android:id="@+id/imageFragment"
-        android:name="xyz.aprildown.theme.app.ImageFragment"
+        android:name="xyz.aprildown.theme.app.widgets.ImageFragment"
         android:label="Image"
         tools:layout="@layout/fragment_image" />
 
     <fragment
         android:id="@+id/appBarFragment"
-        android:name="xyz.aprildown.theme.app.AppBarFragment"
+        android:name="xyz.aprildown.theme.app.widgets.AppBarFragment"
         android:label="App Bar"
         tools:layout="@layout/fragment_app_bar" />
 
     <fragment
         android:id="@+id/chipFragment"
-        android:name="xyz.aprildown.theme.app.ChipFragment"
+        android:name="xyz.aprildown.theme.app.widgets.ChipFragment"
         android:label="Chip"
         tools:layout="@layout/fragment_chip" />
 
     <fragment
         android:id="@+id/fabFragment"
-        android:name="xyz.aprildown.theme.app.FabFragment"
+        android:name="xyz.aprildown.theme.app.widgets.FabFragment"
         android:label="Fab"
         tools:layout="@layout/fragment_fab" />
 
     <fragment
         android:id="@+id/cardFragment"
-        android:name="xyz.aprildown.theme.app.CardFragment"
+        android:name="xyz.aprildown.theme.app.widgets.CardFragment"
         android:label="Card"
         tools:layout="@layout/fragment_card" />
 
     <fragment
         android:id="@+id/barFragment"
-        android:name="xyz.aprildown.theme.app.BarFragment"
+        android:name="xyz.aprildown.theme.app.widgets.BarFragment"
         android:label="Bar"
         tools:layout="@layout/fragment_bar" />
 
     <activity
-        android:id="@+id/showcaseBasicActivity"
-        android:name="xyz.aprildown.theme.app.ShowcaseBasicActivity"
-        android:label="Basic Activity"
-        tools:layout="@layout/activity_showcase_basic" />
-
-    <activity
-        android:id="@+id/showcaseCollapsingToolbarActivity"
-        android:name="xyz.aprildown.theme.app.ShowcaseCollapsingToolbarActivity"
+        android:id="@+id/collapsingToolbarActivity"
+        android:name="xyz.aprildown.theme.app.widgets.CollapsingToolbarActivity"
         android:label="Collapsing Toolbar Activity"
-        tools:layout="@layout/activity_showcase_collapsing_toolbar" />
+        tools:layout="@layout/activity_collapsing_toolbar" />
 
 </navigation>

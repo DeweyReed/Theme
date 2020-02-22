@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.app
+package xyz.aprildown.theme.app.widgets
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_widget.view.*
+import xyz.aprildown.theme.app.R
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,8 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     "Fab" to R.id.fabFragment,
                     "Card" to R.id.cardFragment,
                     "Bar" to R.id.barFragment,
-                    "Basic Activity" to R.id.showcaseBasicActivity,
-                    "Collapsing Toolbar Activity" to R.id.showcaseCollapsingToolbarActivity
+                    "Collapsing Toolbar Activity" to R.id.collapsingToolbarActivity
                 ).map { WidgetItem(it) }
             )
         }

@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.app
+package xyz.aprildown.theme.app.widgets
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import xyz.aprildown.theme.app.R
 
 class TextViewFragment : Fragment(R.layout.fragment_text_view)
 

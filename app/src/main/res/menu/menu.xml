@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action"
+        android:id="@+id/action_change_theme"
         android:icon="@drawable/ic_day"
         android:title="Day"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action2"
+        android:id="@+id/action_day_night"
         android:icon="@drawable/ic_night"
         android:title="Day"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

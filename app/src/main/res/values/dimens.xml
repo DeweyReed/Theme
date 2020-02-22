@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="keyline_0">2dp</dimen>
+    <dimen name="keyline_1">4dp</dimen>
+    <dimen name="keyline_2">8dp</dimen>
+    <dimen name="keyline_4">16dp</dimen>
+    <dimen name="keyline_5">24dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

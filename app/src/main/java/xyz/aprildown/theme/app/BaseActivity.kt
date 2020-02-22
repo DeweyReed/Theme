@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -40,14 +39,6 @@ abstract class BaseActivity : AppCompatActivity() {
         if (themeValue != THEME_NONE) {
             Theme.tintSystemUi(this)
         }
-    }
-
-    /**
-     * Call super after the menu is inflated.
-     */
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menu?.let { Theme.get().tintMenu(it) }
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onDestroy() {

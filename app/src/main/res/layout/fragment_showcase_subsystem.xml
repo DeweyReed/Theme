@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorPrimary"
+            app:cav_fill_color="?colorPrimary"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorPrimaryVariant"
+            app:cav_fill_color="?colorPrimaryVariant"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorOnPrimary"
+            app:cav_fill_color="?colorOnPrimary"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorSecondary"
+            app:cav_fill_color="?colorSecondary"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorSecondaryVariant"
+            app:cav_fill_color="?colorSecondaryVariant"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorOnSecondary"
+            app:cav_fill_color="?colorOnSecondary"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorBackground"
+            app:cav_fill_color="?android:colorBackground"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorOnBackground"
+            app:cav_fill_color="?colorOnBackground"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorSurface"
+            app:cav_fill_color="?colorSurface"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorOnSurface"
+            app:cav_fill_color="?colorOnSurface"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorError"
+            app:cav_fill_color="?colorError"
+            app:cav_stroke_color="?colorOnBackground" />
+
+        <xyz.aprildown.theme.app.showcase.ColorAttributeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="\?colorOnError"
+            app:cav_fill_color="?colorOnError"
+            app:cav_stroke_color="?colorOnBackground" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

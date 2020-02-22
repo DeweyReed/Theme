@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ColorDotView">
+        <attr name="cdv_fill_color" format="color" />
+        <attr name="cdv_stroke_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ColorAttributeView">
+        <attr name="android:text" />
+        <attr name="cav_fill_color" format="color" />
+        <attr name="cav_stroke_color" format="color" />
+    </declare-styleable>
+
+</resources>
