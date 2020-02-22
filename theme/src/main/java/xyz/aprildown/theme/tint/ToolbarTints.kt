@@ -17,6 +17,7 @@ import xyz.aprildown.theme.utils.getMaterialBackgroundColor
 import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.tinted
+import xyz.aprildown.theme.utils.toColorStateList
 import xyz.aprildown.theme.utils.withAlpha
 
 /**
@@ -108,29 +109,42 @@ internal class ToolbarTint : BaseTint<Toolbar>(
          * and icons color. This means we know if the primary color is light before hand.
          * However, with Theme, we don't know that so we have to calculate at run time.
          */
+
+        fun tintToolbarMenu(color: ColorStateList) {
+            toolbar.setTitleTextColor(color)
+            // The navigationIcon may not be inflated now, post it.
+            // But it'll override any tint in the Activity's onCreate
+            val navigationIcon = toolbar.navigationIcon
+            if (navigationIcon != null) {
+                toolbar.navigationIcon = navigationIcon.tinted(color)
+            } else {
+                toolbar.post {
+                    toolbar.navigationIcon?.let {
+                        toolbar.navigationIcon = it.tinted(color)
+                    }
+                }
+            }
+            toolbar.post {
+                // Use the same color.
+                toolbar.overflowIcon?.let {
+                    toolbar.overflowIcon = it.tinted(color)
+                }
+                toolbar.menu.tintMenu(color)
+            }
+        }
+
         withColorOrResourceId(
             R.styleable.Theme_Toolbar_titleTextColor,
             applySolidColor = {
                 toolbar.setTitleTextColor(it)
+                tintToolbarMenu(it.toColorStateList())
             },
             applyResource = { resourceId ->
                 if (resourceId == R.color.abc_primary_text_material_dark ||
                     resourceId == R.color.abc_primary_text_material_light
                 ) {
                     context.textColorOnToolbar(isNearestToolbarBackgroundLight)?.let { color ->
-                        toolbar.setTitleTextColor(color)
-                        // The navigationIcon may not be inflated now, post it.
-                        // But it'll override any tint in the Activity's onCreate
-                        toolbar.post {
-                            // Use the same color.
-                            toolbar.navigationIcon?.let {
-                                toolbar.navigationIcon = it.tinted(color)
-                            }
-                            toolbar.overflowIcon?.let {
-                                toolbar.overflowIcon = it.tinted(color)
-                            }
-                            toolbar.menu.tintMenu(color)
-                        }
+                        tintToolbarMenu(color)
                     }
                 }
             }
