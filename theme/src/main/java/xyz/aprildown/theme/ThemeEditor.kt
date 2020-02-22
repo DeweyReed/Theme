@@ -5,15 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
-import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
-import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
-import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY_VARIANT
-import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY
-import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
-import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
-import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
-import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
 import xyz.aprildown.theme.utils.color
 import xyz.aprildown.theme.utils.darker
 import xyz.aprildown.theme.utils.getThemePrefs

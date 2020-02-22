@@ -1,4 +1,4 @@
-package xyz.aprildown.theme.internal
+package xyz.aprildown.theme
 
 // Base
 internal const val PREFS_NAME = "theme-prefs"

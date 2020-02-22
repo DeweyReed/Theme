@@ -9,15 +9,6 @@ import android.content.SharedPreferences
 import android.view.Menu
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import xyz.aprildown.theme.internal.KEY_COLOR_ON_PRIMARY
-import xyz.aprildown.theme.internal.KEY_COLOR_ON_SECONDARY
-import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY
-import xyz.aprildown.theme.internal.KEY_COLOR_PRIMARY_VARIANT
-import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY
-import xyz.aprildown.theme.internal.KEY_COLOR_SECONDARY_VARIANT
-import xyz.aprildown.theme.internal.KEY_IS_PRIMARY_LIGHT
-import xyz.aprildown.theme.internal.KEY_NAV_BAR_COLOR
-import xyz.aprildown.theme.internal.KEY_STATUS_BAR_COLOR
 import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
@@ -95,8 +86,11 @@ class Theme private constructor(
 
     // endregion helpers
 
-    fun tintMenu(menu: Menu) {
-        menu.tintMenuWithHack(context)
+    /**
+     * We make menu nullable before override fun onCreateOptionsMenu(menu: Menu?): Boolean
+     */
+    fun tintMenu(menu: Menu?) {
+        menu?.tintMenuWithHack(context)
     }
 
     companion object {

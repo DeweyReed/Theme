@@ -27,7 +27,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.google.android.material.shape.MaterialShapeDrawable
 import xyz.aprildown.theme.BuildConfig
-import xyz.aprildown.theme.internal.PREFS_NAME
+import xyz.aprildown.theme.PREFS_NAME
 
 private fun Context.safeContext(): Context =
     takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !isDeviceProtectedStorage }?.let {
@@ -77,7 +77,7 @@ internal fun View.getMaterialBackgroundColor(): Int? {
 }
 
 @ColorInt
-fun Context.themeColor(@AttrRes attrRes: Int): Int {
+internal fun Context.themeColor(@AttrRes attrRes: Int): Int {
     val a = obtainStyledAttributes(null, intArrayOf(attrRes))
     try {
         return a.getColor(0, Color.RED)
@@ -87,7 +87,7 @@ fun Context.themeColor(@AttrRes attrRes: Int): Int {
 }
 
 @ColorRes
-fun Context.findAttrFinalResourceId(@AttrRes attrRes: Int): Int {
+internal fun Context.findAttrFinalResourceId(@AttrRes attrRes: Int): Int {
     val a = obtainStyledAttributes(null, intArrayOf(attrRes))
     try {
         return a.getResourceId(0, -1)
