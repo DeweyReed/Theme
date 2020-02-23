@@ -5,9 +5,9 @@ import android.view.View
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
+import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
-import xyz.aprildown.theme.utils.withAlpha
 
 internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
     attrs = R.styleable.Theme_TextInputLayout,
@@ -110,8 +110,8 @@ private fun View.mtrl_filled_icon_tint(): ColorStateList {
         ),
         intArrayOf(
             Theme.get().colorPrimary,
-            colorOnSurface withAlpha 0.38f,
-            colorOnSurface withAlpha 0.54f
+            colorOnSurface.adjustAlpha(0.38f),
+            colorOnSurface.adjustAlpha(0.54f)
         )
     )
 }
@@ -127,8 +127,8 @@ private fun View.mtrl_outlined_icon_tint(): ColorStateList {
         ),
         intArrayOf(
             Theme.get().colorPrimary,
-            colorOnSurface withAlpha 0.38f,
-            colorOnSurface withAlpha 0.6f
+            colorOnSurface.adjustAlpha(0.38f),
+            colorOnSurface.adjustAlpha(0.6f)
         )
     )
 }

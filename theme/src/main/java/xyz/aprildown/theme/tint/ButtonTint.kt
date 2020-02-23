@@ -39,7 +39,6 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                 R.styleable.Theme_Button_backgroundTint,
                 applySolidColor = {
                     ViewCompat.setBackgroundTintList(button, it.toColorStateList())
-
                 },
                 applyResource = {
                     withBackgroundTint(it, button)
@@ -178,8 +177,8 @@ private fun View.mtrl_btn_bg_color_selector(): ColorStateList = ColorStateList(
 // R.color.mtrl_btn_text_btn_bg_color_selector
 private fun View.mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateList(
     arrayOf(
-        intArrayOf(android.R.attr.checked),
-        intArrayOf(-android.R.attr.checked)
+        intArrayOf(android.R.attr.state_checked),
+        intArrayOf(-android.R.attr.state_checked)
     ),
     intArrayOf(
         Theme.get().colorPrimary.adjustAlpha(0.08f),
@@ -200,9 +199,10 @@ private fun withStrokeColor(resourceId: Int, view: MaterialButton) {
 
 // R.color.mtrl_btn_stroke_color_selector
 private fun View.mtrl_btn_stroke_color_selector(): ColorStateList = ColorStateList(
+    // It's "android.R.attr.state_checked" not "android.R.attr.checked".
     arrayOf(
-        intArrayOf(android.R.attr.checked),
-        intArrayOf(-android.R.attr.checked)
+        intArrayOf(android.R.attr.state_checked),
+        intArrayOf(-android.R.attr.state_checked)
     ),
     intArrayOf(
         Theme.get().colorPrimary,

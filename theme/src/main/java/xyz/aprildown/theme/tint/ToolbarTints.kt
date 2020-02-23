@@ -11,6 +11,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
+import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.colorStateList
 import xyz.aprildown.theme.utils.float
 import xyz.aprildown.theme.utils.getMaterialBackgroundColor
@@ -18,7 +19,6 @@ import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.tinted
 import xyz.aprildown.theme.utils.toColorStateList
-import xyz.aprildown.theme.utils.withAlpha
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/AppBarLayout.md
@@ -181,7 +181,10 @@ internal class ToolbarTint : BaseTint<Toolbar>(
 private fun View.material_on_primary_emphasis_medium(): ColorStateList {
     return ColorStateList(
         arrayOf(intArrayOf()),
-        intArrayOf(Theme.get().colorOnPrimary withAlpha context.float(R.dimen.material_emphasis_medium))
+        intArrayOf(
+            Theme.get().colorOnPrimary
+                .adjustAlpha(context.float(R.dimen.material_emphasis_medium))
+        )
     )
 }
 

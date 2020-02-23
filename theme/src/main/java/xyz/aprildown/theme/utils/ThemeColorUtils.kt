@@ -65,14 +65,6 @@ internal fun Int.adjustAlpha(@FloatRange(from = 0.0, to = 1.0) factor: Float): I
 }
 
 @ColorInt
-internal infix fun Int.withAlpha(@FloatRange(from = 0.0, to = 1.0) factor: Float): Int = Color.argb(
-    (Color.alpha(255) * factor).roundToInt(),
-    Color.red(this),
-    Color.green(this),
-    Color.blue(this)
-)
-
-@ColorInt
 internal fun Int.stripAlpha(): Int = Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
 
 @ColorInt
