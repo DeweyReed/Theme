@@ -17,5 +17,14 @@ internal class TextViewTint : BaseTint<AppCompatTextView>(
         matchThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
             textView.setTextColor(it)
         }
+        matchThemeColor(R.styleable.Theme_TextView_android_textColorHint)?.let {
+            textView.setHintTextColor(it)
+        }
+        matchThemeColor(R.styleable.Theme_TextView_android_textColorLink)?.let {
+            textView.setLinkTextColor(it)
+        }
+        matchThemeColor(R.styleable.Theme_TextView_android_textColorHighlight)?.let {
+            textView.highlightColor = it
+        }
     }
 )
