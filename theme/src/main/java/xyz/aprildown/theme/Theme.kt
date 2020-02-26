@@ -9,6 +9,8 @@ import android.content.SharedPreferences
 import android.view.Menu
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
@@ -103,16 +105,21 @@ class Theme private constructor(
         fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init"))
 
         /**
+         * @param themeRes A style where you define all your theme colors.
          * @param appIconRes Optional. To use a better way to tint the app icon in the recent apps screen.
          */
         @JvmOverloads
         @JvmStatic
         fun init(
             context: Context,
+            @StyleRes themeRes: Int,
             @DrawableRes appIconRes: Int = 0,
             f: (ThemeEditor.() -> Unit)? = null
         ) {
-            instance ?: (Theme(context = context, appIconRes = appIconRes).also {
+            instance ?: (Theme(
+                context = ContextThemeWrapper(context, themeRes),
+                appIconRes = appIconRes
+            ).also {
                 instance = it
                 if (f != null) {
                     val editor = ThemeEditor(context)
