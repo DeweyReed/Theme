@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
 import com.google.android.material.appbar.AppBarLayout
@@ -120,7 +121,14 @@ internal class ToolbarTint : BaseTint<Toolbar>(
             } else {
                 toolbar.post {
                     toolbar.navigationIcon?.let {
-                        toolbar.navigationIcon = it.tinted(color)
+                        when (it) {
+                            is DrawerArrowDrawable -> {
+                                it.color = color.defaultColor
+                            }
+                            else -> {
+                                toolbar.navigationIcon = it.tinted(color)
+                            }
+                        }
                     }
                 }
             }
