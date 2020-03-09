@@ -103,7 +103,7 @@ private fun ThemeHelper<*>.createCompoundButtonTint(): ColorStateList? {
     )
 }
 
-private fun ThemeHelper<*>.createCompoundButtonBackground(colorSecondary: Int? = null): Drawable {
+private fun ThemeHelper<*>.createCompoundButtonBackground(colorSecondary: Int? = null): Drawable? {
     val currentBackground = view.background
     if (currentBackground is RippleDrawable) {
         /**
