@@ -6,10 +6,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
+import android.content.res.TypedArray
 import android.view.Menu
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
+import androidx.annotation.StyleableRes
 import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
@@ -164,4 +167,40 @@ class Theme private constructor(
             }
         }
     }
+}
+
+/**
+ * The core of Theme.
+ */
+internal fun TypedArray.matchThemeColor(@StyleableRes index: Int): Int? = try {
+    val resourceId = getResourceId(index, -1)
+    if (resourceId != -1) {
+        Theme.get().run {
+            /**
+             * In order to make this implementation work,
+             * you have to define this way(I use primary color as the example):
+             * <color name="colorPrimary">#FF0000</color>
+             * Then in the styles.xml:
+             * <style name="AppTheme" ...>
+             *     <item name="colorPrimary">@color/colorPrimary</item>
+             *     ...
+             * </style>
+             * The final color(#FF0000)'s name("colorPrimary")
+             * must be identical to the values below, or the names here can't be found.
+             */
+            when (resources.getResourceEntryName(resourceId)) {
+                "colorPrimary" -> colorPrimary
+                "colorPrimaryVariant" -> colorPrimaryVariant
+                "colorOnPrimary" -> colorOnPrimary
+                "colorSecondary" -> colorSecondary
+                "colorSecondaryVariant" -> colorSecondaryVariant
+                "colorOnSecondary" -> colorOnSecondary
+                else -> null
+            }
+        }
+    } else {
+        null
+    }
+} catch (e: Resources.NotFoundException) {
+    null
 }
