@@ -124,7 +124,9 @@ class Theme private constructor(
                 appIconRes = appIconRes
             ).also {
                 instance = it
-                if (f != null) {
+                val prefs = it.prefs
+                if (f != null && prefs.getBoolean(KEY_FIRST_TIME, true)) {
+                    prefs.edit().putBoolean(KEY_FIRST_TIME, false).apply()
                     val editor = ThemeEditor(context)
                     editor.f()
                     editor.save()
