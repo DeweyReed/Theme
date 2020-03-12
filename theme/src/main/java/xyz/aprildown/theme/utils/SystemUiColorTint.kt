@@ -29,7 +29,7 @@ private fun Activity.setLightStatusBarCompat(lightMode: Boolean) {
     }
 }
 
-internal fun Activity.setStatusBarColorCompat(@ColorInt colorStatusBar: Int, lightMode: Boolean) {
+internal fun Activity.setStatusBarColorCompat(@ColorInt colorStatusBar: Int) {
     val rootView: ViewGroup? = (findViewById<View>(android.R.id.content) as? ViewGroup)?.run {
         if (childCount > 0) getChildAt(0) as? ViewGroup else null
     }
@@ -40,10 +40,10 @@ internal fun Activity.setStatusBarColorCompat(@ColorInt colorStatusBar: Int, lig
     } else {
         window?.statusBarColor = colorStatusBar
     }
-    setLightStatusBarCompat(lightMode)
+    setLightStatusBarCompat(colorStatusBar.isLightColor)
 }
 
-internal fun Activity.setLightNavigationBarCompat(lightMode: Boolean) {
+private fun Activity.setLightNavigationBarCompat(lightMode: Boolean) {
     val view = window?.decorView ?: return
     if (isOOrLater()) {
         var flags = view.systemUiVisibility
@@ -54,6 +54,11 @@ internal fun Activity.setLightNavigationBarCompat(lightMode: Boolean) {
         }
         view.systemUiVisibility = flags
     }
+}
+
+internal fun Activity.setNavigationBarColorCompat(@ColorInt colorNavigationBar: Int) {
+    window?.navigationBarColor = colorNavigationBar
+    setLightNavigationBarCompat(colorNavigationBar.isLightColor)
 }
 
 internal fun Activity.setTaskDescriptionColor(@DrawableRes appIconRes: Int, @ColorInt color: Int) {

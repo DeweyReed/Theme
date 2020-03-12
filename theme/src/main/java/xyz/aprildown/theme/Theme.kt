@@ -17,8 +17,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
-import xyz.aprildown.theme.utils.isLightColor
-import xyz.aprildown.theme.utils.setLightNavigationBarCompat
+import xyz.aprildown.theme.utils.setNavigationBarColorCompat
 import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
 import xyz.aprildown.theme.utils.themeColor
@@ -155,15 +154,9 @@ class Theme private constructor(
             get().run {
                 (context as? Activity)?.let { activity ->
                     activity.setTaskDescriptionColor(appIconRes, colorPrimary)
-                    activity.setStatusBarColorCompat(
-                        colorStatusBar = colorStatusBar,
-                        // Make sure the toolbar text color and the status bar icon color are same.
-                        lightMode = isPrimaryLight
-                    )
+                    activity.setStatusBarColorCompat(colorStatusBar)
                     if (prefs.contains(KEY_NAV_BAR_COLOR)) {
-                        val navColor = colorNavigationBar
-                        activity.window?.navigationBarColor = navColor
-                        activity.setLightNavigationBarCompat(navColor.isLightColor)
+                        activity.setNavigationBarColorCompat(colorNavigationBar)
                     }
                 }
             }
