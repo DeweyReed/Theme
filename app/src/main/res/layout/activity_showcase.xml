@@ -5,20 +5,20 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        style="@style/Widget.MaterialComponents.AppBarLayout.Primary"
+        style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="0dp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutShowcase"
-            style="@style/Widget.MaterialComponents.TabLayout.Colored"
+            style="@style/Widget.MaterialComponents.TabLayout.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

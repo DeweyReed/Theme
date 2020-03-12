@@ -98,12 +98,12 @@ internal class ToolbarTint : BaseTint<Toolbar>(
         // R.style.Widget_MaterialComponents_Toolbar_Surface
         val toolbar = view
         val context = toolbar.context
-        isNearestToolbarBackgroundLight = Theme.get().isPrimaryLight
         matchThemeColor(R.styleable.Theme_Toolbar_android_background)?.let {
-            isNearestToolbarBackgroundLight = it.isLightColor
             // Check MaterialToolbar.initBackground
             toolbar.setMaterialBackgroundColor(it)
         }
+        isNearestToolbarBackgroundLight =
+            toolbar.getMaterialBackgroundColor()?.isLightColor ?: Theme.get().isPrimaryLight
         /**
          * Here is the problem.
          * Normally, we use AppTheme.AppBarOverlay and AppTheme.PopupOverlay to define toolbar text
