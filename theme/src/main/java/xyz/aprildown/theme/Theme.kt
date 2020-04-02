@@ -17,6 +17,7 @@ import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
+import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setNavigationBarColorCompat
 import xyz.aprildown.theme.utils.setStatusBarColorCompat
 import xyz.aprildown.theme.utils.setTaskDescriptionColor
@@ -88,6 +89,9 @@ class Theme private constructor(
     val isPrimaryLight: Boolean
         get() = prefs.getBoolean(KEY_IS_PRIMARY_LIGHT, true)
 
+    val lightStatusByPrimary: Boolean
+        get() = prefs.getBoolean(KEY_LIGHT_STATUS_BY_PRIMARY, false)
+
     // endregion helpers
 
     /**
@@ -154,7 +158,10 @@ class Theme private constructor(
             get().run {
                 (context as? Activity)?.let { activity ->
                     activity.setTaskDescriptionColor(appIconRes, colorPrimary)
-                    activity.setStatusBarColorCompat(colorStatusBar)
+                    activity.setStatusBarColorCompat(
+                        colorStatusBar,
+                        (if (lightStatusByPrimary) colorPrimary else colorStatusBar).isLightColor
+                    )
                     if (prefs.contains(KEY_NAV_BAR_COLOR)) {
                         activity.setNavigationBarColorCompat(colorNavigationBar)
                     }

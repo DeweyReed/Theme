@@ -1,4 +1,3 @@
-
 package xyz.aprildown.theme
 
 import android.content.Context
@@ -22,6 +21,7 @@ class ThemeEditor(private val context: Context) {
             editor.putInt(KEY_COLOR_PRIMARY, value)
             editor.putBoolean(KEY_IS_PRIMARY_LIGHT, value.isLightColor)
         }
+
     @ColorRes
     var colorPrimaryRes = 0
         set(value) {
@@ -34,6 +34,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_COLOR_PRIMARY_VARIANT, value)
         }
+
     @ColorRes
     var colorPrimaryVariantRes = 0
         set(value) {
@@ -46,6 +47,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_COLOR_ON_PRIMARY, value)
         }
+
     @ColorRes
     var colorOnPrimaryRes = 0
         set(value) {
@@ -58,6 +60,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_COLOR_SECONDARY, value)
         }
+
     @ColorRes
     var colorSecondaryRes = 0
         set(value) {
@@ -70,6 +73,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_COLOR_SECONDARY_VARIANT, value)
         }
+
     @ColorRes
     var colorSecondaryVariantRes = 0
         set(value) {
@@ -82,6 +86,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_COLOR_ON_SECONDARY, value)
         }
+
     @ColorRes
     var colorOnSecondaryRes = 0
         set(value) {
@@ -94,6 +99,7 @@ class ThemeEditor(private val context: Context) {
             field = value
             editor.putInt(KEY_STATUS_BAR_COLOR, value)
         }
+
     @ColorRes
     var colorStatusBarRes = 0
         set(value) {
@@ -110,10 +116,21 @@ class ThemeEditor(private val context: Context) {
                 editor.remove(KEY_NAV_BAR_COLOR)
             }
         }
+
     @ColorRes
     var colorNavigationBarRes = 0
         set(value) {
             colorNavigationBar = context.color(value)
+        }
+
+    /**
+     * By default, we calculate if the status bar should use the light mode by the status color.
+     * But we maybe end up using different light modes on Toolbar and the status bar.
+     * Enable this if you wish to calculate the status bar light mode by the primary color.
+     */
+    var lightStatusByPrimary: Boolean = false
+        set(value) {
+            editor.putBoolean(KEY_LIGHT_STATUS_BY_PRIMARY, value)
         }
 
     fun darker(@ColorInt color: Int): Int = color.darker()
@@ -136,9 +153,10 @@ class ThemeEditor(private val context: Context) {
             .remove(KEY_STATUS_BAR_COLOR)
             .remove(KEY_NAV_BAR_COLOR)
             .remove(KEY_IS_PRIMARY_LIGHT)
+            .remove(KEY_LIGHT_STATUS_BY_PRIMARY)
     }
 
-    fun save(commit: Boolean = false) {
-        if (commit) editor.commit() else editor.apply()
+    fun save() {
+        editor.apply()
     }
 }

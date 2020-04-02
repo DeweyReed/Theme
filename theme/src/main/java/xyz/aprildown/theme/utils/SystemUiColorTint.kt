@@ -29,7 +29,10 @@ private fun Activity.setLightStatusBarCompat(lightMode: Boolean) {
     }
 }
 
-internal fun Activity.setStatusBarColorCompat(@ColorInt colorStatusBar: Int) {
+internal fun Activity.setStatusBarColorCompat(
+    @ColorInt colorStatusBar: Int,
+    useLightMode: Boolean
+) {
     val rootView: ViewGroup? = (findViewById<View>(android.R.id.content) as? ViewGroup)?.run {
         if (childCount > 0) getChildAt(0) as? ViewGroup else null
     }
@@ -40,7 +43,7 @@ internal fun Activity.setStatusBarColorCompat(@ColorInt colorStatusBar: Int) {
     } else {
         window?.statusBarColor = colorStatusBar
     }
-    setLightStatusBarCompat(colorStatusBar.isLightColor)
+    setLightStatusBarCompat(lightMode = useLightMode)
 }
 
 private fun Activity.setLightNavigationBarCompat(lightMode: Boolean) {

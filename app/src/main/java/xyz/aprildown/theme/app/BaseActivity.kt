@@ -56,6 +56,7 @@ abstract class BaseActivity : AppCompatActivity() {
                     colorSecondaryRes = R.color.md_blue_500
                     colorSecondaryVariantRes = R.color.md_blue_800
                     colorOnSecondary = on(colorSecondary)
+                    lightStatusByPrimary = true
                 }
             }
             THEME_DEFAULT -> {
@@ -79,6 +80,8 @@ abstract class BaseActivity : AppCompatActivity() {
             colorSecondary = randomColor
             colorSecondaryVariant = darker(colorSecondary)
             colorOnSecondary = on(colorSecondary)
+            lightStatusByPrimary = true
+            colorNavigationBar = if (Random.nextBoolean()) colorPrimary else null
         }
         themeValue = THEME_SHUFFLE + Random.nextInt()
     }
