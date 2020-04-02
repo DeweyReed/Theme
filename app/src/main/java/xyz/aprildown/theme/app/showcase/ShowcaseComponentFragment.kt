@@ -78,7 +78,7 @@ private open class SimpleComponent(@LayoutRes componentLayoutRes: Int) :
 }
 
 private class DrawerComponent : SimpleComponent(R.layout.component_drawer) {
-    override fun bindView(holder: SimpleViewHolder, payloads: MutableList<Any>) {
+    override fun bindView(holder: SimpleViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
         holder.itemView.run {
             drawer_layout.openDrawer(GravityCompat.START)
@@ -107,7 +107,7 @@ private class SnackbarComponent : SimpleComponent(R.layout.component_snackbar) {
 private class ButtonTriggerComponent(
     private val onClick: () -> Unit
 ) : SimpleComponent(R.layout.component_button_trigger) {
-    override fun bindView(holder: SimpleViewHolder, payloads: MutableList<Any>) {
+    override fun bindView(holder: SimpleViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
         holder.itemView.button.setOnClickListener {
             onClick.invoke()

@@ -61,7 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         override val type: Int = R.layout.item_widget
         override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
-        override fun bindView(holder: ViewHolder, payloads: MutableList<Any>) {
+        override fun bindView(holder: ViewHolder, payloads: List<Any>) {
             super.bindView(holder, payloads)
             holder.run {
                 titleView.text = pair.first
