@@ -19,7 +19,6 @@ class ThemeEditor(private val context: Context) {
         set(value) {
             field = value
             editor.putInt(KEY_COLOR_PRIMARY, value)
-            editor.putBoolean(KEY_IS_PRIMARY_LIGHT, value.isLightColor)
         }
 
     @ColorRes
@@ -152,7 +151,6 @@ class ThemeEditor(private val context: Context) {
             .remove(KEY_COLOR_ON_SECONDARY)
             .remove(KEY_STATUS_BAR_COLOR)
             .remove(KEY_NAV_BAR_COLOR)
-            .remove(KEY_IS_PRIMARY_LIGHT)
             .remove(KEY_LIGHT_STATUS_BY_PRIMARY)
     }
 

@@ -26,7 +26,11 @@ internal abstract class BaseTint<T : View>(
 }
 
 internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
-    return tint.apply(this, attrs)
+    return if (Theme.get().enabled) {
+        tint.apply(this, attrs)
+    } else {
+        this
+    }
 }
 
 internal class ThemeHelper<T : View>(val view: T, private val typedArray: TypedArray) {

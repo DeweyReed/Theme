@@ -18,6 +18,5 @@ internal const val KEY_COLOR_ON_SECONDARY = "accent_on_color"
 
 // Helpers
 
-internal const val KEY_IS_PRIMARY_LIGHT = "is_primary_light"
 internal const val KEY_LIGHT_STATUS_BY_PRIMARY = "light_status_by_primary"
 

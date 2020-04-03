@@ -37,11 +37,6 @@ private fun Context.safeContext(): Context =
 internal fun Context.getThemePrefs(): SharedPreferences =
     safeContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-@ColorInt
-internal inline fun SharedPreferences.getColorOrDefault(key: String, or: () -> Int): Int {
-    return if (contains(key)) getInt(key, 0) else or.invoke()
-}
-
 internal fun Context.float(@DimenRes dimenRes: Int): Float =
     ResourcesCompat.getFloat(resources, dimenRes)
 

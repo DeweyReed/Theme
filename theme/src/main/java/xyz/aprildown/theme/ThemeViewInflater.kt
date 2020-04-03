@@ -113,6 +113,7 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
         if (name == null) return null
+        if (!Theme.get().enabled) return null
 
         for (delegate in Theme.get().delegates) {
             val result = delegate.createView(context, name, attrs)

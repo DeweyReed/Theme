@@ -9,13 +9,13 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.view.Menu
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.annotation.StyleableRes
 import androidx.appcompat.view.ContextThemeWrapper
 import xyz.aprildown.theme.tint.tintMenuWithHack
-import xyz.aprildown.theme.utils.getColorOrDefault
 import xyz.aprildown.theme.utils.getThemePrefs
 import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setNavigationBarColorCompat
@@ -30,69 +30,96 @@ class Theme private constructor(
 
     private var prefs: SharedPreferences = context.getThemePrefs()
 
+    var enabled = true
+
     internal val delegates = mutableListOf<ThemeInflationDelegate>()
 
     // region colors
 
     val colorPrimary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_PRIMARY) {
-            context.themeColor(R.attr.colorPrimary)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_PRIMARY,
+            colorAttrId = R.attr.colorPrimary
+        )
 
     val colorPrimaryVariant: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_PRIMARY_VARIANT) {
-            context.themeColor(R.attr.colorPrimaryVariant)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_PRIMARY_VARIANT,
+            colorAttrId = R.attr.colorPrimaryVariant
+        )
 
     val colorOnPrimary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_ON_PRIMARY) {
-            context.themeColor(R.attr.colorOnPrimary)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_ON_PRIMARY,
+            colorAttrId = R.attr.colorOnPrimary
+        )
 
     val colorSecondary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_SECONDARY) {
-            context.themeColor(R.attr.colorSecondary)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_SECONDARY,
+            colorAttrId = R.attr.colorSecondary
+        )
 
     val colorSecondaryVariant: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_SECONDARY_VARIANT) {
-            context.themeColor(R.attr.colorSecondaryVariant)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_SECONDARY_VARIANT,
+            colorAttrId = R.attr.colorSecondaryVariant
+        )
 
     val colorOnSecondary: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_COLOR_ON_SECONDARY) {
-            context.themeColor(R.attr.colorOnSecondary)
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_COLOR_ON_SECONDARY,
+            colorAttrId = R.attr.colorOnSecondary
+        )
 
     val colorStatusBar: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_STATUS_BAR_COLOR) {
-            colorPrimaryVariant
-        }
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_STATUS_BAR_COLOR,
+            colorAttrId = android.R.attr.statusBarColor
+        )
 
     val colorNavigationBar: Int
         @ColorInt
-        get() = prefs.getColorOrDefault(KEY_NAV_BAR_COLOR) {
-            context.themeColor(android.R.attr.navigationBarColor)
+        get() = getDynamicColorOrDefault(
+            colorKey = KEY_NAV_BAR_COLOR,
+            colorAttrId = android.R.attr.navigationBarColor
+        )
+
+    @ColorInt
+    private fun getDynamicColorOrDefault(colorKey: String, @AttrRes colorAttrId: Int): Int = when {
+        !enabled -> {
+            context.themeColor(colorAttrId)
         }
+        prefs.contains(colorKey) -> {
+            prefs.getInt(colorKey, 0)
+        }
+        else -> {
+            context.themeColor(colorAttrId)
+        }
+    }
 
     // endregion colors
 
     // region helpers
 
-    val isPrimaryLight: Boolean
-        get() = prefs.getBoolean(KEY_IS_PRIMARY_LIGHT, true)
-
     val lightStatusByPrimary: Boolean
         get() = prefs.getBoolean(KEY_LIGHT_STATUS_BY_PRIMARY, false)
 
     // endregion helpers
+
+    // region utils
+
+    internal val isPrimaryLight: Boolean
+        get() = colorPrimary.isLightColor
+
+    // endregion utils
 
     /**
      * We make menu nullable before override fun onCreateOptionsMenu(menu: Menu?): Boolean
@@ -156,6 +183,7 @@ class Theme private constructor(
         @JvmStatic
         fun tintSystemUi(context: Context) {
             get().run {
+                if (!enabled) return@run
                 (context as? Activity)?.let { activity ->
                     activity.setTaskDescriptionColor(appIconRes, colorPrimary)
                     activity.setStatusBarColorCompat(

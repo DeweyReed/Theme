@@ -52,6 +52,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 Theme.edit(this) {
                     colorPrimaryRes = R.color.md_amber_500
                     colorPrimaryVariantRes = R.color.md_amber_800
+                    colorStatusBar = colorPrimaryVariant
                     colorOnPrimary = on(colorPrimary)
                     colorSecondaryRes = R.color.md_blue_500
                     colorSecondaryVariantRes = R.color.md_blue_800
@@ -63,6 +64,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 Theme.edit(this) {
                     colorPrimaryRes = R.color.colorPrimary
                     colorPrimaryVariantRes = R.color.colorPrimaryVariant
+                    colorStatusBar = colorPrimaryVariant
                     colorOnPrimary = on(colorPrimary)
                     colorSecondaryRes = R.color.colorSecondary
                     colorSecondaryVariantRes = R.color.colorSecondaryVariant
@@ -76,6 +78,7 @@ abstract class BaseActivity : AppCompatActivity() {
         Theme.edit(this) {
             colorPrimary = randomColor
             colorPrimaryVariant = darker(colorPrimary)
+            colorStatusBar = colorPrimaryVariant
             colorOnPrimary = on(colorPrimary)
             colorSecondary = randomColor
             colorSecondaryVariant = darker(colorSecondary)
