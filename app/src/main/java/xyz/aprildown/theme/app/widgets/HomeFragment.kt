@@ -48,6 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     "Fab" to R.id.fabFragment,
                     "Card" to R.id.cardFragment,
                     "Bar" to R.id.barFragment,
+                    "Dialog" to R.id.dialogFragment,
                     "Collapsing Toolbar Activity" to R.id.collapsingToolbarActivity
                 ).map { WidgetItem(it) }
             )

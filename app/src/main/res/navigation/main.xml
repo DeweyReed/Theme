@@ -71,6 +71,12 @@
         android:label="Bar"
         tools:layout="@layout/fragment_bar" />
 
+    <fragment
+        android:id="@+id/dialogFragment"
+        android:name="xyz.aprildown.theme.app.widgets.DialogFragment"
+        android:label="Dialog"
+        tools:layout="@layout/fragment_dialog" />
+
     <activity
         android:id="@+id/collapsingToolbarActivity"
         android:name="xyz.aprildown.theme.app.widgets.CollapsingToolbarActivity"
