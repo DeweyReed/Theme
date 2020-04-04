@@ -16,6 +16,7 @@ import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.colorStateList
 import xyz.aprildown.theme.utils.float
 import xyz.aprildown.theme.utils.getMaterialBackgroundColor
+import xyz.aprildown.theme.utils.isDarkColor
 import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.tinted
@@ -102,8 +103,7 @@ internal class ToolbarTint : BaseTint<Toolbar>(
             // Check MaterialToolbar.initBackground
             toolbar.setMaterialBackgroundColor(it)
         }
-        isNearestToolbarBackgroundLight =
-            toolbar.getMaterialBackgroundColor()?.isLightColor ?: Theme.get().isPrimaryLight
+
         /**
          * Here is the problem.
          * Normally, we use AppTheme.AppBarOverlay and AppTheme.PopupOverlay to define toolbar text
@@ -112,6 +112,8 @@ internal class ToolbarTint : BaseTint<Toolbar>(
          */
 
         fun tintToolbarMenu(color: ColorStateList) {
+            // toolbar.background's color may be 0 so we use toolbar title color.
+            isNearestToolbarBackgroundLight = color.defaultColor.isDarkColor
             toolbar.setTitleTextColor(color)
             // The navigationIcon may not be inflated now, post it.
             // But it'll override any tint in the Activity's onCreate
