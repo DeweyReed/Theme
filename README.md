@@ -38,7 +38,7 @@ Define theme colors:
 - **Color resources name must be identical to the names above.**
 - **Color values must be formatted as `#RRGGBB`. Color references won't work** because of [how `TypedArray.getResourceId` works](https://developer.android.com/reference/android/content/res/TypedArray.html#getResourceId(int,%20int)).
 
-Then add a attribute to your root theme:
+Then add an attribute to your root theme:
 
 ```XML
 <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -54,13 +54,14 @@ Then add a attribute to your root theme:
 Then in your App:
 
 ```Kotlin
-Theme.init(ContextThemeWrapper(this, R.style.AppTheme)) {
+Theme.init(
+    context = this,
+    themeRes = R.style.AppTheme
+) {
     // Optional. Provide initial colors here.
     // The usage is same as the code below.
 }
 ```
-
-- Use a themed context because we need to resolve color resources.
 
 ### 3. Edit
 
@@ -72,10 +73,11 @@ Theme.edit(this) {
     colorSecondaryRes = R.color.md_blue_500
     colorSecondaryVariantRes = R.color.md_blue_800
     colorOnSecondary = on(colorSecondary)
+    colorStatusBar = colorPrimaryVariant
 }
 ```
 
-- **After editting, you have to recreate activities in the backstack on your own.**
+- **After editing, you have to recreate activities in the backstack on your own.**
 - Variables ending with `Res` expect a `ColorRes`. Other variables expect a `ColorInt`.
 
 ## License
