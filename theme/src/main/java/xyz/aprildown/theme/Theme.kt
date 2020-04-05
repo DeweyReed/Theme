@@ -8,14 +8,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.view.Menu
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.annotation.StyleableRes
 import androidx.appcompat.view.ContextThemeWrapper
-import xyz.aprildown.theme.tint.tintMenuWithHack
 import xyz.aprildown.theme.utils.getThemePrefs
 import xyz.aprildown.theme.utils.isLightColor
 import xyz.aprildown.theme.utils.setNavigationBarColorCompat
@@ -120,13 +118,6 @@ class Theme private constructor(
         get() = colorPrimary.isLightColor
 
     // endregion utils
-
-    /**
-     * We make menu nullable before override fun onCreateOptionsMenu(menu: Menu?): Boolean
-     */
-    fun tintMenu(menu: Menu?) {
-        menu?.tintMenuWithHack(context)
-    }
 
     companion object {
 

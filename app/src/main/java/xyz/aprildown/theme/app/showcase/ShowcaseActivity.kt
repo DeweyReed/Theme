@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_showcase.*
-import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.app.BaseActivity
 import xyz.aprildown.theme.app.R
 
@@ -41,7 +40,6 @@ class ShowcaseActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        Theme.get().tintMenu(menu)
         return true
     }
 

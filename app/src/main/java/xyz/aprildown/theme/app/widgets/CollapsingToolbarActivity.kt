@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_collapsing_toolbar.*
-import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.app.BaseActivity
 import xyz.aprildown.theme.app.R
 
@@ -21,7 +20,6 @@ class CollapsingToolbarActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        Theme.get().tintMenu(menu)
         return true
     }
 

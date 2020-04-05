@@ -17,12 +17,10 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -61,7 +59,7 @@ import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
-import xyz.aprildown.theme.tint.ToolbarTint
+import xyz.aprildown.theme.tint.ThemeToolbar
 import xyz.aprildown.theme.tint.decorate
 
 @Keep // Make proguard keep this class as it's accessed reflectively by AppCompat
@@ -133,9 +131,9 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                     CollapsingToolbarLayoutTint()
                 )
             "androidx.appcompat.widget.Toolbar" ->
-                Toolbar(context, attrs).decorate(attrs, ToolbarTint())
+                ThemeToolbar(context, attrs)
             "com.google.android.material.appbar.MaterialToolbar" ->
-                MaterialToolbar(context, attrs).decorate(attrs, ToolbarTint())
+                ThemeToolbar(context, attrs)
             "com.google.android.material.bottomappbar.BottomAppBar" ->
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
             "com.google.android.material.bottomnavigation.BottomNavigationView" ->

@@ -44,6 +44,7 @@ internal class ThemeHelper<T : View>(val view: T, private val typedArray: TypedA
         val context = view.context
         return when (context.findAttrFinalResourceId(attrRes)) {
             context.findAttrFinalResourceId(R.attr.colorPrimary) -> theme.colorPrimary
+            context.findAttrFinalResourceId(R.attr.colorOnPrimary) -> theme.colorOnPrimary
             context.findAttrFinalResourceId(R.attr.colorSecondary) -> theme.colorSecondary
             else -> null
         }
