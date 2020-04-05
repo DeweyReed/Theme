@@ -121,6 +121,15 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
         }
 
         return when (name) {
+            "com.google.android.material.textview.MaterialTextView" ->
+                createTextView(context, attrs)
+            "com.google.android.material.button.MaterialButton" ->
+                createButton(context, attrs!!)
+            "com.google.android.material.checkbox.MaterialCheckBox" ->
+                createCheckBox(context, attrs)
+            "com.google.android.material.radiobutton.MaterialRadioButton" ->
+                createRadioButton(context, attrs)
+
             "ProgressBar" ->
                 ProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
             "com.google.android.material.appbar.AppBarLayout" ->
