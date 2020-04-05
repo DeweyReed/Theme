@@ -151,7 +151,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 MaterialCardView(context, attrs).decorate(attrs, MaterialCardViewTint())
             "com.google.android.material.navigation.NavigationView" ->
                 NavigationView(context, attrs).decorate(attrs, NavigationViewTint())
-            "com.google.android.material.switchmaterial.SwitchMaterial" ->
+            "com.google.android.material.switchmaterial.SwitchMaterial",
+            "androidx.appcompat.widget.SwitchCompat" ->
                 SwitchMaterial(context, attrs).decorate(attrs, SwitchMaterialTint())
             "com.google.android.material.tabs.TabLayout" ->
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
