@@ -73,7 +73,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
             applyResource = {
                 when (it) {
                     R.color.mtrl_extended_fab_ripple_color -> {
-                        fab.rippleColor = fab.mtrl_extended_fab_ripple_color()
+                        fab.rippleColor = mtrl_extended_fab_ripple_color()
                     }
                 }
             }
@@ -110,7 +110,7 @@ private fun View.mtrl_extended_fab_bg_color_selector(): ColorStateList {
 }
 
 // R.color.mtrl_extended_fab_ripple_color
-private fun View.mtrl_extended_fab_ripple_color(): ColorStateList {
+private fun mtrl_extended_fab_ripple_color(): ColorStateList {
     val colorOnSecondary = Theme.get().colorOnSecondary
     return ColorStateList(
         arrayOf(

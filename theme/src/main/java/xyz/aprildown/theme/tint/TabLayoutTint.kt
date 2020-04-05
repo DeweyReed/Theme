@@ -62,7 +62,7 @@ private fun withTabIconTint(resourceId: Int, view: TabLayout) {
             view.mtrl_tabs_icon_color_selector()
         }
         R.color.mtrl_tabs_icon_color_selector_colored -> {
-            view.mtrl_tabs_icon_color_selector_colored()
+            mtrl_tabs_icon_color_selector_colored()
         }
         else -> null
     }?.let {
@@ -76,7 +76,7 @@ private fun withTabTextColor(resourceId: Int, view: TabLayout) {
             view.mtrl_tabs_icon_color_selector()
         }
         R.color.mtrl_tabs_icon_color_selector_colored -> {
-            view.mtrl_tabs_icon_color_selector_colored()
+            mtrl_tabs_icon_color_selector_colored()
         }
         else -> null
     }?.let {
@@ -99,7 +99,7 @@ private fun View.mtrl_tabs_icon_color_selector(): ColorStateList {
 }
 
 // R.color.mtrl_tabs_icon_color_selector_colored
-private fun View.mtrl_tabs_icon_color_selector_colored(): ColorStateList {
+private fun mtrl_tabs_icon_color_selector_colored(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(
@@ -119,7 +119,7 @@ private fun withTabRippleColor(resourceId: Int, view: TabLayout) {
             view.mtrl_tabs_ripple_color()
         }
         R.color.mtrl_tabs_colored_ripple_color -> {
-            view.mtrl_tabs_colored_ripple_color()
+            mtrl_tabs_colored_ripple_color()
         }
         else -> null
     }?.let {
@@ -166,7 +166,7 @@ private fun View.mtrl_tabs_ripple_color(): ColorStateList {
 }
 
 // R.color.mtrl_tabs_colored_ripple_color
-private fun View.mtrl_tabs_colored_ripple_color(): ColorStateList {
+private fun mtrl_tabs_colored_ripple_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(

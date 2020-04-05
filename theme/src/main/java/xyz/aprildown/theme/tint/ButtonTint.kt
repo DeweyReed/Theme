@@ -154,7 +154,7 @@ private fun withBackgroundTint(resourceId: Int, view: MaterialButton) {
             view.mtrl_btn_bg_color_selector()
         }
         R.color.mtrl_btn_text_btn_bg_color_selector -> {
-            view.mtrl_btn_text_btn_bg_color_selector()
+            mtrl_btn_text_btn_bg_color_selector()
         }
         else -> null
     }?.let {
@@ -175,7 +175,7 @@ private fun View.mtrl_btn_bg_color_selector(): ColorStateList = ColorStateList(
 )
 
 // R.color.mtrl_btn_text_btn_bg_color_selector
-private fun View.mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateList(
+private fun mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_checked),
         intArrayOf(-android.R.attr.state_checked)

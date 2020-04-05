@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package xyz.aprildown.theme
 
 import android.annotation.SuppressLint
@@ -111,13 +109,6 @@ class Theme private constructor(
         get() = prefs.getBoolean(KEY_LIGHT_STATUS_BY_PRIMARY, false)
 
     // endregion helpers
-
-    // region utils
-
-    internal val isPrimaryLight: Boolean
-        get() = colorPrimary.isLightColor
-
-    // endregion utils
 
     companion object {
 

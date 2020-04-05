@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("unused", "SpellCheckingInspection")
-
 package xyz.aprildown.theme.utils
 
 import android.content.res.ColorStateList
@@ -43,11 +41,11 @@ internal fun Int.lighter(@FloatRange(from = 0.0, to = 1.0) factor: Float = 0.15f
     return Color.argb(alpha, red, green, blue)
 }
 
-internal val Int.isDarkColor: Boolean get() = this.isDarkColor(0.5)
+// internal val Int.isDarkColor: Boolean get() = this.isDarkColor(0.5)
 
-internal fun Int.isDarkColor(@FloatRange(from = 0.0, to = 1.0) luminance: Double): Boolean {
-    return AndroidColorUtils.calculateLuminance(this) <= luminance
-}
+// internal fun Int.isDarkColor(@FloatRange(from = 0.0, to = 1.0) luminance: Double): Boolean {
+//     return AndroidColorUtils.calculateLuminance(this) <= luminance
+// }
 
 internal val Int.isLightColor: Boolean get() = this.isLightColor(0.5)
 
@@ -67,13 +65,13 @@ internal fun Int.adjustAlpha(@FloatRange(from = 0.0, to = 1.0) factor: Float): I
 @ColorInt
 internal fun Int.stripAlpha(): Int = Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
 
-@ColorInt
-internal fun Int.shiftColor(@FloatRange(from = 0.0, to = 2.0) by: Float): Int {
-    if (by == 1f) return this
-    val hsv = FloatArray(3)
-    Color.colorToHSV(this, hsv)
-    hsv[2] *= by // value component
-    return Color.HSVToColor(hsv)
-}
+// @ColorInt
+// internal fun Int.shiftColor(@FloatRange(from = 0.0, to = 2.0) by: Float): Int {
+//     if (by == 1f) return this
+//     val hsv = FloatArray(3)
+//     Color.colorToHSV(this, hsv)
+//     hsv[2] *= by // value component
+//     return Color.HSVToColor(hsv)
+// }
 
 internal fun Int.toColorStateList(): ColorStateList = ColorStateList.valueOf(this)

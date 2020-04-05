@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
@@ -53,14 +52,14 @@ internal fun View.setMaterialBackgroundColor(@ColorInt color: Int) {
     }
 }
 
-@ColorInt
-internal fun View.getMaterialBackgroundColor(): Int? {
-    return when (val background = background) {
-        is ColorDrawable -> background.color
-        is MaterialShapeDrawable -> background.fillColor?.defaultColor
-        else -> null
-    }
-}
+// @ColorInt
+// internal fun View.getMaterialBackgroundColor(): Int? {
+//     return when (val background = background) {
+//         is ColorDrawable -> background.color
+//         is MaterialShapeDrawable -> background.fillColor?.defaultColor
+//         else -> null
+//     }
+// }
 
 @ColorInt
 internal fun Context.themeColor(@AttrRes attrRes: Int): Int {
@@ -82,11 +81,11 @@ internal fun Context.findAttrFinalResourceId(@AttrRes attrRes: Int): Int {
     }
 }
 
-internal fun Drawable.tinted(@ColorInt color: Int): Drawable {
-    val result = DrawableCompat.wrap(this.mutate())
-    DrawableCompat.setTint(result, color)
-    return result
-}
+// internal fun Drawable.tinted(@ColorInt color: Int): Drawable {
+//     val result = DrawableCompat.wrap(this.mutate())
+//     DrawableCompat.setTint(result, color)
+//     return result
+// }
 
 internal fun Drawable.tinted(csl: ColorStateList): Drawable {
     val result = DrawableCompat.wrap(this.mutate())
