@@ -7,7 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
-import xyz.aprildown.theme.utils.isLightColor
+import xyz.aprildown.theme.utils.colorStateList
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.tinted
@@ -22,22 +22,24 @@ internal class BottomAppBarTint : BaseTint<BottomAppBar>(
     onTint = {
         // R.style.Widget_MaterialComponents_BottomAppBar
         // R.style.Widget_MaterialComponents_BottomAppBar_Colored
+        // R.style.Widget_MaterialComponents_BottomAppBar_PrimarySurface
         val bottomAppBar = view
         val context = bottomAppBar.context
         matchThemeColor(R.styleable.Theme_BottomAppBar_backgroundTint)?.let {
             bottomAppBar.backgroundTint = it.toColorStateList()
         }
-        val isBackgroundLight =
-            bottomAppBar.backgroundTint?.defaultColor?.isLightColor
-                ?: Theme.get().isPrimaryLight
-        context.textColorOnToolbar(isBackgroundLight)?.let { textColorOnToolbar ->
+
+        // R.style.Widget_MaterialComponents_BottomAppBar doesn't have a materialThemeOverlay
+        // define colorControlNormal so we have to do it on our own.
+        (findAttributeColor(R.attr.colorControlNormal)?.toColorStateList()
+            ?: context.colorStateList(R.color.material_on_surface_emphasis_medium))?.let { colorOnBar ->
             bottomAppBar.navigationIcon?.let {
-                bottomAppBar.navigationIcon = it.tinted(textColorOnToolbar)
+                bottomAppBar.navigationIcon = it.tinted(colorOnBar)
             }
             bottomAppBar.overflowIcon?.let {
-                bottomAppBar.overflowIcon = it.tinted(textColorOnToolbar)
+                bottomAppBar.overflowIcon = it.tinted(colorOnBar)
             }
-            bottomAppBar.menu.tintMenu(textColorOnToolbar)
+            bottomAppBar.menu.tintMenu(colorOnBar)
         }
     }
 )
