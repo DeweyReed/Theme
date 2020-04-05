@@ -83,13 +83,13 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
         return super.createRadioButton(context, attrs).decorate(attrs, RadioButtonTint())
     }
 
-    override fun createSeekBar(context: Context?, attrs: AttributeSet?): AppCompatSeekBar {
-        return super.createSeekBar(context, attrs).decorate(attrs, SeekBarTint())
-    }
-
     // endregion MaterialComponentsViewInflater
 
     // region AppCompatViewInflater
+
+    override fun createSeekBar(context: Context?, attrs: AttributeSet?): AppCompatSeekBar {
+        return super.createSeekBar(context, attrs).decorate(attrs, SeekBarTint())
+    }
 
     override fun createImageView(context: Context?, attrs: AttributeSet?): AppCompatImageView {
         return super.createImageView(context, attrs).decorate(attrs, ImageViewTint())
@@ -121,6 +121,17 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
         }
 
         return when (name) {
+            "androidx.appcompat.widget.AppCompatSeekBar" ->
+                createSeekBar(context, attrs)
+            "androidx.appcompat.widget.AppCompatImageView" ->
+                createImageView(context, attrs)
+            "androidx.appcompat.widget.AppCompatEditText" ->
+                createEditText(context, attrs)
+            "androidx.appcompat.widget.AppCompatSpinner" ->
+                createSpinner(context, attrs)
+            "androidx.appcompat.widget.AppCompatImageButton" ->
+                createImageButton(context, attrs)
+
             "com.google.android.material.textview.MaterialTextView" ->
                 createTextView(context, attrs)
             "com.google.android.material.button.MaterialButton" ->
