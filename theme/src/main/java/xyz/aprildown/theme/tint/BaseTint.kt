@@ -26,7 +26,7 @@ internal abstract class BaseTint<T : View>(
 }
 
 internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
-    return if (Theme.get().enabled) {
+    return if (!isInEditMode && Theme.get().enabled) {
         tint.apply(this, attrs)
     } else {
         this
