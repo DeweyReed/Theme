@@ -159,18 +159,16 @@ class Theme private constructor(
         }
 
         @JvmStatic
-        fun tintSystemUi(context: Context) {
+        fun tintSystemUi(activity: Activity) {
             get().run {
                 if (!enabled) return@run
-                (context as? Activity)?.let { activity ->
-                    activity.setTaskDescriptionColor(appIconRes, colorPrimary)
-                    activity.setStatusBarColorCompat(
-                        colorStatusBar,
-                        (if (lightStatusByPrimary) colorPrimary else colorStatusBar).isLightColor
-                    )
-                    if (prefs.contains(KEY_NAV_BAR_COLOR)) {
-                        activity.setNavigationBarColorCompat(colorNavigationBar)
-                    }
+                activity.setTaskDescriptionColor(appIconRes, colorPrimary)
+                activity.setStatusBarColorCompat(
+                    colorStatusBar,
+                    (if (lightStatusByPrimary) colorPrimary else colorStatusBar).isLightColor
+                )
+                if (prefs.contains(KEY_NAV_BAR_COLOR)) {
+                    activity.setNavigationBarColorCompat(colorNavigationBar)
                 }
             }
         }
