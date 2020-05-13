@@ -23,6 +23,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -135,7 +136,7 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
             "com.google.android.material.textview.MaterialTextView" ->
                 createTextView(context, attrs)
             "com.google.android.material.button.MaterialButton" ->
-                createButton(context, attrs!!)
+                MaterialButton(context, attrs).decorate(attrs, ButtonTint())
             "com.google.android.material.checkbox.MaterialCheckBox" ->
                 createCheckBox(context, attrs)
             "com.google.android.material.radiobutton.MaterialRadioButton" ->
