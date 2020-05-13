@@ -36,7 +36,21 @@ class ShowcaseActivity : BaseActivity() {
             }
         }
         tabLayoutShowcase.setupWithViewPager(viewPagerShowcase)
+        // viewPagerShowcase.currentItem = 1
     }
+
+    // /**
+    //  * Code to show off.
+    //  */
+    // override fun recreate() {
+    //     if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+    //         startActivity(Intent(this, ShowcaseActivity::class.java))
+    //         finish()
+    //         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    //     } else {
+    //         super.recreate()
+    //     }
+    // }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
