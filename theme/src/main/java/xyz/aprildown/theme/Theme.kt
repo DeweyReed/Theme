@@ -89,14 +89,10 @@ class Theme private constructor(
         )
 
     @ColorInt
-    private fun getDynamicColorOrDefault(colorKey: String, @AttrRes colorAttrId: Int): Int = when {
-        !enabled -> {
-            context.themeColor(colorAttrId)
-        }
-        prefs.contains(colorKey) -> {
+    private fun getDynamicColorOrDefault(colorKey: String, @AttrRes colorAttrId: Int): Int {
+        return if (enabled && prefs.contains(colorKey)) {
             prefs.getInt(colorKey, 0)
-        }
-        else -> {
+        } else {
             context.themeColor(colorAttrId)
         }
     }
