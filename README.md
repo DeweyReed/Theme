@@ -1,84 +1,122 @@
-# [WIP, Experimental] Theme
+# [Experimental] Theme
 
-With the release of [`material-components-android 1.1.0`](https://github.com/material-components/material-components-android/releases/tag/1.1.0) and Android Q, many android view components can be themed at runtime.
+<img src="images/image.gif" alt="image" title="image" width="300" align="right" />
 
-`Theme` retints Android views after their creation to provide dynamic theming support for the app.
+`Theme` is an experimental dynamic theme engine for Android.
 
 ## WARNING
 
-**Don't use `Theme` in the production unless you've understood the library and the risk.**
+**`Theme` only works with [`material-components-android 1.1.0`](https://github.com/material-components/material-components-android/releases/tag/1.1.0). Any other version doesn't work.**
 
-**Jetpack Compose supports dynamic theming out of the box, which should be your choice during the production (in the future).**
+**I don't recommend using `Theme` in the production** because the implementation is fragile.
 
-## Limitation
-
-Because of the limitaion of Android View system, It's very difficult to tint some widgets(like `TimePicker`) unless we hack or use many reflections. `Theme` also breaks some widgets(like `MaterailDatePicker`). So `Theme` only works partly with `material-components-android 1.1.0`, not 1.0.0 or 1.2.0 and later.
+Jetpack Compose supports dynamic theming and is a better alternative(in the future).
 
 ## Usage
 
-### 1. Dependency
+1. [Try a snapshot from JitPack.](https://jitpack.io/#DeweyReed/Theme)
+1. Define six theme colors:
 
-[Try a snapshot from JitPack.](https://jitpack.io/#DeweyReed/Theme)
+    ```XML
+    <resources>
+        <color name="colorPrimary">#008577</color>
+        <color name="colorPrimaryVariant">#00574B</color>
+        <color name="colorOnPrimary">#FFFFFF</color>
+        <color name="colorSecondary">#D81B60</color>
+        <color name="colorSecondaryVariant">#A00037</color>
+        <color name="colorOnSecondary">#FFFFFF</color>
+    </resources>
+    ```
 
-### 2. Initilize
+    - **The color resources name must be identical to the names above.**
+    - **Color values must be formatted as `#RRGGBB`. Color references won't work** because of [how `TypedArray.getResourceId` works](https://developer.android.com/reference/android/content/res/TypedArray.html#getResourceId(int,%20int)).
 
-Define theme colors:
+1. Add an attribute to your root theme:
 
-```XML
-<resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryVariant">#00574B</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorSecondary">#D81B60</color>
-    <color name="colorSecondaryVariant">#A00037</color>
-    <color name="colorOnSecondary">#FFFFFF</color>
-</resources>
-```
+    ```XML
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        ...
+        <!-- Add this line -->
+        <item name="viewInflaterClass">xyz.aprildown.theme.ThemeViewInflater</item>
+    </style>
+    ```
 
-- **Color resources name must be identical to the names above.**
-- **Color values must be formatted as `#RRGGBB`. Color references won't work** because of [how `TypedArray.getResourceId` works](https://developer.android.com/reference/android/content/res/TypedArray.html#getResourceId(int,%20int)).
+1. In your Application:
 
-Then add an attribute to your root theme:
+    ```Kotlin
+    Theme.init(
+        context = this,
+        themeRes = R.style.AppTheme
+    ) {
+        // Optional. Provide initial colors here.
+        // The usage is same as the code below.
+    }
+    ```
 
-```XML
-<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
-    ...
+1. Change colors:
 
-    <!-- Add this line -->
-    <item name="viewInflaterClass">xyz.aprildown.theme.ThemeViewInflater</item>
-</style>
-```
+    ```Kotlin
+    Theme.edit(this) {
+        colorPrimaryRes = R.color.md_amber_500
+        colorPrimaryVariantRes = R.color.md_amber_800
+        colorOnPrimary = on(colorPrimary)
+        colorSecondaryRes = R.color.md_blue_500
+        colorSecondaryVariantRes = R.color.md_blue_800
+        colorOnSecondary = on(colorSecondary)
+        colorStatusBar = colorPrimaryVariant
+    }
+    ```
 
-Then in your App:
+    - Variables ending with `Res` expect a `ColorRes`. Other variables expect a `ColorInt`.
+    - **After editing, you have to recreate activities in the back stack manually.**
+
+## More Settings
+
+### Tint Status Bar and Navigation Bar
 
 ```Kotlin
-Theme.init(
-    context = this,
-    themeRes = R.style.AppTheme
-) {
-    // Optional. Provide initial colors here.
-    // The usage is same as the code below.
+Theme.tintSystemUi(activity)
+```
+
+- Put it in activity's `onCreate`, but if you're using `DrawerLayout`, put it after `DrawerLayout` is inflated(usually it's after `setContentView`).
+
+### Disable Theme
+
+This's useful when you show a `MaterialDatePicker` because `Theme` messes up its colors.
+
+```Kotlin
+button.setOnClickListener {
+    Theme.get().enabled = false
+    MaterialDatePicker.Builder.datePicker()
+        .build()
+        .apply {
+            addOnDismissListener {
+                Theme.get().enabled = true
+            }
+        }
+        .show(childFragmentManager, null)
 }
 ```
 
-### 3. Edit
+### Support Custom Views
 
-```Kotlin
-Theme.edit(this) {
-    colorPrimaryRes = R.color.md_amber_500
-    colorPrimaryVariantRes = R.color.md_amber_800
-    colorOnPrimary = on(colorPrimary)
-    colorSecondaryRes = R.color.md_blue_500
-    colorSecondaryVariantRes = R.color.md_blue_800
-    colorOnSecondary = on(colorSecondary)
-    colorStatusBar = colorPrimaryVariant
-}
-```
+1. Create a `ThemeInflationDelegate` like [AppComponentsDelegate](/app/src/main/java/xyz/aprildown/theme/app/AppComponentsDelegate.kt).
+1. Add it after `Theme`'s initialization:
 
-- **After editing, you have to recreate activities in the backstack on your own.**
-- Variables ending with `Res` expect a `ColorRes`. Other variables expect a `ColorInt`.
+    ```Kotlin
+    Theme.init(...)
+    Theme.installDelegates(AppComponentsDelegate())
+    ```
+
+## Limitation
+
+- Style `Toolbar` [according to the docs](https://github.com/material-components/material-components-android/blob/master/docs/components/TopAppBar.md#regular-top-app-bar), or the tint doesn't work.
+- `Theme` doesn't use any reflection, so it's hard to tint widgets like `TimePicker`.
+- `Theme` heavily depends on `material-components-android 1.1.0` internal resources ID, making it doesn't work with 1.0.0, 1.2.0, or later.
+
+## How `Theme` Works
+
+`material-components-android 1.1.0` makes setting attributes programmatically very easy. [ThemeViewInflater](/theme/src/main/java/xyz/aprildown/theme/ThemeViewInflater.kt) extends [MaterialComponentsViewInflater](https://developer.android.com/reference/com/google/android/material/theme/MaterialComponentsViewInflater) and does all retint work. Classes named `***Tint` resolves color attributes from `AttributeSet` and applies new color.
 
 ## License
 
