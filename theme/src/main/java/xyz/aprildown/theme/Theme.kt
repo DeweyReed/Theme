@@ -110,7 +110,7 @@ class Theme private constructor(
 
         // We're holding an application context
         @SuppressLint("StaticFieldLeak")
-        private var instance: Theme? = null
+        internal var instance: Theme? = null
 
         @JvmStatic
         fun get(): Theme = (instance ?: throw IllegalStateException("Requires Theme.init"))

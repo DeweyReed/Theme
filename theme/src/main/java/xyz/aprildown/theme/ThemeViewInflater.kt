@@ -112,9 +112,11 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createView(context: Context, name: String?, attrs: AttributeSet?): View? {
         if (name == null) return null
-        if (!Theme.get().enabled) return null
+        // We may be in the edit mode where the instance isn't initialized.
+        val theme = Theme.instance ?: return null
+        if (!theme.enabled) return null
 
-        for (delegate in Theme.get().delegates) {
+        for (delegate in theme.delegates) {
             val result = delegate.createView(context, name, attrs)
             if (result != null) {
                 return result
