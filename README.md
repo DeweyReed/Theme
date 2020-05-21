@@ -6,6 +6,8 @@
 
 `Theme` is an experimental dynamic theme engine for Android by retinting views after their creation.
 
+This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic) and [Cyanea](https://github.com/jaredrummler/Cyanea).
+
 ## WARNING
 
 **`Theme` only works with [`material-components-android 1.1.0`](https://github.com/material-components/material-components-android/releases/tag/1.1.0). Any other version doesn't work.**
