@@ -1,8 +1,10 @@
 # [Experimental] Theme
 
+![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat) [![Releases](https://jitpack.io/v/xyz.aprildown/Theme.svg)](https://jitpack.io/#xyz.aprildown/Theme)
+
 <img src="images/image.gif" alt="image" title="image" width="300" align="right" />
 
-`Theme` is an experimental dynamic theme engine for Android.
+`Theme` is an experimental dynamic theme engine for Android by retinting views after their creation.
 
 ## WARNING
 
@@ -69,6 +71,12 @@ Jetpack Compose supports dynamic theming and is a better alternative(in the futu
 
     - Variables ending with `Res` expect a `ColorRes`. Other variables expect a `ColorInt`.
     - **After editing, you have to recreate activities in the back stack manually.**
+
+1. Use colors at runtime.
+
+    ```Kotlin
+    Theme.get().colorPrimary
+    ```
 
 ## More Settings
 
