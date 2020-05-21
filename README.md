@@ -16,7 +16,27 @@ Jetpack Compose supports dynamic theming and is a better alternative(in the futu
 
 ## Usage
 
-1. [Try a snapshot from JitPack.](https://jitpack.io/#xyz.aprildown/Theme)
+1. Install dependency:
+
+    1. Add the JitPack repository to your build file
+
+        ```Groovy
+        allprojects {
+            repositories {
+                ...
+                maven { url 'https://jitpack.io' }
+            }
+        }
+        ```
+
+    1. Add the dependency
+
+        ```Groovy
+        dependencies {
+            implementation 'xyz.aprildown:Theme:0.1.0'
+        }
+        ```
+
 1. Define six theme colors:
 
     ```XML
