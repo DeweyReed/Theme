@@ -16,6 +16,10 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
 Jetpack Compose supports dynamic theming and is a better alternative(in the future).
 
+## Sample App
+
+You can [download the APK from Release.](https://github.com/deweyreed/theme/releases)
+
 ## Usage
 
 1. Install dependency:
