@@ -4,7 +4,7 @@
 
 <img src="images/image.gif" alt="image" title="image" width="300" align="right" />
 
-`Theme` is an experimental dynamic theme engine for Android by retinting views after their creation.
+`Theme` is an experimental theme engine for Android by retinting views after their creation.
 
 This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic) and [Cyanea](https://github.com/jaredrummler/Cyanea).
 
@@ -14,7 +14,7 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
 **I don't recommend using `Theme` in the production** because the implementation is fragile.
 
-Jetpack Compose supports dynamic theming and is a better alternative(in the future).
+Jetpack Compose supports theming programmatically and is a better alternative(in the future).
 
 ## Sample App
 
