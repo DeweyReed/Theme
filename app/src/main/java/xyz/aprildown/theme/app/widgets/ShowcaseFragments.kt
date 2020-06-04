@@ -4,6 +4,7 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckedTextView
 import android.widget.RadioButton
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
@@ -35,6 +36,11 @@ class CompoundButtonFragment : Fragment(R.layout.fragment_compound_button) {
                             }
                         }
                     }
+                }
+            }
+            if (current is CheckedTextView) {
+                current.setOnClickListener {
+                    current.toggle()
                 }
             }
         }

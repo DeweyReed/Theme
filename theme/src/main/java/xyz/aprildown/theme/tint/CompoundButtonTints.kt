@@ -4,9 +4,11 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.view.ViewCompat
 import androidx.core.widget.CompoundButtonCompat
+import androidx.core.widget.TextViewCompat
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.elevation.ElevationOverlayProvider
@@ -17,6 +19,7 @@ import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.getParentAbsoluteElevation
 import xyz.aprildown.theme.utils.layer
 import xyz.aprildown.theme.utils.themeColor
+import xyz.aprildown.theme.utils.themeFloat
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
@@ -223,3 +226,52 @@ private fun ThemeHelper<*>.createSwitchTrackTintList(): ColorStateList? {
         )
     )
 }
+
+internal class CheckedTextViewTint : BaseTint<AppCompatCheckedTextView>(
+    attrs = R.styleable.Theme_CheckedTextView,
+    defStyleAttr = android.R.attr.checkedTextViewStyle,
+    onTint = {
+        val context = view.context
+        val resources = view.resources
+        val checkedTextView = view
+
+        // This piece of code only tints CheckedTextView from MaterialAlertDialog.
+        val drawableResId =
+            typedArray.getResourceId(R.styleable.Theme_CheckedTextView_drawableStartCompat, -1)
+        if (drawableResId != -1 &&
+            TextViewCompat.getCompoundDrawableTintList(checkedTextView) == null
+        ) {
+            if (resources.getResourcePackageName(drawableResId) == "android" &&
+                resources.getResourceTypeName(drawableResId) == "drawable" &&
+                resources.getResourceEntryName(drawableResId).let {
+                    it == "btn_radio_material_anim" || it == "btn_check_material_anim"
+                }
+            ) {
+                // R.color.control_checkable_material
+                val colorControlActivated = findAttributeColor(android.R.attr.colorControlActivated)
+                if (colorControlActivated != null) {
+                    val colorControlNormal = context.themeColor(android.R.attr.colorControlNormal)
+                    TextViewCompat.setCompoundDrawableTintList(
+                        checkedTextView,
+                        ColorStateList(
+                            arrayOf(
+                                intArrayOf(-android.R.attr.state_enabled),
+                                intArrayOf(android.R.attr.state_checked),
+                                intArrayOf()
+                            ),
+                            intArrayOf(
+                                colorControlNormal.adjustAlpha(context.themeFloat(android.R.attr.disabledAlpha)),
+                                colorControlActivated,
+                                colorControlNormal
+                            )
+                        )
+                    )
+                }
+            }
+        }
+
+        matchThemeColor(R.styleable.Theme_CheckedTextView_android_checkMarkTint)?.let {
+            checkedTextView.checkMarkTintList = it.toColorStateList()
+        }
+    }
+)

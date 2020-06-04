@@ -10,6 +10,7 @@ import android.widget.ScrollView
 import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
@@ -39,6 +40,7 @@ import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
 import xyz.aprildown.theme.tint.CardViewTint
 import xyz.aprildown.theme.tint.CheckBoxTint
+import xyz.aprildown.theme.tint.CheckedTextViewTint
 import xyz.aprildown.theme.tint.ChipTint
 import xyz.aprildown.theme.tint.CollapsingToolbarLayoutTint
 import xyz.aprildown.theme.tint.EditTextTint
@@ -106,6 +108,13 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createImageButton(context: Context?, attrs: AttributeSet?): AppCompatImageButton {
         return super.createImageButton(context, attrs).decorate(attrs, ImageButtonTint())
+    }
+
+    override fun createCheckedTextView(
+        context: Context?,
+        attrs: AttributeSet?
+    ): AppCompatCheckedTextView {
+        return super.createCheckedTextView(context, attrs).decorate(attrs, CheckedTextViewTint())
     }
 
     // endregion AppCompatViewInflater

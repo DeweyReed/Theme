@@ -71,6 +71,15 @@ internal fun Context.themeColor(@AttrRes attrRes: Int): Int {
     }
 }
 
+internal fun Context.themeFloat(@AttrRes attrRes: Int): Float {
+    val a = obtainStyledAttributes(null, intArrayOf(attrRes))
+    try {
+        return a.getFloat(0, 0f)
+    } finally {
+        a.recycle()
+    }
+}
+
 @ColorRes
 internal fun Context.findAttrFinalResourceId(@AttrRes attrRes: Int): Int {
     val a = obtainStyledAttributes(null, intArrayOf(attrRes))

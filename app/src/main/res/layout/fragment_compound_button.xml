@@ -81,4 +81,62 @@
         android:enabled="false"
         android:text="Disabled Checked" />
 
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:drawablePadding="20dp"
+        android:ellipsize="marquee"
+        android:gravity="start|center_vertical"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:paddingStart="@dimen/abc_select_dialog_padding_start_material"
+        android:paddingEnd="?attr/dialogPreferredPadding"
+        android:text="CheckedTextView"
+        android:textAlignment="viewStart"
+        app:drawableStartCompat="?android:attr/listChoiceIndicatorSingle"
+        app:layout_wrapBefore="true" />
+
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:drawablePadding="20dp"
+        android:ellipsize="marquee"
+        android:gravity="start|center_vertical"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:paddingStart="@dimen/abc_select_dialog_padding_start_material"
+        android:paddingEnd="?attr/dialogPreferredPadding"
+        android:text="Checked CheckedTextView"
+        android:textAlignment="viewStart"
+        app:drawableStartCompat="?android:attr/listChoiceIndicatorSingle" />
+
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="20dp"
+        android:ellipsize="marquee"
+        android:enabled="false"
+        android:gravity="start|center_vertical"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:paddingStart="@dimen/abc_select_dialog_padding_start_material"
+        android:paddingEnd="?attr/dialogPreferredPadding"
+        android:text="Disabled CheckedTextView"
+        android:textAlignment="viewStart"
+        app:drawableStartCompat="?android:attr/listChoiceIndicatorSingle" />
+
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:drawablePadding="20dp"
+        android:ellipsize="marquee"
+        android:enabled="false"
+        android:gravity="start|center_vertical"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:paddingStart="@dimen/abc_select_dialog_padding_start_material"
+        android:paddingEnd="?attr/dialogPreferredPadding"
+        android:text="Disabled Enabled CheckedTextView"
+        android:textAlignment="viewStart"
+        app:drawableStartCompat="?android:attr/listChoiceIndicatorSingle" />
+
 </com.google.android.flexbox.FlexboxLayout>

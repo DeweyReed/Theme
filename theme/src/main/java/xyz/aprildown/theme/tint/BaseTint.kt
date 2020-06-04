@@ -33,7 +33,7 @@ internal fun <T : View> T.decorate(attrs: AttributeSet?, tint: BaseTint<T>): T {
     }
 }
 
-internal class ThemeHelper<T : View>(val view: T, private val typedArray: TypedArray) {
+internal class ThemeHelper<T : View>(val view: T, val typedArray: TypedArray) {
 
     fun matchThemeColor(@StyleableRes index: Int): Int? {
         return typedArray.matchThemeColor(index)
@@ -45,7 +45,8 @@ internal class ThemeHelper<T : View>(val view: T, private val typedArray: TypedA
         return when (context.findAttrFinalResourceId(attrRes)) {
             context.findAttrFinalResourceId(R.attr.colorPrimary) -> theme.colorPrimary
             context.findAttrFinalResourceId(R.attr.colorOnPrimary) -> theme.colorOnPrimary
-            context.findAttrFinalResourceId(R.attr.colorSecondary) -> theme.colorSecondary
+            context.findAttrFinalResourceId(R.attr.colorSecondary),
+            context.findAttrFinalResourceId(R.attr.colorAccent) -> theme.colorSecondary
             else -> null
         }
     }

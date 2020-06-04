@@ -26,6 +26,11 @@
         <attr name="trackTint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_CheckedTextView">
+        <attr name="drawableStartCompat" />
+        <attr name="android:checkMarkTint" />
+    </declare-styleable>
+
     <declare-styleable name="Theme_ImageView">
         <attr name="android:background" />
         <attr name="tint" />
