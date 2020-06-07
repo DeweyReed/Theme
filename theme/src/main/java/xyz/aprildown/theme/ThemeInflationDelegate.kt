@@ -95,41 +95,45 @@ abstract class ThemeInflationDelegate {
     }
 
     fun View.applyDefaultTint(attrs: AttributeSet?) {
-        when (this) {
+        // The code doesn't compile if we use when(this).
+        when (val view = this) {
 
-            is ProgressBar -> decorate(attrs, ProgressBarTint())
+            is ProgressBar -> view.decorate(attrs, ProgressBarTint())
 
-            is AppBarLayout -> decorate(attrs, AppBarLayoutTint())
-            is CollapsingToolbarLayout -> decorate(attrs, CollapsingToolbarLayoutTint())
-            is BottomAppBar -> decorate(attrs, BottomAppBarTint())
-            is BottomNavigationView -> decorate(attrs, BottomNavigationViewTint())
-            is Chip -> decorate(attrs, ChipTint())
-            is ExtendedFloatingActionButton -> decorate(attrs, ExtendedFloatingActionButtonTint())
-            is FloatingActionButton -> decorate(attrs, FloatingActionButtonTint())
-            is MaterialCardView -> decorate(attrs, MaterialCardViewTint())
-            is CardView -> decorate(attrs, CardViewTint())
-            is NavigationView -> decorate(attrs, NavigationViewTint())
-            is SwitchMaterial -> decorate(attrs, SwitchMaterialTint())
-            is TabLayout -> decorate(attrs, TabLayoutTint())
-            is TextInputLayout -> decorate(attrs, TextInputLayoutTint())
+            is AppBarLayout -> view.decorate(attrs, AppBarLayoutTint())
+            is CollapsingToolbarLayout -> view.decorate(attrs, CollapsingToolbarLayoutTint())
+            is BottomAppBar -> view.decorate(attrs, BottomAppBarTint())
+            is BottomNavigationView -> view.decorate(attrs, BottomNavigationViewTint())
+            is Chip -> view.decorate(attrs, ChipTint())
+            is ExtendedFloatingActionButton -> view.decorate(
+                attrs,
+                ExtendedFloatingActionButtonTint()
+            )
+            is FloatingActionButton -> view.decorate(attrs, FloatingActionButtonTint())
+            is MaterialCardView -> view.decorate(attrs, MaterialCardViewTint())
+            is CardView -> view.decorate(attrs, CardViewTint())
+            is NavigationView -> view.decorate(attrs, NavigationViewTint())
+            is SwitchMaterial -> view.decorate(attrs, SwitchMaterialTint())
+            is TabLayout -> view.decorate(attrs, TabLayoutTint())
+            is TextInputLayout -> view.decorate(attrs, TextInputLayoutTint())
 
-            is ScrollView -> decorate(attrs, ScrollViewTint())
-            is HorizontalScrollView -> decorate(attrs, HorizontalScrollViewTint())
-            is ListView -> decorate(attrs, ListViewTint())
-            is RecyclerView -> decorate(attrs, RecyclerViewTint())
+            is ScrollView -> view.decorate(attrs, ScrollViewTint())
+            is HorizontalScrollView -> view.decorate(attrs, HorizontalScrollViewTint())
+            is ListView -> view.decorate(attrs, ListViewTint())
+            is RecyclerView -> view.decorate(attrs, RecyclerViewTint())
 
-            is MaterialCheckBox -> decorate(attrs, CheckBoxTint())
-            is MaterialRadioButton -> decorate(attrs, RadioButtonTint())
+            is MaterialCheckBox -> view.decorate(attrs, CheckBoxTint())
+            is MaterialRadioButton -> view.decorate(attrs, RadioButtonTint())
 
-            is AppCompatSeekBar -> decorate(attrs, SeekBarTint())
-            is AppCompatImageButton -> decorate(attrs, ImageButtonTint())
-            is AppCompatImageView -> decorate(attrs, ImageViewTint())
-            is AppCompatEditText -> decorate(attrs, EditTextTint())
-            is AppCompatSpinner -> decorate(attrs, SpinnerTint())
-            is AppCompatCheckedTextView -> decorate(attrs, CheckedTextViewTint())
+            is AppCompatSeekBar -> view.decorate(attrs, SeekBarTint())
+            is AppCompatImageButton -> view.decorate(attrs, ImageButtonTint())
+            is AppCompatImageView -> view.decorate(attrs, ImageViewTint())
+            is AppCompatEditText -> view.decorate(attrs, EditTextTint())
+            is AppCompatSpinner -> view.decorate(attrs, SpinnerTint())
+            is AppCompatCheckedTextView -> view.decorate(attrs, CheckedTextViewTint())
 
-            is AppCompatButton -> decorate(attrs, ButtonTint())
-            is AppCompatTextView -> decorate(attrs, TextViewTint())
+            is AppCompatButton -> view.decorate(attrs, ButtonTint())
+            is AppCompatTextView -> view.decorate(attrs, TextViewTint())
         }
     }
 }
