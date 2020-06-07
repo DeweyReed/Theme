@@ -37,9 +37,11 @@ You can [download the APK from Release.](https://github.com/deweyreed/theme/rele
 
     1. Add the dependency
 
+        [![Releases](https://jitpack.io/v/xyz.aprildown/Theme.svg)](https://jitpack.io/#xyz.aprildown/Theme)
+
         ```Groovy
         dependencies {
-            implementation 'xyz.aprildown:Theme:0.1.1'
+            implementation 'xyz.aprildown:Theme:0.1.2'
         }
         ```
 
