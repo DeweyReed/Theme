@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -99,6 +100,7 @@ abstract class ThemeInflationDelegate {
         when (val view = this) {
 
             is ProgressBar -> view.decorate(attrs, ProgressBarTint())
+            is ContentLoadingProgressBar -> view.decorate(attrs, ProgressBarTint())
 
             is AppBarLayout -> view.decorate(attrs, AppBarLayoutTint())
             is CollapsingToolbarLayout -> view.decorate(attrs, CollapsingToolbarLayoutTint())

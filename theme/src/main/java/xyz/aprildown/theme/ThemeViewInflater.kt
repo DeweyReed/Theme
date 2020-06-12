@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -155,6 +156,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
             "ProgressBar" ->
                 ProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
+            "androidx.core.widget.ContentLoadingProgressBar" ->
+                ContentLoadingProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
             "com.google.android.material.appbar.AppBarLayout" ->
                 AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
             "com.google.android.material.appbar.CollapsingToolbarLayout" ->
