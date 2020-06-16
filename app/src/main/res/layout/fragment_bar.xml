@@ -42,6 +42,17 @@
             android:progressTint="?colorPrimary"
             android:thumbTint="?colorPrimary" />
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="50" />
+
     </LinearLayout>
 
 </ScrollView>
