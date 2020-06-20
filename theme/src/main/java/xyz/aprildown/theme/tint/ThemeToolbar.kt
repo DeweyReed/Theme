@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import com.google.android.material.appbar.MaterialToolbar
 import xyz.aprildown.theme.R
@@ -17,7 +18,6 @@ import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.colorStateList
 import xyz.aprildown.theme.utils.drawable
 import xyz.aprildown.theme.utils.float
-import xyz.aprildown.theme.utils.isOOrLater
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 import xyz.aprildown.theme.utils.tinted
 import xyz.aprildown.theme.utils.toColorStateList
@@ -154,12 +154,8 @@ private fun View.material_on_primary_emphasis_medium(): ColorStateList {
 
 internal fun Menu.tintMenu(csl: ColorStateList) {
     fun MenuItem.tint(csl: ColorStateList) {
-        icon?.let {
-            if (isOOrLater()) {
-                iconTintList = csl
-            } else {
-                icon = icon.tinted(csl)
-            }
+        if (MenuItemCompat.getIconTintList(this) == null) {
+            MenuItemCompat.setIconTintList(this, csl)
         }
     }
 
