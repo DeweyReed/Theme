@@ -1,5 +1,6 @@
 # [Experimental] Theme
 
+![Android CI](https://github.com/DeweyReed/Theme/workflows/Android%20CI/badge.svg)
 ![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat) [![Releases](https://jitpack.io/v/xyz.aprildown/Theme.svg)](https://jitpack.io/#xyz.aprildown/Theme)
 
 <img src="images/image.gif" alt="image" title="image" width="300" align="right" />
