@@ -42,7 +42,7 @@ You can [download the APK from Release.](https://github.com/deweyreed/theme/rele
 
         ```Groovy
         dependencies {
-            implementation 'xyz.aprildown:Theme:0.1.3'
+            implementation 'xyz.aprildown:Theme:0.1.4'
         }
         ```
 
