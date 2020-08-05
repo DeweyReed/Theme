@@ -23,6 +23,7 @@ android {
     }
     lintOptions {
         disable 'HardcodedText', 'GoogleAppIndexingWarning', 'ContentDescription'
+        disable 'FunctionName', 'PrivateResource'
     }
 
     compileOptions {
