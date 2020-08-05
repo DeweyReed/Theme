@@ -7,7 +7,6 @@ import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.ScrollView
-import androidx.annotation.Keep
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatCheckedTextView
@@ -66,7 +65,6 @@ import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.ThemeToolbar
 import xyz.aprildown.theme.tint.decorate
 
-@Keep // Make proguard keep this class as it's accessed reflectively by AppCompat
 open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     // region MaterialComponentsViewInflater
