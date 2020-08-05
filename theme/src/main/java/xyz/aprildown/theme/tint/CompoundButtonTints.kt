@@ -17,7 +17,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.getParentAbsoluteElevation
-import xyz.aprildown.theme.utils.layer
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.themeFloat
 import xyz.aprildown.theme.utils.toColorStateList
@@ -98,10 +97,10 @@ private fun ThemeHelper<*>.createCompoundButtonTint(): ColorStateList? {
             intArrayOf(-android.R.attr.state_enabled, -android.R.attr.state_checked)
         ),
         intArrayOf(
-            layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_FULL),
-            layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_MEDIUM),
-            layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED),
-            layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED)
+            MaterialColors.layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_FULL),
+            MaterialColors.layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_MEDIUM),
+            MaterialColors.layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED),
+            MaterialColors.layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED)
         )
     )
 }
@@ -197,9 +196,13 @@ private fun ThemeHelper<*>.createSwitchThumbTintList(): ColorStateList? {
             intArrayOf(-android.R.attr.state_enabled, -android.R.attr.state_checked)
         ),
         intArrayOf(
-            layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_FULL),
+            MaterialColors.layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_FULL),
             colorThumbOff,
-            layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_DISABLED),
+            MaterialColors.layer(
+                colorSurface,
+                colorControlActivated,
+                MaterialColors.ALPHA_DISABLED
+            ),
             colorThumbOff
         )
     )
@@ -219,10 +222,10 @@ private fun ThemeHelper<*>.createSwitchTrackTintList(): ColorStateList? {
             intArrayOf(-android.R.attr.state_enabled, -android.R.attr.state_checked)
         ),
         intArrayOf(
-            layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_MEDIUM),
-            layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_LOW),
-            layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_LOW),
-            layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED_LOW)
+            MaterialColors.layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_MEDIUM),
+            MaterialColors.layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_LOW),
+            MaterialColors.layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_LOW),
+            MaterialColors.layer(colorSurface, colorOnSurface, MaterialColors.ALPHA_DISABLED_LOW)
         )
     )
 }
