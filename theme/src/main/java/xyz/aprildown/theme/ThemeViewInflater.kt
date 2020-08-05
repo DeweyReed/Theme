@@ -29,6 +29,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
@@ -60,6 +61,7 @@ import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
 import xyz.aprildown.theme.tint.ScrollViewTint
 import xyz.aprildown.theme.tint.SeekBarTint
+import xyz.aprildown.theme.tint.ShapeableImageViewTint
 import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
@@ -199,6 +201,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 Slider(context, attrs).decorate(attrs, SliderTint())
             "com.google.android.material.slider.RangeSlider" ->
                 RangeSlider(context, attrs).decorate(attrs, RangeSliderTint())
+            "com.google.android.material.imageview.ShapeableImageView" ->
+                ShapeableImageView(context, attrs).decorate(attrs, ShapeableImageViewTint())
 
             "ScrollView" ->
                 ScrollView(context, attrs).decorate(attrs, ScrollViewTint())

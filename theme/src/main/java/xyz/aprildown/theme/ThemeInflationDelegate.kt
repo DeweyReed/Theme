@@ -29,6 +29,7 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.slider.RangeSlider
@@ -60,6 +61,7 @@ import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
 import xyz.aprildown.theme.tint.ScrollViewTint
 import xyz.aprildown.theme.tint.SeekBarTint
+import xyz.aprildown.theme.tint.ShapeableImageViewTint
 import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
@@ -124,6 +126,7 @@ abstract class ThemeInflationDelegate {
             is TextInputLayout -> view.decorate(attrs, TextInputLayoutTint())
             is Slider -> view.decorate(attrs, SliderTint())
             is RangeSlider -> view.decorate(attrs, RangeSliderTint())
+            is ShapeableImageView -> view.decorate(attrs, ShapeableImageViewTint())
 
             is ScrollView -> view.decorate(attrs, ScrollViewTint())
             is HorizontalScrollView -> view.decorate(attrs, HorizontalScrollViewTint())

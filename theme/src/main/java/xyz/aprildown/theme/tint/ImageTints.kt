@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.ViewCompat
 import androidx.core.widget.ImageViewCompat
+import com.google.android.material.imageview.ShapeableImageView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.utils.toColorStateList
 
@@ -33,3 +34,20 @@ private fun ThemeHelper<*>.tintImageView() {
         ImageViewCompat.setImageTintList(imageView, it.toColorStateList())
     }
 }
+
+internal class ShapeableImageViewTint : BaseTint<ShapeableImageView>(
+    attrs = R.styleable.Theme_ShapeableImageView,
+    onTint = {
+        // R.style.Widget_MaterialComponents_ShapeableImageView
+        val imageView = view
+        matchThemeColor(R.styleable.Theme_ShapeableImageView_android_background)?.let {
+            ViewCompat.setBackgroundTintList(imageView, it.toColorStateList())
+        }
+        matchThemeColor(R.styleable.Theme_ShapeableImageView_tint)?.let {
+            ImageViewCompat.setImageTintList(imageView, it.toColorStateList())
+        }
+        matchThemeColor(R.styleable.Theme_ShapeableImageView_strokeColor)?.let {
+            imageView.strokeColor = it.toColorStateList()
+        }
+    }
+)

@@ -36,6 +36,12 @@
         <attr name="tint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ShapeableImageView">
+        <attr name="android:background" />
+        <attr name="tint" />
+        <attr name="strokeColor" />
+    </declare-styleable>
+
     <declare-styleable name="Theme_EditText">
         <attr name="android:textColor" />
         <attr name="android:textColorHint" />
