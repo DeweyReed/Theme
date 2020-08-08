@@ -1,7 +1,7 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
-import android.view.View
 import com.google.android.material.chip.Chip
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
@@ -22,6 +22,7 @@ internal class ChipTint : BaseTint<Chip>(
         // R.style.Widget_MaterialComponents_Chip_Choice
         // R.style.Widget_MaterialComponents_Chip_Filter
         val chip = view
+        val context = chip.context
         withColorOrResourceId(
             R.styleable.Theme_Chip_android_textColor,
             applySolidColor = {
@@ -30,7 +31,7 @@ internal class ChipTint : BaseTint<Chip>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_choice_chip_text_color -> {
-                        chip.setTextColor(chip.mtrl_choice_chip_text_color())
+                        chip.setTextColor(mtrl_choice_chip_text_color(context))
                     }
                 }
             }
@@ -43,7 +44,7 @@ internal class ChipTint : BaseTint<Chip>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_choice_chip_background_color -> {
-                        chip.chipBackgroundColor = chip.mtrl_choice_chip_background_color()
+                        chip.chipBackgroundColor = mtrl_choice_chip_background_color(context)
                     }
                 }
             }
@@ -56,7 +57,7 @@ internal class ChipTint : BaseTint<Chip>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_choice_chip_ripple_color -> {
-                        chip.rippleColor = chip.mtrl_choice_chip_ripple_color()
+                        chip.rippleColor = mtrl_choice_chip_ripple_color(context)
                     }
                 }
             }
@@ -71,14 +72,14 @@ internal class ChipTint : BaseTint<Chip>(
         matchThemeColor(R.styleable.Theme_Chip_chipIconTint)?.let {
             chip.chipIconTint = it.toColorStateList()
         }
-        // TODO: We're unable to set chipSurfaceColor programmatically now.
+        // We're unable to set chipSurfaceColor programmatically for now.
         // matchThemeColor(R.styleable.Theme_Chip_chipSurfaceColor)?.let {
         // }
     }
 )
 
 // R.color.mtrl_choice_chip_text_color
-private fun View.mtrl_choice_chip_text_color(): ColorStateList {
+private fun mtrl_choice_chip_text_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -98,7 +99,7 @@ private fun View.mtrl_choice_chip_text_color(): ColorStateList {
 }
 
 // R.color.mtrl_choice_chip_background_color
-private fun View.mtrl_choice_chip_background_color(): ColorStateList {
+private fun mtrl_choice_chip_background_color(context: Context): ColorStateList {
     val colorPrimaryAlpha24 = Theme.get().colorPrimary.adjustAlpha(0.24f)
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -118,9 +119,7 @@ private fun View.mtrl_choice_chip_background_color(): ColorStateList {
 }
 
 // R.color.mtrl_choice_chip_ripple_color
-private fun View.mtrl_choice_chip_ripple_color(): ColorStateList {
-    val context = context
-    val colorPrimary = Theme.get().colorPrimary
+private fun mtrl_choice_chip_ripple_color(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(
@@ -131,7 +130,8 @@ private fun View.mtrl_choice_chip_ripple_color(): ColorStateList {
             intArrayOf()
         ),
         intArrayOf(
-            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_pressed_alpha)),
+            Theme.get().colorPrimary
+                .adjustAlpha(context.float(R.dimen.mtrl_low_ripple_pressed_alpha)),
             colorOnSurface.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
             colorOnSurface.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
             colorOnSurface.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_hovered_alpha)),
