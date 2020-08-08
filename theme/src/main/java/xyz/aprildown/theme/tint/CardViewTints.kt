@@ -1,12 +1,10 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.InsetDrawable
-import android.view.View
 import androidx.cardview.widget.CardView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.shape.MaterialShapeDrawable
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
@@ -26,7 +24,7 @@ internal class CardViewTint : BaseTint<CardView>(
 )
 
 /**
- * https://github.com/material-components/material-components-android/blob/master/docs/components/MaterialCardView.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/Card.md
  */
 internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
     attrs = R.styleable.Theme_MaterialCardView,
@@ -40,14 +38,12 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
         withColorOrResourceId(
             R.styleable.Theme_MaterialCardView_cardForegroundColor,
             applySolidColor = {
-                (((card.foreground as? InsetDrawable)?.drawable) as? MaterialShapeDrawable)
-                    ?.fillColor = it.toColorStateList()
+                card.setCardForegroundColor(it.toColorStateList())
             },
             applyResource = {
                 when (it) {
                     R.color.mtrl_card_view_foreground -> {
-                        (((card.foreground as? InsetDrawable)?.drawable) as? MaterialShapeDrawable)
-                            ?.fillColor = card.mtrl_card_view_foreground()
+                        card.setCardForegroundColor(mtrl_card_view_foreground(card.context))
                     }
                 }
             }
@@ -63,7 +59,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_card_view_ripple -> {
-                        card.rippleColor = card.mtrl_card_view_ripple()
+                        card.rippleColor = mtrl_card_view_ripple(card.context)
                     }
                 }
             }
@@ -75,7 +71,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
 )
 
 // R.color.mtrl_card_view_foreground
-private fun View.mtrl_card_view_foreground(): ColorStateList {
+private fun mtrl_card_view_foreground(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_checked),
@@ -91,7 +87,7 @@ private fun View.mtrl_card_view_foreground(): ColorStateList {
 }
 
 // R.color.mtrl_card_view_ripple
-private fun View.mtrl_card_view_ripple(): ColorStateList {
+private fun mtrl_card_view_ripple(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_checked),
