@@ -1,7 +1,7 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
-import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.widget.ImageViewCompat
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -22,6 +22,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
     onTint = {
         // R.style.Widget_MaterialComponents_FloatingActionButton
         val fab = view
+        val context = fab.context
         withColorOrResourceId(
             R.styleable.Theme_FloatingActionButton_backgroundTint,
             applySolidColor = {
@@ -30,7 +31,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_fab_bg_color_selector -> {
-                        ViewCompat.setBackgroundTintList(fab, fab.mtrl_fab_bg_color_selector())
+                        ViewCompat.setBackgroundTintList(fab, mtrl_fab_bg_color_selector(context))
                     }
                 }
             }
@@ -45,7 +46,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
                     R.color.mtrl_fab_icon_text_color_selector -> {
                         ImageViewCompat.setImageTintList(
                             fab,
-                            fab.mtrl_fab_icon_text_color_selector()
+                            mtrl_fab_icon_text_color_selector(context)
                         )
                     }
                 }
@@ -59,7 +60,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_fab_ripple_color -> {
-                        fab.setRippleColor(fab.mtrl_fab_ripple_color())
+                        fab.setRippleColor(mtrl_fab_ripple_color(context))
                     }
                 }
             }
@@ -68,7 +69,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
 )
 
 // R.color.mtrl_fab_bg_color_selector
-private fun View.mtrl_fab_bg_color_selector(): ColorStateList {
+private fun mtrl_fab_bg_color_selector(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -82,8 +83,7 @@ private fun View.mtrl_fab_bg_color_selector(): ColorStateList {
 }
 
 // R.color.mtrl_fab_ripple_color
-private fun View.mtrl_fab_ripple_color(): ColorStateList {
-    val context = context
+private fun mtrl_fab_ripple_color(context: Context): ColorStateList {
     val colorOnSecondary = Theme.get().colorOnSecondary
     return ColorStateList(
         arrayOf(
@@ -104,7 +104,7 @@ private fun View.mtrl_fab_ripple_color(): ColorStateList {
 }
 
 // R.color.mtrl_fab_icon_text_color_selector
-private fun View.mtrl_fab_icon_text_color_selector(): ColorStateList {
+private fun mtrl_fab_icon_text_color_selector(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -127,6 +127,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
         // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton
         // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon
         val fab = view
+        val context = fab.context
         withColorOrResourceId(
             R.styleable.Theme_ExtendedFloatingActionButton_android_textColor,
             applySolidColor = {
@@ -135,7 +136,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
             applyResource = {
                 when (it) {
                     R.color.mtrl_fab_icon_text_color_selector -> {
-                        fab.setTextColor(fab.mtrl_fab_icon_text_color_selector())
+                        fab.setTextColor(mtrl_fab_icon_text_color_selector(context))
                     }
                 }
             }
@@ -150,7 +151,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
                     R.color.mtrl_fab_bg_color_selector -> {
                         ViewCompat.setBackgroundTintList(
                             fab,
-                            fab.mtrl_fab_bg_color_selector()
+                            mtrl_fab_bg_color_selector(context)
                         )
                     }
                 }
@@ -164,7 +165,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
             applyResource = {
                 when (it) {
                     R.color.mtrl_fab_icon_text_color_selector -> {
-                        fab.iconTint = fab.mtrl_fab_icon_text_color_selector()
+                        fab.iconTint = mtrl_fab_icon_text_color_selector(context)
                     }
                 }
             }
@@ -180,7 +181,7 @@ internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActio
             applyResource = {
                 when (it) {
                     R.color.mtrl_fab_ripple_color -> {
-                        fab.rippleColor = fab.mtrl_fab_ripple_color()
+                        fab.rippleColor = mtrl_fab_ripple_color(context)
                     }
                 }
             }
