@@ -7,6 +7,7 @@ import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.ScrollView
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatCheckedTextView
@@ -38,6 +39,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.AppBarLayoutTint
+import xyz.aprildown.theme.tint.AutoCompleteTextViewTint
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
@@ -89,6 +91,14 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createRadioButton(context: Context?, attrs: AttributeSet?): AppCompatRadioButton {
         return super.createRadioButton(context, attrs).decorate(attrs, RadioButtonTint())
+    }
+
+    override fun createAutoCompleteTextView(
+        context: Context,
+        attrs: AttributeSet?
+    ): AppCompatAutoCompleteTextView {
+        return super.createAutoCompleteTextView(context, attrs)
+            .decorate(attrs, AutoCompleteTextViewTint())
     }
 
     // endregion MaterialComponentsViewInflater
