@@ -36,6 +36,7 @@ import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.tint.AppBarLayoutTint
 import xyz.aprildown.theme.tint.BottomAppBarTint
@@ -66,6 +67,7 @@ import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
+import xyz.aprildown.theme.tint.TextInputEditTextTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.decorate
@@ -124,6 +126,7 @@ abstract class ThemeInflationDelegate {
             is SwitchMaterial -> view.decorate(attrs, SwitchMaterialTint())
             is TabLayout -> view.decorate(attrs, TabLayoutTint())
             is TextInputLayout -> view.decorate(attrs, TextInputLayoutTint())
+            is TextInputEditText -> view.decorate(attrs, TextInputEditTextTint())
             is Slider -> view.decorate(attrs, SliderTint())
             is RangeSlider -> view.decorate(attrs, RangeSliderTint())
             is ShapeableImageView -> view.decorate(attrs, ShapeableImageViewTint())

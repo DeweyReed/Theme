@@ -135,13 +135,20 @@
         <attr name="hintTextColor" />
         <attr name="helperTextTextColor" />
         <attr name="errorTextColor" />
-        <attr name="errorIconTint" />
         <attr name="counterTextColor" />
         <attr name="counterOverflowTextColor" />
+        <attr name="prefixTextColor" />
+        <attr name="suffixTextColor" />
         <attr name="startIconTint" />
         <attr name="endIconTint" />
+        <attr name="errorIconTint" />
         <attr name="boxStrokeColor" />
+        <attr name="boxStrokeErrorColor" />
         <attr name="boxBackgroundColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_TextInputEditText">
+        <attr name="android:textColor" />
     </declare-styleable>
 
     <declare-styleable name="Theme_ProgressBar">

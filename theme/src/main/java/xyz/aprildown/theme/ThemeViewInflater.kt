@@ -36,6 +36,7 @@ import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.AppBarLayoutTint
@@ -68,6 +69,7 @@ import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
+import xyz.aprildown.theme.tint.TextInputEditTextTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.ThemeToolbar
@@ -207,6 +209,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
             "com.google.android.material.textfield.TextInputLayout" ->
                 TextInputLayout(context, attrs).decorate(attrs, TextInputLayoutTint())
+            "com.google.android.material.textfield.TextInputEditText" ->
+                TextInputEditText(context, attrs).decorate(attrs, TextInputEditTextTint())
             "com.google.android.material.slider.Slider" ->
                 Slider(context, attrs).decorate(attrs, SliderTint())
             "com.google.android.material.slider.RangeSlider" ->

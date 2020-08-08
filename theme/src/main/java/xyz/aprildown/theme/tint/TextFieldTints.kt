@@ -1,7 +1,8 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
-import android.view.View
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
@@ -9,6 +10,9 @@ import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
+/**
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/TextField.md
+ */
 internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
     attrs = R.styleable.Theme_TextInputLayout,
     defStyleAttr = R.attr.textInputStyle,
@@ -28,14 +32,17 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
         matchThemeColor(R.styleable.Theme_TextInputLayout_errorTextColor)?.let {
             textInputLayout.setErrorTextColor(it.toColorStateList())
         }
-        matchThemeColor(R.styleable.Theme_TextInputLayout_errorIconTint)?.let {
-            textInputLayout.setErrorIconTintList(it.toColorStateList())
-        }
         matchThemeColor(R.styleable.Theme_TextInputLayout_counterTextColor)?.let {
             textInputLayout.counterTextColor = it.toColorStateList()
         }
         matchThemeColor(R.styleable.Theme_TextInputLayout_counterOverflowTextColor)?.let {
             textInputLayout.counterOverflowTextColor = it.toColorStateList()
+        }
+        matchThemeColor(R.styleable.Theme_TextInputLayout_prefixTextColor)?.let {
+            textInputLayout.setPrefixTextColor(it.toColorStateList())
+        }
+        matchThemeColor(R.styleable.Theme_TextInputLayout_suffixTextColor)?.let {
+            textInputLayout.setSuffixTextColor(it.toColorStateList())
         }
         withColorOrResourceId(
             R.styleable.Theme_TextInputLayout_startIconTint,
@@ -43,7 +50,7 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
                 textInputLayout.setStartIconTintList(it.toColorStateList())
             },
             applyResource = {
-                withStartIconTint(it, textInputLayout)
+                textInputLayout.withStartIconTint(it)
             }
         )
         withColorOrResourceId(
@@ -52,18 +59,24 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
                 textInputLayout.setEndIconTintList(it.toColorStateList())
             },
             applyResource = {
-                withEndIconTint(it, textInputLayout)
+                textInputLayout.withEndIconTint(it)
             }
         )
+        matchThemeColor(R.styleable.Theme_TextInputLayout_errorIconTint)?.let {
+            textInputLayout.setErrorIconTintList(it.toColorStateList())
+        }
         withColorOrResourceId(
             R.styleable.Theme_TextInputLayout_boxStrokeColor,
             applySolidColor = {
                 textInputLayout.boxStrokeColor = it
             },
             applyResource = {
-                withStrokeColor(it, textInputLayout)
+                textInputLayout.withBoxStrokeColor(it)
             }
         )
+        matchThemeColor(R.styleable.Theme_TextInputLayout_boxStrokeErrorColor)?.let {
+            textInputLayout.boxStrokeErrorColor = it.toColorStateList()
+        }
 
         matchThemeColor(R.styleable.Theme_TextInputLayout_boxBackgroundColor)?.let {
             textInputLayout.boxBackgroundColor = it
@@ -71,36 +84,36 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
     }
 )
 
-private fun withStartIconTint(resourceId: Int, view: TextInputLayout) {
+private fun TextInputLayout.withStartIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_filled_icon_tint -> {
-            view.mtrl_filled_icon_tint()
+            mtrl_filled_icon_tint(context)
         }
         R.color.mtrl_outlined_icon_tint -> {
-            view.mtrl_outlined_icon_tint()
+            mtrl_outlined_icon_tint(context)
         }
         else -> null
     }?.let {
-        view.setStartIconTintList(it)
+        setStartIconTintList(it)
     }
 }
 
-private fun withEndIconTint(resourceId: Int, view: TextInputLayout) {
+private fun TextInputLayout.withEndIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_filled_icon_tint -> {
-            view.mtrl_filled_icon_tint()
+            mtrl_filled_icon_tint(context)
         }
         R.color.mtrl_outlined_icon_tint -> {
-            view.mtrl_outlined_icon_tint()
+            mtrl_outlined_icon_tint(context)
         }
         else -> null
     }?.let {
-        view.setEndIconTintList(it)
+        setEndIconTintList(it)
     }
 }
 
 // R.color.mtrl_filled_icon_tint
-private fun View.mtrl_filled_icon_tint(): ColorStateList {
+private fun mtrl_filled_icon_tint(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(
@@ -117,7 +130,7 @@ private fun View.mtrl_filled_icon_tint(): ColorStateList {
 }
 
 // R.color.mtrl_outlined_icon_tint
-private fun View.mtrl_outlined_icon_tint(): ColorStateList {
+private fun mtrl_outlined_icon_tint(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(
@@ -133,21 +146,69 @@ private fun View.mtrl_outlined_icon_tint(): ColorStateList {
     )
 }
 
-private fun withStrokeColor(resourceId: Int, view: TextInputLayout) {
-
-    if (resourceId == R.color.mtrl_filled_stroke_color ||
-        resourceId == R.color.mtrl_outlined_stroke_color
-    ) {
-        val colorPrimary = Theme.get().colorPrimary
-        // 1. Check setBoxStrokeColor implementation
-        // 2. Search "TextInputLayout_boxStrokeColor" in TextInputLayout
-        view.boxStrokeColor = colorPrimary
-
-        view.addOnEditTextAttachedListener(object : TextInputLayout.OnEditTextAttachedListener {
-            override fun onEditTextAttached(textInputLayout: TextInputLayout) {
-                textInputLayout.removeOnEditTextAttachedListener(this)
-                textInputLayout.editText?.tintCursorAndSelectHandle(colorPrimary)
-            }
-        })
+private fun TextInputLayout.withBoxStrokeColor(resourceId: Int) {
+    when (resourceId) {
+        R.color.mtrl_filled_stroke_color -> {
+            mtrl_filled_stroke_color(context)
+        }
+        R.color.mtrl_outlined_stroke_color -> {
+            mtrl_outlined_stroke_color(context)
+        }
+        else -> null
+    }?.let {
+        setBoxStrokeColorStateList(it)
     }
 }
+
+/**
+ * [R.color.mtrl_filled_stroke_color]
+ */
+private fun mtrl_filled_stroke_color(context: Context): ColorStateList {
+    val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
+    return ColorStateList(
+        arrayOf(
+            intArrayOf(android.R.attr.state_focused),
+            intArrayOf(android.R.attr.state_hovered),
+            intArrayOf(-android.R.attr.state_enabled),
+            intArrayOf()
+        ),
+        intArrayOf(
+            Theme.get().colorPrimary,
+            colorOnSurface.adjustAlpha(0.46f),
+            colorOnSurface.adjustAlpha(0.38f),
+            colorOnSurface.adjustAlpha(0.42f)
+        )
+    )
+}
+
+/**
+ * [R.color.mtrl_outlined_stroke_color]
+ */
+private fun mtrl_outlined_stroke_color(context: Context): ColorStateList {
+    val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
+    return ColorStateList(
+        arrayOf(
+            intArrayOf(android.R.attr.state_focused),
+            intArrayOf(android.R.attr.state_hovered),
+            intArrayOf(-android.R.attr.state_enabled),
+            intArrayOf()
+        ),
+        intArrayOf(
+            Theme.get().colorPrimary,
+            colorOnSurface.adjustAlpha(0.87f),
+            colorOnSurface.adjustAlpha(0.12f),
+            colorOnSurface.adjustAlpha(0.38f)
+        )
+    )
+}
+
+internal class TextInputEditTextTint : BaseTint<TextInputEditText>(
+    attrs = R.styleable.Theme_TextInputEditText,
+    defStyleAttr = R.attr.editTextStyle,
+    onTint = {
+        val editText = view
+        matchThemeColor(R.styleable.Theme_TextInputEditText_android_textColor)?.let {
+            editText.setTextColor(it)
+        }
+    }
+)
