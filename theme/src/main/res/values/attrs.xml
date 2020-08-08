@@ -45,6 +45,8 @@
     <declare-styleable name="Theme_EditText">
         <attr name="android:textColor" />
         <attr name="android:textColorHint" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textColorHighlight" />
         <attr name="backgroundTint" />
     </declare-styleable>
 

@@ -19,7 +19,7 @@ internal class TextViewTint : BaseTint<AppCompatTextView>(
     }
 )
 
-private fun ThemeHelper<*>.decorateTextView() {
+internal fun ThemeHelper<*>.decorateTextView() {
     val textView = view as TextView
     matchThemeColor(R.styleable.Theme_TextView_android_textColor)?.let {
         textView.setTextColor(it)

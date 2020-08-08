@@ -19,12 +19,8 @@ internal class EditTextTint : BaseTint<AppCompatEditText>(
     onTint = {
         // R.style.Widget_AppCompat_EditText
         val editText = view
-        matchThemeColor(R.styleable.Theme_EditText_android_textColor)?.let {
-            editText.setTextColor(it)
-        }
-        matchThemeColor(R.styleable.Theme_EditText_android_textColorHint)?.let {
-            editText.setHintTextColor(it)
-        }
+
+        decorateTextView()
 
         withColorOrResourceId(
             R.styleable.Theme_EditText_backgroundTint,
