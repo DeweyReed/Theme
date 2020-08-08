@@ -1,8 +1,8 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
@@ -14,7 +14,7 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * https://github.com/material-components/material-components-android/blob/master/docs/components/MaterialButton.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/Button.md
  */
 internal class ButtonTint : BaseTint<AppCompatButton>(
     attrs = R.styleable.Theme_Button,
@@ -32,7 +32,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     button.setTextColor(it)
                 },
                 applyResource = {
-                    withTextColor(it, button)
+                    button.withTextColor(it)
                 }
             )
             withColorOrResourceId(
@@ -41,7 +41,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     ViewCompat.setBackgroundTintList(button, it.toColorStateList())
                 },
                 applyResource = {
-                    withBackgroundTint(it, button)
+                    button.withBackgroundTint(it)
                 }
             )
             withColorOrResourceId(
@@ -50,7 +50,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     button.iconTint = it.toColorStateList()
                 },
                 applyResource = {
-                    withIconTint(it, button)
+                    button.withIconTint(it)
                 }
             )
             withColorOrResourceId(
@@ -59,7 +59,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     button.strokeColor = it.toColorStateList()
                 },
                 applyResource = {
-                    withStrokeColor(it, button)
+                    button.withStrokeColor(it)
                 }
             )
             withColorOrResourceId(
@@ -68,46 +68,46 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
                     button.rippleColor = it.toColorStateList()
                 },
                 applyResource = {
-                    withRippleColor(it, button)
+                    button.withRippleColor(it)
                 }
             )
         }
     }
 )
 
-private fun withTextColor(resourceId: Int, view: MaterialButton) {
+private fun MaterialButton.withTextColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_text_color_selector -> {
-            view.mtrl_btn_text_color_selector()
+            mtrl_btn_text_color_selector(context)
         }
         R.color.mtrl_text_btn_text_color_selector -> {
-            view.mtrl_text_btn_text_color_selector()
+            mtrl_text_btn_text_color_selector(context)
         }
         else -> null
     }?.let {
-        view.setTextColor(it)
+        setTextColor(it)
     }
 }
 
 /**
  * Icon tint shares the same states with text colors.
  */
-private fun withIconTint(resourceId: Int, view: MaterialButton) {
+private fun MaterialButton.withIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_text_color_selector -> {
-            view.mtrl_btn_text_color_selector()
+            mtrl_btn_text_color_selector(context)
         }
         R.color.mtrl_text_btn_text_color_selector -> {
-            view.mtrl_text_btn_text_color_selector()
+            mtrl_text_btn_text_color_selector(context)
         }
         else -> null
     }?.let {
-        view.iconTint = it
+        iconTint = it
     }
 }
 
 // R.color.mtrl_btn_text_color_selector
-private fun View.mtrl_btn_text_color_selector(): ColorStateList = ColorStateList(
+private fun mtrl_btn_text_color_selector(context: Context): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_enabled),
         intArrayOf()
@@ -119,7 +119,7 @@ private fun View.mtrl_btn_text_color_selector(): ColorStateList = ColorStateList
 )
 
 // R.color.mtrl_text_btn_text_color_selector
-private fun View.mtrl_text_btn_text_color_selector(): ColorStateList {
+private fun mtrl_text_btn_text_color_selector(context: Context): ColorStateList {
     val theme = Theme.get()
     val colorPrimary = theme.colorPrimary
     // We need to use the view's context to get the correct color.
@@ -148,22 +148,22 @@ private fun View.mtrl_text_btn_text_color_selector(): ColorStateList {
     )
 }
 
-private fun withBackgroundTint(resourceId: Int, view: MaterialButton) {
+private fun MaterialButton.withBackgroundTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_bg_color_selector -> {
-            view.mtrl_btn_bg_color_selector()
+            mtrl_btn_bg_color_selector(context)
         }
         R.color.mtrl_btn_text_btn_bg_color_selector -> {
             mtrl_btn_text_btn_bg_color_selector()
         }
         else -> null
     }?.let {
-        ViewCompat.setBackgroundTintList(view, it)
+        ViewCompat.setBackgroundTintList(this, it)
     }
 }
 
 // R.color.mtrl_btn_bg_color_selector
-private fun View.mtrl_btn_bg_color_selector(): ColorStateList = ColorStateList(
+private fun mtrl_btn_bg_color_selector(context: Context): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_enabled),
         intArrayOf()
@@ -186,48 +186,48 @@ private fun mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateLi
     )
 )
 
-private fun withStrokeColor(resourceId: Int, view: MaterialButton) {
+private fun MaterialButton.withStrokeColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_stroke_color_selector -> {
-            view.mtrl_btn_stroke_color_selector()
+            mtrl_btn_stroke_color_selector(context)
         }
         else -> null
     }?.let {
-        view.strokeColor = it
+        strokeColor = it
     }
 }
 
 // R.color.mtrl_btn_stroke_color_selector
-private fun View.mtrl_btn_stroke_color_selector(): ColorStateList = ColorStateList(
-    // It's "android.R.attr.state_checked" not "android.R.attr.checked".
-    arrayOf(
-        intArrayOf(android.R.attr.state_checked),
-        intArrayOf(-android.R.attr.state_checked)
-    ),
-    intArrayOf(
-        Theme.get().colorPrimary,
-        context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
+private fun mtrl_btn_stroke_color_selector(context: Context): ColorStateList {
+    return ColorStateList(
+        arrayOf(
+            intArrayOf(android.R.attr.state_checked),
+            intArrayOf(-android.R.attr.state_checked)
+        ),
+        intArrayOf(
+            Theme.get().colorPrimary,
+            context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
+        )
     )
-)
+}
 
-private fun withRippleColor(resourceId: Int, view: MaterialButton) {
+private fun MaterialButton.withRippleColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_ripple_color -> {
-            view.mtrl_btn_ripple_color()
+            mtrl_btn_ripple_color(context)
         }
         R.color.mtrl_btn_text_btn_ripple_color -> {
-            view.mtrl_btn_text_btn_ripple_color()
+            mtrl_btn_text_btn_ripple_color(context)
         }
         else -> null
     }?.let {
-        view.rippleColor = it
+        rippleColor = it
     }
 }
 
 // R.color.mtrl_btn_ripple_color
-private fun View.mtrl_btn_ripple_color(): ColorStateList {
-    val context = context
-    val color = Theme.get().colorOnPrimary
+private fun mtrl_btn_ripple_color(context: Context): ColorStateList {
+    val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_pressed),
@@ -237,18 +237,18 @@ private fun View.mtrl_btn_ripple_color(): ColorStateList {
             intArrayOf()
         ),
         intArrayOf(
-            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_pressed_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_hovered_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_default_alpha))
+            colorOnPrimary.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_pressed_alpha)),
+            colorOnPrimary.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
+            colorOnPrimary.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_focused_alpha)),
+            colorOnPrimary.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_hovered_alpha)),
+            colorOnPrimary.adjustAlpha(context.float(R.dimen.mtrl_high_ripple_default_alpha))
         )
     )
 }
 
 // R.color.mtrl_btn_text_btn_ripple_color
-private fun View.mtrl_btn_text_btn_ripple_color(): ColorStateList {
-    val color = Theme.get().colorPrimary
+private fun mtrl_btn_text_btn_ripple_color(context: Context): ColorStateList {
+    val colorPrimary = Theme.get().colorPrimary
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_pressed),
@@ -258,11 +258,11 @@ private fun View.mtrl_btn_text_btn_ripple_color(): ColorStateList {
             intArrayOf()
         ),
         intArrayOf(
-            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_pressed_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_hovered_alpha)),
-            color.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_default_alpha))
+            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_pressed_alpha)),
+            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
+            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_focused_alpha)),
+            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_hovered_alpha)),
+            colorPrimary.adjustAlpha(context.float(R.dimen.mtrl_low_ripple_default_alpha))
         )
     )
 }

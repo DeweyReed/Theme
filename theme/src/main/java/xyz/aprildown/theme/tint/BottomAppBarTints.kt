@@ -1,7 +1,7 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
-import android.view.View
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
@@ -29,8 +29,12 @@ internal class BottomAppBarTint : BaseTint<BottomAppBar>(
             bottomAppBar.backgroundTint = it.toColorStateList()
         }
 
-        // R.style.Widget_MaterialComponents_BottomAppBar doesn't have a materialThemeOverlay
-        // define colorControlNormal so we have to do it on our own.
+        /**
+         * [R.style.Widget_MaterialComponents_BottomAppBar] doesn't have a materialThemeOverlay
+         * to define colorControlNormal so we have to do it on our own.
+         * If we can find colorControlNormal, it means we're using Colored.
+         * If we can't find it, we use [R.style.ThemeOverlay_MaterialComponents_BottomAppBar_Surface].
+         */
         (findAttributeColor(R.attr.colorControlNormal)?.toColorStateList()
             ?: context.colorStateList(R.color.material_on_surface_emphasis_medium))?.let { colorOnBar ->
             bottomAppBar.navigationIcon?.let {
@@ -90,7 +94,7 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
 private fun BottomNavigationView.withItemIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_bottom_nav_item_tint -> {
-            itemIconTintList = mtrl_bottom_nav_item_tint()
+            itemIconTintList = mtrl_bottom_nav_item_tint(context)
         }
         R.color.mtrl_bottom_nav_colored_item_tint -> {
             itemIconTintList = mtrl_bottom_nav_colored_item_tint()
@@ -99,7 +103,7 @@ private fun BottomNavigationView.withItemIconTint(resourceId: Int) {
 }
 
 // R.color.mtrl_bottom_nav_item_tint
-private fun View.mtrl_bottom_nav_item_tint(): ColorStateList {
+private fun mtrl_bottom_nav_item_tint(context: Context): ColorStateList {
     val theme = Theme.get()
     return ColorStateList(
         arrayOf(
@@ -131,7 +135,7 @@ private fun mtrl_bottom_nav_colored_item_tint(): ColorStateList {
 private fun BottomNavigationView.withItemTextTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_bottom_nav_item_tint -> {
-            itemTextColor = mtrl_bottom_nav_item_tint()
+            itemTextColor = mtrl_bottom_nav_item_tint(context)
         }
         R.color.mtrl_bottom_nav_colored_item_tint -> {
             itemTextColor = mtrl_bottom_nav_colored_item_tint()
@@ -142,7 +146,7 @@ private fun BottomNavigationView.withItemTextTint(resourceId: Int) {
 private fun BottomNavigationView.withItemRippleTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_bottom_nav_ripple_color -> {
-            itemRippleColor = mtrl_bottom_nav_ripple_color()
+            itemRippleColor = mtrl_bottom_nav_ripple_color(context)
         }
         R.color.mtrl_bottom_nav_colored_ripple_color -> {
             itemRippleColor = mtrl_bottom_nav_colored_ripple_color()
@@ -151,7 +155,7 @@ private fun BottomNavigationView.withItemRippleTint(resourceId: Int) {
 }
 
 // R.color.mtrl_bottom_nav_ripple_color
-private fun View.mtrl_bottom_nav_ripple_color(): ColorStateList {
+private fun mtrl_bottom_nav_ripple_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
