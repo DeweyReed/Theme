@@ -1,9 +1,10 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.InsetDrawable
-import android.view.View
+import androidx.core.view.ViewCompat
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.shape.MaterialShapeDrawable
 import xyz.aprildown.theme.R
@@ -19,9 +20,12 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
     attrs = R.styleable.Theme_NavigationView,
     defStyleAttr = R.attr.navigationViewStyle,
     onTint = {
-        // Why is this style private?
         // R.style.Widget_MaterialComponents_NavigationView
         val nav = view
+        val context = nav.context
+        matchThemeColor(R.styleable.Theme_NavigationView_android_background)?.let {
+            ViewCompat.setBackgroundTintList(nav, it.toColorStateList())
+        }
         withColorOrResourceId(
             R.styleable.Theme_NavigationView_itemIconTint,
             applySolidColor = {
@@ -30,7 +34,7 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_navigation_item_icon_tint -> {
-                        nav.itemIconTintList = nav.mtrl_navigation_item_icon_tint()
+                        nav.itemIconTintList = mtrl_navigation_item_icon_tint(context)
                     }
                 }
             }
@@ -58,7 +62,7 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_navigation_item_text_color -> {
-                        nav.itemTextColor = nav.mtrl_navigation_item_text_color()
+                        nav.itemTextColor = mtrl_navigation_item_text_color(context)
                     }
                 }
             }
@@ -67,7 +71,7 @@ internal class NavigationViewTint : BaseTint<NavigationView>(
 )
 
 // R.color.mtrl_navigation_item_icon_tint
-private fun View.mtrl_navigation_item_icon_tint(): ColorStateList {
+private fun mtrl_navigation_item_icon_tint(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(
@@ -85,7 +89,7 @@ private fun View.mtrl_navigation_item_icon_tint(): ColorStateList {
 
 // R.color.mtrl_navigation_item_background_color
 private fun mtrl_navigation_item_background_color(): ColorStateList {
-    val colorPrimary12 = Theme.get().colorPrimary.adjustAlpha(0.12f)
+    val colorPrimaryAlpha12 = Theme.get().colorPrimary.adjustAlpha(0.12f)
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_activated),
@@ -93,15 +97,15 @@ private fun mtrl_navigation_item_background_color(): ColorStateList {
             intArrayOf()
         ),
         intArrayOf(
-            colorPrimary12,
-            colorPrimary12,
+            colorPrimaryAlpha12,
+            colorPrimaryAlpha12,
             Color.TRANSPARENT
         )
     )
 }
 
 // R.color.mtrl_navigation_item_text_color
-private fun View.mtrl_navigation_item_text_color(): ColorStateList {
+private fun mtrl_navigation_item_text_color(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
         arrayOf(

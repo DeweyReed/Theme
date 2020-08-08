@@ -116,6 +116,7 @@
     </declare-styleable>
 
     <declare-styleable name="Theme_NavigationView">
+        <attr name="android:background" />
         <attr name="itemIconTint" />
         <attr name="itemShapeFillColor" />
         <attr name="itemTextColor" />
