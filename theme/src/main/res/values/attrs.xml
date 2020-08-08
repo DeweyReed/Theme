@@ -157,6 +157,7 @@
     <declare-styleable name="Theme_Slider">
         <attr name="haloColor" />
         <attr name="thumbColor" />
+        <attr name="tickColor" />
         <attr name="tickColorActive" />
         <attr name="tickColorInactive" />
         <attr name="trackColor" />

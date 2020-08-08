@@ -2,6 +2,7 @@
 
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.View
@@ -23,6 +24,7 @@ internal class SliderTint : BaseTint<Slider>(
         // R.style.Widget_MaterialComponents_Slider
         // R.style.Base_Widget_MaterialComponents_Slider
         val slider = view
+        val context = slider.context
         withColorOrResourceId(
             R.styleable.Theme_Slider_haloColor,
             applySolidColor = {
@@ -44,38 +46,49 @@ internal class SliderTint : BaseTint<Slider>(
             applyResource = {
                 when (it) {
                     R.color.material_slider_thumb_color -> {
-                        slider.thumbTintList = material_slider_thumb_color(slider)
+                        slider.thumbTintList = material_slider_thumb_color(context)
                     }
                 }
             }
         )
-        withColorOrResourceId(
-            R.styleable.Theme_Slider_tickColorActive,
-            applySolidColor = {
-                slider.tickActiveTintList = it.toColorStateList()
-            },
-            applyResource = {
-                when (it) {
-                    R.color.material_slider_active_tick_marks_color -> {
-                        slider.tickActiveTintList = material_slider_active_tick_marks_color()
+        if (typedArray.hasValue(R.styleable.Theme_Slider_tickColor)) {
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColor,
+                applySolidColor = {
+                    val csl = it.toColorStateList()
+                    slider.tickActiveTintList = csl
+                    slider.tickInactiveTintList = csl
+                }
+            )
+        } else {
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColorActive,
+                applySolidColor = {
+                    slider.tickActiveTintList = it.toColorStateList()
+                },
+                applyResource = {
+                    when (it) {
+                        R.color.material_slider_active_tick_marks_color -> {
+                            slider.tickActiveTintList = material_slider_active_tick_marks_color()
+                        }
                     }
                 }
-            }
-        )
-        withColorOrResourceId(
-            R.styleable.Theme_Slider_tickColorInactive,
-            applySolidColor = {
-                slider.tickInactiveTintList = it.toColorStateList()
-            },
-            applyResource = {
-                when (it) {
-                    R.color.material_slider_inactive_tick_marks_color -> {
-                        slider.tickInactiveTintList =
-                            material_slider_inactive_tick_marks_color(slider)
+            )
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColorInactive,
+                applySolidColor = {
+                    slider.tickInactiveTintList = it.toColorStateList()
+                },
+                applyResource = {
+                    when (it) {
+                        R.color.material_slider_inactive_tick_marks_color -> {
+                            slider.tickInactiveTintList =
+                                material_slider_inactive_tick_marks_color(context)
+                        }
                     }
                 }
-            }
-        )
+            )
+        }
         if (typedArray.hasValue(R.styleable.Theme_Slider_trackColor)) {
             withColorOrResourceId(
                 R.styleable.Theme_Slider_trackColor,
@@ -108,7 +121,7 @@ internal class SliderTint : BaseTint<Slider>(
                     when (it) {
                         R.color.material_slider_inactive_track_color -> {
                             slider.trackInactiveTintList =
-                                material_slider_inactive_track_color(slider)
+                                material_slider_inactive_track_color(context)
                         }
                     }
                 }
@@ -132,7 +145,7 @@ private fun material_slider_halo_color(): ColorStateList {
 }
 
 // R.color.material_slider_thumb_color
-private fun material_slider_thumb_color(view: View): ColorStateList {
+private fun material_slider_thumb_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -140,7 +153,7 @@ private fun material_slider_thumb_color(view: View): ColorStateList {
         ),
         intArrayOf(
             Theme.get().colorPrimary,
-            view.context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.38f)
+            context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.38f)
         )
     )
 }
@@ -161,7 +174,7 @@ private fun material_slider_active_tick_marks_color(): ColorStateList {
 }
 
 // R.color.material_slider_inactive_tick_marks_color
-private fun material_slider_inactive_tick_marks_color(view: View): ColorStateList {
+private fun material_slider_inactive_tick_marks_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -169,7 +182,7 @@ private fun material_slider_inactive_tick_marks_color(view: View): ColorStateLis
         ),
         intArrayOf(
             Theme.get().colorOnPrimary.adjustAlpha(0.54f),
-            view.context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
+            context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
         )
     )
 }
@@ -189,7 +202,7 @@ private fun material_slider_active_track_color(view: View): ColorStateList {
 }
 
 // R.color.material_slider_inactive_track_color
-private fun material_slider_inactive_track_color(view: View): ColorStateList {
+private fun material_slider_inactive_track_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -197,7 +210,7 @@ private fun material_slider_inactive_track_color(view: View): ColorStateList {
         ),
         intArrayOf(
             Theme.get().colorPrimary.adjustAlpha(0.24f),
-            view.context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
+            context.themeColor(R.attr.colorOnSurface).adjustAlpha(0.12f)
         )
     )
 }
@@ -212,6 +225,7 @@ internal class RangeSliderTint : BaseTint<RangeSlider>(
         // R.style.Widget_MaterialComponents_Slider
         // R.style.Base_Widget_MaterialComponents_Slider
         val slider = view
+        val context = slider.context
         withColorOrResourceId(
             R.styleable.Theme_Slider_haloColor,
             applySolidColor = {
@@ -233,38 +247,49 @@ internal class RangeSliderTint : BaseTint<RangeSlider>(
             applyResource = {
                 when (it) {
                     R.color.material_slider_thumb_color -> {
-                        slider.thumbTintList = material_slider_thumb_color(slider)
+                        slider.thumbTintList = material_slider_thumb_color(context)
                     }
                 }
             }
         )
-        withColorOrResourceId(
-            R.styleable.Theme_Slider_tickColorActive,
-            applySolidColor = {
-                slider.tickActiveTintList = it.toColorStateList()
-            },
-            applyResource = {
-                when (it) {
-                    R.color.material_slider_active_tick_marks_color -> {
-                        slider.tickActiveTintList = material_slider_active_tick_marks_color()
+        if (typedArray.hasValue(R.styleable.Theme_Slider_tickColor)) {
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColor,
+                applySolidColor = {
+                    val csl = it.toColorStateList()
+                    slider.tickActiveTintList = csl
+                    slider.tickInactiveTintList = csl
+                }
+            )
+        } else {
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColorActive,
+                applySolidColor = {
+                    slider.tickActiveTintList = it.toColorStateList()
+                },
+                applyResource = {
+                    when (it) {
+                        R.color.material_slider_active_tick_marks_color -> {
+                            slider.tickActiveTintList = material_slider_active_tick_marks_color()
+                        }
                     }
                 }
-            }
-        )
-        withColorOrResourceId(
-            R.styleable.Theme_Slider_tickColorInactive,
-            applySolidColor = {
-                slider.tickInactiveTintList = it.toColorStateList()
-            },
-            applyResource = {
-                when (it) {
-                    R.color.material_slider_inactive_tick_marks_color -> {
-                        slider.tickInactiveTintList =
-                            material_slider_inactive_tick_marks_color(slider)
+            )
+            withColorOrResourceId(
+                R.styleable.Theme_Slider_tickColorInactive,
+                applySolidColor = {
+                    slider.tickInactiveTintList = it.toColorStateList()
+                },
+                applyResource = {
+                    when (it) {
+                        R.color.material_slider_inactive_tick_marks_color -> {
+                            slider.tickInactiveTintList =
+                                material_slider_inactive_tick_marks_color(context)
+                        }
                     }
                 }
-            }
-        )
+            )
+        }
         if (typedArray.hasValue(R.styleable.Theme_Slider_trackColor)) {
             withColorOrResourceId(
                 R.styleable.Theme_Slider_trackColor,
@@ -296,9 +321,8 @@ internal class RangeSliderTint : BaseTint<RangeSlider>(
                 applyResource = {
                     when (it) {
                         R.color.material_slider_inactive_track_color -> {
-                            @Suppress("FunctionName")
                             slider.trackInactiveTintList =
-                                material_slider_inactive_track_color(slider)
+                                material_slider_inactive_track_color(context)
                         }
                     }
                 }
