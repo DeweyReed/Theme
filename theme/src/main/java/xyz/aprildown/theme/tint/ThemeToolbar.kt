@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.MenuItemCompat
@@ -23,7 +22,7 @@ import xyz.aprildown.theme.utils.tinted
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * I hate Toolbar.
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/TopAppBar.md
  */
 internal class ThemeToolbar(
     context: Context,
@@ -53,7 +52,7 @@ internal class ThemeToolbar(
          * Here is the problem.
          * Normally, we use AppTheme.AppBarOverlay and AppTheme.PopupOverlay to define toolbar text
          * and icons color. This means we know if the primary color is light before hand.
-         * However, with Theme, we don't know that so we have to calculate at run time.
+         * However, with Theme, we don't know that, so we have to calculate at run time.
          */
 
         fun tintToolbarMenu(color: ColorStateList) {
@@ -83,7 +82,7 @@ internal class ThemeToolbar(
             applyResource = { resourceId ->
                 when (resourceId) {
                     R.color.material_on_primary_emphasis_medium -> {
-                        toolbar.setSubtitleTextColor(toolbar.material_on_primary_emphasis_medium())
+                        toolbar.setSubtitleTextColor(material_on_primary_emphasis_medium(context))
                     }
                 }
             }
@@ -142,7 +141,7 @@ internal class ThemeToolbar(
 }
 
 // R.color.material_on_primary_emphasis_medium
-private fun View.material_on_primary_emphasis_medium(): ColorStateList {
+private fun material_on_primary_emphasis_medium(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(intArrayOf()),
         intArrayOf(

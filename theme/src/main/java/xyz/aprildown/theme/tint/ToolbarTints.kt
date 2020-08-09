@@ -8,7 +8,7 @@ import xyz.aprildown.theme.R
 import xyz.aprildown.theme.utils.setMaterialBackgroundColor
 
 /**
- * https://github.com/material-components/material-components-android/blob/master/docs/components/AppBarLayout.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/TopAppBar.md
  */
 internal class AppBarLayoutTint : BaseTint<AppBarLayout>(
     attrs = R.styleable.Theme_AppBarLayout,

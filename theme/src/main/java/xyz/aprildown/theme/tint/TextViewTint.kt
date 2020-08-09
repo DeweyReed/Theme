@@ -35,10 +35,6 @@ internal fun ThemeHelper<*>.decorateTextView() {
     }
 }
 
-/**
- * [MaterialTextView]
- * https://github.com/material-components/material-components-android/blob/master/docs/components/MaterialTextView.md
- */
 internal class AutoCompleteTextViewTint : BaseTint<AppCompatAutoCompleteTextView>(
     attrs = R.styleable.Theme_TextView,
     defStyleAttr = R.attr.autoCompleteTextViewStyle,
