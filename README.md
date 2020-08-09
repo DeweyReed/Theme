@@ -11,15 +11,14 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
 ## WARNING
 
-**`Theme` only works with [`material-components-android 1.1.0`](https://github.com/material-components/material-components-android/releases/tag/1.1.0). Any other version doesn't work.**
-
-**I don't recommend using `Theme` in the production** because the implementation is fragile.
-
-Jetpack Compose supports theming programmatically and is a better alternative(in the future).
+- `Theme` is a companion of [material-components-android](https://github.com/material-components/material-components-android/), so it requires you to adopt `material-components-android` in your project.
+- Currently, `Theme` supports `material-components-android` [1.1.0](https://github.com/material-components/material-components-android/releases/tag/1.1.0) and [1.2.0](https://github.com/material-components/material-components-android/releases/tag/1.2.0). Any other version doesn't work.
+- Because the implementation is fragile, think twice, and do some investigation before using this library.
+- Jetpack Compose supports theming programmatically and is a better alternative(in the future).
 
 ## Sample App
 
-You can [download the APK from Release.](https://github.com/deweyreed/theme/releases)
+[Sample APK from Release.](https://github.com/deweyreed/theme/releases)
 
 ## Usage
 
@@ -42,7 +41,8 @@ You can [download the APK from Release.](https://github.com/deweyreed/theme/rele
 
         ```Groovy
         dependencies {
-            implementation 'xyz.aprildown:Theme:0.1.4'
+            implementation 'xyz.aprildown:Theme:0.2.0' // for material-components-android 1.2.0
+            implementation 'xyz.aprildown:Theme:0.1.4' // for material-components-android 1.1.0
         }
         ```
 
@@ -101,7 +101,7 @@ You can [download the APK from Release.](https://github.com/deweyreed/theme/rele
     - Variables ending with `Res` expect a `ColorRes`. Other variables expect a `ColorInt`.
     - **After editing, you have to recreate activities in the back stack manually.**
 
-1. Use colors at runtime.
+1. [Optional] Use colors at runtime.
 
     ```Kotlin
     Theme.get().colorPrimary
@@ -137,7 +137,7 @@ button.setOnClickListener {
 
 ### Support Custom Views
 
-1. Create a `ThemeInflationDelegate` like [AppComponentsDelegate](/app/src/main/java/xyz/aprildown/theme/app/AppComponentsDelegate.kt).
+1. Create a `ThemeInflationDelegate` like [AppComponentsDelegate](./app/src/main/java/xyz/aprildown/theme/app/AppComponentsDelegate.kt).
 1. Add it after `Theme`'s initialization:
 
     ```Kotlin
@@ -149,11 +149,10 @@ button.setOnClickListener {
 
 - Style `Toolbar` [according to the docs](https://github.com/material-components/material-components-android/blob/master/docs/components/TopAppBar.md#regular-top-app-bar), or the tint doesn't work.
 - `Theme` doesn't use any reflection, so it's hard to tint widgets like `TimePicker`.
-- `Theme` heavily depends on `material-components-android 1.1.0` internal resources ID, making it doesn't work with 1.0.0, 1.2.0, or later.
 
 ## How `Theme` Works
 
-`material-components-android 1.1.0` makes setting attributes programmatically very easy. [ThemeViewInflater](/theme/src/main/java/xyz/aprildown/theme/ThemeViewInflater.kt) extends [MaterialComponentsViewInflater](https://developer.android.com/reference/com/google/android/material/theme/MaterialComponentsViewInflater) and does all retint work. Classes named `***Tint` resolves color attributes from `AttributeSet` and applies new color.
+`material-components-android` makes setting attributes programmatically very easy. [ThemeViewInflater](/theme/src/main/java/xyz/aprildown/theme/ThemeViewInflater.kt) extends [MaterialComponentsViewInflater](https://developer.android.com/reference/com/google/android/material/theme/MaterialComponentsViewInflater) and does all retint work. Classes named `***Tint` resolves color attributes from `AttributeSet` and applies new color.
 
 ## License
 
