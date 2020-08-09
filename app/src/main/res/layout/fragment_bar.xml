@@ -16,7 +16,8 @@
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminateTint="?colorPrimary" />
+            android:indeterminateTint="?colorPrimary"
+            android:indeterminateTintMode="src_in" />
 
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
