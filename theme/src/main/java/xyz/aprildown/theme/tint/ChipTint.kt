@@ -12,15 +12,15 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Chip.md
+ * [R.style.Widget_MaterialComponents_Chip_Entry]
+ * [R.style.Widget_MaterialComponents_Chip_Action]
+ * [R.style.Widget_MaterialComponents_Chip_Choice]
+ * [R.style.Widget_MaterialComponents_Chip_Filter]
  */
 internal class ChipTint : BaseTint<Chip>(
     attrs = R.styleable.Theme_Chip,
     defStyleAttr = R.attr.chipStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_Chip_Entry
-        // R.style.Widget_MaterialComponents_Chip_Action
-        // R.style.Widget_MaterialComponents_Chip_Choice
-        // R.style.Widget_MaterialComponents_Chip_Filter
         val chip = view
         val context = chip.context
         withColorOrResourceId(
@@ -72,13 +72,13 @@ internal class ChipTint : BaseTint<Chip>(
         matchThemeColor(R.styleable.Theme_Chip_chipIconTint)?.let {
             chip.chipIconTint = it.toColorStateList()
         }
-        // We're unable to set chipSurfaceColor programmatically for now.
+        // TODO: We're unable to set chipSurfaceColor programmatically for now.
         // matchThemeColor(R.styleable.Theme_Chip_chipSurfaceColor)?.let {
         // }
     }
 )
 
-// R.color.mtrl_choice_chip_text_color
+/** [R.color.mtrl_choice_chip_text_color] */
 private fun mtrl_choice_chip_text_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
@@ -98,7 +98,7 @@ private fun mtrl_choice_chip_text_color(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_choice_chip_background_color
+/** [R.color.mtrl_choice_chip_background_color] */
 private fun mtrl_choice_chip_background_color(context: Context): ColorStateList {
     val colorPrimaryAlpha24 = Theme.get().colorPrimary.adjustAlpha(0.24f)
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
@@ -118,7 +118,7 @@ private fun mtrl_choice_chip_background_color(context: Context): ColorStateList 
     )
 }
 
-// R.color.mtrl_choice_chip_ripple_color
+/** [R.color.mtrl_choice_chip_ripple_color] */
 private fun mtrl_choice_chip_ripple_color(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(

@@ -23,12 +23,12 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Checkbox.md
+ * [R.style.Widget_AppCompat_CompoundButton_CheckBox]
  */
 internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
     attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.checkboxStyle,
     onTint = {
-        // R.style.Widget_AppCompat_CompoundButton_CheckBox
         val checkBox = view
         if (checkBox is MaterialCheckBox) {
             withColorOrResourceId(
@@ -53,13 +53,13 @@ internal class CheckBoxTint : BaseTint<AppCompatCheckBox>(
 
 /**
  * [MaterialRadioButton]
- *https://github.com/material-components/material-components-android/blob/master/docs/components/RadioButton.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/RadioButton.md
+ * [R.style.Widget_AppCompat_CompoundButton_RadioButton]
  */
 internal class RadioButtonTint : BaseTint<AppCompatRadioButton>(
     attrs = R.styleable.Theme_CompoundButton,
     defStyleAttr = android.R.attr.radioButtonStyle,
     onTint = {
-        // R.style.Widget_AppCompat_CompoundButton_RadioButton
         val radioButton = view
         if (radioButton is MaterialRadioButton) {
             withColorOrResourceId(
@@ -110,7 +110,8 @@ private fun ThemeHelper<*>.createCompoundButtonBackground(colorSecondary: Int? =
     if (currentBackground is RippleDrawable) {
         /**
          * R.drawable.control_background_40dp_material
-         * @style/Widget.AppCompat.CompoundButton.CheckBox/RadioButton
+         * [R.style.Widget_AppCompat_CompoundButton_CheckBox]
+         * [R.style.Widget_AppCompat_CompoundButton_RadioButton]
          *
          * I can't find the background resource for Switch. However,
          * when I track its background at runtime, the background is the same as other
@@ -143,12 +144,12 @@ private fun ThemeHelper<*>.createCompoundButtonBackground(colorSecondary: Int? =
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Switch.md
+ * [R.style.Widget_AppCompat_CompoundButton_Switch]
  */
 internal class SwitchMaterialTint : BaseTint<SwitchMaterial>(
     attrs = R.styleable.Theme_Switch,
     defStyleAttr = android.R.attr.switchStyle,
     onTint = {
-        // R.style.Widget_AppCompat_CompoundButton_Switch
         val switch = view
         withColorOrResourceId(
             R.styleable.Theme_Switch_thumbTint,
@@ -250,7 +251,7 @@ internal class CheckedTextViewTint : BaseTint<AppCompatCheckedTextView>(
                     it == "btn_radio_material_anim" || it == "btn_check_material_anim"
                 }
             ) {
-                // R.color.control_checkable_material
+                /** [R.color.control_checkable_material] */
                 val colorControlActivated = findAttributeColor(android.R.attr.colorControlActivated)
                 if (colorControlActivated != null) {
                     val colorControlNormal = context.themeColor(android.R.attr.colorControlNormal)

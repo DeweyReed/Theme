@@ -13,13 +13,13 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Tabs.md
+ * [R.style.Widget_MaterialComponents_TabLayout]
+ * [R.style.Widget_MaterialComponents_TabLayout_Colored]
  */
 internal class TabLayoutTint : BaseTint<TabLayout>(
     attrs = R.styleable.Theme_TabLayout,
     defStyleAttr = R.attr.tabStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_TabLayout
-        // R.style.Widget_MaterialComponents_TabLayout_Colored
         val tabLayout = view
         matchThemeColor(R.styleable.Theme_TabLayout_android_background)?.let {
             tabLayout.setMaterialBackgroundColor(it)
@@ -85,7 +85,7 @@ private fun TabLayout.withTabTextColor(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_tabs_icon_color_selector
+/** [R.color.mtrl_tabs_icon_color_selector] */
 private fun View.mtrl_tabs_icon_color_selector(): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -99,7 +99,7 @@ private fun View.mtrl_tabs_icon_color_selector(): ColorStateList {
     )
 }
 
-// R.color.mtrl_tabs_icon_color_selector_colored
+/** [R.color.mtrl_tabs_icon_color_selector_colored] */
 private fun mtrl_tabs_icon_color_selector_colored(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
@@ -128,7 +128,7 @@ private fun TabLayout.withTabRippleColor(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_tabs_ripple_color
+/** [R.color.mtrl_tabs_ripple_color] */
 private fun mtrl_tabs_ripple_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
@@ -166,7 +166,7 @@ private fun mtrl_tabs_ripple_color(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_tabs_colored_ripple_color
+/** [R.color.mtrl_tabs_colored_ripple_color] */
 private fun mtrl_tabs_colored_ripple_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(

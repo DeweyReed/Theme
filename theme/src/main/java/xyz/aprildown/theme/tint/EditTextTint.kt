@@ -5,19 +5,20 @@ import android.widget.EditText
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
+import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.isQOrLater
 import xyz.aprildown.theme.utils.themeColor
 
 /**
- * I don't recommend using EditText directly because it doesn't provide many customization.
+ * Use [TextInputLayout].
+ * [R.style.Widget_AppCompat_EditText]
  */
 internal class EditTextTint : BaseTint<AppCompatEditText>(
     attrs = R.styleable.Theme_EditText,
     defStyleAttr = R.attr.editTextStyle,
     onTint = {
-        // R.style.Widget_AppCompat_EditText
         val editText = view
 
         decorateTextView()

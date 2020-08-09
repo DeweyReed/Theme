@@ -12,13 +12,13 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/TextField.md
+ * [R.style.Widget_MaterialComponents_TextInputLayout_FilledBox]
+ * [R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox]
  */
 internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
     attrs = R.styleable.Theme_TextInputLayout,
     defStyleAttr = R.attr.textInputStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_TextInputLayout_FilledBox
-        // R.style.Widget_MaterialComponents_TextInputLayout_OutlinedBox
         val textInputLayout = view
         matchThemeColor(R.styleable.Theme_TextInputLayout_android_textColorHint)?.let {
             textInputLayout.defaultHintTextColor = it.toColorStateList()
@@ -112,7 +112,7 @@ private fun TextInputLayout.withEndIconTint(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_filled_icon_tint
+/** [R.color.mtrl_filled_icon_tint] */
 private fun mtrl_filled_icon_tint(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -129,7 +129,7 @@ private fun mtrl_filled_icon_tint(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_outlined_icon_tint
+/** [R.color.mtrl_outlined_icon_tint] */
 private fun mtrl_outlined_icon_tint(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -160,9 +160,7 @@ private fun TextInputLayout.withBoxStrokeColor(resourceId: Int) {
     }
 }
 
-/**
- * [R.color.mtrl_filled_stroke_color]
- */
+/** [R.color.mtrl_filled_stroke_color] */
 private fun mtrl_filled_stroke_color(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -181,9 +179,7 @@ private fun mtrl_filled_stroke_color(context: Context): ColorStateList {
     )
 }
 
-/**
- * [R.color.mtrl_outlined_stroke_color]
- */
+/** [R.color.mtrl_outlined_stroke_color] */
 private fun mtrl_outlined_stroke_color(context: Context): ColorStateList {
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(

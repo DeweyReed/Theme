@@ -11,11 +11,14 @@ import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
+/**
+ * Use [MaterialCardView] instead.
+ * [R.style.Widget_MaterialComponents_CardView]
+ */
 internal class CardViewTint : BaseTint<CardView>(
     attrs = R.styleable.Theme_MaterialCardView,
     defStyleAttr = R.attr.cardViewStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_CardView
         val card = view
         matchThemeColor(R.styleable.Theme_MaterialCardView_cardBackgroundColor)?.let {
             card.setCardBackgroundColor(it)
@@ -25,12 +28,12 @@ internal class CardViewTint : BaseTint<CardView>(
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Card.md
+ * [R.style.Widget_MaterialComponents_CardView]
  */
 internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
     attrs = R.styleable.Theme_MaterialCardView,
     defStyleAttr = R.attr.materialCardViewStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_CardView
         val card = view
         matchThemeColor(R.styleable.Theme_MaterialCardView_cardBackgroundColor)?.let {
             card.setCardBackgroundColor(it)
@@ -70,7 +73,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
     }
 )
 
-// R.color.mtrl_card_view_foreground
+/** [R.color.mtrl_card_view_foreground] */
 private fun mtrl_card_view_foreground(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -86,7 +89,7 @@ private fun mtrl_card_view_foreground(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_card_view_ripple
+/** [R.color.mtrl_card_view_ripple] */
 private fun mtrl_card_view_ripple(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(

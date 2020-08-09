@@ -23,6 +23,9 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/TopAppBar.md
+ * [R.style.Widget_MaterialComponents_Toolbar]
+ * [R.style.Widget_MaterialComponents_Toolbar_Primary]
+ * [R.style.Widget_MaterialComponents_Toolbar_Surface]
  */
 internal class ThemeToolbar(
     context: Context,
@@ -38,13 +41,10 @@ internal class ThemeToolbar(
     }
 
     private fun ThemeHelper<ThemeToolbar>.initTheme() {
-        // R.style.Widget_MaterialComponents_Toolbar
-        // R.style.Widget_MaterialComponents_Toolbar_Primary
-        // R.style.Widget_MaterialComponents_Toolbar_Surface
         val toolbar = view
         val context = toolbar.context
         matchThemeColor(R.styleable.Theme_Toolbar_android_background)?.let {
-            // Check MaterialToolbar.initBackground
+            /** [MaterialToolbar.initBackground] */
             toolbar.setMaterialBackgroundColor(it)
         }
 
@@ -140,7 +140,7 @@ internal class ThemeToolbar(
     }
 }
 
-// R.color.material_on_primary_emphasis_medium
+/** [R.color.material_on_primary_emphasis_medium] */
 private fun material_on_primary_emphasis_medium(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(intArrayOf()),

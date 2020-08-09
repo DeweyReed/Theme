@@ -15,15 +15,15 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Button.md
+ * [R.style.Widget_MaterialComponents_Button]
+ * [R.style.Widget_MaterialComponents_Button_UnelevatedButton]
+ * [R.style.Widget_MaterialComponents_Button_OutlinedButton]
+ * [R.style.Widget_MaterialComponents_Button_TextButton]
  */
 internal class ButtonTint : BaseTint<AppCompatButton>(
     attrs = R.styleable.Theme_Button,
     defStyleAttr = R.attr.materialButtonStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_Button
-        // R.style.Widget_MaterialComponents_Button_UnelevatedButton
-        // R.style.Widget_MaterialComponents_Button_OutlinedButton
-        // R.style.Widget_MaterialComponents_Button_TextButton
         val button = view
         if (button is MaterialButton) {
             withColorOrResourceId(
@@ -106,7 +106,7 @@ private fun MaterialButton.withIconTint(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_btn_text_color_selector
+/** [R.color.mtrl_btn_text_color_selector] */
 private fun mtrl_btn_text_color_selector(context: Context): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_enabled),
@@ -118,7 +118,7 @@ private fun mtrl_btn_text_color_selector(context: Context): ColorStateList = Col
     )
 )
 
-// R.color.mtrl_text_btn_text_color_selector
+/** [R.color.mtrl_text_btn_text_color_selector] */
 private fun mtrl_text_btn_text_color_selector(context: Context): ColorStateList {
     val theme = Theme.get()
     val colorPrimary = theme.colorPrimary
@@ -162,7 +162,7 @@ private fun MaterialButton.withBackgroundTint(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_btn_bg_color_selector
+/** [R.color.mtrl_btn_bg_color_selector] */
 private fun mtrl_btn_bg_color_selector(context: Context): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_enabled),
@@ -174,7 +174,7 @@ private fun mtrl_btn_bg_color_selector(context: Context): ColorStateList = Color
     )
 )
 
-// R.color.mtrl_btn_text_btn_bg_color_selector
+/** [R.color.mtrl_btn_text_btn_bg_color_selector] */
 private fun mtrl_btn_text_btn_bg_color_selector(): ColorStateList = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_checked),
@@ -197,7 +197,7 @@ private fun MaterialButton.withStrokeColor(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_btn_stroke_color_selector
+/** [R.color.mtrl_btn_stroke_color_selector] */
 private fun mtrl_btn_stroke_color_selector(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -225,7 +225,7 @@ private fun MaterialButton.withRippleColor(resourceId: Int) {
     }
 }
 
-// R.color.mtrl_btn_ripple_color
+/** [R.color.mtrl_btn_ripple_color] */
 private fun mtrl_btn_ripple_color(context: Context): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
@@ -246,7 +246,7 @@ private fun mtrl_btn_ripple_color(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_btn_text_btn_ripple_color
+/** [R.color.mtrl_btn_text_btn_ripple_color] */
 private fun mtrl_btn_text_btn_ripple_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     return ColorStateList(

@@ -16,13 +16,13 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/Slider.md
+ * [R.style.Widget_MaterialComponents_Slider]
+ * [R.style.Base_Widget_MaterialComponents_Slider]
  */
 internal class SliderTint : BaseTint<Slider>(
     attrs = R.styleable.Theme_Slider,
     defStyleAttr = R.attr.sliderStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_Slider
-        // R.style.Base_Widget_MaterialComponents_Slider
         val slider = view
         val context = slider.context
         withColorOrResourceId(
@@ -130,7 +130,7 @@ internal class SliderTint : BaseTint<Slider>(
     }
 )
 
-// R.color.material_slider_halo_color
+/** [R.color.material_slider_halo_color] */
 private fun material_slider_halo_color(): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -144,7 +144,7 @@ private fun material_slider_halo_color(): ColorStateList {
     )
 }
 
-// R.color.material_slider_thumb_color
+/** [R.color.material_slider_thumb_color] */
 private fun material_slider_thumb_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -158,7 +158,7 @@ private fun material_slider_thumb_color(context: Context): ColorStateList {
     )
 }
 
-// R.color.material_slider_active_tick_marks_color
+/** [R.color.material_slider_active_tick_marks_color] */
 private fun material_slider_active_tick_marks_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
@@ -173,7 +173,7 @@ private fun material_slider_active_tick_marks_color(): ColorStateList {
     )
 }
 
-// R.color.material_slider_inactive_tick_marks_color
+/** [R.color.material_slidwer_inactive_tick_marks_color] */
 private fun material_slider_inactive_tick_marks_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -187,7 +187,7 @@ private fun material_slider_inactive_tick_marks_color(context: Context): ColorSt
     )
 }
 
-// R.color.material_slider_active_track_color
+/** [R.color.material_slider_active_track_color] */
 private fun material_slider_active_track_color(view: View): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -201,7 +201,7 @@ private fun material_slider_active_track_color(view: View): ColorStateList {
     )
 }
 
-// R.color.material_slider_inactive_track_color
+/** [R.color.material_slider_inactive_track_color] */
 private fun material_slider_inactive_track_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -216,14 +216,12 @@ private fun material_slider_inactive_track_color(context: Context): ColorStateLi
 }
 
 /**
- * Copy and paste because BaseSlider isn't open.
+ * Copy and paste from [SliderTint] because BaseSlider isn't open.
  */
 internal class RangeSliderTint : BaseTint<RangeSlider>(
     attrs = R.styleable.Theme_Slider,
     defStyleAttr = R.attr.sliderStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_Slider
-        // R.style.Base_Widget_MaterialComponents_Slider
         val slider = view
         val context = slider.context
         withColorOrResourceId(

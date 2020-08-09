@@ -15,12 +15,12 @@ import xyz.aprildown.theme.utils.toColorStateList
 
 /**
  * https://github.com/material-components/material-components-android/blob/master/docs/components/FloatingActionButton.md
+ * [R.style.Widget_MaterialComponents_FloatingActionButton]
  */
 internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
     attrs = R.styleable.Theme_FloatingActionButton,
     defStyleAttr = R.attr.floatingActionButtonStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_FloatingActionButton
         val fab = view
         val context = fab.context
         withColorOrResourceId(
@@ -68,7 +68,7 @@ internal class FloatingActionButtonTint : BaseTint<FloatingActionButton>(
     }
 )
 
-// R.color.mtrl_fab_bg_color_selector
+/** [R.color.mtrl_fab_bg_color_selector] */
 private fun mtrl_fab_bg_color_selector(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -82,7 +82,7 @@ private fun mtrl_fab_bg_color_selector(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_fab_ripple_color
+/** [R.color.mtrl_fab_ripple_color] */
 private fun mtrl_fab_ripple_color(context: Context): ColorStateList {
     val colorOnSecondary = Theme.get().colorOnSecondary
     return ColorStateList(
@@ -103,7 +103,7 @@ private fun mtrl_fab_ripple_color(context: Context): ColorStateList {
     )
 }
 
-// R.color.mtrl_fab_icon_text_color_selector
+/** [R.color.mtrl_fab_icon_text_color_selector] */
 private fun mtrl_fab_icon_text_color_selector(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -118,14 +118,14 @@ private fun mtrl_fab_icon_text_color_selector(context: Context): ColorStateList 
 }
 
 /**
- *https://github.com/material-components/material-components-android/blob/master/docs/components/ExtendedFloatingActionButton.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/ExtendedFloatingActionButton.md
+ * [R.style.Widget_MaterialComponents_ExtendedFloatingActionButton]
+ * [R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon]
  */
 internal class ExtendedFloatingActionButtonTint : BaseTint<ExtendedFloatingActionButton>(
     attrs = R.styleable.Theme_ExtendedFloatingActionButton,
     defStyleAttr = R.attr.extendedFloatingActionButtonStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton
-        // R.style.Widget_MaterialComponents_ExtendedFloatingActionButton_Icon
         val fab = view
         val context = fab.context
         withColorOrResourceId(

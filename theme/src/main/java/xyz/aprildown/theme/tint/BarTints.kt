@@ -8,12 +8,14 @@ import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
+/**
+ * [R.style.Widget_AppCompat_ProgressBar]
+ * [R.style.Widget_AppCompat_ProgressBar_Horizontal]
+ */
 internal class ProgressBarTint : BaseTint<ProgressBar>(
     attrs = R.styleable.Theme_ProgressBar,
     defStyleAttr = android.R.attr.progressBarStyle,
     onTint = {
-        // R.style.Widget_AppCompat_ProgressBar
-        // R.style.Widget_AppCompat_ProgressBar_Horizontal
         val progressBar = view
         withColorOrResourceId(
             R.styleable.Theme_ProgressBar_android_indeterminateTint,
@@ -36,12 +38,14 @@ internal class ProgressBarTint : BaseTint<ProgressBar>(
     }
 )
 
+/**
+ * [R.style.Widget_AppCompat_SeekBar]
+ * [R.style.Widget_AppCompat_SeekBar_Discrete]
+ */
 internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
     attrs = R.styleable.Theme_SeekBar,
     defStyleAttr = R.attr.seekBarStyle,
     onTint = {
-        // R.style.Widget_AppCompat_SeekBar
-        // R.style.Widget_AppCompat_SeekBar_Discrete
         val seekBar = view
         val context = seekBar.context
         withColorOrResourceId(
@@ -50,7 +54,7 @@ internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
                 seekBar.thumbTintList = it.toColorStateList()
             },
             applyDefault = {
-                // R.drawable.seekbar_thumb_material_anim
+                /** [R.drawable.seekbar_thumb_material_anim] */
                 seekBar.thumbTintList = ColorStateList(
                     arrayOf(
                         intArrayOf(-android.R.attr.state_enabled),

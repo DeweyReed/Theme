@@ -16,11 +16,13 @@ internal class ImageViewTint : BaseTint<AppCompatImageView>(
     }
 )
 
+/**
+ * [R.style.Widget_AppCompat_ImageButton]
+ */
 internal class ImageButtonTint : BaseTint<AppCompatImageButton>(
     attrs = R.styleable.Theme_ImageView,
     defStyleAttr = R.attr.imageButtonStyle,
     onTint = {
-        // R.style.Widget_AppCompat_ImageButton
         tintImageView()
     }
 )
@@ -35,10 +37,12 @@ private fun ThemeHelper<*>.tintImageView() {
     }
 }
 
+/**
+ * [R.style.Widget_MaterialComponents_ShapeableImageView]
+ */
 internal class ShapeableImageViewTint : BaseTint<ShapeableImageView>(
     attrs = R.styleable.Theme_ShapeableImageView,
     onTint = {
-        // R.style.Widget_MaterialComponents_ShapeableImageView
         val imageView = view
         matchThemeColor(R.styleable.Theme_ShapeableImageView_android_background)?.let {
             ViewCompat.setBackgroundTintList(imageView, it.toColorStateList())
