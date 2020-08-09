@@ -17,6 +17,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.getParentAbsoluteElevation
+import xyz.aprildown.theme.utils.isNOrLater
 import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.themeFloat
 import xyz.aprildown.theme.utils.toColorStateList
@@ -239,7 +240,7 @@ internal class CheckedTextViewTint : BaseTint<AppCompatCheckedTextView>(
         val resources = view.resources
         val checkedTextView = view
 
-        // This piece of code only tints CheckedTextView from MaterialAlertDialog.
+        // This piece of code only tints CheckedTextView from MaterialAlertDialog for N or later.
         val drawableResId =
             typedArray.getResourceId(R.styleable.Theme_CheckedTextView_drawableStartCompat, -1)
         if (drawableResId != -1 &&
@@ -249,7 +250,8 @@ internal class CheckedTextViewTint : BaseTint<AppCompatCheckedTextView>(
                 resources.getResourceTypeName(drawableResId) == "drawable" &&
                 resources.getResourceEntryName(drawableResId).let {
                     it == "btn_radio_material_anim" || it == "btn_check_material_anim"
-                }
+                } &&
+                isNOrLater() // control_checkable_material is imported from N
             ) {
                 /** [R.color.control_checkable_material] */
                 val colorControlActivated = findAttributeColor(android.R.attr.colorControlActivated)

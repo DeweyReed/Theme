@@ -4,7 +4,7 @@ import android.os.Build
 
 internal fun isMOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 
-// internal fun isNOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+internal fun isNOrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
 
 // internal fun isNMR1OrLater(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
 
