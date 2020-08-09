@@ -8,8 +8,8 @@ ext {
             min_sdk       : 21,
             target_sdk    : 29,
 
-            version_code  : 14,
-            version_name  : '0.1.4',
+            version_code  : 20,
+            version_name  : '0.2.0',
     ]
     libs = [
             kotlin_stdlib_jdk7          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
