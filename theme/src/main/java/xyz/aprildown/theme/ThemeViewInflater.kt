@@ -7,7 +7,7 @@ import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.ScrollView
-import androidx.annotation.Keep
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatCheckedTextView
@@ -30,12 +30,17 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.theme.MaterialComponentsViewInflater
 import xyz.aprildown.theme.tint.AppBarLayoutTint
+import xyz.aprildown.theme.tint.AutoCompleteTextViewTint
 import xyz.aprildown.theme.tint.BottomAppBarTint
 import xyz.aprildown.theme.tint.BottomNavigationViewTint
 import xyz.aprildown.theme.tint.ButtonTint
@@ -55,18 +60,21 @@ import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
+import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
 import xyz.aprildown.theme.tint.ScrollViewTint
 import xyz.aprildown.theme.tint.SeekBarTint
+import xyz.aprildown.theme.tint.ShapeableImageViewTint
+import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
+import xyz.aprildown.theme.tint.TextInputEditTextTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.ThemeToolbar
 import xyz.aprildown.theme.tint.decorate
 
-@Keep // Make proguard keep this class as it's accessed reflectively by AppCompat
 open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     // region MaterialComponentsViewInflater
@@ -85,6 +93,14 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
 
     override fun createRadioButton(context: Context?, attrs: AttributeSet?): AppCompatRadioButton {
         return super.createRadioButton(context, attrs).decorate(attrs, RadioButtonTint())
+    }
+
+    override fun createAutoCompleteTextView(
+        context: Context,
+        attrs: AttributeSet?
+    ): AppCompatAutoCompleteTextView {
+        return super.createAutoCompleteTextView(context, attrs)
+            .decorate(attrs, AutoCompleteTextViewTint())
     }
 
     // endregion MaterialComponentsViewInflater
@@ -193,6 +209,15 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 TabLayout(context, attrs).decorate(attrs, TabLayoutTint())
             "com.google.android.material.textfield.TextInputLayout" ->
                 TextInputLayout(context, attrs).decorate(attrs, TextInputLayoutTint())
+            "com.google.android.material.textfield.TextInputEditText" ->
+                TextInputEditText(context, attrs).decorate(attrs, TextInputEditTextTint())
+            "com.google.android.material.slider.Slider" ->
+                Slider(context, attrs).decorate(attrs, SliderTint())
+            "com.google.android.material.slider.RangeSlider" ->
+                RangeSlider(context, attrs).decorate(attrs, RangeSliderTint())
+            "com.google.android.material.imageview.ShapeableImageView" ->
+                ShapeableImageView(context, attrs).decorate(attrs, ShapeableImageViewTint())
+
             "ScrollView" ->
                 ScrollView(context, attrs).decorate(attrs, ScrollViewTint())
             "HorizontalScrollView" ->

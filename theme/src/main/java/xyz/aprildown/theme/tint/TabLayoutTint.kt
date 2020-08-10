@@ -1,5 +1,6 @@
 package xyz.aprildown.theme.tint
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.View
 import com.google.android.material.tabs.TabLayout
@@ -11,14 +12,14 @@ import xyz.aprildown.theme.utils.themeColor
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
- * https://github.com/material-components/material-components-android/blob/master/docs/components/TabLayout.md
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/Tabs.md
+ * [R.style.Widget_MaterialComponents_TabLayout]
+ * [R.style.Widget_MaterialComponents_TabLayout_Colored]
  */
 internal class TabLayoutTint : BaseTint<TabLayout>(
     attrs = R.styleable.Theme_TabLayout,
     defStyleAttr = R.attr.tabStyle,
     onTint = {
-        // R.style.Widget_MaterialComponents_TabLayout
-        // R.style.Widget_MaterialComponents_TabLayout_Colored
         val tabLayout = view
         matchThemeColor(R.styleable.Theme_TabLayout_android_background)?.let {
             tabLayout.setMaterialBackgroundColor(it)
@@ -29,7 +30,7 @@ internal class TabLayoutTint : BaseTint<TabLayout>(
                 tabLayout.tabIconTint = it.toColorStateList()
             },
             applyResource = {
-                withTabIconTint(it, tabLayout)
+                tabLayout.withTabIconTint(it)
             }
         )
         withColorOrResourceId(
@@ -38,7 +39,7 @@ internal class TabLayoutTint : BaseTint<TabLayout>(
                 tabLayout.tabTextColors = it.toColorStateList()
             },
             applyResource = {
-                withTabTextColor(it, tabLayout)
+                tabLayout.withTabTextColor(it)
             }
         )
         matchThemeColor(R.styleable.Theme_TabLayout_tabIndicatorColor)?.let {
@@ -50,41 +51,41 @@ internal class TabLayoutTint : BaseTint<TabLayout>(
                 tabLayout.tabRippleColor = it.toColorStateList()
             },
             applyResource = {
-                withTabRippleColor(it, tabLayout)
+                tabLayout.withTabRippleColor(it)
             }
         )
     }
 )
 
-private fun withTabIconTint(resourceId: Int, view: TabLayout) {
+private fun TabLayout.withTabIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_tabs_icon_color_selector -> {
-            view.mtrl_tabs_icon_color_selector()
+            mtrl_tabs_icon_color_selector()
         }
         R.color.mtrl_tabs_icon_color_selector_colored -> {
             mtrl_tabs_icon_color_selector_colored()
         }
         else -> null
     }?.let {
-        view.tabIconTint = it
+        tabIconTint = it
     }
 }
 
-private fun withTabTextColor(resourceId: Int, view: TabLayout) {
+private fun TabLayout.withTabTextColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_tabs_icon_color_selector -> {
-            view.mtrl_tabs_icon_color_selector()
+            mtrl_tabs_icon_color_selector()
         }
         R.color.mtrl_tabs_icon_color_selector_colored -> {
             mtrl_tabs_icon_color_selector_colored()
         }
         else -> null
     }?.let {
-        view.tabTextColors = it
+        tabTextColors = it
     }
 }
 
-// R.color.mtrl_tabs_icon_color_selector
+/** [R.color.mtrl_tabs_icon_color_selector] */
 private fun View.mtrl_tabs_icon_color_selector(): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -98,7 +99,7 @@ private fun View.mtrl_tabs_icon_color_selector(): ColorStateList {
     )
 }
 
-// R.color.mtrl_tabs_icon_color_selector_colored
+/** [R.color.mtrl_tabs_icon_color_selector_colored] */
 private fun mtrl_tabs_icon_color_selector_colored(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
@@ -113,22 +114,22 @@ private fun mtrl_tabs_icon_color_selector_colored(): ColorStateList {
     )
 }
 
-private fun withTabRippleColor(resourceId: Int, view: TabLayout) {
+private fun TabLayout.withTabRippleColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_tabs_ripple_color -> {
-            view.mtrl_tabs_ripple_color()
+            mtrl_tabs_ripple_color(context)
         }
         R.color.mtrl_tabs_colored_ripple_color -> {
             mtrl_tabs_colored_ripple_color()
         }
         else -> null
     }?.let {
-        view.tabRippleColor = it
+        tabRippleColor = it
     }
 }
 
-// R.color.mtrl_tabs_ripple_color
-private fun View.mtrl_tabs_ripple_color(): ColorStateList {
+/** [R.color.mtrl_tabs_ripple_color] */
+private fun mtrl_tabs_ripple_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -165,7 +166,7 @@ private fun View.mtrl_tabs_ripple_color(): ColorStateList {
     )
 }
 
-// R.color.mtrl_tabs_colored_ripple_color
+/** [R.color.mtrl_tabs_colored_ripple_color] */
 private fun mtrl_tabs_colored_ripple_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(

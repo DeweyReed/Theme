@@ -29,10 +29,14 @@ import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.radiobutton.MaterialRadioButton
+import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.theme.tint.AppBarLayoutTint
 import xyz.aprildown.theme.tint.BottomAppBarTint
@@ -54,12 +58,16 @@ import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
+import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
 import xyz.aprildown.theme.tint.ScrollViewTint
 import xyz.aprildown.theme.tint.SeekBarTint
+import xyz.aprildown.theme.tint.ShapeableImageViewTint
+import xyz.aprildown.theme.tint.SliderTint
 import xyz.aprildown.theme.tint.SpinnerTint
 import xyz.aprildown.theme.tint.SwitchMaterialTint
 import xyz.aprildown.theme.tint.TabLayoutTint
+import xyz.aprildown.theme.tint.TextInputEditTextTint
 import xyz.aprildown.theme.tint.TextInputLayoutTint
 import xyz.aprildown.theme.tint.TextViewTint
 import xyz.aprildown.theme.tint.decorate
@@ -118,6 +126,10 @@ abstract class ThemeInflationDelegate {
             is SwitchMaterial -> view.decorate(attrs, SwitchMaterialTint())
             is TabLayout -> view.decorate(attrs, TabLayoutTint())
             is TextInputLayout -> view.decorate(attrs, TextInputLayoutTint())
+            is TextInputEditText -> view.decorate(attrs, TextInputEditTextTint())
+            is Slider -> view.decorate(attrs, SliderTint())
+            is RangeSlider -> view.decorate(attrs, RangeSliderTint())
+            is ShapeableImageView -> view.decorate(attrs, ShapeableImageViewTint())
 
             is ScrollView -> view.decorate(attrs, ScrollViewTint())
             is HorizontalScrollView -> view.decorate(attrs, HorizontalScrollViewTint())

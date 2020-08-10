@@ -8,8 +8,8 @@ ext {
             min_sdk       : 21,
             target_sdk    : 29,
 
-            version_code  : 14,
-            version_name  : '0.1.4',
+            version_code  : 20,
+            version_name  : '0.2.0',
     ]
     libs = [
             kotlin_stdlib_jdk7          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
@@ -21,7 +21,7 @@ ext {
             androidx_constraintlayout   : 'androidx.constraintlayout:constraintlayout:1.1.3',
             androidx_core_ktx           : 'androidx.core:core-ktx:1.3.1',
 
-            material                    : 'com.google.android.material:material:1.1.0',
+            material                    : 'com.google.android.material:material:1.2.0',
 
             androidx_navigation_fragment: 'androidx.navigation:navigation-fragment-ktx:2.3.0',
             androidx_navigation_ui      : 'androidx.navigation:navigation-ui-ktx:2.3.0',

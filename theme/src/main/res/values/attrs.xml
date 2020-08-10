@@ -36,9 +36,17 @@
         <attr name="tint" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ShapeableImageView">
+        <attr name="android:background" />
+        <attr name="tint" />
+        <attr name="strokeColor" />
+    </declare-styleable>
+
     <declare-styleable name="Theme_EditText">
         <attr name="android:textColor" />
         <attr name="android:textColorHint" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textColorHighlight" />
         <attr name="backgroundTint" />
     </declare-styleable>
 
@@ -108,6 +116,7 @@
     </declare-styleable>
 
     <declare-styleable name="Theme_NavigationView">
+        <attr name="android:background" />
         <attr name="itemIconTint" />
         <attr name="itemShapeFillColor" />
         <attr name="itemTextColor" />
@@ -126,13 +135,20 @@
         <attr name="hintTextColor" />
         <attr name="helperTextTextColor" />
         <attr name="errorTextColor" />
-        <attr name="errorIconTint" />
         <attr name="counterTextColor" />
         <attr name="counterOverflowTextColor" />
+        <attr name="prefixTextColor" />
+        <attr name="suffixTextColor" />
         <attr name="startIconTint" />
         <attr name="endIconTint" />
+        <attr name="errorIconTint" />
         <attr name="boxStrokeColor" />
+        <attr name="boxStrokeErrorColor" />
         <attr name="boxBackgroundColor" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_TextInputEditText">
+        <attr name="android:textColor" />
     </declare-styleable>
 
     <declare-styleable name="Theme_ProgressBar">
@@ -143,6 +159,17 @@
     <declare-styleable name="Theme_SeekBar">
         <attr name="android:thumbTint" />
         <attr name="android:progressTint" />
+    </declare-styleable>
+
+    <declare-styleable name="Theme_Slider">
+        <attr name="haloColor" />
+        <attr name="thumbColor" />
+        <attr name="tickColor" />
+        <attr name="tickColorActive" />
+        <attr name="tickColorInactive" />
+        <attr name="trackColor" />
+        <attr name="trackColorActive" />
+        <attr name="trackColorInactive" />
     </declare-styleable>
 
 </resources>

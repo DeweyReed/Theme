@@ -10,6 +10,8 @@ android {
         targetSdkVersion versions.target_sdk
         versionCode versions.version_code
         versionName versions.version_name
+
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     compileOptions {
