@@ -62,7 +62,7 @@ internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
                     ),
                     intArrayOf(
                         // Even if I set colorControlNormal here, the disabled color is still
-                        // a little dark than the original color. I can't find a way to fix it.
+                        // a little darker than the original color. I can't find a way to fix it.
                         // This is why Slider is better.
                         context.themeColor(android.R.attr.colorControlNormal),
                         Theme.get().colorSecondary

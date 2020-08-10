@@ -35,6 +35,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
     defStyleAttr = R.attr.materialCardViewStyle,
     onTint = {
         val card = view
+        val context = card.context
         matchThemeColor(R.styleable.Theme_MaterialCardView_cardBackgroundColor)?.let {
             card.setCardBackgroundColor(it)
         }
@@ -46,7 +47,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_card_view_foreground -> {
-                        card.setCardForegroundColor(mtrl_card_view_foreground(card.context))
+                        card.setCardForegroundColor(mtrl_card_view_foreground(context))
                     }
                 }
             }
@@ -62,7 +63,7 @@ internal class MaterialCardViewTint : BaseTint<MaterialCardView>(
             applyResource = {
                 when (it) {
                     R.color.mtrl_card_view_ripple -> {
-                        card.rippleColor = mtrl_card_view_ripple(card.context)
+                        card.rippleColor = mtrl_card_view_ripple(context)
                     }
                 }
             }
