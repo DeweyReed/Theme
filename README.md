@@ -12,7 +12,7 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 ## WARNING
 
 - `Theme` is a companion of [material-components-android](https://github.com/material-components/material-components-android/), so it requires you to adopt `material-components-android` in your project.
-- Currently, `Theme` supports `material-components-android` [1.1.0](https://github.com/material-components/material-components-android/releases/tag/1.1.0) and [1.2.0](https://github.com/material-components/material-components-android/releases/tag/1.2.0). Any other version doesn't work.
+- Currently, `Theme` supports `material-components-android` [1.1.0](https://github.com/material-components/material-components-android/releases/tag/1.1.0) and [1.2.x](https://github.com/material-components/material-components-android/releases/tag/1.2.1). Any other version doesn't work.
 - Because the implementation is fragile, think twice, and do some investigation before using this library.
 - Jetpack Compose supports theming programmatically and is a better alternative(in the future).
 
@@ -41,7 +41,7 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
         ```Groovy
         dependencies {
-            implementation 'xyz.aprildown:Theme:0.2.0' // for material-components-android 1.2.0
+            implementation 'xyz.aprildown:Theme:0.2.0' // for material-components-android 1.2.x
             implementation 'xyz.aprildown:Theme:0.1.4' // for material-components-android 1.1.0
         }
         ```
