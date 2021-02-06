@@ -60,13 +60,17 @@
             android:layout_height="wrap_content"
             android:value="50"
             android:valueFrom="0"
-            android:valueTo="100" />
+            android:valueTo="100"
+            app:thumbStrokeColor="?colorSecondary"
+            app:thumbStrokeWidth="2dp" />
 
         <com.google.android.material.slider.RangeSlider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:valueFrom="0"
             android:valueTo="100"
+            app:thumbStrokeColor="?colorSecondary"
+            app:thumbStrokeWidth="2dp"
             app:values="@array/range_slider_values" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator

@@ -51,6 +51,9 @@ internal class SliderTint : BaseTint<Slider>(
                 }
             }
         )
+        matchThemeColor(R.styleable.Theme_Slider_thumbStrokeColor)?.let {
+            slider.thumbStrokeColor = it.toColorStateList()
+        }
         if (typedArray.hasValue(R.styleable.Theme_Slider_tickColor)) {
             withColorOrResourceId(
                 R.styleable.Theme_Slider_tickColor,
@@ -173,7 +176,7 @@ private fun material_slider_active_tick_marks_color(): ColorStateList {
     )
 }
 
-/** [R.color.material_slidwer_inactive_tick_marks_color] */
+/** [R.color.material_slider_inactive_tick_marks_color] */
 private fun material_slider_inactive_tick_marks_color(context: Context): ColorStateList {
     return ColorStateList(
         arrayOf(
@@ -250,6 +253,9 @@ internal class RangeSliderTint : BaseTint<RangeSlider>(
                 }
             }
         )
+        matchThemeColor(R.styleable.Theme_Slider_thumbStrokeColor)?.let {
+            slider.thumbStrokeColor = it.toColorStateList()
+        }
         if (typedArray.hasValue(R.styleable.Theme_Slider_tickColor)) {
             withColorOrResourceId(
                 R.styleable.Theme_Slider_tickColor,
