@@ -70,6 +70,7 @@
         <attr name="android:background" />
         <attr name="titleTextColor" />
         <attr name="subtitleTextColor" />
+        <attr name="navigationIconTint" />
     </declare-styleable>
 
     <declare-styleable name="Theme_BottomAppBar">

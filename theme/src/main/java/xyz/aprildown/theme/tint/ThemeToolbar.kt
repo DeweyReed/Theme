@@ -47,6 +47,9 @@ internal class ThemeToolbar(
             /** [MaterialToolbar.initBackground] */
             toolbar.setMaterialBackgroundColor(it)
         }
+        matchThemeColor(R.styleable.Theme_Toolbar_navigationIconTint)?.let {
+            toolbar.setNavigationIconTint(it)
+        }
 
         /**
          * Here is the problem.
