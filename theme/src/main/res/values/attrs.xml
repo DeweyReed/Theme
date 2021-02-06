@@ -174,4 +174,9 @@
         <attr name="trackColorInactive" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_ProgressIndicator">
+        <attr name="indicatorColor" />
+        <attr name="trackColor" />
+    </declare-styleable>
+
 </resources>

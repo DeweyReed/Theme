@@ -32,6 +32,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -59,6 +61,7 @@ import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
+import xyz.aprildown.theme.tint.ProgressIndicatorTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
@@ -174,6 +177,10 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 ProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
             "androidx.core.widget.ContentLoadingProgressBar" ->
                 ContentLoadingProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
+            "com.google.android.material.progressindicator.LinearProgressIndicator" ->
+                LinearProgressIndicator(context, attrs).decorate(attrs, ProgressIndicatorTint())
+            "com.google.android.material.progressindicator.CircularProgressIndicator" ->
+                CircularProgressIndicator(context, attrs).decorate(attrs, ProgressIndicatorTint())
             "com.google.android.material.appbar.AppBarLayout" ->
                 AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
             "com.google.android.material.appbar.CollapsingToolbarLayout" ->

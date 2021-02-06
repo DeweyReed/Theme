@@ -3,9 +3,14 @@ package xyz.aprildown.theme.tint
 import android.content.res.ColorStateList
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatSeekBar
+import com.google.android.material.progressindicator.BaseProgressIndicator
+import com.google.android.material.progressindicator.BaseProgressIndicatorSpec
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
+import xyz.aprildown.theme.utils.adjustAlpha
 import xyz.aprildown.theme.utils.themeColor
+import xyz.aprildown.theme.utils.themeFloat
 import xyz.aprildown.theme.utils.toColorStateList
 
 /**
@@ -79,5 +84,37 @@ internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
                 seekBar.progressTintList = Theme.get().colorSecondary.toColorStateList()
             }
         )
+    }
+)
+
+/**
+ * [R.style.Widget_MaterialComponents_LinearProgressIndicator]
+ * [R.style.Widget_MaterialComponents_CircularProgressIndicator]
+
+ * [BaseProgressIndicatorSpec.loadIndicatorColors]
+ * [BaseProgressIndicatorSpec.loadTrackColor]
+ */
+internal class ProgressIndicatorTint : BaseTint<BaseProgressIndicator<*>>(
+    attrs = R.styleable.Theme_ProgressIndicator,
+    defStyleAttr = R.attr.linearProgressIndicatorStyle,
+    onTint = {
+        val progress = view
+        val context = view.context
+
+        val indicatorColor = matchThemeColor(R.styleable.Theme_ProgressIndicator_indicatorColor)
+            ?: Theme.get().colorPrimary
+
+        val trackColor = matchThemeColor(R.styleable.Theme_ProgressIndicator_trackColor)
+        progress.setIndicatorColor(indicatorColor)
+
+        if (trackColor != null) {
+            progress.trackColor = trackColor
+        } else if (progress is LinearProgressIndicator) {
+            var alpha = context.themeFloat(android.R.attr.disabledAlpha)
+            if (alpha == 0f) {
+                alpha = 0.2f
+            }
+            progress.trackColor = indicatorColor.adjustAlpha(alpha)
+        }
     }
 )

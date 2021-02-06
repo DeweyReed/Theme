@@ -31,6 +31,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
@@ -57,6 +59,7 @@ import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
+import xyz.aprildown.theme.tint.ProgressIndicatorTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
@@ -107,6 +110,8 @@ abstract class ThemeInflationDelegate {
         // The code doesn't compile if we use when(this).
         when (val view = this) {
 
+            is LinearProgressIndicator -> view.decorate(attrs, ProgressIndicatorTint())
+            is CircularProgressIndicator -> view.decorate(attrs, ProgressIndicatorTint())
             is ProgressBar -> view.decorate(attrs, ProgressBarTint())
             is ContentLoadingProgressBar -> view.decorate(attrs, ProgressBarTint())
 
