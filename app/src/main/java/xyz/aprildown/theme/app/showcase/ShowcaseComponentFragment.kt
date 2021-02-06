@@ -18,20 +18,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
-import kotlinx.android.synthetic.main.component_button_trigger.view.*
-import kotlinx.android.synthetic.main.component_drawer.view.*
-import kotlinx.android.synthetic.main.component_snackbar.view.*
-import kotlinx.android.synthetic.main.fragment_showcase_component.*
 import xyz.aprildown.theme.app.R
+import xyz.aprildown.theme.app.databinding.ComponentButtonTriggerBinding
+import xyz.aprildown.theme.app.databinding.ComponentDrawerBinding
+import xyz.aprildown.theme.app.databinding.ComponentSnackbarBinding
+import xyz.aprildown.theme.app.databinding.FragmentShowcaseComponentBinding
 
 class ShowcaseComponentFragment : Fragment(R.layout.fragment_showcase_component) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
+        val binding = FragmentShowcaseComponentBinding.bind(view)
 
         val itemAdapter = GenericItemAdapter()
         val fastAdapter = FastAdapter.with(itemAdapter)
-        listShowcaseComponent.adapter = fastAdapter
-        listShowcaseComponent.addItemDecoration(
+        binding.listShowcaseComponent.adapter = fastAdapter
+        binding.listShowcaseComponent.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
@@ -80,10 +81,10 @@ private open class SimpleComponent(@LayoutRes componentLayoutRes: Int) :
 private class DrawerComponent : SimpleComponent(R.layout.component_drawer) {
     override fun bindView(holder: SimpleViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
-        holder.itemView.run {
-            drawer_layout.openDrawer(GravityCompat.START)
-            nav_view.setNavigationItemSelectedListener { true }
-            nav_view.setCheckedItem(R.id.nav_item_one)
+        ComponentDrawerBinding.bind(holder.itemView).run {
+            drawerLayout.openDrawer(GravityCompat.START)
+            navView.setNavigationItemSelectedListener { true }
+            navView.setCheckedItem(R.id.nav_item_one)
         }
     }
 }
@@ -92,7 +93,8 @@ private class SnackbarComponent : SimpleComponent(R.layout.component_snackbar) {
 
     override fun getViewHolder(v: View): SimpleViewHolder {
         return super.getViewHolder(v).apply {
-            val container = v.snackbar_container
+            val binding = ComponentSnackbarBinding.bind(itemView)
+            val container = binding.snackbarContainer
             val view = Snackbar.make(container, "Marked as favorite", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Action") {}
                 .view
@@ -109,7 +111,7 @@ private class ButtonTriggerComponent(
 ) : SimpleComponent(R.layout.component_button_trigger) {
     override fun bindView(holder: SimpleViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
-        holder.itemView.button.setOnClickListener {
+        ComponentButtonTriggerBinding.bind(holder.itemView).button.setOnClickListener {
             onClick.invoke()
         }
     }

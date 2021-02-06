@@ -3,16 +3,17 @@ package xyz.aprildown.theme.app.widgets
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_collapsing_toolbar.*
 import xyz.aprildown.theme.app.BaseActivity
 import xyz.aprildown.theme.app.R
+import xyz.aprildown.theme.app.databinding.ActivityCollapsingToolbarBinding
 
 class CollapsingToolbarActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_collapsing_toolbar)
-        setSupportActionBar(toolbar)
+        val binding = ActivityCollapsingToolbarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }

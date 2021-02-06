@@ -9,9 +9,9 @@ import android.widget.RadioButton
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
-import kotlinx.android.synthetic.main.fragment_dialog.*
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.app.R
+import xyz.aprildown.theme.app.databinding.FragmentDialogBinding
 
 class TextViewFragment : Fragment(R.layout.fragment_text_view)
 
@@ -62,11 +62,12 @@ class BarFragment : Fragment(R.layout.fragment_bar)
 class DialogFragment : Fragment(R.layout.fragment_dialog) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
-        btnDialogTimePicker.setOnClickListener {
+        val binding = FragmentDialogBinding.bind(view)
+        binding.btnDialogTimePicker.setOnClickListener {
             TimePickerDialog(context, null, 12, 12, false)
                 .show()
         }
-        btnDialogMaterialDateTimePicker.setOnClickListener {
+        binding.btnDialogMaterialDateTimePicker.setOnClickListener {
             Theme.get().enabled = false
             MaterialDatePicker.Builder.datePicker()
                 .build()

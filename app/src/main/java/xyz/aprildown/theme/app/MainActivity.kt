@@ -5,33 +5,36 @@ import android.widget.ImageButton
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import kotlinx.android.synthetic.main.activity_main.*
+import xyz.aprildown.theme.app.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setUpViews()
     }
 
     private fun setUpViews() {
-        btnMainPickTheme.setOnClickListener {
+        binding.btnMainPickTheme.setOnClickListener {
             pickTheme()
         }
-        btnMainShuffleTheme.setOnClickListener {
+        binding.btnMainShuffleTheme.setOnClickListener {
             shuffleTheme()
         }
-        btnMainDayNight.setOnClickListener {
+        binding.btnMainDayNight.setOnClickListener {
             toggleDayNight()
         }
         if (isDarkTheme) {
-            btnMainDayNight.setImageResource(R.drawable.ic_night)
-            btnMainDayNight.tint(android.R.color.darker_gray)
+            binding.btnMainDayNight.setImageResource(R.drawable.ic_night)
+            binding.btnMainDayNight.tint(android.R.color.darker_gray)
         } else {
-            btnMainDayNight.setImageResource(R.drawable.ic_day)
-            btnMainDayNight.tint(android.R.color.holo_orange_dark)
+            binding.btnMainDayNight.setImageResource(R.drawable.ic_day)
+            binding.btnMainDayNight.tint(android.R.color.holo_orange_dark)
         }
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Color
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -26,17 +28,21 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * We can set up Theme during setContentView instead of onCreate
-     * because all we care is view creation.
-     */
-    override fun setContentView(layoutResID: Int) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         if (themeValue == THEME_NONE) {
             setTheme(R.style.AppTheme_WithoutTheme)
         } else {
             setTheme(R.style.AppTheme_WithTheme)
         }
-        super.setContentView(layoutResID)
+        super.onCreate(savedInstanceState)
+    }
+
+    /**
+     * We can set up Theme during setContentView instead of onCreate
+     * because all we care is view creation.
+     */
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
         if (themeValue != THEME_NONE && !isDarkTheme) {
             Theme.tintSystemUi(this)
         }

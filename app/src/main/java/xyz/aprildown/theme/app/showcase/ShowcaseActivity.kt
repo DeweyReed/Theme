@@ -5,9 +5,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-import kotlinx.android.synthetic.main.activity_showcase.*
 import xyz.aprildown.theme.app.BaseActivity
 import xyz.aprildown.theme.app.R
+import xyz.aprildown.theme.app.databinding.ActivityShowcaseBinding
 
 /**
  * Copied and then modified from [https://github.com/material-components/material-components-android/tree/master/material-theme-builder]
@@ -15,10 +15,11 @@ import xyz.aprildown.theme.app.R
 class ShowcaseActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_showcase)
-        setSupportActionBar(toolbar)
+        val binding = ActivityShowcaseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        viewPagerShowcase.adapter = object : FragmentStatePagerAdapter(
+        binding.viewPagerShowcase.adapter = object : FragmentStatePagerAdapter(
             supportFragmentManager,
             BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         ) {
@@ -35,7 +36,7 @@ class ShowcaseActivity : BaseActivity() {
                 else -> throw IllegalStateException()
             }
         }
-        tabLayoutShowcase.setupWithViewPager(viewPagerShowcase)
+        binding.tabLayoutShowcase.setupWithViewPager(binding.viewPagerShowcase)
         // viewPagerShowcase.currentItem = 1
     }
 
