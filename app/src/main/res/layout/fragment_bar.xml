@@ -69,6 +69,18 @@
             android:valueTo="100"
             app:values="@array/range_slider_values" />
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:trackCornerRadius="5dp" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:trackCornerRadius="5dp" />
+
     </LinearLayout>
 
 </ScrollView>

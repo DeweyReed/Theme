@@ -9,6 +9,8 @@ import android.widget.RadioButton
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.app.R
 import xyz.aprildown.theme.app.databinding.FragmentDialogBinding
@@ -66,6 +68,19 @@ class DialogFragment : Fragment(R.layout.fragment_dialog) {
         binding.btnDialogTimePicker.setOnClickListener {
             TimePickerDialog(context, null, 12, 12, false)
                 .show()
+        }
+        binding.btnDialogMaterialTimePicker.setOnClickListener {
+            Theme.get().enabled = false
+            MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setTitleText("MaterialTimePicker")
+                .build()
+                .apply {
+                    addOnDismissListener {
+                        Theme.get().enabled = true
+                    }
+                }
+                .show(childFragmentManager, null)
         }
         binding.btnDialogMaterialDateTimePicker.setOnClickListener {
             Theme.get().enabled = false

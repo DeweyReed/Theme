@@ -17,6 +17,13 @@
             android:textAllCaps="false" />
 
         <Button
+            android:id="@+id/btnDialogMaterialTimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MaterialTimePicker"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btnDialogMaterialDateTimePicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
