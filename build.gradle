@@ -26,6 +26,7 @@ allprojects {
         jcenter {
             content {
                 includeModule 'com.google.android', 'flexbox'
+                includeModule 'org.jetbrains.trove4j', 'trove4j'
             }
         }
     }
