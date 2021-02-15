@@ -75,6 +75,9 @@ internal class ChipTint : BaseTint<Chip>(
         // TODO: We're unable to set chipSurfaceColor programmatically for now.
         // matchThemeColor(R.styleable.Theme_Chip_chipSurfaceColor)?.let {
         // }
+        matchThemeColor(R.styleable.Theme_Chip_checkedIconTint)?.let {
+            chip.checkedIconTint = it.toColorStateList()
+        }
     }
 )
 

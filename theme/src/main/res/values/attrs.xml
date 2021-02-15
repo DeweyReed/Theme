@@ -93,6 +93,7 @@
         <attr name="rippleColor" />
         <attr name="closeIconTint" />
         <attr name="chipIconTint" />
+        <attr name="checkedIconTint" />
     </declare-styleable>
 
     <declare-styleable name="Theme_FloatingActionButton">
