@@ -4,7 +4,8 @@ buildscript {
     apply from: 'dependencies.gradle'
     repositories {
         google()
-        jcenter()
+        gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.android_gradle}"
@@ -21,7 +22,12 @@ apply plugin: "com.github.ben-manes.versions"
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        jcenter {
+            content {
+                includeModule 'com.google.android', 'flexbox'
+            }
+        }
     }
 }
 

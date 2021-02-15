@@ -28,7 +28,7 @@ ext {
 
             leak_cannary                : 'com.squareup.leakcanary:leakcanary-android:2.6',
 
-            fast_adapter                : 'com.mikepenz:fastadapter:5.3.2',
+            fast_adapter                : 'com.mikepenz:fastadapter:5.3.4',
             materialize                 : 'com.mikepenz:materialize:1.2.1',
             flexbox                     : 'com.google.android:flexbox:2.0.1',
 
