@@ -149,6 +149,7 @@
         <attr name="boxStrokeColor" />
         <attr name="boxStrokeErrorColor" />
         <attr name="boxBackgroundColor" />
+        <attr name="placeholderTextColor" />
     </declare-styleable>
 
     <declare-styleable name="Theme_TextInputEditText">

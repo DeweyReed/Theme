@@ -81,6 +81,9 @@ internal class TextInputLayoutTint : BaseTint<TextInputLayout>(
         matchThemeColor(R.styleable.Theme_TextInputLayout_boxBackgroundColor)?.let {
             textInputLayout.boxBackgroundColor = it
         }
+        matchThemeColor(R.styleable.Theme_TextInputLayout_placeholderTextColor)?.let {
+            textInputLayout.placeholderTextColor = it.toColorStateList()
+        }
     }
 )
 
