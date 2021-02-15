@@ -100,7 +100,7 @@ internal class ThemeToolbar(
         super.setNavigationIcon(icon?.tintedNavigationIcon())
     }
 
-    private fun Drawable.tintedNavigationIcon(): Drawable? {
+    private fun Drawable.tintedNavigationIcon(): Drawable {
         val color = colorOnToolbar ?: return this
         return when (this) {
             is DrawerArrowDrawable -> {

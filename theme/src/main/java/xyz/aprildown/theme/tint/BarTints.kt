@@ -59,7 +59,7 @@ internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
                 seekBar.thumbTintList = it.toColorStateList()
             },
             applyDefault = {
-                /** [R.drawable.seekbar_thumb_material_anim] */
+                /** [android.R.drawable.seekbar_thumb_material_anim] */
                 seekBar.thumbTintList = ColorStateList(
                     arrayOf(
                         intArrayOf(-android.R.attr.state_enabled),

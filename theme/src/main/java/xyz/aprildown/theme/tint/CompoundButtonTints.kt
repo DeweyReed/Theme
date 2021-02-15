@@ -253,7 +253,7 @@ internal class CheckedTextViewTint : BaseTint<AppCompatCheckedTextView>(
                 } &&
                 isNOrLater() // control_checkable_material is imported from N
             ) {
-                /** [R.color.control_checkable_material] */
+                /** [android.R.color.control_checkable_material] */
                 val colorControlActivated = findAttributeColor(android.R.attr.colorControlActivated)
                 if (colorControlActivated != null) {
                     val colorControlNormal = context.themeColor(android.R.attr.colorControlNormal)
