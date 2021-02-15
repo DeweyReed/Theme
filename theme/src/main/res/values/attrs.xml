@@ -8,6 +8,7 @@
     </declare-styleable>
 
     <declare-styleable name="Theme_Button">
+        <attr name="android:background" />
         <attr name="android:textColor" />
         <attr name="backgroundTint" />
         <attr name="iconTint" />

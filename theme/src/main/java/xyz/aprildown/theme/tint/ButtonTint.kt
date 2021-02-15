@@ -3,6 +3,8 @@ package xyz.aprildown.theme.tint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
@@ -25,25 +27,28 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
     defStyleAttr = R.attr.materialButtonStyle,
     onTint = {
         val button = view
+        matchThemeColor(R.styleable.Theme_Button_android_background)?.let {
+            button.setBackgroundColor(it)
+        }
+        withColorOrResourceId(
+            R.styleable.Theme_Button_android_textColor,
+            applySolidColor = {
+                button.setTextColor(it)
+            },
+            applyResource = {
+                button.withTextColor(it)
+            }
+        )
+        withColorOrResourceId(
+            R.styleable.Theme_Button_backgroundTint,
+            applySolidColor = {
+                ViewCompat.setBackgroundTintList(button, it.toColorStateList())
+            },
+            applyResource = {
+                button.withBackgroundTint(it)
+            }
+        )
         if (button is MaterialButton) {
-            withColorOrResourceId(
-                R.styleable.Theme_Button_android_textColor,
-                applySolidColor = {
-                    button.setTextColor(it)
-                },
-                applyResource = {
-                    button.withTextColor(it)
-                }
-            )
-            withColorOrResourceId(
-                R.styleable.Theme_Button_backgroundTint,
-                applySolidColor = {
-                    ViewCompat.setBackgroundTintList(button, it.toColorStateList())
-                },
-                applyResource = {
-                    button.withBackgroundTint(it)
-                }
-            )
             withColorOrResourceId(
                 R.styleable.Theme_Button_iconTint,
                 applySolidColor = {
@@ -75,7 +80,7 @@ internal class ButtonTint : BaseTint<AppCompatButton>(
     }
 )
 
-private fun MaterialButton.withTextColor(resourceId: Int) {
+private fun TextView.withTextColor(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_text_color_selector -> {
             mtrl_btn_text_color_selector(context)
@@ -148,7 +153,7 @@ private fun mtrl_text_btn_text_color_selector(context: Context): ColorStateList 
     )
 }
 
-private fun MaterialButton.withBackgroundTint(resourceId: Int) {
+private fun View.withBackgroundTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_btn_bg_color_selector -> {
             mtrl_btn_bg_color_selector(context)
