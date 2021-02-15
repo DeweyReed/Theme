@@ -2,6 +2,7 @@ package xyz.aprildown.theme.tint
 
 import android.content.Context
 import android.content.res.ColorStateList
+import androidx.core.view.ViewCompat
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import xyz.aprildown.theme.R
@@ -60,6 +61,9 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
         val bottomNavigationView = view
         matchThemeColor(R.styleable.Theme_BottomNavigationView_android_background)?.let {
             bottomNavigationView.setMaterialBackgroundColor(it)
+        }
+        matchThemeColor(R.styleable.Theme_BottomNavigationView_backgroundTint)?.let {
+            ViewCompat.setBackgroundTintList(bottomNavigationView, it.toColorStateList())
         }
         withColorOrResourceId(
             R.styleable.Theme_BottomNavigationView_itemIconTint,

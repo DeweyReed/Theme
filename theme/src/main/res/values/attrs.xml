@@ -80,6 +80,7 @@
 
     <declare-styleable name="Theme_BottomNavigationView">
         <attr name="android:background" />
+        <attr name="backgroundTint" />
         <attr name="itemIconTint" />
         <attr name="itemTextColor" />
         <attr name="itemRippleColor" />
