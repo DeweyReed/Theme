@@ -4,9 +4,9 @@ ext {
             kotlin        : '1.4.30',
             versions      : '0.36.0',
 
-            compile_sdk   : 29,
+            compile_sdk   : 30,
             min_sdk       : 21,
-            target_sdk    : 29,
+            target_sdk    : 30,
 
             version_code  : 20,
             version_name  : '0.2.0',
