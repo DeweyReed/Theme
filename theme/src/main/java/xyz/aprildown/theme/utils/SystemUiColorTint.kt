@@ -9,8 +9,10 @@ import android.graphics.Color
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.toBitmap
@@ -18,13 +20,21 @@ import androidx.drawerlayout.widget.DrawerLayout
 
 private fun Activity.setLightStatusBarCompat(lightMode: Boolean) {
     val view = window?.decorView ?: return
-    if (isMOrLater()) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        view.windowInsetsController?.run {
+            val flag = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            setSystemBarsAppearance(if (lightMode) flag else 0, flag)
+        }
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        @Suppress("DEPRECATION")
         var flags = view.systemUiVisibility
+        @Suppress("DEPRECATION")
         flags = if (lightMode) {
             flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         } else {
             flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
         }
+        @Suppress("DEPRECATION")
         view.systemUiVisibility = flags
     }
 }
@@ -48,13 +58,21 @@ internal fun Activity.setStatusBarColorCompat(
 
 private fun Activity.setLightNavigationBarCompat(lightMode: Boolean) {
     val view = window?.decorView ?: return
-    if (isOOrLater()) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        view.windowInsetsController?.run {
+            val flag = WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
+            setSystemBarsAppearance(if (lightMode) flag else 0, flag)
+        }
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        @Suppress("DEPRECATION")
         var flags = view.systemUiVisibility
+        @Suppress("DEPRECATION")
         flags = if (lightMode) {
             flags or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         } else {
             flags and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
         }
+        @Suppress("DEPRECATION")
         view.systemUiVisibility = flags
     }
 }
