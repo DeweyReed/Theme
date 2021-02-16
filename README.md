@@ -41,7 +41,7 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
         ```Groovy
         dependencies {  
-            implementation 'xyz.aprildown:Theme:0.3.0' // for material-components-android 1.3.0
+            implementation 'xyz.aprildown:Theme:0.3.1' // for material-components-android 1.3.0
             // implementation 'xyz.aprildown:Theme:0.2.0' // for material-components-android 1.2.x
             // implementation 'xyz.aprildown:Theme:0.1.4' // for material-components-android 1.1.0
         }
