@@ -112,7 +112,9 @@ internal abstract class ProgressIndicatorTint(
 
         if (trackColor != null) {
             progress.trackColor = trackColor
-        } else if (progress is LinearProgressIndicator) {
+        } else if (progress is LinearProgressIndicator &&
+            !typedArray.hasValue(R.styleable.Theme_ProgressIndicator_trackColor)
+        ) {
             var alpha = context.themeFloat(android.R.attr.disabledAlpha)
             if (alpha == 0f) {
                 alpha = 0.2f
