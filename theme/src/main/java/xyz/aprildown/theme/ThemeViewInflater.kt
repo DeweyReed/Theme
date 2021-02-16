@@ -50,6 +50,7 @@ import xyz.aprildown.theme.tint.CardViewTint
 import xyz.aprildown.theme.tint.CheckBoxTint
 import xyz.aprildown.theme.tint.CheckedTextViewTint
 import xyz.aprildown.theme.tint.ChipTint
+import xyz.aprildown.theme.tint.CircularProgressIndicatorTint
 import xyz.aprildown.theme.tint.CollapsingToolbarLayoutTint
 import xyz.aprildown.theme.tint.EditTextTint
 import xyz.aprildown.theme.tint.ExtendedFloatingActionButtonTint
@@ -57,11 +58,11 @@ import xyz.aprildown.theme.tint.FloatingActionButtonTint
 import xyz.aprildown.theme.tint.HorizontalScrollViewTint
 import xyz.aprildown.theme.tint.ImageButtonTint
 import xyz.aprildown.theme.tint.ImageViewTint
+import xyz.aprildown.theme.tint.LinearProgressIndicatorTint
 import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
-import xyz.aprildown.theme.tint.ProgressIndicatorTint
 import xyz.aprildown.theme.tint.RadioButtonTint
 import xyz.aprildown.theme.tint.RangeSliderTint
 import xyz.aprildown.theme.tint.RecyclerViewTint
@@ -178,9 +179,15 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
             "androidx.core.widget.ContentLoadingProgressBar" ->
                 ContentLoadingProgressBar(context, attrs).decorate(attrs, ProgressBarTint())
             "com.google.android.material.progressindicator.LinearProgressIndicator" ->
-                LinearProgressIndicator(context, attrs).decorate(attrs, ProgressIndicatorTint())
+                LinearProgressIndicator(context, attrs).decorate(
+                    attrs,
+                    LinearProgressIndicatorTint()
+                )
             "com.google.android.material.progressindicator.CircularProgressIndicator" ->
-                CircularProgressIndicator(context, attrs).decorate(attrs, ProgressIndicatorTint())
+                CircularProgressIndicator(context, attrs).decorate(
+                    attrs,
+                    CircularProgressIndicatorTint()
+                )
             "com.google.android.material.appbar.AppBarLayout" ->
                 AppBarLayout(context, attrs).decorate(attrs, AppBarLayoutTint())
             "com.google.android.material.appbar.CollapsingToolbarLayout" ->

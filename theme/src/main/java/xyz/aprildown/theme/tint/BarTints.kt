@@ -2,6 +2,7 @@ package xyz.aprildown.theme.tint
 
 import android.content.res.ColorStateList
 import android.widget.ProgressBar
+import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatSeekBar
 import com.google.android.material.progressindicator.BaseProgressIndicator
 import com.google.android.material.progressindicator.BaseProgressIndicatorSpec
@@ -94,9 +95,11 @@ internal class SeekBarTint : BaseTint<AppCompatSeekBar>(
  * [BaseProgressIndicatorSpec.loadIndicatorColors]
  * [BaseProgressIndicatorSpec.loadTrackColor]
  */
-internal class ProgressIndicatorTint : BaseTint<BaseProgressIndicator<*>>(
+internal abstract class ProgressIndicatorTint(
+    @AttrRes defStyleAttr: Int
+) : BaseTint<BaseProgressIndicator<*>>(
     attrs = R.styleable.Theme_ProgressIndicator,
-    defStyleAttr = R.attr.linearProgressIndicatorStyle,
+    defStyleAttr = defStyleAttr,
     onTint = {
         val progress = view
         val context = view.context
@@ -118,3 +121,9 @@ internal class ProgressIndicatorTint : BaseTint<BaseProgressIndicator<*>>(
         }
     }
 )
+
+internal class LinearProgressIndicatorTint :
+    ProgressIndicatorTint(R.attr.linearProgressIndicatorStyle)
+
+internal class CircularProgressIndicatorTint :
+    ProgressIndicatorTint(R.attr.circularProgressIndicatorStyle)
