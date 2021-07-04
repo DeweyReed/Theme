@@ -183,4 +183,12 @@
         <attr name="trackColor" />
     </declare-styleable>
 
+    <declare-styleable name="Theme_NavigationRailView">
+        <attr name="android:background" />
+        <attr name="itemBackground" />
+        <attr name="itemRippleColor" />
+        <attr name="itemIconTint" />
+        <attr name="itemTextColor" />
+    </declare-styleable>
+
 </resources>

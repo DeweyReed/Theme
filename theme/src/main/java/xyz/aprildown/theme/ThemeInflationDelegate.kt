@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.navigationrail.NavigationRailView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.radiobutton.MaterialRadioButton
@@ -59,6 +60,7 @@ import xyz.aprildown.theme.tint.ImageViewTint
 import xyz.aprildown.theme.tint.LinearProgressIndicatorTint
 import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
+import xyz.aprildown.theme.tint.NavigationRailViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
@@ -120,6 +122,7 @@ abstract class ThemeInflationDelegate {
             is CollapsingToolbarLayout -> view.decorate(attrs, CollapsingToolbarLayoutTint())
             is BottomAppBar -> view.decorate(attrs, BottomAppBarTint())
             is BottomNavigationView -> view.decorate(attrs, BottomNavigationViewTint())
+            is NavigationRailView -> view.decorate(attrs, NavigationRailViewTint())
             is Chip -> view.decorate(attrs, ChipTint())
             is ExtendedFloatingActionButton -> view.decorate(
                 attrs,

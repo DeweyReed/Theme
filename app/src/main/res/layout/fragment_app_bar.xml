@@ -65,6 +65,12 @@
 
             </com.google.android.material.tabs.TabLayout>
 
+            <com.google.android.material.navigationrail.NavigationRailView
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                app:headerLayout="@layout/view_navigation_rail_header"
+                app:menu="@menu/bottom_app_bar_menu" />
+
         </LinearLayout>
 
     </ScrollView>

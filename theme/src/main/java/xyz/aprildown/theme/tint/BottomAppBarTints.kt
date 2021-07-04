@@ -2,9 +2,12 @@ package xyz.aprildown.theme.tint
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import androidx.core.view.ViewCompat
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigationrail.NavigationRailView
 import xyz.aprildown.theme.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.utils.adjustAlpha
@@ -95,7 +98,7 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
     }
 )
 
-private fun BottomNavigationView.withItemIconTint(resourceId: Int) {
+private fun NavigationBarView.withItemIconTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_navigation_bar_item_tint -> {
             itemIconTintList = mtrl_navigation_bar_item_tint(context)
@@ -136,7 +139,7 @@ private fun mtrl_navigation_bar_colored_item_tint(): ColorStateList {
     )
 }
 
-private fun BottomNavigationView.withItemTextTint(resourceId: Int) {
+private fun NavigationBarView.withItemTextTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_navigation_bar_item_tint -> {
             itemTextColor = mtrl_navigation_bar_item_tint(context)
@@ -147,7 +150,7 @@ private fun BottomNavigationView.withItemTextTint(resourceId: Int) {
     }
 }
 
-private fun BottomNavigationView.withItemRippleTint(resourceId: Int) {
+private fun NavigationBarView.withItemRippleTint(resourceId: Int) {
     when (resourceId) {
         R.color.mtrl_navigation_bar_ripple_color -> {
             itemRippleColor = mtrl_navigation_bar_ripple_color(context)
@@ -216,3 +219,49 @@ private fun mtrl_navigation_bar_colored_ripple_color(): ColorStateList {
         )
     )
 }
+
+/**
+ * https://github.com/material-components/material-components-android/blob/master/docs/components/NavigationRail.md
+ * [R.style.Widget_MaterialComponents_NavigationRailView]
+ * [R.style.Widget_MaterialComponents_NavigationRailView_Colored]
+ */
+internal class NavigationRailViewTint : BaseTint<NavigationRailView>(
+    attrs = R.styleable.Theme_NavigationRailView,
+    defStyleAttr = R.attr.navigationRailStyle,
+    onTint = {
+        val nav = view
+        matchThemeColor(R.styleable.Theme_NavigationRailView_android_background)?.let {
+            ViewCompat.setBackgroundTintList(nav, it.toColorStateList())
+        }
+        matchThemeColor(R.styleable.Theme_NavigationRailView_itemBackground)?.let {
+            nav.itemBackground = ColorDrawable(it)
+        }
+        withColorOrResourceId(
+            R.styleable.Theme_NavigationRailView_itemRippleColor,
+            applySolidColor = {
+                nav.itemRippleColor = it.toColorStateList()
+            },
+            applyResource = {
+                nav.withItemRippleTint(it)
+            }
+        )
+        withColorOrResourceId(
+            R.styleable.Theme_NavigationRailView_itemIconTint,
+            applySolidColor = {
+                nav.itemIconTintList = it.toColorStateList()
+            },
+            applyResource = {
+                nav.withItemIconTint(it)
+            }
+        )
+        withColorOrResourceId(
+            R.styleable.Theme_NavigationRailView_itemTextColor,
+            applySolidColor = {
+                nav.itemTextColor = it.toColorStateList()
+            },
+            applyResource = {
+                nav.withItemTextTint(it)
+            }
+        )
+    }
+)

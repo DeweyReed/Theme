@@ -32,6 +32,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.navigationrail.NavigationRailView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.slider.RangeSlider
@@ -61,6 +62,7 @@ import xyz.aprildown.theme.tint.ImageViewTint
 import xyz.aprildown.theme.tint.LinearProgressIndicatorTint
 import xyz.aprildown.theme.tint.ListViewTint
 import xyz.aprildown.theme.tint.MaterialCardViewTint
+import xyz.aprildown.theme.tint.NavigationRailViewTint
 import xyz.aprildown.theme.tint.NavigationViewTint
 import xyz.aprildown.theme.tint.ProgressBarTint
 import xyz.aprildown.theme.tint.RadioButtonTint
@@ -203,6 +205,8 @@ open class ThemeViewInflater : MaterialComponentsViewInflater() {
                 BottomAppBar(context, attrs).decorate(attrs, BottomAppBarTint())
             "com.google.android.material.bottomnavigation.BottomNavigationView" ->
                 BottomNavigationView(context, attrs).decorate(attrs, BottomNavigationViewTint())
+            "com.google.android.material.navigationrail.NavigationRailView" ->
+                NavigationRailView(context, attrs).decorate(attrs, NavigationRailViewTint())
             "com.google.android.material.chip.Chip" ->
                 Chip(context, attrs).decorate(attrs, ChipTint())
             "com.google.android.material.floatingactionbutton.FloatingActionButton" ->
