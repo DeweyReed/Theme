@@ -97,17 +97,17 @@ internal class BottomNavigationViewTint : BaseTint<BottomNavigationView>(
 
 private fun BottomNavigationView.withItemIconTint(resourceId: Int) {
     when (resourceId) {
-        R.color.mtrl_bottom_nav_item_tint -> {
-            itemIconTintList = mtrl_bottom_nav_item_tint(context)
+        R.color.mtrl_navigation_bar_item_tint -> {
+            itemIconTintList = mtrl_navigation_bar_item_tint(context)
         }
-        R.color.mtrl_bottom_nav_colored_item_tint -> {
-            itemIconTintList = mtrl_bottom_nav_colored_item_tint()
+        R.color.mtrl_navigation_bar_colored_item_tint -> {
+            itemIconTintList = mtrl_navigation_bar_colored_item_tint()
         }
     }
 }
 
-/** [R.color.mtrl_bottom_nav_item_tint] */
-private fun mtrl_bottom_nav_item_tint(context: Context): ColorStateList {
+/** [R.color.mtrl_navigation_bar_item_tint] */
+private fun mtrl_navigation_bar_item_tint(context: Context): ColorStateList {
     val theme = Theme.get()
     return ColorStateList(
         arrayOf(
@@ -121,8 +121,8 @@ private fun mtrl_bottom_nav_item_tint(context: Context): ColorStateList {
     )
 }
 
-/** [R.color.mtrl_bottom_nav_colored_item_tint] */
-private fun mtrl_bottom_nav_colored_item_tint(): ColorStateList {
+/** [R.color.mtrl_navigation_bar_colored_item_tint] */
+private fun mtrl_navigation_bar_colored_item_tint(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(
@@ -138,28 +138,28 @@ private fun mtrl_bottom_nav_colored_item_tint(): ColorStateList {
 
 private fun BottomNavigationView.withItemTextTint(resourceId: Int) {
     when (resourceId) {
-        R.color.mtrl_bottom_nav_item_tint -> {
-            itemTextColor = mtrl_bottom_nav_item_tint(context)
+        R.color.mtrl_navigation_bar_item_tint -> {
+            itemTextColor = mtrl_navigation_bar_item_tint(context)
         }
-        R.color.mtrl_bottom_nav_colored_item_tint -> {
-            itemTextColor = mtrl_bottom_nav_colored_item_tint()
+        R.color.mtrl_navigation_bar_colored_item_tint -> {
+            itemTextColor = mtrl_navigation_bar_colored_item_tint()
         }
     }
 }
 
 private fun BottomNavigationView.withItemRippleTint(resourceId: Int) {
     when (resourceId) {
-        R.color.mtrl_bottom_nav_ripple_color -> {
-            itemRippleColor = mtrl_bottom_nav_ripple_color(context)
+        R.color.mtrl_navigation_bar_ripple_color -> {
+            itemRippleColor = mtrl_navigation_bar_ripple_color(context)
         }
-        R.color.mtrl_bottom_nav_colored_ripple_color -> {
-            itemRippleColor = mtrl_bottom_nav_colored_ripple_color()
+        R.color.mtrl_navigation_bar_colored_ripple_color -> {
+            itemRippleColor = mtrl_navigation_bar_colored_ripple_color()
         }
     }
 }
 
-/** [R.color.mtrl_bottom_nav_ripple_color] */
-private fun mtrl_bottom_nav_ripple_color(context: Context): ColorStateList {
+/** [R.color.mtrl_navigation_bar_ripple_color] */
+private fun mtrl_navigation_bar_ripple_color(context: Context): ColorStateList {
     val colorPrimary = Theme.get().colorPrimary
     val colorOnSurface = context.themeColor(R.attr.colorOnSurface)
     return ColorStateList(
@@ -196,8 +196,8 @@ private fun mtrl_bottom_nav_ripple_color(context: Context): ColorStateList {
     )
 }
 
-/** [R.color.mtrl_bottom_nav_colored_ripple_color] */
-private fun mtrl_bottom_nav_colored_ripple_color(): ColorStateList {
+/** [R.color.mtrl_navigation_bar_colored_ripple_color] */
+private fun mtrl_navigation_bar_colored_ripple_color(): ColorStateList {
     val colorOnPrimary = Theme.get().colorOnPrimary
     return ColorStateList(
         arrayOf(
