@@ -11,8 +11,6 @@ buildscript {
         classpath "com.android.tools.build:gradle:${versions.android_gradle}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
         classpath "com.github.ben-manes:gradle-versions-plugin:${versions.versions}"
     }
 }
@@ -23,12 +21,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter {
-            content {
-                includeModule 'com.google.android', 'flexbox'
-                includeModule 'org.jetbrains.trove4j', 'trove4j'
-            }
-        }
     }
 }
 
