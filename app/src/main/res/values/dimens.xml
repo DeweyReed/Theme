@@ -6,6 +6,5 @@
     <dimen name="keyline_2">8dp</dimen>
     <dimen name="keyline_4">16dp</dimen>
     <dimen name="keyline_5">24dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

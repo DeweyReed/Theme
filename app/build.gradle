@@ -37,6 +37,7 @@ dependencies {
     implementation libs.androidx_appcompat
     implementation libs.androidx_preference
     implementation libs.androidx_constraintlayout
+    implementation libs.androidx_viewpager2
 
     implementation libs.androidx_core_ktx
 

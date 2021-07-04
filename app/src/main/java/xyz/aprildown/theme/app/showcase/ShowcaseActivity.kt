@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import xyz.aprildown.theme.app.BaseActivity
 import xyz.aprildown.theme.app.R
 import xyz.aprildown.theme.app.databinding.ActivityShowcaseBinding
@@ -19,24 +20,25 @@ class ShowcaseActivity : BaseActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        binding.viewPagerShowcase.adapter = object : FragmentStatePagerAdapter(
-            supportFragmentManager,
-            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        ) {
-            override fun getCount(): Int = 2
-            override fun getPageTitle(position: Int): CharSequence? = when (position) {
-                0 -> "Subsystem"
-                1 -> "Component"
-                else -> throw IllegalStateException()
-            }
+        binding.viewPagerShowcase.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int = 2
 
-            override fun getItem(position: Int): Fragment = when (position) {
+            override fun createFragment(position: Int): Fragment = when (position) {
                 0 -> ShowcaseSubsystemFragment()
                 1 -> ShowcaseComponentFragment()
                 else -> throw IllegalStateException()
             }
         }
-        binding.tabLayoutShowcase.setupWithViewPager(binding.viewPagerShowcase)
+        TabLayoutMediator(
+            binding.tabLayoutShowcase,
+            binding.viewPagerShowcase
+        ) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Subsystem"
+                1 -> "Component"
+                else -> throw IllegalStateException()
+            }
+        }.attach()
         // viewPagerShowcase.currentItem = 1
     }
 

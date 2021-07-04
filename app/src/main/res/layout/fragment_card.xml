@@ -22,6 +22,7 @@
             android:layout_margin="8dp"
             android:checkable="true"
             android:clickable="true"
+            android:focusable="true"
             app:cardElevation="4dp"
             app:checkedIcon="@drawable/ic_day"
             app:checkedIconTint="?colorPrimary" />
@@ -33,6 +34,7 @@
             android:layout_margin="8dp"
             android:checkable="true"
             android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="?colorPrimary"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"

@@ -16,12 +16,6 @@
 
     <style name="AppTheme.WithoutTheme" />
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-
-    <style name="BaseMaterialAppTheme" parent="Theme.MaterialComponents.Light" />
-
     <style name="ShowcaseFlexbox">
         <item name="flexWrap">wrap</item>
         <item name="showDivider">middle</item>
