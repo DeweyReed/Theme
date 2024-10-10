@@ -1,7 +1,7 @@
 # [Experimental] Theme
 
 ![Android CI](https://github.com/DeweyReed/Theme/workflows/Android%20CI/badge.svg)
-![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat) [![Releases](https://jitpack.io/v/xyz.aprildown/Theme.svg)](https://jitpack.io/#xyz.aprildown/Theme)
+![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat) [![Releases](https://jitpack.io/v/DeweyReed/Theme.svg)](https://jitpack.io/#DeweyReed/Theme)
 
 <img src="images/image.gif" alt="image" title="image" width="300" align="right" />
 
@@ -12,7 +12,7 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 ## WARNING
 
 - `Theme` is a companion of [material-components-android](https://github.com/material-components/material-components-android/), so it requires you to adopt `material-components-android` in your project.
-- Currently, `Theme` supports `material-components-android` [1.1.0](https://github.com/material-components/material-components-android/releases/tag/1.1.0), [1.2.x](https://github.com/material-components/material-components-android/releases/tag/1.2.1), [1.3.0](https://github.com/material-components/material-components-android/releases/tag/1.3.0) and [1.4.0](https://github.com/material-components/material-components-android/releases/tag/1.4.0). Any other version doesn't work.
+- Currently, `Theme` only supports `material-components-android` [1.4.0](https://github.com/material-components/material-components-android/releases/tag/1.4.0). Any other version doesn't work.
 - Because the implementation is fragile, think twice, and do some investigation before using this library.
 - Jetpack Compose supports theming programmatically and is a better alternative(in the future).
 
@@ -37,14 +37,11 @@ This library is inspired by [aesthetic](https://github.com/afollestad/aesthetic)
 
     1. Add the dependency
 
-        [![Releases](https://jitpack.io/v/xyz.aprildown/Theme.svg)](https://jitpack.io/#xyz.aprildown/Theme)
+        [![Releases](https://jitpack.io/v/DeweyReed/Theme.svg)](https://jitpack.io/#DeweyReed/Theme)
 
         ```Groovy
         dependencies {  
-            implementation 'xyz.aprildown:Theme:0.4.0' // for material-components-android 1.4.0
-            // implementation 'xyz.aprildown:Theme:0.3.1' // for material-components-android 1.3.0
-            // implementation 'xyz.aprildown:Theme:0.2.0' // for material-components-android 1.2.x
-            // implementation 'xyz.aprildown:Theme:0.1.4' // for material-components-android 1.1.0
+            implementation 'com.github.DeweyReed:Theme:0.4.0' // for material-components-android 1.4.0
         }
         ```
 
